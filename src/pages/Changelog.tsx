@@ -9,18 +9,62 @@ import {
   Check,
   Bug,
   Zap,
-  Wrench
+  Wrench,
+  AlertTriangle
 } from "lucide-react";
 
 const changelogs: Record<string, {
   version: string;
+  buildNumber?: string;
   date: string;
   summary: string;
   features: string[];
   improvements: string[];
   bugfixes: string[];
   technical: string[];
+  knownIssues?: string[];
 }> = {
+  "build-10": {
+    version: "Build 10",
+    buildNumber: "0.0.0.2000",
+    date: "January 11, 2026",
+    summary: "Maintenance release addressing critical build system issues, ensuring reliable ISO generation and cross-compilation for GamerOS. Core OS functionality remains stable with all existing features preserved.",
+    features: [
+      "Build system stability - resolved primary blocker preventing ISO creation",
+      "Docker integration - strengthened cross-compilation environment reliability",
+      "Enhanced error handling with improved build feedback",
+      "Maintained full compatibility with existing OS features",
+    ],
+    improvements: [
+      "Corrected build-iso.bat script to reference valid build-x86_64 target",
+      "Eliminated 'No rule to make target build-iso' errors",
+      "Verified proper Docker command execution with correct make target parameters",
+      "Refined batch files to eliminate common execution errors",
+      "Confirmed proper handling of all build dependencies",
+      "Optimized Docker-based builds for consistent cross-platform performance",
+    ],
+    bugfixes: [
+      "Fixed incorrect Make target in build-iso.bat script",
+      "Resolved ISO generation failure preventing successful builds",
+      "Fixed duplicate function definitions causing linker errors",
+      "Removed conflicting basic filesystem implementation",
+      "Corrected broken URL in currentbugs.md documentation",
+    ],
+    technical: [
+      "Target Platform: x86_64 (64-bit Intel/AMD processors)",
+      "Bootloader: GRUB Multiboot2 for reliable boot process",
+      "Kernel Format: ELF64 executable format",
+      "Graphics System: Enhanced VGA with advanced rendering pipeline",
+      "Memory Management: 16-byte aligned allocations with protection",
+      "UI Framework: Event-driven widget system with theme support",
+    ],
+    knownIssues: [
+      "QEMU may not properly display VGA graphics in some configurations",
+      "Some advanced layout managers require further optimization",
+      "Runtime theme changes may require application restart",
+      "Enhanced graphics features increase memory requirements",
+    ],
+  },
   "build-9": {
     version: "Build 9",
     date: "January 2025",
@@ -76,12 +120,14 @@ const changelogs: Record<string, {
 
 const defaultChangelog = {
   version: "Unknown Build",
+  buildNumber: undefined as string | undefined,
   date: "Unknown",
   summary: "Changelog not available for this version.",
-  features: [],
-  improvements: [],
-  bugfixes: [],
-  technical: [],
+  features: [] as string[],
+  improvements: [] as string[],
+  bugfixes: [] as string[],
+  technical: [] as string[],
+  knownIssues: undefined as string[] | undefined,
 };
 
 const Changelog = () => {
@@ -104,7 +150,10 @@ const Changelog = () => {
 
           {/* Header */}
           <div className="glass-card p-8 mb-8">
-            <h1 className="text-4xl font-bold mb-2">{changelog.version}</h1>
+            <h1 className="text-4xl font-bold mb-1">{changelog.version}</h1>
+            {changelog.buildNumber && (
+              <p className="text-sm font-mono text-primary/80 mb-2">v{changelog.buildNumber}</p>
+            )}
             <div className="flex items-center gap-4 text-muted-foreground mb-6">
               <span className="flex items-center gap-1">
                 <Calendar className="w-4 h-4" />
@@ -183,12 +232,31 @@ const Changelog = () => {
                   <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center">
                     <span className="text-muted-foreground font-mono text-sm">&lt;/&gt;</span>
                   </div>
-                  <h2 className="text-xl font-semibold">Technical Changes</h2>
+                  <h2 className="text-xl font-semibold">Technical Details</h2>
                 </div>
                 <ul className="space-y-2">
                   {changelog.technical.map((item, i) => (
                     <li key={i} className="flex items-start gap-2 text-muted-foreground">
                       <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground mt-2 flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {changelog.knownIssues && changelog.knownIssues.length > 0 && (
+              <div className="glass-card p-6 border-yellow-500/20">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center">
+                    <AlertTriangle className="w-5 h-5 text-yellow-500" />
+                  </div>
+                  <h2 className="text-xl font-semibold">Known Issues</h2>
+                </div>
+                <ul className="space-y-2">
+                  {changelog.knownIssues.map((item, i) => (
+                    <li key={i} className="flex items-start gap-2 text-muted-foreground">
+                      <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-2 flex-shrink-0" />
                       {item}
                     </li>
                   ))}
