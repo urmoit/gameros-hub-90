@@ -12,17 +12,19 @@ import {
 } from "lucide-react";
 
 const latestRelease = {
-  version: "Build 9",
-  date: "January 2025",
+  version: "Build 10",
+  buildNumber: "0.0.0.2000",
+  date: "January 11, 2026",
   highlights: [
-    "Android APK runtime support",
-    "Improved Windows compatibility",
-    "New Settings redesign",
-    "Performance optimizations",
+    "Build system stability fixes",
+    "Docker cross-compilation improvements",
+    "Resolved duplicate function definitions",
+    "Enhanced QEMU documentation",
   ],
 };
 
 const releases = [
+  { version: "Build 10", date: "Jan 2026", type: "Maintenance", description: "Build system stability" },
   { version: "Build 9", date: "Jan 2025", type: "Major", description: "Android APK support" },
   { version: "Build 8", date: "Dec 2024", type: "Feature", description: "Linux binary compatibility" },
   { version: "Build 7", date: "Nov 2024", type: "Feature", description: "Windows app layer" },
@@ -35,10 +37,10 @@ const releases = [
 ];
 
 const upcomingFeatures = [
-  { title: "DirectX Support", timeline: "Q1 2025", description: "Full DirectX 12 implementation for gaming" },
-  { title: "Network Stack", timeline: "Q2 2025", description: "TCP/IP and WiFi driver support" },
-  { title: "App Store", timeline: "Q3 2025", description: "Curated application marketplace" },
-  { title: "Multi-User", timeline: "Q4 2025", description: "User accounts and permissions" },
+  { title: "Advanced Graphics", timeline: "Q1 2026", description: "Enhanced VGA rendering and GPU optimization" },
+  { title: "Hardware Drivers", timeline: "Q2 2026", description: "Expanded hardware compatibility" },
+  { title: "UI Framework", timeline: "Q3 2026", description: "Fluent Design window system" },
+  { title: "Process Manager", timeline: "Q4 2026", description: "Advanced process scheduling" },
 ];
 
 const News = () => {
@@ -74,7 +76,8 @@ const News = () => {
                     <Star className="w-5 h-5 text-primary" />
                     <span className="text-sm font-medium text-primary">Latest Release</span>
                   </div>
-                  <h2 className="text-3xl font-bold mb-2">{latestRelease.version}</h2>
+                  <h2 className="text-3xl font-bold mb-1">{latestRelease.version}</h2>
+                  <p className="text-sm font-mono text-primary/80 mb-1">{latestRelease.buildNumber}</p>
                   <p className="text-muted-foreground mb-6">{latestRelease.date}</p>
                   
                   <ul className="space-y-3 mb-8">
@@ -91,7 +94,7 @@ const News = () => {
                       <Link to="/download">Download Now</Link>
                     </Button>
                     <Button variant="outline" asChild>
-                      <Link to={`/news/build-9`}>
+                      <Link to={`/news/build-10`}>
                         View Changelog
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </Link>
@@ -103,9 +106,10 @@ const News = () => {
                   <div className="aspect-video rounded-lg bg-gradient-to-br from-primary/10 to-secondary flex items-center justify-center">
                     <div className="text-center">
                       <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center mx-auto mb-3">
-                        <span className="text-2xl font-bold text-primary">9</span>
+                        <span className="text-2xl font-bold text-primary">10</span>
                       </div>
-                      <p className="text-sm text-muted-foreground">Build 9</p>
+                      <p className="text-sm text-muted-foreground">Build 10</p>
+                      <p className="text-xs font-mono text-muted-foreground/70 mt-1">v0.0.0.2000</p>
                     </div>
                   </div>
                 </div>
