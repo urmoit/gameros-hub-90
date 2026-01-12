@@ -1,10 +1,10 @@
 import StatCard from "@/components/ui/StatCard";
 
 const stats = [
-  { value: "9", label: "Releases" },
-  { value: "0", label: "Open Issues" },
-  { value: "100%", label: "Issues Resolved" },
-  { value: "2025", label: "Project Started" },
+  { value: "TBA", label: "Releases" },
+  { value: "TBA", label: "Contributors" },
+  { value: "TBA", label: "Lines of Code" },
+  { value: "2026", label: "Project Started" },
 ];
 
 const StatsSection = () => {
@@ -16,7 +16,7 @@ const StatsSection = () => {
             Project Statistics
           </h2>
           <p className="text-lg text-muted-foreground">
-            Tracking our progress and commitment to quality
+            Tracking our progress as we build GamerOS
           </p>
         </div>
 
