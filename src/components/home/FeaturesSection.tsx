@@ -1,4 +1,7 @@
+import { motion } from "framer-motion";
 import FeatureCard from "@/components/ui/FeatureCard";
+import ScrollReveal from "@/components/ui/ScrollReveal";
+import { StaggerContainer, StaggerItem } from "@/components/ui/StaggerContainer";
 import { 
   Zap, 
   Layers, 
@@ -45,21 +48,30 @@ const FeaturesSection = () => {
   return (
     <section className="py-24 bg-secondary/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Built for the Modern Era
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            GamerOS combines the best of all worlds, bringing together Windows 11 aesthetics 
-            with cross-platform application support.
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+              Built for the Modern Era
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              GamerOS combines the best of all worlds, bringing together Windows 11 aesthetics 
+              with cross-platform application support.
+            </p>
+          </div>
+        </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
-            <FeatureCard key={index} {...feature} />
+            <StaggerItem key={index}>
+              <motion.div
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.2 }}
+              >
+                <FeatureCard {...feature} />
+              </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

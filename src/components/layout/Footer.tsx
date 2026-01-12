@@ -35,7 +35,7 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Resources</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link to="/download" className="hover:text-foreground transition-colors">Download</Link></li>
-              <li><Link to="/all-versions" className="hover:text-foreground transition-colors">All Versions</Link></li>
+              <li><Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link></li>
               <li><Link to="/known-bugs" className="hover:text-foreground transition-colors">Known Bugs</Link></li>
               <li><a href="#" className="hover:text-foreground transition-colors">Documentation</a></li>
             </ul>
@@ -68,7 +68,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>© 2025 GamerOS. Open source and community driven.</p>
+          <p>© 2026 GamerOS. Open source and community driven.</p>
         </div>
       </div>
     </footer>

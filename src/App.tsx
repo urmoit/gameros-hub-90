@@ -11,6 +11,7 @@ import Download from "./pages/Download";
 import KnownBugs from "./pages/KnownBugs";
 import AllVersions from "./pages/AllVersions";
 import Changelog from "./pages/Changelog";
+import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/download" element={<Download />} />
           <Route path="/known-bugs" element={<KnownBugs />} />
           <Route path="/all-versions" element={<AllVersions />} />
+          <Route path="/faq" element={<FAQ />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
