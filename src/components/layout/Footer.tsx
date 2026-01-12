@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Github, Twitter, MessageCircle } from "lucide-react";
+import { Github, Twitter, MessageCircle, Coffee } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -14,9 +14,18 @@ const Footer = () => {
               </div>
               <span className="font-semibold text-lg">GamerOS</span>
             </Link>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground mb-4">
               A modern operating system supporting Windows, Linux, and Android apps.
             </p>
+            <a
+              href="https://buymeacoffee.com/solon"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-yellow-500/10 text-yellow-600 dark:text-yellow-500 text-sm font-medium hover:bg-yellow-500/20 transition-colors"
+            >
+              <Coffee className="w-4 h-4" />
+              Support the Developer
+            </a>
           </div>
 
           {/* Navigation */}
@@ -68,7 +77,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>© 2026 GamerOS. Open source and community driven.</p>
+          <p>© 2026 GamerOS. Built with ❤️ by a solo developer.</p>
         </div>
       </div>
     </footer>
