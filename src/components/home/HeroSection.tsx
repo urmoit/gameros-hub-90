@@ -1,6 +1,8 @@
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Download, ArrowRight, Monitor, Smartphone, Terminal } from "lucide-react";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 const HeroSection = () => {
   return (
@@ -9,85 +11,156 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background" />
       
       {/* Decorative elements */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
+      <motion.div 
+        className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
+        animate={{ 
+          scale: [1, 1.1, 1],
+          opacity: [0.3, 0.5, 0.3]
+        }}
+        transition={{ 
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div 
+        className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-accent/10 rounded-full blur-3xl"
+        animate={{ 
+          scale: [1.1, 1, 1.1],
+          opacity: [0.5, 0.3, 0.5]
+        }}
+        transition={{ 
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8">
+        <motion.div 
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
           <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
           Windows 11 Inspired Design
-        </div>
+        </motion.div>
 
         {/* Main Title */}
-        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">
+        <motion.h1 
+          className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           <span className="text-foreground">Gamer</span>
           <span className="text-primary">OS</span>
-        </h1>
+        </motion.h1>
 
         {/* Subtitle */}
-        <p className="text-xl sm:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8">
+        <motion.p 
+          className="text-xl sm:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
           A modern x86_64 operating system that runs 
           <span className="text-foreground font-medium"> Windows</span>,
           <span className="text-foreground font-medium"> Linux</span>, and
           <span className="text-foreground font-medium"> Android</span> apps seamlessly.
-        </p>
+        </motion.p>
 
         {/* Platform icons */}
-        <div className="flex items-center justify-center gap-6 mb-12">
-          <div className="flex items-center gap-2 text-muted-foreground">
+        <motion.div 
+          className="flex items-center justify-center gap-6 mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <motion.div 
+            className="flex items-center gap-2 text-muted-foreground"
+            whileHover={{ scale: 1.05, color: "hsl(var(--primary))" }}
+          >
             <Monitor className="w-5 h-5" />
             <span className="text-sm">Windows Apps</span>
-          </div>
-          <div className="flex items-center gap-2 text-muted-foreground">
+          </motion.div>
+          <motion.div 
+            className="flex items-center gap-2 text-muted-foreground"
+            whileHover={{ scale: 1.05, color: "hsl(var(--primary))" }}
+          >
             <Terminal className="w-5 h-5" />
             <span className="text-sm">Linux Apps</span>
-          </div>
-          <div className="flex items-center gap-2 text-muted-foreground">
+          </motion.div>
+          <motion.div 
+            className="flex items-center gap-2 text-muted-foreground"
+            whileHover={{ scale: 1.05, color: "hsl(var(--primary))" }}
+          >
             <Smartphone className="w-5 h-5" />
             <span className="text-sm">Android APKs</span>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button size="lg" asChild className="min-w-[180px]">
-            <Link to="/download">
-              <Download className="w-5 h-5 mr-2" />
-              Download
-            </Link>
-          </Button>
-          <Button size="lg" variant="outline" asChild className="min-w-[180px]">
-            <Link to="/about">
-              Learn More
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Link>
-          </Button>
-        </div>
+        <motion.div 
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            <Button size="lg" asChild className="min-w-[180px]">
+              <Link to="/download">
+                <Download className="w-5 h-5 mr-2" />
+                Download
+              </Link>
+            </Button>
+          </motion.div>
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            <Button size="lg" variant="outline" asChild className="min-w-[180px]">
+              <Link to="/about">
+                Learn More
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Link>
+            </Button>
+          </motion.div>
+        </motion.div>
 
         {/* Preview Window */}
-        <div className="mt-16 max-w-4xl mx-auto">
-          <div className="glass-card overflow-hidden fluent-shadow">
-            {/* Window titlebar */}
-            <div className="flex items-center gap-2 px-4 py-3 bg-card border-b border-border">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-destructive/60" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
-                <div className="w-3 h-3 rounded-full bg-green-500/60" />
-              </div>
-              <span className="text-sm text-muted-foreground ml-2">GamerOS Desktop</span>
-            </div>
-            {/* Window content */}
-            <div className="aspect-video bg-gradient-to-br from-primary/5 to-secondary flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-24 h-24 rounded-2xl bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                  <span className="text-4xl font-bold text-primary">G</span>
+        <ScrollReveal delay={0.2}>
+          <div className="mt-16 max-w-4xl mx-auto">
+            <motion.div 
+              className="glass-card overflow-hidden fluent-shadow"
+              whileHover={{ y: -5 }}
+              transition={{ duration: 0.3 }}
+            >
+              {/* Window titlebar */}
+              <div className="flex items-center gap-2 px-4 py-3 bg-card border-b border-border">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-destructive/60" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/60" />
                 </div>
-                <p className="text-muted-foreground">Modern. Fast. Universal.</p>
+                <span className="text-sm text-muted-foreground ml-2">GamerOS Desktop</span>
               </div>
-            </div>
+              {/* Window content */}
+              <div className="aspect-video bg-gradient-to-br from-primary/5 to-secondary flex items-center justify-center">
+                <motion.div 
+                  className="text-center"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.8, duration: 0.5 }}
+                >
+                  <div className="w-24 h-24 rounded-2xl bg-primary/20 flex items-center justify-center mx-auto mb-4">
+                    <span className="text-4xl font-bold text-primary">G</span>
+                  </div>
+                  <p className="text-muted-foreground">Modern. Fast. Universal.</p>
+                </motion.div>
+              </div>
+            </motion.div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );
