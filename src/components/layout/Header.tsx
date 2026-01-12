@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Coffee } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
@@ -47,6 +47,15 @@ const Header = () => {
 
           {/* Right side actions */}
           <div className="hidden md:flex items-center gap-2">
+            <a
+              href="https://buymeacoffee.com/solon"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-yellow-600 dark:text-yellow-500 hover:bg-yellow-500/10 transition-colors"
+            >
+              <Coffee className="w-4 h-4" />
+              <span className="hidden lg:inline">Support</span>
+            </a>
             <ThemeToggle />
             <Button asChild>
               <Link to="/download">Download Now</Link>
@@ -55,6 +64,14 @@ const Header = () => {
 
           {/* Mobile Menu Toggle */}
           <div className="flex md:hidden items-center gap-2">
+            <a
+              href="https://buymeacoffee.com/solon"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-lg text-yellow-600 dark:text-yellow-500 hover:bg-yellow-500/10 transition-colors"
+            >
+              <Coffee className="w-5 h-5" />
+            </a>
             <ThemeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -83,6 +100,15 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
+              <a
+                href="https://buymeacoffee.com/solon"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium text-yellow-600 dark:text-yellow-500 hover:bg-yellow-500/10 transition-colors"
+              >
+                <Coffee className="w-4 h-4" />
+                Support the Developer
+              </a>
               <Button asChild className="mt-2">
                 <Link to="/download" onClick={() => setIsOpen(false)}>
                   Download Now

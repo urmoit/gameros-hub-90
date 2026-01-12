@@ -32,7 +32,7 @@ const faqCategories = [
       },
       {
         q: "Is GamerOS free?",
-        a: "Yes! GamerOS is completely free and open source under the MIT license. You can use, modify, and distribute it freely."
+        a: "Yes! GamerOS is completely free and open source under the MIT license. You can use, modify, and distribute it freely. If you'd like to support the solo developer behind GamerOS, you can buy me a coffee at buymeacoffee.com/solon - your support helps keep the project going!"
       },
     ]
   },
