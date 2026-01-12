@@ -7,40 +7,72 @@ import {
   Calendar, 
   ArrowRight,
   Star,
-  Tag,
-  Clock
+  Clock,
+  Rocket,
+  Users,
+  Code2,
+  Sparkles,
+  Target,
+  MessageCircle
 } from "lucide-react";
 
-const latestRelease = {
-  version: "Build 10",
-  buildNumber: "0.0.0.2000",
-  date: "January 11, 2026",
-  highlights: [
-    "Build system stability fixes",
-    "Docker cross-compilation improvements",
-    "Resolved duplicate function definitions",
-    "Enhanced QEMU documentation",
-  ],
-};
-
-const releases = [
-  { version: "Build 10", date: "Jan 2026", type: "Maintenance", description: "Build system stability" },
-  { version: "Build 9", date: "Jan 2025", type: "Major", description: "Android APK support" },
-  { version: "Build 8", date: "Dec 2024", type: "Feature", description: "Linux binary compatibility" },
-  { version: "Build 7", date: "Nov 2024", type: "Feature", description: "Windows app layer" },
-  { version: "Build 6", date: "Oct 2024", type: "UI", description: "Fluent Design shell" },
-  { version: "Build 5", date: "Sep 2024", type: "Core", description: "File system rewrite" },
-  { version: "Build 4", date: "Aug 2024", type: "Core", description: "Process scheduler" },
-  { version: "Build 3", date: "Jul 2024", type: "Core", description: "Memory management" },
-  { version: "Build 2", date: "Jun 2024", type: "Core", description: "Basic kernel" },
-  { version: "Build 1", date: "May 2024", type: "Initial", description: "UEFI bootloader" },
+const announcements = [
+  {
+    title: "GamerOS Development Kickoff",
+    date: "January 2026",
+    type: "Announcement",
+    description: "We've officially started development on GamerOS, a revolutionary operating system that will seamlessly run Windows, Linux, and Android applications.",
+    icon: Rocket,
+  },
+  {
+    title: "Community Discord Launched",
+    date: "January 2026",
+    type: "Community",
+    description: "Join our growing community of developers and enthusiasts on Discord. Share ideas, get help, and be part of the journey.",
+    icon: MessageCircle,
+  },
+  {
+    title: "Open Source Commitment",
+    date: "January 2026",
+    type: "Announcement",
+    description: "GamerOS will be fully open source under the MIT license. We believe in transparency and community-driven development.",
+    icon: Code2,
+  },
+  {
+    title: "Looking for Contributors",
+    date: "January 2026",
+    type: "Community",
+    description: "We're actively seeking contributors in kernel development, UI design, documentation, and testing. All skill levels welcome!",
+    icon: Users,
+  },
 ];
 
-const upcomingFeatures = [
-  { title: "Advanced Graphics", timeline: "Q1 2026", description: "Enhanced VGA rendering and GPU optimization" },
-  { title: "Hardware Drivers", timeline: "Q2 2026", description: "Expanded hardware compatibility" },
-  { title: "UI Framework", timeline: "Q3 2026", description: "Fluent Design window system" },
-  { title: "Process Manager", timeline: "Q4 2026", description: "Advanced process scheduling" },
+const upcomingMilestones = [
+  { title: "Core Kernel", timeline: "Q1 2026", description: "Basic kernel with memory management and process scheduling", status: "In Progress" },
+  { title: "Graphics Framework", timeline: "Q2 2026", description: "Fluent Design-inspired UI framework implementation", status: "Planned" },
+  { title: "Windows Compatibility", timeline: "Q3 2026", description: "Initial Windows application compatibility layer", status: "Planned" },
+  { title: "Linux Support", timeline: "Q3 2026", description: "Linux binary execution support", status: "Planned" },
+  { title: "Android Runtime", timeline: "Q4 2026", description: "Android APK execution environment", status: "Planned" },
+  { title: "First Public Beta", timeline: "2027", description: "First downloadable public beta release", status: "Planned" },
+];
+
+const devUpdates = [
+  {
+    title: "Build System Architecture",
+    description: "Established robust build system using Docker for cross-compilation, ensuring consistent builds across all development environments.",
+  },
+  {
+    title: "Bootloader Development",
+    description: "Custom UEFI bootloader in development, designed for fast and reliable system initialization.",
+  },
+  {
+    title: "Memory Management",
+    description: "Implementing advanced memory management with 16-byte aligned allocations and protection mechanisms.",
+  },
+  {
+    title: "UI Framework Design",
+    description: "Designing an event-driven widget system with comprehensive theme support for the Fluent Design interface.",
+  },
 ];
 
 const News = () => {
@@ -56,15 +88,15 @@ const News = () => {
               Latest Updates
             </div>
             <h1 className="text-4xl sm:text-5xl font-bold mb-6">
-              News & Releases
+              News & Updates
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Stay up to date with the latest GamerOS developments, releases, and announcements.
+              Stay informed about GamerOS development progress, announcements, and community updates.
             </p>
           </div>
         </section>
 
-        {/* Latest Release */}
+        {/* Project Status */}
         <section className="py-16 bg-secondary/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="glass-card p-8 lg:p-12 relative overflow-hidden">
@@ -74,42 +106,37 @@ const News = () => {
                 <div>
                   <div className="flex items-center gap-2 mb-4">
                     <Star className="w-5 h-5 text-primary" />
-                    <span className="text-sm font-medium text-primary">Latest Release</span>
+                    <span className="text-sm font-medium text-primary">Project Status</span>
                   </div>
-                  <h2 className="text-3xl font-bold mb-1">{latestRelease.version}</h2>
-                  <p className="text-sm font-mono text-primary/80 mb-1">{latestRelease.buildNumber}</p>
-                  <p className="text-muted-foreground mb-6">{latestRelease.date}</p>
+                  <h2 className="text-3xl font-bold mb-4">Active Development</h2>
+                  <p className="text-muted-foreground mb-6">
+                    GamerOS is currently in the early stages of development. Our team is focused on building 
+                    a solid foundation including the kernel, graphics framework, and compatibility layers. 
+                    We're making steady progress and excited to share updates along the way.
+                  </p>
                   
-                  <ul className="space-y-3 mb-8">
-                    {latestRelease.highlights.map((highlight, i) => (
-                      <li key={i} className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-primary" />
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="flex gap-4">
-                    <Button asChild>
-                      <Link to="/download">Download Now</Link>
-                    </Button>
-                    <Button variant="outline" asChild>
-                      <Link to={`/news/build-10`}>
-                        View Changelog
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                      </Link>
-                    </Button>
+                  <div className="flex flex-wrap gap-3 mb-8">
+                    <span className="px-3 py-1 rounded-full bg-green-500/10 text-green-500 text-sm">Kernel Development</span>
+                    <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm">UI Design</span>
+                    <span className="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-500 text-sm">Build System</span>
                   </div>
+
+                  <Button variant="outline" asChild>
+                    <Link to="/roadmap">
+                      View Full Roadmap
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
                 </div>
 
                 <div className="glass-card p-6">
                   <div className="aspect-video rounded-lg bg-gradient-to-br from-primary/10 to-secondary flex items-center justify-center">
                     <div className="text-center">
                       <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center mx-auto mb-3">
-                        <span className="text-2xl font-bold text-primary">10</span>
+                        <Sparkles className="w-8 h-8 text-primary" />
                       </div>
-                      <p className="text-sm text-muted-foreground">Build 10</p>
-                      <p className="text-xs font-mono text-muted-foreground/70 mt-1">v0.0.0.2000</p>
+                      <p className="text-sm text-muted-foreground">Building the Future</p>
+                      <p className="text-xs font-mono text-muted-foreground/70 mt-1">v0.0.x Development</p>
                     </div>
                   </div>
                 </div>
@@ -118,55 +145,111 @@ const News = () => {
           </div>
         </section>
 
-        {/* Release Timeline */}
+        {/* Announcements */}
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-center mb-12">Release History</h2>
+            <h2 className="text-3xl font-bold text-center mb-12">Announcements</h2>
             
-            <div className="grid gap-4">
-              {releases.map((release, i) => (
-                <Link 
-                  key={i} 
-                  to={`/news/${release.version.toLowerCase().replace(" ", "-")}`}
-                  className="glass-card p-4 fluent-hover flex items-center gap-4"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <span className="font-bold text-primary">{i === 0 ? "9" : 9 - i}</span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-semibold">{release.version}</h3>
-                      <span className="px-2 py-0.5 rounded-full bg-secondary text-xs">{release.type}</span>
+            <div className="grid md:grid-cols-2 gap-6">
+              {announcements.map((item, i) => (
+                <div key={i} className="glass-card p-6 fluent-hover">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-6 h-6 text-primary" />
                     </div>
-                    <p className="text-sm text-muted-foreground truncate">{release.description}</p>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="px-2 py-0.5 rounded-full bg-secondary text-xs">{item.type}</span>
+                        <span className="text-xs text-muted-foreground">{item.date}</span>
+                      </div>
+                      <h3 className="font-semibold mb-2">{item.title}</h3>
+                      <p className="text-sm text-muted-foreground">{item.description}</p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground flex-shrink-0">
-                    <Calendar className="w-4 h-4" />
-                    {release.date}
-                  </div>
-                  <ArrowRight className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                </Link>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Upcoming */}
+        {/* Development Updates */}
         <section className="py-16 bg-secondary/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-center mb-12">What's Next</h2>
+            <h2 className="text-3xl font-bold text-center mb-4">Development Updates</h2>
+            <p className="text-center text-muted-foreground mb-12">
+              What we're currently working on
+            </p>
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {upcomingFeatures.map((feature, i) => (
+            <div className="grid md:grid-cols-2 gap-6">
+              {devUpdates.map((update, i) => (
                 <div key={i} className="glass-card p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Clock className="w-4 h-4 text-primary" />
-                    <span className="text-sm text-primary font-medium">{feature.timeline}</span>
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Code2 className="w-4 h-4 text-primary" />
+                    </div>
+                    <h3 className="font-semibold">{update.title}</h3>
                   </div>
-                  <h3 className="font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground">{feature.description}</p>
+                  <p className="text-sm text-muted-foreground">{update.description}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Upcoming Milestones */}
+        <section className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-center mb-4">Upcoming Milestones</h2>
+            <p className="text-center text-muted-foreground mb-12">
+              Our development roadmap and targets
+            </p>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {upcomingMilestones.map((milestone, i) => (
+                <div key={i} className="glass-card p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-primary" />
+                      <span className="text-sm text-primary font-medium">{milestone.timeline}</span>
+                    </div>
+                    <span className={`px-2 py-0.5 rounded-full text-xs ${
+                      milestone.status === "In Progress" 
+                        ? "bg-green-500/10 text-green-500" 
+                        : "bg-secondary text-muted-foreground"
+                    }`}>
+                      {milestone.status}
+                    </span>
+                  </div>
+                  <h3 className="font-semibold mb-2">{milestone.title}</h3>
+                  <p className="text-sm text-muted-foreground">{milestone.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Get Involved */}
+        <section className="py-16 bg-secondary/30">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="glass-card p-8 lg:p-12 text-center">
+              <Target className="w-12 h-12 text-primary mx-auto mb-6" />
+              <h2 className="text-3xl font-bold mb-4">Get Involved</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+                GamerOS is a community-driven project. Whether you're a developer, designer, writer, 
+                or just enthusiastic about operating systems, there's a place for you in our community.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Button size="lg">
+                  <Users className="w-5 h-5 mr-2" />
+                  Join Community
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link to="/about">
+                    Learn More
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </section>
