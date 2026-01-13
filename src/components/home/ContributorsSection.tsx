@@ -30,17 +30,19 @@ const ContributorsSection = () => {
               whileHover={{ y: -5, scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl font-bold text-primary">S</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-1">Solon</h3>
+              <a href="https://github.com/urmoit" target="_blank" rel="noopener noreferrer">
+                <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 hover:bg-primary/20 transition-colors">
+                  <span className="text-3xl font-bold text-primary">U</span>
+                </div>
+              </a>
+              <h3 className="text-xl font-semibold mb-1">urmoit</h3>
               <p className="text-muted-foreground mb-4">Solo Developer & Creator</p>
               <p className="text-sm text-muted-foreground mb-6">
                 Building GamerOS from the ground up - kernel, UI, everything. 
                 It's a labor of love and a learning journey.
               </p>
               <motion.a 
-                href="https://buymeacoffee.com/solon"
+                href="https://buymeacoffee.com/urmoit"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-yellow-500 text-yellow-950 font-medium hover:bg-yellow-400 transition-colors"
@@ -66,7 +68,9 @@ const ContributorsSection = () => {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <motion.a 
-                href="#" 
+                href="https://github.com/urmoit/GamerOS" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
