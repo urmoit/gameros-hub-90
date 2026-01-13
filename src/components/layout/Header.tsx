@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Coffee } from "lucide-react";
+import { Menu, X, Coffee, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
@@ -17,7 +17,17 @@ const Header = () => {
   const location = useLocation();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 mica-bg border-b border-border/50">
+    <header className="fixed top-0 left-0 right-0 z-50">
+      {/* Development Notice Banner */}
+      <div className="bg-amber-500 text-black">
+        <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center gap-2">
+          <AlertTriangle className="h-4 w-4 flex-shrink-0" />
+          <p className="text-sm font-semibold text-center">
+            GamerOS is currently in development. Downloads are not available yet.
+          </p>
+        </div>
+      </div>
+      <div className="mica-bg border-b border-border/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -117,6 +127,7 @@ const Header = () => {
             </div>
           </nav>
         )}
+      </div>
       </div>
     </header>
   );
