@@ -48,7 +48,7 @@ const Header = () => {
           {/* Right side actions */}
           <div className="hidden md:flex items-center gap-2">
             <a
-              href="https://buymeacoffee.com/solon"
+              href="https://buymeacoffee.com/urmoit"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-yellow-600 dark:text-yellow-500 hover:bg-yellow-500/10 transition-colors"
@@ -65,7 +65,7 @@ const Header = () => {
           {/* Mobile Menu Toggle */}
           <div className="flex md:hidden items-center gap-2">
             <a
-              href="https://buymeacoffee.com/solon"
+              href="https://buymeacoffee.com/urmoit"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg text-yellow-600 dark:text-yellow-500 hover:bg-yellow-500/10 transition-colors"
@@ -101,7 +101,7 @@ const Header = () => {
                 </Link>
               ))}
               <a
-                href="https://buymeacoffee.com/solon"
+                href="https://buymeacoffee.com/urmoit"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium text-yellow-600 dark:text-yellow-500 hover:bg-yellow-500/10 transition-colors"

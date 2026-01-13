@@ -32,7 +32,7 @@ const faqCategories = [
       },
       {
         q: "Is GamerOS free?",
-        a: "Yes! GamerOS is completely free and open source under the MIT license. You can use, modify, and distribute it freely. If you'd like to support the solo developer behind GamerOS, you can buy me a coffee at buymeacoffee.com/solon - your support helps keep the project going!"
+        a: "Yes! GamerOS is completely free and open source under the MIT license. You can use, modify, and distribute it freely. If you'd like to support the solo developer behind GamerOS, you can buy me a coffee at buymeacoffee.com/urmoit - your support helps keep the project going!"
       },
     ]
   },
@@ -198,13 +198,15 @@ const FAQ = () => {
                     We're happy to help!
                   </p>
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <Button size="lg">
+                    <Button size="lg" disabled className="opacity-60">
                       <MessageCircle className="w-5 h-5 mr-2" />
-                      Join Discord
+                      Discord Coming Soon
                     </Button>
-                    <Button size="lg" variant="outline">
-                      <Github className="w-5 h-5 mr-2" />
-                      GitHub Discussions
+                    <Button size="lg" variant="outline" asChild>
+                      <a href="https://github.com/urmoit/GamerOS" target="_blank" rel="noopener noreferrer">
+                        <Github className="w-5 h-5 mr-2" />
+                        GitHub Discussions
+                      </a>
                     </Button>
                     <Button size="lg" variant="outline" asChild>
                       <Link to="/about">
