@@ -8,9 +8,11 @@ import {
   CheckCircle2,
   ExternalLink,
   FileCode,
-  Calendar
+  Calendar,
+  Circle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const bugSummary = {
   total: 16,
@@ -269,11 +271,13 @@ const BugTracking = () => {
                     <p className="text-sm text-muted-foreground">{criticalBugs.length} issues</p>
                   </div>
                 </div>
-                <ul className="space-y-2 ml-13">
+                <ul className="space-y-3 ml-13">
                   {criticalBugs.map((bug, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <input type="checkbox" disabled className="mt-1 rounded" />
-                      {bug}
+                    <li key={i} className="flex items-start gap-3 text-sm">
+                      <div className="flex items-center justify-center w-5 h-5 rounded-md border-2 border-red-500 bg-red-500/10 mt-0.5">
+                        <Circle className="w-2 h-2 text-red-500" />
+                      </div>
+                      <span className="text-muted-foreground">{bug}</span>
                     </li>
                   ))}
                 </ul>
@@ -290,11 +294,13 @@ const BugTracking = () => {
                     <p className="text-sm text-muted-foreground">{highPriorityBugs.length} issues</p>
                   </div>
                 </div>
-                <ul className="space-y-2 ml-13">
+                <ul className="space-y-3 ml-13">
                   {highPriorityBugs.map((bug, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <input type="checkbox" disabled className="mt-1 rounded" />
-                      {bug}
+                    <li key={i} className="flex items-start gap-3 text-sm">
+                      <div className="flex items-center justify-center w-5 h-5 rounded-md border-2 border-orange-500 bg-orange-500/10 mt-0.5">
+                        <Circle className="w-2 h-2 text-orange-500" />
+                      </div>
+                      <span className="text-muted-foreground">{bug}</span>
                     </li>
                   ))}
                 </ul>
@@ -311,11 +317,13 @@ const BugTracking = () => {
                     <p className="text-sm text-muted-foreground">{mediumPriorityBugs.length} issues</p>
                   </div>
                 </div>
-                <ul className="space-y-2 ml-13">
+                <ul className="space-y-3 ml-13">
                   {mediumPriorityBugs.map((bug, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <input type="checkbox" disabled className="mt-1 rounded" />
-                      {bug}
+                    <li key={i} className="flex items-start gap-3 text-sm">
+                      <div className="flex items-center justify-center w-5 h-5 rounded-md border-2 border-yellow-500 bg-yellow-500/10 mt-0.5">
+                        <Circle className="w-2 h-2 text-yellow-500" />
+                      </div>
+                      <span className="text-muted-foreground">{bug}</span>
                     </li>
                   ))}
                 </ul>
@@ -332,11 +340,13 @@ const BugTracking = () => {
                     <p className="text-sm text-muted-foreground">{lowPriorityBugs.length} issues</p>
                   </div>
                 </div>
-                <ul className="space-y-2 ml-13">
+                <ul className="space-y-3 ml-13">
                   {lowPriorityBugs.map((bug, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <input type="checkbox" disabled className="mt-1 rounded" />
-                      {bug}
+                    <li key={i} className="flex items-start gap-3 text-sm">
+                      <div className="flex items-center justify-center w-5 h-5 rounded-md border-2 border-green-500 bg-green-500/10 mt-0.5">
+                        <Circle className="w-2 h-2 text-green-500" />
+                      </div>
+                      <span className="text-muted-foreground">{bug}</span>
                     </li>
                   ))}
                 </ul>
