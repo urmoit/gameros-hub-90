@@ -13,10 +13,48 @@ import {
   Code2,
   Sparkles,
   Target,
-  MessageCircle
+  MessageCircle,
+  ExternalLink,
+  GitCommit
 } from "lucide-react";
 
 const announcements = [
+  {
+    title: "Update current bugs documentation and enhance kernel boot process",
+    date: "January 14, 2026",
+    type: "Commit",
+    description: "Revised currentbugs.md to include a summary of total bugs, categorized by severity. Added debug output to kernel_main for better visibility during boot. Improved CPU detection in boot.asm with comprehensive checks.",
+    icon: Code2,
+    commitCode: "70fba78",
+    commitUrl: "https://github.com/urmoit/GamerOS/commit/70fba78de2e3c123f2bfd4f5aea08996eee8d172",
+  },
+  {
+    title: "Enhance QEMU boot process and GUI application",
+    date: "January 14, 2026",
+    type: "Commit",
+    description: "Updated run-qemu.bat to use -cpu max and log output to qemu-debug.log. Modified GUI application to increase window height and reduce tab count. Updated changelog content to reflect recent development milestones.",
+    icon: Code2,
+    commitCode: "f50fb62",
+    commitUrl: "https://github.com/urmoit/GamerOS/commit/f50fb62ff112cf56a6025299f8b9bb21f6160d59",
+  },
+  {
+    title: "Refactor build scripts and update documentation",
+    date: "January 14, 2026",
+    type: "Commit",
+    description: "Updated build-iso.bat to use make build-x86_64. Enhanced currentbugs.md with new remaining issues. Improved debug.bat to check for QEMU in multiple common locations. Added comprehensive QEMU tutorial.",
+    icon: Code2,
+    commitCode: "21d5dce",
+    commitUrl: "https://github.com/urmoit/GamerOS/commit/21d5dce0b6db2f416201a61e586fa6e206acb657",
+  },
+  {
+    title: "Added cursor worktree",
+    date: "January 14, 2026",
+    type: "Commit",
+    description: "Added cursor worktree for improved development workflow.",
+    icon: Code2,
+    commitCode: "259e723",
+    commitUrl: "https://github.com/urmoit/GamerOS/commit/259e723ec1704b43a9182110ecf7b27dcee35e44",
+  },
   {
     title: "GamerOS Development Kickoff",
     date: "January 2026",
@@ -159,11 +197,25 @@ const News = () => {
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="px-2 py-0.5 rounded-full bg-secondary text-xs">{item.type}</span>
+                        <span className={`px-2 py-0.5 rounded-full text-xs ${item.type === 'Commit' ? 'bg-green-500/10 text-green-500' : 'bg-secondary'}`}>
+                          {item.type}
+                        </span>
                         <span className="text-xs text-muted-foreground">{item.date}</span>
                       </div>
                       <h3 className="font-semibold mb-2">{item.title}</h3>
-                      <p className="text-sm text-muted-foreground">{item.description}</p>
+                      <p className="text-sm text-muted-foreground mb-3">{item.description}</p>
+                      {'commitCode' in item && item.commitCode && (
+                        <a 
+                          href={item.commitUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-xs text-primary hover:underline"
+                        >
+                          <GitCommit className="w-3 h-3" />
+                          <code>{item.commitCode}</code>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
