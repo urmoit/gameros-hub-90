@@ -9,6 +9,7 @@ import Roadmap from "./pages/Roadmap";
 import News from "./pages/News";
 import Download from "./pages/Download";
 import KnownBugs from "./pages/KnownBugs";
+import BugTracking from "./pages/BugTracking";
 import AllVersions from "./pages/AllVersions";
 import Changelog from "./pages/Changelog";
 import FAQ from "./pages/FAQ";
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/news/:version" element={<Changelog />} />
           <Route path="/download" element={<Download />} />
           <Route path="/known-bugs" element={<KnownBugs />} />
+          <Route path="/bug-tracking" element={<BugTracking />} />
           <Route path="/all-versions" element={<AllVersions />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="*" element={<NotFound />} />
