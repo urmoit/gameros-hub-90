@@ -9,38 +9,38 @@ import {
   ExternalLink,
   FileCode,
   Calendar,
-  Circle
+  Circle,
+  Check
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 
 const bugSummary = {
-  total: 16,
-  critical: 3,
-  high: 3,
-  medium: 5,
+  total: 20,
+  critical: 1,
+  high: 2,
+  medium: 6,
   low: 5,
-  resolved: 0,
+  resolved: 5,
 };
 
 const criticalBugs = [
-  "Duplicate scheduler.h include causing compilation issues",
-  "Missing terminate_process function declaration",
   "DEXLFOK boot hang - OS shows \"DEXLFOK\" in yellow and pauses, preventing boot",
 ];
 
 const highPriorityBugs = [
-  "Unused process functions (process1_entry, process2_entry) wasting memory",
   "Incomplete UI framework implementation",
   "Missing executive services initialization",
 ];
 
 const mediumPriorityBugs = [
-  "Potential division by zero in GUI tab calculations",
-  "Uninitialized kernel_counter variable",
   "TODO comments indicating incomplete implementations (4 files)",
   "Missing null pointer checks in some functions",
   "Potential race conditions in scheduler",
+  "Implicit function declarations in GUI app (strlen, workstation_create_desktop)",
+  "Implicit function declarations in user mode init functions",
+  "Color value overflow in GUI functions (32-bit to 8-bit conversion)",
+  "Missing kmalloc/kfree declarations in object manager",
+  "Unused variables (prev in memory.c)",
 ];
 
 const lowPriorityBugs = [
@@ -51,46 +51,22 @@ const lowPriorityBugs = [
   "Inefficient string operations",
 ];
 
+const resolvedBugs = [
+  "Duplicate scheduler.h include",
+  "Missing terminate_process function declaration",
+  "Unused process functions",
+  "Potential division by zero in GUI tab calculations",
+  "Uninitialized kernel_counter variable",
+];
+
 const detailedBugs = [
   {
-    file: "src/impl/kernel/main.c",
-    issue: "Duplicate include of scheduler.h (lines 9 and 16)",
+    file: "src/impl/x86_64/boot.asm (Boot Process)",
+    issue: "OS displays \"DEXLFOK\" in yellow and pauses during boot instead of continuing",
     severity: "Critical",
-    location: "Lines 9, 16",
-    impact: "Compilation warnings/errors, potential symbol conflicts",
-    fix: "Remove duplicate include on line 16",
-  },
-  {
-    file: "src/impl/kernel/main.c",
-    issue: "process1_entry and process2_entry functions defined but never called",
-    severity: "High",
-    location: "Lines 23-41, 43-61",
-    impact: "Wasted memory and code space, potential confusion",
-    fix: "Remove unused functions or implement proper process spawning",
-  },
-  {
-    file: "src/impl/kernel/main.c",
-    issue: "terminate_process function declared as extern but may not exist",
-    severity: "Critical",
-    location: "Lines 36-37, 56-57",
-    impact: "Linker errors if function not implemented, undefined behavior",
-    fix: "Implement terminate_process function or remove calls",
-  },
-  {
-    file: "src/impl/kernel/main.c",
-    issue: "kernel_counter variable not properly initialized before use",
-    severity: "Medium",
-    location: "Line 100",
-    impact: "Undefined behavior on first iteration",
-    fix: "Initialize kernel_counter = 0; before the loop",
-  },
-  {
-    file: "src/impl/gui_app.c",
-    issue: "Potential division by zero in tab width calculation",
-    severity: "Medium",
-    location: "Line 104",
-    impact: "Crash if TAB_COUNT is 0 or if calculation results in zero",
-    fix: "Add safety check: if (TAB_COUNT == 0) return;",
+    location: "CPU detection and paging setup code",
+    impact: "System hangs immediately after CPU detection, preventing full boot",
+    fix: "Need to investigate further - fixed memory addresses for paging tables did not resolve the issue",
   },
   {
     file: "src/executive/executive.c",
@@ -133,6 +109,46 @@ const detailedBugs = [
     fix: "Implement missing desktop management functionality",
   },
   {
+    file: "src/impl/gui_app.c",
+    issue: "Implicit function declarations for strlen and workstation_create_desktop",
+    severity: "Medium",
+    location: "Lines 119, 160",
+    impact: "Compilation warnings, potential runtime issues if functions not properly linked",
+    fix: "Add strlen declaration to string.h header and declare workstation_create_desktop function",
+  },
+  {
+    file: "src/impl/gui_app.c",
+    issue: "Color value overflow when converting 32-bit values to 8-bit parameters",
+    severity: "Medium",
+    location: "Lines 163-174",
+    impact: "Colors may display incorrectly, overflow warnings during compilation",
+    fix: "Use proper 8-bit color values instead of 32-bit values",
+  },
+  {
+    file: "src/executive/object_manager/object_manager.c",
+    issue: "Implicit declarations of kmalloc and kfree functions",
+    severity: "Medium",
+    location: "Lines 80, 95",
+    impact: "Compilation warnings, potential linking issues",
+    fix: "Include proper header file declaring kmalloc/kfree or add declarations",
+  },
+  {
+    file: "src/user_mode/user_mode.c",
+    issue: "Multiple implicit function declarations for subsystem init/shutdown functions",
+    severity: "Medium",
+    location: "Lines 27-38, 44-51",
+    impact: "Compilation warnings, potential linking issues with subsystem implementations",
+    fix: "Add proper function declarations or include appropriate headers",
+  },
+  {
+    file: "src/impl/kernel_mode/microkernel/memory.c",
+    issue: "Unused variable 'prev' in kmalloc function",
+    severity: "Low",
+    location: "Line 32",
+    impact: "Compilation warning, minor code cleanliness issue",
+    fix: "Remove unused variable or use it in the logic",
+  },
+  {
     file: "src/user_mode/compatibility_layers/msdos/msdos.c",
     issue: "TODO comments for incomplete MSDOS compatibility",
     severity: "Low",
@@ -171,14 +187,6 @@ const detailedBugs = [
     location: "Multiple lines",
     impact: "Limited Windows application support",
     fix: "Implement Win32 subsystem",
-  },
-  {
-    file: "src/impl/x86_64/boot.asm (Boot Process)",
-    issue: "OS displays \"DEXLFOK\" in yellow and pauses during boot instead of continuing",
-    severity: "Critical",
-    location: "CPU detection and paging setup code",
-    impact: "System hangs immediately after CPU detection, preventing full boot",
-    fix: "Need to investigate further - fixed memory addresses for paging tables did not resolve the issue",
   },
 ];
 
@@ -246,8 +254,8 @@ const BugTracking = () => {
                 <div className="text-2xl font-bold text-green-600">{bugSummary.low}</div>
                 <div className="text-sm text-muted-foreground">Low Priority</div>
               </div>
-              <div className="glass-card p-4 text-center">
-                <div className="text-2xl font-bold text-muted-foreground">{bugSummary.resolved}</div>
+              <div className="glass-card p-4 text-center border-emerald-500/30">
+                <div className="text-2xl font-bold text-emerald-500">{bugSummary.resolved}</div>
                 <div className="text-sm text-muted-foreground">Resolved</div>
               </div>
             </div>
@@ -268,7 +276,7 @@ const BugTracking = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-red-500">🔴 Critical (System Breaking)</h3>
-                    <p className="text-sm text-muted-foreground">{criticalBugs.length} issues</p>
+                    <p className="text-sm text-muted-foreground">{criticalBugs.length} issue{criticalBugs.length !== 1 ? 's' : ''}</p>
                   </div>
                 </div>
                 <ul className="space-y-3 ml-13">
@@ -353,17 +361,26 @@ const BugTracking = () => {
               </div>
 
               {/* Resolved */}
-              <div className="glass-card p-6 border-l-4 border-muted">
+              <div className="glass-card p-6 border-l-4 border-emerald-500">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center">
-                    <CheckCircle2 className="w-5 h-5 text-muted-foreground" />
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-500" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-muted-foreground">✅ Resolved</h3>
-                    <p className="text-sm text-muted-foreground">0 issues</p>
+                    <h3 className="font-semibold text-emerald-500">✅ Resolved</h3>
+                    <p className="text-sm text-muted-foreground">{resolvedBugs.length} issues</p>
                   </div>
                 </div>
-                <p className="text-sm text-muted-foreground ml-13">None yet</p>
+                <ul className="space-y-3 ml-13">
+                  {resolvedBugs.map((bug, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm">
+                      <div className="flex items-center justify-center w-5 h-5 rounded-md border-2 border-emerald-500 bg-emerald-500 mt-0.5">
+                        <Check className="w-3 h-3 text-white" />
+                      </div>
+                      <span className="text-muted-foreground line-through">{bug}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
@@ -423,24 +440,35 @@ const BugTracking = () => {
         {/* Report Bug CTA */}
         <section className="py-16 bg-secondary/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="glass-card p-8 text-center">
-              <Bug className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="text-2xl font-bold mb-4">Found a New Bug?</h3>
-              <p className="text-muted-foreground max-w-xl mx-auto mb-6">
-                Help us improve GamerOS by reporting issues on our GitHub repository. 
-                Please include reproduction steps and system information.
+            <div className="glass-card p-8 lg:p-12 text-center">
+              <Bug className="w-12 h-12 text-primary mx-auto mb-6" />
+              <h2 className="text-3xl font-bold mb-4">Found a Bug?</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+                Help us improve GamerOS by reporting bugs on our GitHub repository. 
+                Please include as much detail as possible including steps to reproduce.
               </p>
-              <Button asChild>
-                <a 
-                  href="https://github.com/urmoit/GamerOS/issues" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2"
-                >
-                  Report on GitHub
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              </Button>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Button size="lg" asChild>
+                  <a 
+                    href="https://github.com/urmoit/GamerOS/issues/new" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    <Bug className="w-5 h-5 mr-2" />
+                    Report Bug on GitHub
+                  </a>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <a 
+                    href="https://github.com/urmoit/GamerOS/issues" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    View All Issues
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
         </section>

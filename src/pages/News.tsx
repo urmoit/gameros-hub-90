@@ -20,6 +20,15 @@ import {
 
 const announcements = [
   {
+    title: "Update current bugs documentation and resolve several issues",
+    date: "January 14, 2026",
+    type: "Commit",
+    description: "Revised currentbugs.md to reflect an increase in total bugs to 20. Documented the resolution of 5 bugs. Added new bug reports for implicit function declarations and color value overflows. Implemented safety checks in draw_tab_bar.",
+    icon: Code2,
+    commitCode: "1d4ecb2",
+    commitUrl: "https://github.com/urmoit/GamerOS/commit/1d4ecb20daa7ac73159c9ea773c4f9d4f6f43a59",
+  },
+  {
     title: "Update current bugs documentation and enhance kernel boot process",
     date: "January 14, 2026",
     type: "Commit",
