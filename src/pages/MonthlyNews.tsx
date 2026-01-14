@@ -32,8 +32,16 @@ const monthlyNewsData: Record<string, MonthData> = {
   "january-2026": {
     month: "January",
     year: "2026",
-    summary: "Development kickoff, build system improvements, and QEMU integration enhancements.",
+    summary: "Development kickoff, build system improvements, bug fixes, and QEMU integration enhancements.",
     items: [
+      {
+        title: "Update current bugs documentation and resolve several issues",
+        date: "January 14, 2026",
+        type: "Commit",
+        description: "Revised currentbugs.md to reflect an increase in total bugs to 20, with updated counts for critical, high, medium, and low priority issues. Documented the resolution of 5 bugs, including critical issues related to duplicate includes and uninitialized variables. Added new bug reports for implicit function declarations and color value overflows in the GUI application. Implemented a safety check in draw_tab_bar to prevent potential division by zero. Removed unused process functions from main.c to optimize memory usage.",
+        commitCode: "1d4ecb2",
+        commitUrl: "https://github.com/urmoit/GamerOS/commit/1d4ecb20daa7ac73159c9ea773c4f9d4f6f43a59",
+      },
       {
         title: "Update current bugs documentation and enhance kernel boot process",
         date: "January 14, 2026",
