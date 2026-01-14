@@ -63,13 +63,6 @@ const announcements = [
     icon: Rocket,
   },
   {
-    title: "Community Discord Launched",
-    date: "January 2026",
-    type: "Community",
-    description: "Join our growing community of developers and enthusiasts on Discord. Share ideas, get help, and be part of the journey.",
-    icon: MessageCircle,
-  },
-  {
     title: "Open Source Commitment",
     date: "January 2026",
     type: "Announcement",
@@ -186,7 +179,15 @@ const News = () => {
         {/* Announcements */}
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-center mb-12">Announcements</h2>
+            <div className="flex items-center justify-between mb-12">
+              <h2 className="text-3xl font-bold">Announcements</h2>
+              <Button variant="outline" asChild>
+                <Link to="/news/monthly/january-2026">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  View January 2026 Archive
+                </Link>
+              </Button>
+            </div>
             
             <div className="grid md:grid-cols-2 gap-6">
               {announcements.map((item, i) => (

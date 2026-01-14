@@ -39,14 +39,13 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Resources */}
           <div>
             <h4 className="font-semibold mb-4">Resources</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link to="/download" className="hover:text-foreground transition-colors">Download</Link></li>
               <li><Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link></li>
-              <li><Link to="/known-bugs" className="hover:text-foreground transition-colors">Known Bugs</Link></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Documentation</a></li>
+              <li><Link to="/bug-tracking" className="hover:text-foreground transition-colors">Bug Tracking</Link></li>
+              <li><a href="https://github.com/urmoit/GamerOS" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Documentation</a></li>
             </ul>
           </div>
 
