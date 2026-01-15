@@ -16,15 +16,15 @@ import { Button } from "@/components/ui/button";
 
 const bugSummary = {
   total: 20,
-  critical: 1,
+  critical: 0,
   high: 2,
   medium: 6,
   low: 5,
-  resolved: 5,
+  resolved: 6,
 };
 
 const criticalBugs = [
-  "DEXLFOK boot hang - OS shows \"DEXLFOK\" in yellow and pauses, preventing boot",
+  "",
 ];
 
 const highPriorityBugs = [
@@ -52,6 +52,7 @@ const lowPriorityBugs = [
 ];
 
 const resolvedBugs = [
+  "DEXLFOK boot hang - OS shows \"DEXLFOK\" in yellow and pauses, preventing boot",
   "Duplicate scheduler.h include",
   "Missing terminate_process function declaration",
   "Unused process functions",
