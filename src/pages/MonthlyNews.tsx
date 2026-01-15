@@ -35,6 +35,14 @@ const monthlyNewsData: Record<string, MonthData> = {
     summary: "Development kickoff, build system improvements, bug fixes, and QEMU integration enhancements.",
     items: [
       {
+        title: "Update bug tracking documentation and enhance kernel functionality",
+        date: "January 15, 2026",
+        type: "Commit",
+        description: "Revised `currentbugs.md` to reflect a decrease in total bugs to 19, with updated counts for critical and resolved issues. Removed the critical bug entry for the DEXLFOK boot hang as it has been resolved. Added a fallback mechanism in `vga_draw_char` to render text in text mode if graphics mode is not initialized. Improved string handling functions by moving `strlen` and `strcpy` to `string.c` for better code organization. Updated `boot.asm` to set VGA mode 13h directly and improved the boot process with enhanced debug messages. Cleaned up the HAL initialization process to ensure proper setup in 64-bit mode.",
+        commitCode: "aa1e546",
+        commitUrl: "https://github.com/urmoit/GamerOS/commit/aa1e546502dbe2803432795f99b78fe6890a8674",
+      },
+      {
         title: "Update current bugs documentation and resolve several issues",
         date: "January 14, 2026",
         type: "Commit",

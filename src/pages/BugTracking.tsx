@@ -15,17 +15,14 @@ import {
 import { Button } from "@/components/ui/button";
 
 const bugSummary = {
-  total: 20,
+  total: 14,
   critical: 0,
   high: 2,
   medium: 6,
   low: 5,
-  resolved: 6,
 };
 
-const criticalBugs = [
-  "",
-];
+const criticalBugs = [];
 
 const highPriorityBugs = [
   "Incomplete UI framework implementation",
@@ -51,24 +48,8 @@ const lowPriorityBugs = [
   "Inefficient string operations",
 ];
 
-const resolvedBugs = [
-  "DEXLFOK boot hang - OS shows \"DEXLFOK\" in yellow and pauses, preventing boot",
-  "Duplicate scheduler.h include",
-  "Missing terminate_process function declaration",
-  "Unused process functions",
-  "Potential division by zero in GUI tab calculations",
-  "Uninitialized kernel_counter variable",
-];
 
 const detailedBugs = [
-  {
-    file: "src/impl/x86_64/boot.asm (Boot Process)",
-    issue: "OS displays \"DEXLFOK\" in yellow and pauses during boot instead of continuing",
-    severity: "Critical",
-    location: "CPU detection and paging setup code",
-    impact: "System hangs immediately after CPU detection, preventing full boot",
-    fix: "Need to investigate further - fixed memory addresses for paging tables did not resolve the issue",
-  },
   {
     file: "src/executive/executive.c",
     issue: "TODO comment indicates incomplete executive services initialization",
@@ -226,7 +207,7 @@ const BugTracking = () => {
             </p>
             <div className="flex items-center justify-center gap-2 mt-4 text-sm text-muted-foreground">
               <Calendar className="w-4 h-4" />
-              <span>Last Updated: January 14, 2026</span>
+              <span>Last Updated: January 15, 2026</span>
             </div>
           </div>
         </section>
@@ -234,7 +215,7 @@ const BugTracking = () => {
         {/* Summary Stats */}
         <section className="py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               <div className="glass-card p-4 text-center">
                 <div className="text-2xl font-bold text-primary">{bugSummary.total}</div>
                 <div className="text-sm text-muted-foreground">Total Bugs</div>
@@ -254,10 +235,6 @@ const BugTracking = () => {
               <div className="glass-card p-4 text-center border-green-500/30">
                 <div className="text-2xl font-bold text-green-600">{bugSummary.low}</div>
                 <div className="text-sm text-muted-foreground">Low Priority</div>
-              </div>
-              <div className="glass-card p-4 text-center border-emerald-500/30">
-                <div className="text-2xl font-bold text-emerald-500">{bugSummary.resolved}</div>
-                <div className="text-sm text-muted-foreground">Resolved</div>
               </div>
             </div>
           </div>
@@ -356,29 +333,6 @@ const BugTracking = () => {
                         <Circle className="w-2 h-2 text-green-500" />
                       </div>
                       <span className="text-muted-foreground">{bug}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Resolved */}
-              <div className="glass-card p-6 border-l-4 border-emerald-500">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-emerald-500">✅ Resolved</h3>
-                    <p className="text-sm text-muted-foreground">{resolvedBugs.length} issues</p>
-                  </div>
-                </div>
-                <ul className="space-y-3 ml-13">
-                  {resolvedBugs.map((bug, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm">
-                      <div className="flex items-center justify-center w-5 h-5 rounded-md border-2 border-emerald-500 bg-emerald-500 mt-0.5">
-                        <Check className="w-3 h-3 text-white" />
-                      </div>
-                      <span className="text-muted-foreground line-through">{bug}</span>
                     </li>
                   ))}
                 </ul>
