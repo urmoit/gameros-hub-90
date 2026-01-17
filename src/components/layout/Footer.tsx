@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Github, Coffee } from "lucide-react";
+import { Github, Coffee, FileText } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -46,6 +46,12 @@ const Footer = () => {
               <li><Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link></li>
               <li><Link to="/bug-tracking" className="hover:text-foreground transition-colors">Bug Tracking</Link></li>
               <li><a href="https://github.com/urmoit/GamerOS" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Documentation</a></li>
+              <li>
+                <Link to="/changelog" className="hover:text-foreground transition-colors inline-flex items-center gap-1.5">
+                  <FileText className="w-3.5 h-3.5" />
+                  Website Changelog
+                </Link>
+              </li>
             </ul>
           </div>
 
