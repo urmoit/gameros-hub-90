@@ -29,7 +29,7 @@ const App = () => (
           <Route path="/roadmap" element={<Roadmap />} />
           <Route path="/news" element={<News />} />
           <Route path="/news/monthly/:month" element={<MonthlyNews />} />
-          <Route path="/news/:version" element={<Changelog />} />
+          <Route path="/changelog" element={<Changelog />} />
           <Route path="/download" element={<Download />} />
           <Route path="/bug-tracking" element={<BugTracking />} />
           <Route path="/all-versions" element={<AllVersions />} />

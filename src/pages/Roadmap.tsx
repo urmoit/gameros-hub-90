@@ -339,39 +339,52 @@ const Roadmap = () => {
               </motion.div>
               
               <div className="relative">
-                {/* Timeline line */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-border hidden md:block" />
+                {/* Timeline line - centered */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary/50 to-border rounded-full hidden md:block" />
                 
-                <div className="space-y-8">
+                <div className="space-y-12 md:space-y-16">
                   {milestones.map((milestone, i) => (
                     <motion.div
                       key={i}
-                      initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.1 }}
-                      className={`flex items-center gap-8 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
+                      className={`relative flex flex-col md:flex-row items-center gap-4 md:gap-8 ${
+                        i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                      }`}
                     >
-                      <div className={`flex-1 ${i % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
-                        <div className="glass-card p-6 rounded-2xl inline-block">
-                          <div className="text-sm text-primary font-medium mb-1">{milestone.date}</div>
-                          <h3 className="font-semibold text-lg mb-1">{milestone.title}</h3>
+                      {/* Content Card */}
+                      <div className={`flex-1 w-full md:w-auto ${i % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
+                        <motion.div 
+                          whileHover={{ scale: 1.02 }}
+                          className="glass-card p-6 rounded-2xl inline-block max-w-sm"
+                        >
+                          <div className="text-sm text-primary font-semibold mb-2">{milestone.date}</div>
+                          <h3 className="font-bold text-xl mb-2">{milestone.title}</h3>
                           <p className="text-sm text-muted-foreground">{milestone.description}</p>
-                        </div>
+                        </motion.div>
                       </div>
                       
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        milestone.completed 
-                          ? "bg-emerald-500 text-white" 
-                          : "bg-muted border-2 border-border"
-                      }`}>
-                        {milestone.completed ? (
-                          <Check className="w-6 h-6" />
-                        ) : (
-                          <Calendar className="w-5 h-5 text-muted-foreground" />
-                        )}
+                      {/* Center Icon */}
+                      <div className="relative z-10 flex-shrink-0">
+                        <motion.div 
+                          whileHover={{ scale: 1.1 }}
+                          className={`w-14 h-14 rounded-full flex items-center justify-center shadow-lg ${
+                            milestone.completed 
+                              ? "bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-emerald-500/30" 
+                              : "bg-card border-2 border-border shadow-lg"
+                          }`}
+                        >
+                          {milestone.completed ? (
+                            <Check className="w-7 h-7" strokeWidth={3} />
+                          ) : (
+                            <Calendar className="w-6 h-6 text-muted-foreground" />
+                          )}
+                        </motion.div>
                       </div>
                       
+                      {/* Empty spacer for alternating layout */}
                       <div className="flex-1 hidden md:block" />
                     </motion.div>
                   ))}
