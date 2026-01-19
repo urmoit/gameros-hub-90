@@ -44,6 +44,20 @@ interface Version {
 
 const changelogData: Version[] = [
   {
+    version: "1.4.0",
+    date: "January 19, 2026",
+    title: "Changelog Pages & Theme Toggle",
+    description: "Added GamerOS changelog page, enhanced theme toggle animations, and improved navigation.",
+    changes: [
+      { type: "feature", description: "Created GamerOS Changelog page with empty state", component: "GamerOS Changelog" },
+      { type: "feature", description: "Added changelog buttons to News page filter bar", component: "News" },
+      { type: "feature", description: "Added GamerOS changelog link to Download page", component: "Download" },
+      { type: "improvement", description: "Enhanced theme toggle with rotating sun/moon animations", component: "ThemeToggle" },
+      { type: "improvement", description: "Fixed milestones timeline icons and layout on Roadmap", component: "Roadmap" },
+      { type: "fix", description: "Fixed changelog route not working from footer link", component: "Router" },
+    ],
+  },
+  {
     version: "1.3.0",
     date: "January 17, 2026",
     title: "Roadmap & Navigation Overhaul",
