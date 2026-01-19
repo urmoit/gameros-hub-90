@@ -12,6 +12,7 @@ import Download from "./pages/Download";
 import BugTracking from "./pages/BugTracking";
 import AllVersions from "./pages/AllVersions";
 import Changelog from "./pages/Changelog";
+import GamerOSChangelog from "./pages/GamerOSChangelog";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/news" element={<News />} />
           <Route path="/news/monthly/:month" element={<MonthlyNews />} />
           <Route path="/changelog" element={<Changelog />} />
+          <Route path="/gameros-changelog" element={<GamerOSChangelog />} />
           <Route path="/download" element={<Download />} />
           <Route path="/bug-tracking" element={<BugTracking />} />
           <Route path="/all-versions" element={<AllVersions />} />
