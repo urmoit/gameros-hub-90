@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -10,7 +11,8 @@ import {
   Cloud,
   Box,
   Clock,
-  Bell
+  Bell,
+  GitCommit
 } from "lucide-react";
 
 const requirements = {
@@ -83,6 +85,15 @@ const Download = () => {
                   <Button size="lg" variant="outline" className="min-w-[200px]">
                     <Bell className="w-5 h-5 mr-2" />
                     Get Notified
+                  </Button>
+                </div>
+                
+                <div className="mt-6">
+                  <Button variant="ghost" size="sm" asChild>
+                    <Link to="/gameros-changelog" className="gap-2">
+                      <GitCommit className="w-4 h-4" />
+                      View GamerOS Changelog
+                    </Link>
                   </Button>
                 </div>
               </div>

@@ -390,6 +390,20 @@ const News = () => {
                         Monthly Archive
                       </Link>
                     </Button>
+
+                    {/* Changelog Links */}
+                    <Button variant="outline" size="sm" asChild>
+                      <Link to="/gameros-changelog" className="gap-2">
+                        <GitCommit className="w-4 h-4" />
+                        GamerOS Changelog
+                      </Link>
+                    </Button>
+                    <Button variant="outline" size="sm" asChild>
+                      <Link to="/changelog" className="gap-2">
+                        <Tag className="w-4 h-4" />
+                        Website Changelog
+                      </Link>
+                    </Button>
                   </div>
                 </div>
               </motion.div>
