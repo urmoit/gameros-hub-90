@@ -15,41 +15,66 @@ import {
 import { Button } from "@/components/ui/button";
 
 const bugSummary = {
-  total: 14,
-  critical: 0,
-  high: 2,
-  medium: 6,
-  low: 5,
+  total: 28,
+  critical: 1,
+  high: 3,
+  medium: 11,
+  low: 8,
 };
 
-const criticalBugs = [];
+const criticalBugs = [
+  "VGA graphics display issue - screen shows all black or all white instead of colored bars",
+];
 
 const highPriorityBugs = [
   "Incomplete UI framework implementation",
   "Missing executive services initialization",
+  "IPC system is completely stubbed out - all functions return failure",
 ];
 
 const mediumPriorityBugs = [
-  "TODO comments indicating incomplete implementations (4 files)",
+  "TODO comments indicating incomplete implementations (multiple files)",
   "Missing null pointer checks in some functions",
   "Potential race conditions in scheduler",
   "Implicit function declarations in GUI app (strlen, workstation_create_desktop)",
   "Implicit function declarations in user mode init functions",
   "Color value overflow in GUI functions (32-bit to 8-bit conversion)",
   "Missing kmalloc/kfree declarations in object manager",
-  "Unused variables (prev in memory.c)",
+  "Unused variable 'prev' in memory.c kmalloc function",
+  "Variable declaration in switch statement (rgb_to_color function)",
+  "Memory leak in kfree - only coalesces with next block, not previous block",
+  "VESA mode support references undefined extern variable 'vesa_success'",
 ];
 
 const lowPriorityBugs = [
   "Code style inconsistencies",
   "Missing documentation comments",
   "Unused variables in some functions",
-  "Hard-coded magic numbers",
+  "Hard-coded magic numbers (320, 200, 0xA0000, etc.)",
   "Inefficient string operations",
+  "UI rendering disabled in GUI app loop (commented out)",
+  "Theme colors use 32-bit values but VGA mode 13h only supports 8-bit palette",
+  "No error handling for failed widget creation",
 ];
 
 
 const detailedBugs = [
+  {
+    file: "src/impl/kernel/main.c",
+    issue: "VGA graphics display issue - screen shows all black or all white",
+    severity: "Critical",
+    location: "Lines 32-75",
+    impact: "Cannot verify system is working; graphics not displaying correctly",
+    fix: "Investigate palette initialization in long mode, ensure I/O port access works correctly",
+  },
+  {
+    file: "src/impl/kernel_mode/microkernel/ipc.c",
+    issue: "IPC system is completely stubbed out - all functions return failure",
+    severity: "High",
+    location: "Entire file",
+    impact: "No inter-process communication possible, critical for multitasking OS",
+    fix: "Implement message passing system with proper queue management",
+  },
   {
     file: "src/executive/executive.c",
     issue: "TODO comment indicates incomplete executive services initialization",
@@ -57,22 +82,6 @@ const detailedBugs = [
     location: "Line 17",
     impact: "Missing critical OS services, system may not function properly",
     fix: "Implement missing executive services",
-  },
-  {
-    file: "src/user_mode/integral_subsystems/workstation/ui_framework.c",
-    issue: "Multiple TODO comments for incomplete UI functionality",
-    severity: "High",
-    location: "Lines 30, 40-41, 55",
-    impact: "Broken UI event handling and rendering",
-    fix: "Implement pending UI event processing and rendering",
-  },
-  {
-    file: "src/user_mode/integral_subsystems/workstation/window_manager.c",
-    issue: "TODO/FIXME comments indicating incomplete implementation",
-    severity: "Medium",
-    location: "Multiple lines",
-    impact: "Incomplete window management functionality",
-    fix: "Complete window manager implementation",
   },
   {
     file: "src/impl/kernel_mode/microkernel/process.c",
@@ -83,36 +92,36 @@ const detailedBugs = [
     fix: "Implement proper mutex/semaphore system instead of simple spinlocks",
   },
   {
-    file: "src/user_mode/integral_subsystems/workstation/desktop_manager.c",
-    issue: "TODO comments indicating missing desktop management features",
+    file: "src/impl/graphics/vga_graphics.c",
+    issue: "Variable declaration in switch statement without braces",
     severity: "Medium",
-    location: "Multiple lines",
-    impact: "Incomplete desktop environment",
-    fix: "Implement missing desktop management functionality",
+    location: "Line 574 in rgb_to_color function",
+    impact: "May cause compilation issues with some compilers; violates C standard",
+    fix: "Add braces around the case block (e.g., case COLOR_DEPTH_8BIT: { ... })",
   },
   {
-    file: "src/impl/gui_app.c",
-    issue: "Implicit function declarations for strlen and workstation_create_desktop",
+    file: "src/impl/graphics/vga_graphics.c",
+    issue: "VESA mode functions reference undefined extern variable 'vesa_success'",
     severity: "Medium",
-    location: "Lines 119, 160",
-    impact: "Compilation warnings, potential runtime issues if functions not properly linked",
-    fix: "Add strlen declaration to string.h header and declare workstation_create_desktop function",
+    location: "Lines 109, 125, 141",
+    impact: "Potential linking errors or undefined behavior if VESA modes are attempted",
+    fix: "Define vesa_success in boot.asm or remove VESA mode support",
   },
   {
-    file: "src/impl/gui_app.c",
-    issue: "Color value overflow when converting 32-bit values to 8-bit parameters",
+    file: "src/impl/kernel_mode/microkernel/memory.c",
+    issue: "Memory leak in kfree - only coalesces with next block, not previous block",
     severity: "Medium",
-    location: "Lines 163-174",
-    impact: "Colors may display incorrectly, overflow warnings during compilation",
-    fix: "Use proper 8-bit color values instead of 32-bit values",
+    location: "Lines 58-68",
+    impact: "Memory fragmentation over time, inefficient memory usage",
+    fix: "Implement bidirectional coalescing to merge with previous block if also free",
   },
   {
-    file: "src/executive/object_manager/object_manager.c",
-    issue: "Implicit declarations of kmalloc and kfree functions",
-    severity: "Medium",
-    location: "Lines 80, 95",
-    impact: "Compilation warnings, potential linking issues",
-    fix: "Include proper header file declaring kmalloc/kfree or add declarations",
+    file: "src/impl/kernel_mode/microkernel/memory.c",
+    issue: "Unused variable 'prev' in kmalloc function",
+    severity: "Low",
+    location: "Line 32",
+    impact: "Compilation warning, minor code cleanliness issue",
+    fix: "Remove unused variable or use it for bidirectional free list traversal",
   },
   {
     file: "src/user_mode/user_mode.c",
@@ -123,52 +132,52 @@ const detailedBugs = [
     fix: "Add proper function declarations or include appropriate headers",
   },
   {
-    file: "src/impl/kernel_mode/microkernel/memory.c",
-    issue: "Unused variable 'prev' in kmalloc function",
+    file: "src/impl/gui_app.c",
+    issue: "UI rendering disabled in main loop (commented out)",
     severity: "Low",
-    location: "Line 32",
-    impact: "Compilation warning, minor code cleanliness issue",
-    fix: "Remove unused variable or use it in the logic",
+    location: "Line 272",
+    impact: "GUI windows and widgets are not being rendered",
+    fix: "Re-enable ui_render_container() after fixing graphics display issue",
   },
   {
-    file: "src/user_mode/compatibility_layers/msdos/msdos.c",
-    issue: "TODO comments for incomplete MSDOS compatibility",
-    severity: "Low",
-    location: "Multiple lines",
-    impact: "Limited backward compatibility",
-    fix: "Implement MSDOS compatibility layer",
+    file: "src/impl/gui_app.c",
+    issue: "Implicit function declarations for strlen and workstation_create_desktop",
+    severity: "Medium",
+    location: "Lines 119, 160",
+    impact: "Compilation warnings, potential runtime issues if functions not properly linked",
+    fix: "Add strlen declaration to string.h header and declare workstation_create_desktop function",
   },
   {
-    file: "src/user_mode/compatibility_layers/windows9x/windows9x.c",
-    issue: "TODO comments for incomplete Windows 9x compatibility",
-    severity: "Low",
-    location: "Multiple lines",
-    impact: "Limited Windows 9x application support",
-    fix: "Implement Windows 9x compatibility layer",
+    file: "src/executive/object_manager/object_manager.c",
+    issue: "Implicit declarations of kmalloc and kfree functions",
+    severity: "Medium",
+    location: "Lines 80, 95",
+    impact: "Compilation warnings, potential linking issues",
+    fix: "Include proper header file declaring kmalloc/kfree or add declarations",
   },
   {
-    file: "src/user_mode/environment_subsystems/os2/os2.c",
-    issue: "TODO comments for incomplete OS/2 subsystem",
+    file: "src/impl/ui_system/ui_widgets.c",
+    issue: "Theme colors use 32-bit RGBA values but VGA mode 13h only supports 8-bit palette indices",
     severity: "Low",
-    location: "Multiple lines",
-    impact: "No OS/2 application support",
-    fix: "Implement OS/2 environment subsystem",
+    location: "Lines 12-43 in ui_load_default_theme()",
+    impact: "Theme colors won't work correctly in current graphics mode",
+    fix: "Convert theme colors to 8-bit palette indices or implement color conversion",
   },
   {
-    file: "src/user_mode/environment_subsystems/posix/posix.c",
-    issue: "TODO comments for incomplete POSIX subsystem",
+    file: "src/impl/ui_system/ui_widgets.c",
+    issue: "No error handling for failed widget creation (kmalloc returns NULL)",
     severity: "Low",
-    location: "Multiple lines",
-    impact: "Limited POSIX application compatibility",
-    fix: "Complete POSIX subsystem implementation",
+    location: "Multiple widget creation functions",
+    impact: "Potential null pointer dereferences if memory allocation fails",
+    fix: "Add proper null checks and error handling",
   },
   {
-    file: "src/user_mode/environment_subsystems/win32/win32.c",
-    issue: "TODO comments for incomplete Win32 subsystem",
-    severity: "Low",
-    location: "Multiple lines",
-    impact: "Limited Windows application support",
-    fix: "Implement Win32 subsystem",
+    file: "src/user_mode/integral_subsystems/workstation/ui_framework.c",
+    issue: "Multiple TODO comments for incomplete UI functionality",
+    severity: "High",
+    location: "Lines 30, 40-41, 55, 59, 68, 72",
+    impact: "Broken UI event handling and rendering",
+    fix: "Implement pending UI event processing and rendering",
   },
 ];
 
@@ -207,7 +216,7 @@ const BugTracking = () => {
             </p>
             <div className="flex items-center justify-center gap-2 mt-4 text-sm text-muted-foreground">
               <Calendar className="w-4 h-4" />
-              <span>Last Updated: January 15, 2026</span>
+              <span>Last Updated: January 21, 2026</span>
             </div>
           </div>
         </section>

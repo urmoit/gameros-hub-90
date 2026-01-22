@@ -47,6 +47,18 @@ interface NewsItem {
 
 const newsItems: NewsItem[] = [
   {
+    id: "0",
+    title: "Enhance build scripts and update bug tracking documentation",
+    date: "January 21, 2026",
+    type: "Commit",
+    description:
+      "Updated `build.bat` and `build-iso.bat` to include a pause and clearer completion messages. Revised `currentbugs.md` to reflect 28 total bugs with updated severity counts, added new reports for VGA graphics display issues and IPC system stubbing, improved documentation for unresolved issues and suggested fixes, and updated QEMU boot log timestamp for accuracy.",
+    icon: Code2,
+    commitCode: "467b30a",
+    commitUrl: "https://github.com/urmoit/GamerOS/commit/467b30a72928dbf026fc58fbf9359bb7c1985292",
+    featured: true,
+  },
+  {
     id: "1",
     title: "Update bug tracking documentation and enhance kernel functionality",
     date: "January 15, 2026",
