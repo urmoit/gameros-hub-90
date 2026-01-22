@@ -250,7 +250,7 @@ const MonthlyNews = () => {
         
         <main className="flex-1">
           {/* Hero Section */}
-          <section className="relative py-20 overflow-hidden">
+          <section className="relative pt-32 pb-20 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-emerald-500/5" />
             <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
             <div className="absolute bottom-10 left-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
