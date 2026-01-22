@@ -44,6 +44,18 @@ interface Version {
 
 const changelogData: Version[] = [
   {
+    version: "1.4.1",
+    date: "January 21, 2026",
+    title: "News, Bug Tracking, and Homepage Refresh",
+    description: "Updated site content to reflect the latest GamerOS status and commit activity.",
+    changes: [
+      { type: "improvement", description: "Updated homepage stats to show 7,400+ lines of code", component: "Home" },
+      { type: "feature", description: "Added new commit update (467b30a) to News page", component: "News" },
+      { type: "feature", description: "Added new commit update (467b30a) to January 2026 Monthly Archive", component: "Monthly News" },
+      { type: "improvement", description: "Updated Bug Tracking page to 28 total bugs with new VGA + IPC entries", component: "Bug Tracking" },
+    ],
+  },
+  {
     version: "1.4.0",
     date: "January 19, 2026",
     title: "Changelog Pages & Theme Toggle",

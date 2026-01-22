@@ -50,14 +50,24 @@ const monthlyNewsData: Record<string, MonthData> = {
   "january-2026": {
     month: "January",
     year: "2026",
-    summary: "Development kickoff, build system improvements, bug fixes, and QEMU integration enhancements.",
+    summary: "Development kickoff, build system improvements, bug tracking updates, and QEMU integration enhancements.",
     highlights: [
+      "Bug tracking updated to 28 total bugs (new VGA + IPC reports)",
       "Resolved critical DEXLFOK boot hang issue",
       "Improved kernel functionality and VGA text rendering",
       "Enhanced QEMU debugging capabilities",
       "5 bugs resolved, comprehensive documentation updates",
     ],
     items: [
+      {
+        title: "Enhance build scripts and update bug tracking documentation",
+        date: "January 21, 2026",
+        type: "Commit",
+        description:
+          "Updated `build.bat` and `build-iso.bat` to include a pause and clearer completion messages. Revised `currentbugs.md` to reflect 28 total bugs with updated severity counts, added new reports for VGA graphics display issues and IPC system stubbing, improved documentation for unresolved issues and suggested fixes, and updated QEMU boot log timestamp for accuracy.",
+        commitCode: "467b30a",
+        commitUrl: "https://github.com/urmoit/GamerOS/commit/467b30a72928dbf026fc58fbf9359bb7c1985292",
+      },
       {
         title: "Update bug tracking documentation and enhance kernel functionality",
         date: "January 15, 2026",
