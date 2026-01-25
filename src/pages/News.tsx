@@ -48,6 +48,54 @@ interface NewsItem {
 const newsItems: NewsItem[] = [
   {
     id: "0",
+    title: "Implement VGA Mode 12h with interactive UI and input handling",
+    date: "January 25, 2026",
+    type: "Commit",
+    description:
+      "Add VGA Mode 12h (640x480x16) support in bootloader and graphics driver. Implement planar mode pixel operations for efficient 16-color rendering. Create tabbed UI interface with Home, Changelog, and Settings tabs. Add keyboard navigation with arrow keys, tab, and special keys. Integrate mouse support with cursor rendering and click handling. Update build scripts and fix memory management in object manager. Enhance keyboard driver with extended key support (arrows, home, end, etc.). Resolve VGA black screen issue by switching from Mode 13h to Mode 12h.",
+    icon: Code2,
+    commitCode: "07d87d3",
+    commitUrl: "https://github.com/urmoit/GamerOS/commit/07d87d33d02d67414a5d7052825fcd636154309a",
+    featured: true,
+  },
+  {
+    id: "1",
+    title: "Add info and about tabs to gui app",
+    date: "January 25, 2026",
+    type: "Commit",
+    description:
+      "Renamed Home tab to Info and added About tab, increasing tab count to 3. Updated Info tab with system information display including OS details, architecture, and key features. Added About tab with project information and creator details. Refreshed Changelog tab with latest v1.1.1 updates on UI improvements and graphics enhancements. Adjusted UI widget creation, visibility, and tab switching logic accordingly.",
+    icon: Code2,
+    commitCode: "df1f120",
+    commitUrl: "https://github.com/urmoit/GamerOS/commit/df1f120827150086ce6e8ec8eddf9c2876114a9c",
+    featured: true,
+  },
+  {
+    id: "2",
+    title: "Add TODO comments for planned features and improvements",
+    date: "January 24, 2026",
+    type: "Commit",
+    description:
+      "Added TODO comments across multiple modules including executive, filesystem, graphics, GUI, HAL, I/O manager, drivers, kernel, UI system, and user mode. Comments outline future enhancements like error handling, asynchronous I/O, font support, hardware acceleration, multitasking, and security features. This serves as documentation for development roadmap and does not introduce functional changes.",
+    icon: Code2,
+    commitCode: "5e16240",
+    commitUrl: "https://github.com/urmoit/GamerOS/commit/5e162404ce4538594a882150b7ca466312420e76",
+    featured: true,
+  },
+  {
+    id: "3",
+    title: "Resolve VGA graphics display issue with complete Mode 13h setup",
+    date: "January 24, 2026",
+    type: "Commit",
+    description:
+      "Implement complete VGA Mode 13h register configuration in boot.asm including CRTC timing, sequencer, graphics controller, and palette initialization. Move palette setup to 32-bit mode before long mode transition to ensure proper color display. Simplify vga_graphics.c with diagnostic functions and direct framebuffer access. Add test pattern drawing in boot.asm and kernel main for verification. Update bug tracking to mark VGA display issue as resolved.",
+    icon: Code2,
+    commitCode: "2b860d6",
+    commitUrl: "https://github.com/urmoit/GamerOS/commit/2b860d6a1ef736856e217a8e64a6b5c06a089051",
+    featured: true,
+  },
+  {
+    id: "4",
     title: "Enhance build scripts and update bug tracking documentation",
     date: "January 21, 2026",
     type: "Commit",
@@ -56,10 +104,10 @@ const newsItems: NewsItem[] = [
     icon: Code2,
     commitCode: "467b30a",
     commitUrl: "https://github.com/urmoit/GamerOS/commit/467b30a72928dbf026fc58fbf9359bb7c1985292",
-    featured: true,
+    featured: false,
   },
   {
-    id: "1",
+    id: "5",
     title: "Update bug tracking documentation and enhance kernel functionality",
     date: "January 15, 2026",
     type: "Commit",
@@ -67,10 +115,10 @@ const newsItems: NewsItem[] = [
     icon: Code2,
     commitCode: "aa1e546",
     commitUrl: "https://github.com/urmoit/GamerOS/commit/aa1e546502dbe2803432795f99b78fe6890a8674",
-    featured: true,
+    featured: false,
   },
   {
-    id: "2",
+    id: "6",
     title: "Update current bugs documentation and resolve several issues",
     date: "January 14, 2026",
     type: "Commit",
@@ -80,7 +128,7 @@ const newsItems: NewsItem[] = [
     commitUrl: "https://github.com/urmoit/GamerOS/commit/1d4ecb20daa7ac73159c9ea773c4f9d4f6f43a59",
   },
   {
-    id: "3",
+    id: "7",
     title: "Update current bugs documentation and enhance kernel boot process",
     date: "January 14, 2026",
     type: "Commit",
@@ -90,7 +138,7 @@ const newsItems: NewsItem[] = [
     commitUrl: "https://github.com/urmoit/GamerOS/commit/70fba78de2e3c123f2bfd4f5aea08996eee8d172",
   },
   {
-    id: "4",
+    id: "8",
     title: "Enhance QEMU boot process and GUI application",
     date: "January 14, 2026",
     type: "Commit",
@@ -100,7 +148,7 @@ const newsItems: NewsItem[] = [
     commitUrl: "https://github.com/urmoit/GamerOS/commit/f50fb62ff112cf56a6025299f8b9bb21f6160d59",
   },
   {
-    id: "5",
+    id: "9",
     title: "Refactor build scripts and update documentation",
     date: "January 14, 2026",
     type: "Commit",
@@ -110,7 +158,7 @@ const newsItems: NewsItem[] = [
     commitUrl: "https://github.com/urmoit/GamerOS/commit/21d5dce0b6db2f416201a61e586fa6e206acb657",
   },
   {
-    id: "6",
+    id: "10",
     title: "Added cursor worktree",
     date: "January 14, 2026",
     type: "Commit",

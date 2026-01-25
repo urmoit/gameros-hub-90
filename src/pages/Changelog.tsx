@@ -44,6 +44,18 @@ interface Version {
 
 const changelogData: Version[] = [
   {
+    version: "1.4.2",
+    date: "January 25, 2026",
+    title: "VGA Mode 12h Implementation and UI Enhancements",
+    description: "Major graphics and UI updates with VGA Mode 12h support, interactive UI with keyboard/mouse, and comprehensive bug tracking updates.",
+    changes: [
+      { type: "feature", description: "Added January 24-25 commit updates to News page", component: "News" },
+      { type: "feature", description: "Updated January 2026 Monthly Archive with latest commits", component: "Monthly News" },
+      { type: "improvement", description: "Replaced Bug Tracking page with comprehensive markdown documentation (29 bugs)", component: "Bug Tracking" },
+      { type: "improvement", description: "Added react-markdown for proper markdown rendering", component: "Dependencies" },
+    ],
+  },
+  {
     version: "1.4.1",
     date: "January 21, 2026",
     title: "News, Bug Tracking, and Homepage Refresh",
