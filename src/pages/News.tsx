@@ -1,11 +1,11 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Rocket, 
-  Code2, 
-  Users, 
-  Calendar, 
+import {
+  Rocket,
+  Code2,
+  Users,
+  Calendar,
   GitCommit,
   Megaphone,
   Search,
@@ -16,7 +16,8 @@ import {
   Tag,
   ChevronDown,
   X,
-  Sparkles
+  Sparkles,
+  Palette
 } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -42,10 +43,21 @@ interface NewsItem {
   icon: typeof Rocket;
   commitCode?: string;
   commitUrl?: string;
+  internalLink?: string;
   featured?: boolean;
 }
 
 const newsItems: NewsItem[] = [
+  {
+    id: "xp-impl",
+    title: "Implementation Plan: Windows XP Theme & Startup",
+    date: "January 28, 2026",
+    type: "Announcement",
+    description: "Detailed implementation plan for transforming the GamerOS UI to resemble Windows XP (Luna Theme), including startup animation, desktop environment, and VM compatibility fixes.",
+    icon: Palette,
+    internalLink: "/news/xp-implementation",
+    featured: true,
+  },
   {
     id: "0",
     title: "Implement VGA Mode 12h with interactive UI and input handling",
@@ -256,14 +268,14 @@ const News = () => {
     <PageTransition>
       <div className="min-h-screen flex flex-col">
         <Header />
-        
+
         <main className="flex-1">
           {/* Hero Section */}
           <section className="relative pt-32 pb-20 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5" />
             <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
             <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
-            
+
             <div className="container mx-auto px-4 relative">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -346,7 +358,11 @@ const News = () => {
                             )}
                           </div>
                           <h3 className="font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                            {item.title}
+                            {item.internalLink ? (
+                              <Link to={item.internalLink}>{item.title}</Link>
+                            ) : (
+                              item.title
+                            )}
                           </h3>
                           <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
                             {item.description}
@@ -365,6 +381,14 @@ const News = () => {
                               >
                                 View commit <ExternalLink className="w-3 h-3" />
                               </a>
+                            )}
+                            {item.internalLink && (
+                              <Link
+                                to={item.internalLink}
+                                className="text-xs text-primary flex items-center gap-1 hover:underline"
+                              >
+                                Read more <ArrowRight className="w-3 h-3" />
+                              </Link>
                             )}
                           </div>
                         </div>
@@ -413,11 +437,10 @@ const News = () => {
                         <button
                           key={filter}
                           onClick={() => setActiveFilter(filter)}
-                          className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
-                            activeFilter === filter
-                              ? "bg-primary text-primary-foreground shadow-sm"
-                              : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                          }`}
+                          className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${activeFilter === filter
+                            ? "bg-primary text-primary-foreground shadow-sm"
+                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                            }`}
                         >
                           {filter}
                         </button>
@@ -509,14 +532,12 @@ const News = () => {
                         >
                           <div className="flex flex-col md:flex-row md:items-center gap-4">
                             <div className="flex items-center gap-4 flex-1 min-w-0">
-                              <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${
-                                item.type === "Commit" ? "bg-emerald-500/10" :
+                              <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${item.type === "Commit" ? "bg-emerald-500/10" :
                                 item.type === "Announcement" ? "bg-primary/10" : "bg-purple-500/10"
-                              }`}>
-                                <TypeIcon className={`w-5 h-5 ${
-                                  item.type === "Commit" ? "text-emerald-500" :
+                                }`}>
+                                <TypeIcon className={`w-5 h-5 ${item.type === "Commit" ? "text-emerald-500" :
                                   item.type === "Announcement" ? "text-primary" : "text-purple-500"
-                                }`} />
+                                  }`} />
                               </div>
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-1">
@@ -530,7 +551,11 @@ const News = () => {
                                   )}
                                 </div>
                                 <h3 className="font-medium line-clamp-1 group-hover:text-primary transition-colors">
-                                  {item.title}
+                                  {item.internalLink ? (
+                                    <Link to={item.internalLink}>{item.title}</Link>
+                                  ) : (
+                                    item.title
+                                  )}
                                 </h3>
                                 <p className="text-sm text-muted-foreground line-clamp-1 mt-1">
                                   {item.description}
@@ -551,6 +576,14 @@ const News = () => {
                                 >
                                   View <ExternalLink className="w-3 h-3" />
                                 </a>
+                              )}
+                              {item.internalLink && (
+                                <Link
+                                  to={item.internalLink}
+                                  className="flex items-center gap-1 text-sm text-primary hover:underline whitespace-nowrap"
+                                >
+                                  Read more <ArrowRight className="w-3 h-3" />
+                                </Link>
                               )}
                             </div>
                           </div>

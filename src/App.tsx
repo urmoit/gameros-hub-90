@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Roadmap from "./pages/Roadmap";
 import News from "./pages/News";
+import XPImplementation from "./pages/news/XPImplementation";
 import MonthlyNews from "./pages/MonthlyNews";
 import Download from "./pages/Download";
 import BugTracking from "./pages/BugTracking";
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/bug-tracking" element={<BugTracking />} />
           <Route path="/all-versions" element={<AllVersions />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/news/xp-implementation" element={<XPImplementation />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

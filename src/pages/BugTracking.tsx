@@ -1,7 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { Bug } from "lucide-react";
+import { Bug, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -26,7 +26,7 @@ const bugTrackingMarkdown = `# GamerOS Bug Tracking List
 ## Bug Categories
 
 ### 🔴 Critical (System Breaking)
-- [ ] **VGA Mode 12h Black Screen Issue**
+- [x] **VGA Mode 12h Black Screen Issue**
   - Bootloader successfully sets up 640x480 mode
   - Test pattern in bootloader (5 color stripes) may or may not display
   - Kernel vga_clear(0x0F) fills with white but appears as black
@@ -36,7 +36,7 @@ const bugTrackingMarkdown = `# GamerOS Bug Tracking List
     - Graphics controller set/reset not functioning as expected
     - Pixel write mode not configured properly in kernel
     - Memory fence or volatility issues
-  - **Status:** OPEN - Requires debugging with QEMU
+  - **Status:** RESOLVED - Root cause was buffer overflow in bootloader clearing 600KB+ and overwriting kernel. Fixed by correcting clear size to 38,400 bytes.
 
 ### 🟠 High Priority (Major Functionality Impact)
 - [ ] Incomplete UI framework implementation
@@ -349,6 +349,7 @@ const bugTrackingMarkdown = `# GamerOS Bug Tracking List
 4. Test with very simple 1-color fill
 5. Compare register values with VGA BIOS defaults
 
+
 ### File: src/impl/graphics/vga_graphics.c
 **Issue:** Palette initialization uses cli/sti which may interfere with interrupt handling
 **Severity:** Low
@@ -399,7 +400,7 @@ const BugTracking = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Link className="w-4 h-4 mr-2" />
+                    <ExternalLink className="w-4 h-4 mr-2" />
                     View All Issues
                   </a>
                 </Button>

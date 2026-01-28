@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import PageTransition from "@/components/ui/PageTransition";
-import { 
+import {
   Calendar,
   ArrowRight,
   ArrowLeft,
@@ -50,7 +50,7 @@ const monthlyNewsData: Record<string, MonthData> = {
   "january-2026": {
     month: "January",
     year: "2026",
-    summary: "Major graphics and UI advancements, VGA Mode 12h implementation, interactive UI with keyboard and mouse support, and comprehensive bug tracking updates.",
+    summary: "Evaluation of Windows XP styling, Major graphics and UI advancements, VGA Mode 12h implementation, and comprehensive bug tracking updates.",
     highlights: [
       "Implemented VGA Mode 12h (640x480x16) with planar graphics",
       "Added interactive UI with keyboard navigation and mouse support",
@@ -60,6 +60,13 @@ const monthlyNewsData: Record<string, MonthData> = {
       "Bug tracking updated to 29 total bugs with VGA Mode 12h regression",
     ],
     items: [
+      {
+        title: "Implementation Plan: Windows XP Theme & Startup",
+        date: "January 28, 2026",
+        type: "Announcement",
+        description: "Detailed implementation plan for transforming the GamerOS UI to resemble Windows XP (Luna Theme), including startup animation, desktop environment, and VM compatibility fixes.",
+        commitUrl: "/news/xp-implementation", // Re-using commitUrl field for internal link as a hack or better add internalLink support
+      },
       {
         title: "Implement VGA Mode 12h with interactive UI and input handling",
         date: "January 25, 2026",
@@ -280,14 +287,14 @@ const MonthlyNews = () => {
     <PageTransition>
       <div className="min-h-screen flex flex-col">
         <Header />
-        
+
         <main className="flex-1">
           {/* Hero Section */}
           <section className="relative pt-32 pb-20 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-emerald-500/5" />
             <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
             <div className="absolute bottom-10 left-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
-            
+
             <div className="container mx-auto px-4 relative">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -327,7 +334,7 @@ const MonthlyNews = () => {
                     Previous
                   </Button>
                 )}
-                
+
                 <Button variant="ghost" asChild>
                   <Link to="/news" className="gap-2">
                     <FileText className="w-4 h-4" />
@@ -443,11 +450,10 @@ const MonthlyNews = () => {
                         <button
                           key={filter}
                           onClick={() => setActiveFilter(filter)}
-                          className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
-                            activeFilter === filter
-                              ? "bg-primary text-primary-foreground shadow-sm"
-                              : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                          }`}
+                          className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${activeFilter === filter
+                            ? "bg-primary text-primary-foreground shadow-sm"
+                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                            }`}
                         >
                           {filter}
                         </button>
@@ -508,7 +514,7 @@ const MonthlyNews = () => {
                               <div className={`w-2 h-2 rounded-full ${item.type === "Commit" ? "bg-emerald-500" : item.type === "Announcement" ? "bg-primary" : "bg-purple-500"}`} />
                             </div>
 
-                            <div 
+                            <div
                               className="glass-card p-5 fluent-hover cursor-pointer group"
                               onClick={() => toggleExpand(i)}
                             >
@@ -617,11 +623,10 @@ const MonthlyNews = () => {
                   <Link
                     key={m.slug}
                     to={`/news/monthly/${m.slug}`}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                      currentMonth === m.slug
-                        ? "bg-primary text-primary-foreground shadow-md"
-                        : "glass-card hover:bg-muted"
-                    }`}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${currentMonth === m.slug
+                      ? "bg-primary text-primary-foreground shadow-md"
+                      : "glass-card hover:bg-muted"
+                      }`}
                   >
                     {m.label}
                   </Link>

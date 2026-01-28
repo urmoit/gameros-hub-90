@@ -7,7 +7,7 @@ import PageTransition from "@/components/ui/PageTransition";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { 
+import {
   ArrowLeft,
   Calendar,
   Tag,
@@ -43,6 +43,17 @@ interface Version {
 }
 
 const changelogData: Version[] = [
+  {
+    version: "1.4.3",
+    date: "January 28, 2026",
+    title: "XP Theme Implementation Plan",
+    description: "Added detailed implementation plan for Windows XP theme and updated bug tracking.",
+    changes: [
+      { type: "feature", description: "Created 'Implementation Plan: Windows XP Theme & Startup' page", component: "News" },
+      { type: "improvement", description: "Updated Bug Tracking to resolved status for VGA Mode 12h Black Screen", component: "Bug Tracking" },
+      { type: "feature", description: "Added new implementation plan to Monthly Archive", component: "Monthly News" },
+    ],
+  },
   {
     version: "1.4.2",
     date: "January 25, 2026",
@@ -171,7 +182,7 @@ const Changelog = () => {
     setExpandedVersions(newExpanded);
   };
 
-  const filteredChangelog = changelogData.filter(version => 
+  const filteredChangelog = changelogData.filter(version =>
     version.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     version.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
     version.changes.some(c => c.description.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -185,17 +196,17 @@ const Changelog = () => {
     <PageTransition>
       <div className="min-h-screen flex flex-col bg-background">
         <Header />
-        
+
         <main className="flex-1">
           {/* Hero Section */}
           <section className="relative pt-32 pb-16 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-emerald-500/5" />
             <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
             <div className="absolute bottom-10 right-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
-            
+
             <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-              <Link 
-                to="/" 
+              <Link
+                to="/"
                 className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
@@ -210,14 +221,14 @@ const Changelog = () => {
                   <FileText className="w-4 h-4 mr-2" />
                   Website Changelog
                 </Badge>
-                
+
                 <h1 className="text-4xl sm:text-5xl font-bold mb-6">
                   What's{" "}
                   <span className="bg-gradient-to-r from-primary via-emerald-500 to-cyan-500 bg-clip-text text-transparent">
                     New
                   </span>
                 </h1>
-                
+
                 <p className="text-xl text-muted-foreground max-w-2xl mb-8">
                   Track all updates, new features, and improvements made to the GamerOS website.
                 </p>
@@ -270,12 +281,12 @@ const Changelog = () => {
               <div className="relative">
                 {/* Timeline line */}
                 <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-border hidden md:block" />
-                
+
                 <div className="space-y-6">
                   <AnimatePresence mode="popLayout">
                     {filteredChangelog.map((version, i) => {
                       const isExpanded = expandedVersions.has(version.version);
-                      
+
                       return (
                         <motion.div
                           key={version.version}
@@ -290,7 +301,7 @@ const Changelog = () => {
                           <div className="absolute left-4 top-6 w-5 h-5 rounded-full bg-primary border-4 border-background hidden md:flex items-center justify-center z-10">
                             <div className="w-2 h-2 rounded-full bg-primary-foreground" />
                           </div>
-                          
+
                           <div className="glass-card rounded-2xl overflow-hidden">
                             {/* Version Header */}
                             <button
@@ -314,12 +325,12 @@ const Changelog = () => {
                                 <h3 className="text-xl font-semibold mb-1">{version.title}</h3>
                                 <p className="text-muted-foreground text-sm">{version.description}</p>
                               </div>
-                              
+
                               <div className="text-muted-foreground mt-1">
                                 {isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
                               </div>
                             </button>
-                            
+
                             {/* Expanded Changes */}
                             <AnimatePresence>
                               {isExpanded && (
@@ -395,7 +406,7 @@ const Changelog = () => {
                   { type: "fix" as ChangeType, label: "Bug Fix", description: "Resolved issues" },
                   { type: "breaking" as ChangeType, label: "Breaking Change", description: "May require updates" },
                 ].map((item) => (
-                  <div 
+                  <div
                     key={item.type}
                     className="flex items-center gap-3 px-4 py-3 rounded-xl bg-card border border-border"
                   >
@@ -436,7 +447,7 @@ const Changelog = () => {
             </div>
           </section>
         </main>
-        
+
         <Footer />
       </div>
     </PageTransition>
