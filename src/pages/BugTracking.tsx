@@ -1,7 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { Bug, ExternalLink } from "lucide-react";
+import { Bug, ExternalLink, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -367,9 +367,39 @@ const BugTracking = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-24 pb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-lg dark:prose-invert max-w-none">
-            <ReactMarkdown>{bugTrackingMarkdown}</ReactMarkdown>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="glass-card p-8">
+            <div className="prose prose-lg dark:prose-invert max-w-none 
+              prose-headings:font-bold prose-headings:tracking-tight 
+              prose-h1:text-3xl prose-h1:mb-8 prose-h1:text-primary
+              prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-b prose-h2:border-border/50 prose-h2:pb-2
+              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 prose-h3:text-foreground/90
+              prose-p:text-muted-foreground prose-p:leading-relaxed
+              prose-li:text-muted-foreground prose-li:my-1
+              prose-ul:my-6 prose-ul:list-disc prose-ul:pl-6
+              prose-strong:text-foreground prose-strong:font-semibold
+              prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+              prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-code:text-foreground
+              [&>ul>li]:marker:text-primary/50">
+              <ReactMarkdown
+                components={{
+                  ul: ({ className, ...props }) => <ul className="list-disc pl-6 space-y-2" {...props} />,
+                  li: ({ className, children, ...props }) => {
+                    // Check for checkbox pattern [ ] or [x]
+                    const childText = String(children);
+                    if (childText.startsWith("[ ] ")) {
+                      return <li className="flex items-start gap-2 list-none -ml-6" {...props}><div className="mt-1.5 w-4 h-4 rounded border border-muted-foreground/50 shrink-0" /> <span className="flex-1">{childText.substring(4)}</span></li>;
+                    }
+                    if (childText.startsWith("[x] ")) {
+                      return <li className="flex items-start gap-2 list-none -ml-6" {...props}><div className="mt-1.5 w-4 h-4 rounded bg-primary flex items-center justify-center shrink-0"><Check className="w-3 h-3 text-primary-foreground" /></div> <span className="flex-1">{childText.substring(4)}</span></li>;
+                    }
+                    return <li {...props}>{children}</li>
+                  }
+                }}
+              >
+                {bugTrackingMarkdown}
+              </ReactMarkdown>
+            </div>
           </div>
         </div>
 

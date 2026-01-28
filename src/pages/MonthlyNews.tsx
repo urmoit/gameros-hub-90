@@ -562,17 +562,29 @@ const MonthlyNews = () => {
                                         {item.description}
                                       </p>
                                       {item.commitUrl && (
-                                        <a
-                                          href={item.commitUrl}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          onClick={(e) => e.stopPropagation()}
-                                          className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-lg bg-primary/10 text-primary text-sm hover:bg-primary/20 transition-colors"
-                                        >
-                                          <GitCommit className="w-4 h-4" />
-                                          <code className="font-mono">{item.commitCode}</code>
-                                          <ExternalLink className="w-3 h-3" />
-                                        </a>
+                                        item.commitUrl.startsWith("/") ? (
+                                          <Link
+                                            to={item.commitUrl}
+                                            onClick={(e) => e.stopPropagation()}
+                                            className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-lg bg-primary/10 text-primary text-sm hover:bg-primary/20 transition-colors"
+                                          >
+                                            <FileText className="w-4 h-4" />
+                                            <span>Read More</span>
+                                            <ArrowRight className="w-3 h-3" />
+                                          </Link>
+                                        ) : (
+                                          <a
+                                            href={item.commitUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            onClick={(e) => e.stopPropagation()}
+                                            className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-lg bg-primary/10 text-primary text-sm hover:bg-primary/20 transition-colors"
+                                          >
+                                            <GitCommit className="w-4 h-4" />
+                                            <code className="font-mono">{item.commitCode}</code>
+                                            <ExternalLink className="w-3 h-3" />
+                                          </a>
+                                        )
                                       )}
                                     </motion.div>
                                   )}

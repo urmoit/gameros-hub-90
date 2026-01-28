@@ -169,21 +169,28 @@ const XPImplementation = () => {
 
                 <div className="my-12" />
 
-                <h2 id="high-color-support">High Color Support (VESA VBE)</h2>
-                <p>To support "Full Color" and fix rendering artifacts on VMware, we will move from standard VGA (Plane-based, 16-color) to a Linear Framebuffer (32-bit True Color) provided by VESA BIOS Extensions via GRUB Multiboot.</p>
+                <div className="glass-card p-6 mt-12 mb-8">
+                  <h2 id="high-color-support" className="text-2xl font-bold mb-4 flex items-center gap-2">
+                    <Palette className="w-6 h-6 text-primary" />
+                    High Color Support (VESA VBE)
+                  </h2>
+                  <p className="text-muted-foreground leading-relaxed">
+                    To support "Full Color" and fix rendering artifacts on VMware, we will move from standard VGA (Plane-based, 16-color) to a Linear Framebuffer (32-bit True Color) provided by VESA BIOS Extensions via GRUB Multiboot.
+                  </p>
 
-                <div className="grid md:grid-cols-3 gap-6 not-prose my-6">
-                  <div className="p-4 rounded-xl bg-card border border-border">
-                    <h4 className="font-semibold mb-2">1. Bootloader Updates</h4>
-                    <p className="text-sm text-muted-foreground">Request graphics mode in Multiboot Header and pass info structure to kernel.</p>
-                  </div>
-                  <div className="p-4 rounded-xl bg-card border border-border">
-                    <h4 className="font-semibold mb-2">2. Graphics Driver Overhaul</h4>
-                    <p className="text-sm text-muted-foreground">Replace fixed pointer with dynamic framebuffer. Update pixel writing to 32-bit direct RGB.</p>
-                  </div>
-                  <div className="p-4 rounded-xl bg-card border border-border">
-                    <h4 className="font-semibold mb-2">3. Kernel Integration</h4>
-                    <p className="text-sm text-muted-foreground">Parse multiboot struct for framebuffer address, pitch, width, and height.</p>
+                  <div className="grid md:grid-cols-3 gap-6 not-prose mt-8">
+                    <div className="p-4 rounded-xl bg-muted/50 border border-border/50">
+                      <h4 className="font-semibold mb-2 text-primary">1. Bootloader Updates</h4>
+                      <p className="text-sm text-muted-foreground">Request graphics mode in Multiboot Header and pass info structure to kernel.</p>
+                    </div>
+                    <div className="p-4 rounded-xl bg-muted/50 border border-border/50">
+                      <h4 className="font-semibold mb-2 text-primary">2. Graphics Driver Overhaul</h4>
+                      <p className="text-sm text-muted-foreground">Replace fixed pointer with dynamic framebuffer. Update pixel writing to 32-bit direct RGB.</p>
+                    </div>
+                    <div className="p-4 rounded-xl bg-muted/50 border border-border/50">
+                      <h4 className="font-semibold mb-2 text-primary">3. Kernel Integration</h4>
+                      <p className="text-sm text-muted-foreground">Parse multiboot struct for framebuffer address, pitch, width, and height.</p>
+                    </div>
                   </div>
                 </div>
 
