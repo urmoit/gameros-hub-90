@@ -33,11 +33,11 @@ const requirements = {
 };
 
 const platforms = [
-  { icon: Box, name: "VirtualBox", description: "Coming soon" },
-  { icon: Server, name: "VMware", description: "Coming soon" },
-  { icon: Monitor, name: "Hyper-V", description: "Coming soon" },
-  { icon: Cloud, name: "QEMU", description: "Coming soon" },
-  { icon: HardDrive, name: "Real Hardware", description: "Coming soon" },
+  { icon: Box, name: "VirtualBox", description: "Supported", supported: true },
+  { icon: Server, name: "VMware", description: "Supported", supported: true },
+  { icon: Monitor, name: "Hyper-V", description: "Coming soon", supported: false },
+  { icon: Cloud, name: "QEMU", description: "Supported", supported: true },
+  { icon: HardDrive, name: "Real Hardware", description: "Coming soon", supported: false },
 ];
 
 const Download = () => {
@@ -157,12 +157,12 @@ const Download = () => {
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {platforms.map((platform, i) => (
-                <div key={i} className="glass-card p-4 text-center opacity-60">
-                  <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center mx-auto mb-3">
-                    <platform.icon className="w-6 h-6 text-muted-foreground" />
+                <div key={i} className={`glass-card p-4 text-center ${platform.supported ? '' : 'opacity-60'}`}>
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-3 ${platform.supported ? 'bg-primary/10' : 'bg-secondary'}`}>
+                    <platform.icon className={`w-6 h-6 ${platform.supported ? 'text-primary' : 'text-muted-foreground'}`} />
                   </div>
                   <h4 className="font-medium text-sm">{platform.name}</h4>
-                  <p className="text-xs text-muted-foreground">{platform.description}</p>
+                  <p className={`text-xs ${platform.supported ? 'text-primary font-medium' : 'text-muted-foreground'}`}>{platform.description}</p>
                 </div>
               ))}
             </div>

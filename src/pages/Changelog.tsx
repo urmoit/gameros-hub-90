@@ -44,6 +44,19 @@ interface Version {
 
 const changelogData: Version[] = [
   {
+    version: "1.5.0",
+    date: "February 4, 2026",
+    title: "Platform Support & Progress Updates",
+    description: "Updated VM platform support, homepage statistics, and roadmap progress.",
+    changes: [
+      { type: "feature", description: "Added VMware, VirtualBox, and QEMU as supported platforms", component: "Download" },
+      { type: "improvement", description: "Updated homepage lines of code to 8,000+", component: "Home" },
+      { type: "improvement", description: "Marked Roadmap Phase 1 as completed (100%)", component: "Roadmap" },
+      { type: "improvement", description: "Redesigned XP Implementation page with progress tracker", component: "News" },
+      { type: "improvement", description: "Redesigned Bug Tracking page with native components", component: "Bug Tracking" },
+    ],
+  },
+  {
     version: "1.4.3",
     date: "January 28, 2026",
     title: "XP Theme Implementation Plan",

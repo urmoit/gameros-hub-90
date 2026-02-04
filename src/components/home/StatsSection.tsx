@@ -6,7 +6,7 @@ import StatCard from "@/components/ui/StatCard";
 const stats = [
   { value: "TBA", label: "Releases" },
   { value: "TBA", label: "Contributors" },
-  { value: "7,400+", label: "Lines of Code" },
+  { value: "8,000+", label: "Lines of Code" },
   { value: "2026", label: "Project Started" },
 ];
 
