@@ -43,15 +43,15 @@ const phases = [
   {
     phase: "Phase 1",
     title: "Foundation & Build System",
-    status: "in-progress" as PhaseStatus,
-    progress: 60,
+    status: "completed" as PhaseStatus,
+    progress: 100,
     description: "Establishing the core bootloader, kernel, and development environment.",
     eta: "Q1 2026",
     features: [
       { name: "GRUB Multiboot2 bootloader", done: true },
       { name: "Basic kernel (ELF64)", done: true },
       { name: "Memory management (16-byte aligned)", done: true },
-      { name: "VGA graphics pipeline", done: false },
+      { name: "VGA graphics pipeline", done: true },
       { name: "Build system (Docker cross-compilation)", done: true },
       { name: "QEMU testing environment", done: true },
     ],

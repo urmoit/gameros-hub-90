@@ -1,446 +1,330 @@
-import ReactMarkdown from "react-markdown";
+import { motion } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { Bug, ExternalLink, Check } from "lucide-react";
+import PageTransition from "@/components/ui/PageTransition";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import { Link } from "react-router-dom";
+import { 
+  Bug, 
+  ExternalLink, 
+  Check, 
+  AlertTriangle, 
+  AlertCircle, 
+  Info,
+  Circle,
+  ChevronDown,
+  ChevronUp,
+  FileCode,
+  GitCommit
+} from "lucide-react";
+import { useState } from "react";
 
-const bugTrackingMarkdown = `# GamerOS Bug Tracking List
+type BugSeverity = "critical" | "high" | "medium" | "low";
 
-## Summary
-- **Total Bugs Found:** 29
-- **Resolved:** 0
-- **Critical Issues:** 1
-- **High Priority:** 4
-- **Medium Priority:** 11
-- **Low Priority:** 8
+interface BugItem {
+  id: string;
+  title: string;
+  severity: BugSeverity;
+  location: string;
+  description: string;
+  status: "open" | "resolved";
+  suggestedFix?: string;
+}
 
-## Recently Identified Issues
-- 🔴 **CRITICAL:** VGA Mode 12h - Black/white screen with zero errors (REGRESSED)
-  - **Location:** \`src/impl/graphics/vga_graphics.c\`, \`src/impl/kernel/main.c\`, \`src/impl/x86_64/boot.asm\`
-  - **Impact:** Graphics not displaying at all - screen remains black
-  - **Status:** OPEN - Pixel writing logic or bootloader initialization broken
-  - **Details:** Bootloader initializes mode 12h correctly but kernel pixel operations not working
-  - **Priority:** CRITICAL - System appears non-functional to user
+const bugStats = {
+  total: 28,
+  resolved: 0,
+  critical: 1,
+  high: 3,
+  medium: 11,
+  low: 8,
+};
 
-## Bug Categories
+const criticalBugs: BugItem[] = [
+  {
+    id: "vga-display",
+    title: "VGA graphics display issue - screen shows all black or all white instead of colored bars",
+    severity: "critical",
+    location: "src/impl/graphics/vga_graphics.c, src/impl/kernel/main.c",
+    description: "Graphics not displaying correctly, making it impossible to verify system functionality. Palette initialization may not be working correctly in long mode.",
+    status: "open",
+    suggestedFix: "Investigate palette initialization in long mode, ensure I/O port access works correctly",
+  },
+];
 
-### 🔴 Critical (System Breaking)
-- [x] **VGA Mode 12h Black Screen Issue**
-  - Bootloader successfully sets up 640x480 mode
-  - Test pattern in bootloader (5 color stripes) may or may not display
-  - Kernel vga_clear(0x0F) fills with white but appears as black
-  - All subsequent graphics operations fail
-  - Possible causes:
-    - Sequencer plane masking not working correctly
-    - Graphics controller set/reset not functioning as expected
-    - Pixel write mode not configured properly in kernel
-    - Memory fence or volatility issues
-  - **Status:** RESOLVED - Root cause was buffer overflow in bootloader clearing 600KB+ and overwriting kernel. Fixed by correcting clear size to 38,400 bytes.
+const highBugs: BugItem[] = [
+  { id: "ui-framework", title: "Incomplete UI framework implementation", severity: "high", location: "Multiple files", description: "UI framework has TODO comments indicating incomplete implementations", status: "open" },
+  { id: "executive-services", title: "Missing executive services initialization", severity: "high", location: "src/executive/executive.c", description: "TODO comment indicates incomplete executive services initialization", status: "open" },
+  { id: "ipc-stubbed", title: "IPC system is completely stubbed out - all functions return failure", severity: "high", location: "src/impl/kernel_mode/microkernel/ipc.c", description: "No inter-process communication possible, critical for multitasking OS", status: "open", suggestedFix: "Implement message passing system with proper queue management" },
+];
 
-### 🟠 High Priority (Major Functionality Impact)
-- [ ] Incomplete UI framework implementation
-- [ ] Missing executive services initialization
-- [ ] IPC system is completely stubbed out - all functions return failure
-- [ ] VGA Mode 13h palette not loaded (reverted to mode 12h testing)
+const mediumBugs: BugItem[] = [
+  { id: "todo-comments", title: "TODO comments indicating incomplete implementations", severity: "medium", location: "Multiple files", description: "Various files contain TODO comments for incomplete functionality", status: "open" },
+  { id: "null-checks", title: "Missing null pointer checks in some functions", severity: "medium", location: "Various", description: "Potential null pointer dereferences", status: "open" },
+  { id: "race-conditions", title: "Potential race conditions in scheduler", severity: "medium", location: "src/impl/kernel_mode/microkernel/process.c", description: "Spinlock usage may cause deadlocks or data corruption", status: "open" },
+  { id: "implicit-strlen", title: "Implicit function declarations in GUI app", severity: "medium", location: "src/impl/gui_app.c", description: "strlen, workstation_create_desktop not declared", status: "open" },
+  { id: "implicit-usermode", title: "Implicit function declarations in user mode init functions", severity: "medium", location: "src/user_mode/user_mode.c", description: "Subsystem init/shutdown functions not declared", status: "open" },
+  { id: "color-overflow", title: "Color value overflow in GUI functions", severity: "medium", location: "src/impl/gui_app.c", description: "32-bit to 8-bit conversion issues", status: "open" },
+  { id: "kmalloc-decl", title: "Missing kmalloc/kfree declarations in object manager", severity: "medium", location: "src/executive/object_manager/object_manager.c", description: "Implicit declarations may cause linking issues", status: "open" },
+  { id: "unused-prev", title: "Unused variable 'prev' in memory.c kmalloc function", severity: "medium", location: "src/impl/kernel_mode/microkernel/memory.c", description: "Compilation warning, minor code cleanliness issue", status: "open" },
+  { id: "switch-decl", title: "Variable declaration in switch statement", severity: "medium", location: "src/impl/graphics/vga_graphics.c", description: "rgb_to_color function has declaration without braces", status: "open" },
+  { id: "memory-leak", title: "Memory leak in kfree - only coalesces with next block", severity: "medium", location: "src/impl/kernel_mode/microkernel/memory.c", description: "Memory fragmentation over time, inefficient memory usage", status: "open" },
+  { id: "vesa-undefined", title: "VESA mode support references undefined extern variable", severity: "medium", location: "src/impl/graphics/vga_graphics.c", description: "vesa_success undefined, potential linking errors", status: "open" },
+];
 
-### 🟡 Medium Priority (Feature Limitations)
-- [ ] TODO comments indicating incomplete implementations (multiple files)
-- [ ] Missing null pointer checks in some functions
-- [ ] Potential race conditions in scheduler
-- [ ] Implicit function declarations in GUI app (strlen, workstation_create_desktop)
-- [ ] Implicit function declarations in user mode init functions
-- [ ] Color value overflow in GUI functions (32-bit to 8-bit conversion)
-- [ ] Missing kmalloc/kfree declarations in object manager
-- [ ] Unused variable 'prev' in memory.c kmalloc function
-- [ ] Variable declaration in switch statement (rgb_to_color function)
-- [ ] Memory leak in kfree - only coalesces with next block, not previous block
-- [ ] VESA mode support references undefined extern variable 'vesa_success'
+const lowBugs: BugItem[] = [
+  { id: "code-style", title: "Code style inconsistencies", severity: "low", location: "Various", description: "Minor code style issues across codebase", status: "open" },
+  { id: "missing-docs", title: "Missing documentation comments", severity: "low", location: "Various", description: "Some functions lack proper documentation", status: "open" },
+  { id: "unused-vars", title: "Unused variables in some functions", severity: "low", location: "Various", description: "Compilation warnings for unused variables", status: "open" },
+  { id: "magic-numbers", title: "Hard-coded magic numbers", severity: "low", location: "Various", description: "320, 200, 0xA0000, etc. should be constants", status: "open" },
+  { id: "inefficient-string", title: "Inefficient string operations", severity: "low", location: "Various", description: "String operations could be optimized", status: "open" },
+  { id: "ui-disabled", title: "UI rendering disabled in GUI app loop", severity: "low", location: "src/impl/gui_app.c", description: "ui_render_container() commented out", status: "open" },
+  { id: "theme-colors", title: "Theme colors use 32-bit values but VGA mode 13h only supports 8-bit", severity: "low", location: "src/impl/ui_system/ui_widgets.c", description: "Theme colors won't work correctly in current graphics mode", status: "open" },
+  { id: "widget-errors", title: "No error handling for failed widget creation", severity: "low", location: "src/impl/ui_system/ui_widgets.c", description: "Potential null pointer dereferences if kmalloc fails", status: "open" },
+];
 
-### 🟢 Low Priority (Minor Issues)
-- [ ] Code style inconsistencies
-- [ ] Missing documentation comments
-- [ ] Unused variables in some functions
-- [ ] Hard-coded magic numbers (320, 200, 0xA0000, etc.)
-- [ ] Inefficient string operations
-- [ ] UI rendering disabled in GUI app loop (commented out)
-- [ ] Theme colors use 32-bit values but VGA mode 13h only supports 8-bit palette
-- [ ] No error handling for failed widget creation
+const getSeverityConfig = (severity: BugSeverity) => {
+  switch (severity) {
+    case "critical":
+      return { icon: AlertCircle, color: "text-red-500", bg: "bg-red-500/10", border: "border-red-500/30", label: "Critical" };
+    case "high":
+      return { icon: AlertTriangle, color: "text-orange-500", bg: "bg-orange-500/10", border: "border-orange-500/30", label: "High" };
+    case "medium":
+      return { icon: Info, color: "text-yellow-500", bg: "bg-yellow-500/10", border: "border-yellow-500/30", label: "Medium" };
+    case "low":
+      return { icon: Circle, color: "text-green-500", bg: "bg-green-500/10", border: "border-green-500/30", label: "Low" };
+  }
+};
 
-## Detailed Bug Reports
+const BugCard = ({ bug }: { bug: BugItem }) => {
+  const [expanded, setExpanded] = useState(false);
+  const config = getSeverityConfig(bug.severity);
+  const Icon = config.icon;
 
-### File: src/impl/graphics/vga_graphics.c
-**Issue:** Variable declaration in switch statement without braces
-**Severity:** Medium
-**Location:** Line 574 in rgb_to_color function
-**Impact:** May cause compilation issues with some compilers, violates C standard
-**Suggested Fix:** Add braces around the case block: \`case COLOR_DEPTH_8BIT: { uint32_t luminance = ...; return ...; }\`
-**Status:** Open
-
-### File: src/impl/graphics/vga_graphics.c
-**Issue:** VESA mode functions reference undefined extern variable 'vesa_success'
-**Severity:** Medium
-**Location:** Lines 109, 125, 141
-**Impact:** Potential linking errors or undefined behavior if VESA modes are attempted
-**Suggested Fix:** Define vesa_success in boot.asm or remove VESA mode support
-**Status:** Open
-
-### File: src/impl/kernel_mode/microkernel/memory.c
-**Issue:** Memory leak in kfree - only coalesces with next block, not previous block
-**Severity:** Medium
-**Location:** Lines 58-68
-**Impact:** Memory fragmentation over time, inefficient memory usage
-**Suggested Fix:** Implement bidirectional coalescing to merge with previous block if also free
-**Status:** Open
-
-### File: src/impl/kernel_mode/microkernel/memory.c
-**Issue:** Unused variable 'prev' in kmalloc function
-**Severity:** Low
-**Location:** Line 32
-**Impact:** Compilation warning, minor code cleanliness issue
-**Suggested Fix:** Remove unused variable or use it for bidirectional free list traversal
-**Status:** Open
-
-### File: src/impl/kernel_mode/microkernel/ipc.c
-**Issue:** IPC system is completely stubbed out - all functions return failure
-**Severity:** High
-**Location:** Entire file
-**Impact:** No inter-process communication possible, critical for multitasking OS
-**Suggested Fix:** Implement message passing system with proper queue management
-**Status:** Open
-
-### File: src/impl/kernel/main.c
-**Issue:** VGA graphics display issue - screen shows all black or all white
-**Severity:** Critical
-**Location:** Lines 32-75
-**Impact:** Cannot verify system is working, graphics not displaying correctly
-**Suggested Fix:** Investigate palette initialization in long mode, ensure I/O port access works correctly
-**Status:** Resolved
-
-### File: src/impl/gui_app.c
-**Issue:** UI rendering disabled in main loop (commented out)
-**Severity:** Low
-**Location:** Line 272
-**Impact:** GUI windows and widgets are not being rendered
-**Suggested Fix:** Re-enable ui_render_container() after fixing graphics display issue
-**Status:** Open
-
-### File: src/impl/gui_app.c
-**Issue:** Implicit function declarations for strlen and workstation_create_desktop
-**Severity:** Medium
-**Location:** Lines 119, 160
-**Impact:** Compilation warnings, potential runtime issues if functions not properly linked
-**Suggested Fix:** Add strlen declaration to string.h header and declare workstation_create_desktop function
-**Status:** Open
-
-### File: src/impl/gui_app.c
-**Issue:** Color value overflow when converting 32-bit values to 8-bit parameters (resolved in code but still documented)
-**Severity:** Medium
-**Location:** Previously lines 163-174, now commented out
-**Impact:** Colors may display incorrectly if 32-bit values are used
-**Suggested Fix:** Use proper 8-bit color values instead of 32-bit values (already fixed)
-**Status:** Partially resolved - code fixed but issue documented
-
-### File: src/impl/ui_system/ui_widgets.c
-**Issue:** Theme colors use 32-bit RGBA values but VGA mode 13h only supports 8-bit palette indices
-**Severity:** Low
-**Location:** Lines 12-43 in ui_load_default_theme()
-**Impact:** Theme colors won't work correctly in current graphics mode
-**Suggested Fix:** Convert theme colors to 8-bit palette indices or implement color conversion
-**Status:** Open
-
-### File: src/impl/ui_system/ui_widgets.c
-**Issue:** No error handling for failed widget creation (kmalloc returns NULL)
-**Severity:** Low
-**Location:** Multiple widget creation functions
-**Impact:** Potential null pointer dereferences if memory allocation fails
-**Suggested Fix:** Add proper null checks and error handling
-**Status:** Open
-
-### File: src/executive/executive.c
-**Issue:** TODO comment indicates incomplete executive services initialization
-**Severity:** High
-**Location:** Line 17
-**Impact:** Missing critical OS services, system may not function properly
-**Suggested Fix:** Implement missing executive services
-**Status:** Open
-
-### File: src/user_mode/integral_subsystems/workstation/ui_framework.c
-**Issue:** Multiple TODO comments for incomplete UI functionality
-**Severity:** High
-**Location:** Lines 30, 40-41, 55, 59, 68, 72
-**Impact:** Broken UI event handling and rendering
-**Suggested Fix:** Implement pending UI event processing and rendering
-**Status:** Open
-
-### File: src/user_mode/integral_subsystems/workstation/window_manager.c
-**Issue:** TODO/FIXME comments indicating incomplete implementation
-**Severity:** Medium
-**Location:** Multiple lines (24, 39, 48, 52, 56, 60, 65, 70, 74, 78, 82, 86, 90, 102)
-**Impact:** Incomplete window management functionality
-**Suggested Fix:** Complete window manager implementation
-**Status:** Open
-
-### File: src/user_mode/integral_subsystems/workstation/desktop_manager.c
-**Issue:** TODO comments indicating missing desktop management features
-**Severity:** Medium
-**Location:** Lines 68-69, 73, 79, 90
-**Impact:** Incomplete desktop environment
-**Suggested Fix:** Implement missing desktop management functionality
-**Status:** Open
-
-### File: src/impl/kernel_mode/microkernel/process.c
-**Issue:** Potential race conditions in scheduler with spinlock usage
-**Severity:** Medium
-**Location:** Lines 26-28, 31-32, 80-81, 97-99, 124-126
-**Impact:** Potential deadlocks or data corruption in multi-threaded scenarios
-**Suggested Fix:** Implement proper mutex/semaphore system instead of simple spinlocks
-**Status:** Open
-
-### File: src/user_mode/compatibility_layers/msdos/msdos.c
-**Issue:** TODO comments for incomplete MSDOS compatibility
-**Severity:** Low
-**Location:** Multiple lines
-**Impact:** Limited backward compatibility
-**Suggested Fix:** Implement MSDOS compatibility layer
-**Status:** Open
-
-### File: src/user_mode/compatibility_layers/windows9x/windows9x.c
-**Issue:** TODO comments for incomplete Windows 9x compatibility
-**Severity:** Low
-**Location:** Multiple lines
-**Impact:** Limited Windows 9x application support
-**Suggested Fix:** Implement Windows 9x compatibility layer
-**Status:** Open
-
-### File: src/user_mode/environment_subsystems/os2/os2.c
-**Issue:** TODO comments for incomplete OS/2 subsystem
-**Severity:** Low
-**Location:** Multiple lines
-**Impact:** No OS/2 application support
-**Suggested Fix:** Implement OS/2 environment subsystem
-**Status:** Open
-
-### File: src/user_mode/environment_subsystems/posix/posix.c
-**Issue:** TODO comments for incomplete POSIX subsystem
-**Severity:** Low
-**Location:** Multiple lines
-**Impact:** Limited POSIX application compatibility
-**Suggested Fix:** Complete POSIX subsystem implementation
-**Status:** Open
-
-### File: src/user_mode/environment_subsystems/win32/win32.c
-**Issue:** TODO comments for incomplete Win32 subsystem
-**Severity:** Low
-**Location:** Multiple lines
-**Impact:** Limited Windows application support
-**Suggested Fix:** Implement Win32 subsystem
-**Status:** Open
-
-### File: src/user_mode/integral_subsystems/server_service/server_service.c
-**Issue:** TODO comments for incomplete server service implementation
-**Severity:** Medium
-**Location:** Multiple lines
-**Impact:** No network services available
-**Suggested Fix:** Implement server service functionality
-**Status:** Open
-
-### File: src/user_mode/integral_subsystems/security/security.c
-**Issue:** TODO comments for incomplete security system
-**Severity:** Medium
-**Location:** Multiple lines
-**Impact:** No authentication or access control
-**Suggested Fix:** Implement security system
-**Status:** Open
-
-### File: src/executive/object_manager/object_manager.c
-**Issue:** Implicit declarations of kmalloc and kfree functions
-**Severity:** Medium
-**Location:** Lines 80, 95
-**Impact:** Compilation warnings, potential linking issues
-**Suggested Fix:** Include proper header file declaring kmalloc/kfree or add declarations
-**Status:** Open
-
-### File: src/user_mode/user_mode.c
-**Issue:** Multiple implicit function declarations for subsystem init/shutdown functions
-**Severity:** Medium
-**Location:** Lines 27-38, 44-51
-**Impact:** Compilation warnings, potential linking issues with subsystem implementations
-**Suggested Fix:** Add proper function declarations or include appropriate headers
-**Status:** Open
-
-### File: src/impl/kernel_mode/hal/memory/paging.c
-**Issue:** Hard-coded memory addresses and limited memory mapping (only 4MB mapped)
-**Severity:** Medium
-**Location:** Lines 20-31
-**Impact:** System may run out of mapped memory, VGA buffer relies on being in first 2MB
-**Suggested Fix:** Implement dynamic memory mapping for larger address spaces
-**Status:** Open
-
-### File: src/impl/graphics/vga_graphics.c
-**Issue:** vga_fast_clear uses 32-bit operations which may not work correctly for 8-bit palette mode
-**Severity:** Low
-**Location:** Lines 501-518
-**Impact:** Fast clear may write incorrect values if color is not repeated 4 times
-**Suggested Fix:** Use byte operations for 8-bit color depth or ensure color is properly replicated
-**Status:** Open
-
-### File: src/impl/kernel/main.c
-**Issue:** Hard-coded delays using busy loops instead of proper timing
-**Severity:** Low
-**Location:** Line 73
-**Impact:** Wastes CPU cycles, not portable, timing may vary between systems
-**Suggested Fix:** Use timer-based delays or remove if not necessary
-**Status:** Open
-
-## Debugging Notes for VGA Mode 12h Black Screen Issue
-
-### Investigation Timeline
-1. **Initial Status:** System boots to black screen with 0 compilation errors
-2. **Bootloader Status:** Mode 12h initialization completes successfully (set_vga_mode12h function)
-3. **Test Pattern:** Bootloader attempts to draw 5 color stripes but appears as black screen
-4. **Kernel Clear:** \`vga_clear(0x0F)\` (white fill) appears to produce black screen
-5. **Graphics Functions:** All subsequent UI rendering produces no visible output
-
-### VGA Mode 12h Configuration Status
-- **Misc Output Register (0x3C2):** Set to 0xE3 (640x480 timings) ✓
-- **Sequencer Memory Mode (0x3C4/0x3C5 Reg 4):** Set to 0x06 (planar, not chain-4) ✓
-- **CRTC Registers:** Loaded from crtc_data_12h table (25 registers) ✓
-- **Graphics Controller Mode (0x3CE/0x3CF Reg 5):** Set to 0x00 (planar) ✓
-- **Attribute Controller:** Set for 16-color mode ✓
-
-### Possible Root Causes
-1. **Sequencer Plane Masking Issue**
-   - Map Mask register (0x3C4/0x3C5 Reg 2) may not be switching planes correctly
-   - Kernel sets to individual planes (1 << plane) but may not be persisting
-
-2. **Graphics Controller Set/Reset Not Working**
-   - Write mode 1 with set/reset may not be implemented correctly
-   - Bit mask register may not be affecting target pixels
-   - Read-modify-write operations may be failing
-
-3. **Video Memory Access Issue**
-   - Planar mode byte addressing may be incorrect
-   - VGA latches may not be working as expected
-   - Memory fence operations may be clearing data before display
-
-4. **Mode Setup Sequence Issue**
-   - Bootloader may not be disabling/re-enabling display at right times
-   - Attribute controller flip-flop may not be in correct state
-   - Sequencer reset may be interfering with mode configuration
-
-5. **Display Enable Issue**
-   - Attribute controller register 0x20 (display enable) may not be set correctly
-   - Blanking signals may be misconfigured
-   - CRTC timing may be creating blank output
-
-### Testing Strategy
-1. Verify bootloader test pattern displays 5 color stripes on screen
-2. Add debug output to serial console showing pixel write operations
-3. Test individual plane writes to verify sequencer plane switching
-4. Compare with known working Mode 13h implementation
-5. Check QEMU logs for video mode setup errors
-6. Verify memory access to 0xA0000 is working in long mode
-
-### Next Steps
-1. Add QEMU debugging output
-2. Simplify pixel writing to test single plane writes
-3. Verify attribute controller is not preventing display
-4. Test with very simple 1-color fill
-5. Compare register values with VGA BIOS defaults
-
-
-### File: src/impl/graphics/vga_graphics.c
-**Issue:** Palette initialization uses cli/sti which may interfere with interrupt handling
-**Severity:** Low
-**Location:** Lines 28, 62
-**Impact:** May cause missed interrupts during palette initialization
-**Suggested Fix:** Use shorter critical section or ensure interrupts are properly handled
-**Status:** Open
-
----
-
-*Last Updated: January 25, 2026*`;
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className={`glass-card p-4 rounded-xl border ${config.border} ${config.bg} transition-all hover:shadow-lg`}
+    >
+      <div className="flex items-start gap-3">
+        <div className={`w-8 h-8 rounded-lg ${config.bg} flex items-center justify-center shrink-0`}>
+          {bug.status === "resolved" ? (
+            <Check className="w-4 h-4 text-emerald-500" />
+          ) : (
+            <Icon className={`w-4 h-4 ${config.color}`} />
+          )}
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-start justify-between gap-2">
+            <h4 className={`font-medium ${bug.status === "resolved" ? "line-through text-muted-foreground" : ""}`}>
+              {bug.title}
+            </h4>
+            <button
+              onClick={() => setExpanded(!expanded)}
+              className="p-1 hover:bg-muted rounded transition-colors shrink-0"
+            >
+              {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </button>
+          </div>
+          <div className="flex items-center gap-2 mt-1">
+            <FileCode className="w-3 h-3 text-muted-foreground" />
+            <code className="text-xs text-muted-foreground font-mono truncate">{bug.location}</code>
+          </div>
+          {expanded && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              className="mt-3 pt-3 border-t border-border/50"
+            >
+              <p className="text-sm text-muted-foreground mb-2">{bug.description}</p>
+              {bug.suggestedFix && (
+                <div className="text-sm">
+                  <span className="font-medium text-primary">Suggested Fix: </span>
+                  <span className="text-muted-foreground">{bug.suggestedFix}</span>
+                </div>
+              )}
+            </motion.div>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 const BugTracking = () => {
-  return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main className="pt-24 pb-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="glass-card p-8">
-            <div className="prose prose-lg dark:prose-invert max-w-none 
-              prose-headings:font-bold prose-headings:tracking-tight 
-              prose-h1:text-3xl prose-h1:mb-8 prose-h1:text-primary
-              prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-b prose-h2:border-border/50 prose-h2:pb-2
-              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 prose-h3:text-foreground/90
-              prose-p:text-muted-foreground prose-p:leading-relaxed
-              prose-li:text-muted-foreground prose-li:my-1
-              prose-ul:my-6 prose-ul:list-disc prose-ul:pl-6
-              prose-strong:text-foreground prose-strong:font-semibold
-              prose-a:text-primary prose-a:no-underline hover:prose-a:underline
-              prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-code:text-foreground
-              [&>ul>li]:marker:text-primary/50">
-              <ReactMarkdown
-                components={{
-                  ul: ({ className, ...props }) => <ul className="list-disc pl-6 space-y-2" {...props} />,
-                  li: ({ className, children, ...props }) => {
-                    // Check for checkbox pattern [ ] or [x]
-                    const childText = String(children);
-                    if (childText.startsWith("[ ] ")) {
-                      return <li className="flex items-start gap-2 list-none -ml-6" {...props}><div className="mt-1.5 w-4 h-4 rounded border border-muted-foreground/50 shrink-0" /> <span className="flex-1">{childText.substring(4)}</span></li>;
-                    }
-                    if (childText.startsWith("[x] ")) {
-                      return <li className="flex items-start gap-2 list-none -ml-6" {...props}><div className="mt-1.5 w-4 h-4 rounded bg-primary flex items-center justify-center shrink-0"><Check className="w-3 h-3 text-primary-foreground" /></div> <span className="flex-1">{childText.substring(4)}</span></li>;
-                    }
-                    return <li {...props}>{children}</li>
-                  }
-                }}
-              >
-                {bugTrackingMarkdown}
-              </ReactMarkdown>
-            </div>
-          </div>
-        </div>
+  const resolvedPercent = Math.round((bugStats.resolved / bugStats.total) * 100);
 
-        {/* Report Bug CTA */}
-        <section className="py-16 bg-secondary/30 mt-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="glass-card p-8 lg:p-12 text-center">
-              <Bug className="w-12 h-12 text-primary mx-auto mb-6" />
-              <h2 className="text-3xl font-bold mb-4">Found a Bug?</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-                Help us improve GamerOS by reporting bugs on our GitHub repository.
-                Please include as much detail as possible including steps to reproduce.
+  return (
+    <PageTransition>
+      <div className="min-h-screen flex flex-col bg-background">
+        <Header />
+
+        <main className="flex-1">
+          {/* Hero Section */}
+          <section className="relative pt-32 pb-20 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-orange-500/5" />
+            <div className="absolute top-20 left-10 w-72 h-72 bg-red-500/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-10 right-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl" />
+
+            <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-center"
+              >
+                <Badge variant="outline" className="mb-6 px-4 py-2 text-sm border-red-500/30 bg-red-500/5">
+                  <Bug className="w-4 h-4 mr-2" />
+                  Bug Tracking
+                </Badge>
+
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+                  Issue{" "}
+                  <span className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 bg-clip-text text-transparent">
+                    Tracker
+                  </span>
+                </h1>
+
+                <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-12">
+                  Tracking and resolving bugs to make GamerOS stable and reliable.
+                </p>
+
+                {/* Stats Overview */}
+                <div className="max-w-4xl mx-auto">
+                  <div className="glass-card p-6 rounded-2xl mb-8">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="font-medium">Resolution Progress</span>
+                      <span className="text-2xl font-bold">{bugStats.resolved}/{bugStats.total} resolved</span>
+                    </div>
+                    <Progress value={resolvedPercent} className="h-3 mb-6" />
+                    
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      {[
+                        { label: "Critical", count: bugStats.critical, color: "text-red-500", bg: "bg-red-500/10" },
+                        { label: "High", count: bugStats.high, color: "text-orange-500", bg: "bg-orange-500/10" },
+                        { label: "Medium", count: bugStats.medium, color: "text-yellow-500", bg: "bg-yellow-500/10" },
+                        { label: "Low", count: bugStats.low, color: "text-green-500", bg: "bg-green-500/10" },
+                      ].map((stat, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: i * 0.1 }}
+                          className={`p-4 rounded-xl ${stat.bg} text-center`}
+                        >
+                          <div className={`text-3xl font-bold ${stat.color}`}>{stat.count}</div>
+                          <div className="text-sm text-muted-foreground">{stat.label}</div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* Critical Bugs */}
+          {criticalBugs.length > 0 && (
+            <section className="py-12 border-y border-red-500/20 bg-red-500/5">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                  <AlertCircle className="w-6 h-6 text-red-500" />
+                  Critical Issues
+                </h2>
+                <div className="space-y-4">
+                  {criticalBugs.map((bug) => (
+                    <BugCard key={bug.id} bug={bug} />
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* High Priority */}
+          <section className="py-12">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <AlertTriangle className="w-6 h-6 text-orange-500" />
+                High Priority
+              </h2>
+              <div className="grid gap-4">
+                {highBugs.map((bug) => (
+                  <BugCard key={bug.id} bug={bug} />
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Medium Priority */}
+          <section className="py-12 bg-card/30">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <Info className="w-6 h-6 text-yellow-500" />
+                Medium Priority
+              </h2>
+              <div className="grid md:grid-cols-2 gap-4">
+                {mediumBugs.map((bug) => (
+                  <BugCard key={bug.id} bug={bug} />
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Low Priority */}
+          <section className="py-12">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <Circle className="w-6 h-6 text-green-500" />
+                Low Priority
+              </h2>
+              <div className="grid md:grid-cols-2 gap-4">
+                {lowBugs.map((bug) => (
+                  <BugCard key={bug.id} bug={bug} />
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* CTA */}
+          <section className="py-16 border-t border-border/50">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <h2 className="text-2xl font-bold mb-4">Found a bug?</h2>
+              <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
+                Help us improve GamerOS by reporting issues on GitHub.
               </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button size="lg" asChild>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Button asChild size="lg" className="gap-2">
                   <a
                     href="https://github.com/urmoit/GamerOS/issues/new"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Bug className="w-5 h-5 mr-2" />
-                    Report Bug on GitHub
+                    <ExternalLink className="w-4 h-4" />
+                    Report a Bug
                   </a>
                 </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <a
-                    href="https://github.com/urmoit/GamerOS/issues"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    View All Issues
-                  </a>
+                <Button asChild variant="outline" size="lg">
+                  <Link to="/roadmap">View Roadmap</Link>
                 </Button>
               </div>
             </div>
+          </section>
+
+          {/* Last Updated */}
+          <div className="text-center pb-8">
+            <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
+              <GitCommit className="w-4 h-4" />
+              Last Updated: January 21, 2026
+            </p>
           </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+        </main>
+
+        <Footer />
+      </div>
+    </PageTransition>
   );
 };
 
