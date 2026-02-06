@@ -8,6 +8,7 @@ import About from "./pages/About";
 import Roadmap from "./pages/Roadmap";
 import News from "./pages/News";
 import XPImplementation from "./pages/news/XPImplementation";
+import XPTransformation from "./pages/news/XPTransformation";
 import MonthlyNews from "./pages/MonthlyNews";
 import Download from "./pages/Download";
 import BugTracking from "./pages/BugTracking";
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/all-versions" element={<AllVersions />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/news/xp-implementation" element={<XPImplementation />} />
+          <Route path="/news/xp-transformation" element={<XPTransformation />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -34,54 +34,67 @@ interface BugItem {
 }
 
 const bugStats = {
-  total: 28,
-  resolved: 0,
+  total: 25,
+  resolved: 8,
   critical: 1,
-  high: 3,
-  medium: 11,
-  low: 8,
+  high: 4,
+  medium: 10,
+  low: 10,
 };
+
+const resolvedBugs: BugItem[] = [
+  { id: "ist-field", title: "IST Field in IDT Entry", severity: "critical", location: "src/intf/idt.h", description: "IDT entry 'reserved' field was actually IST (Interrupt Stack Table), non-zero values cause triple fault. Renamed to 'ist' and set to 0.", status: "resolved" },
+  { id: "gdt-reload", title: "GDT Reload in 64-bit Mode", severity: "high", location: "src/impl/kernel_mode/hal/cpu/gdt.c", description: "Reloading GDT in 64-bit mode without reloading segment registers causes corruption. Made gdt_init() a no-op since boot.asm already sets up correct GDT.", status: "resolved" },
+  { id: "isr-passbyvalue", title: "ISR Handler Pass-by-Value", severity: "high", location: "src/impl/kernel_mode/hal/interrupts/isr.c", description: "common_isr_handler passed 152-byte struct by value, corrupting stack. Changed to pass by pointer.", status: "resolved" },
+  { id: "double-buffering", title: "Double Buffering Implementation", severity: "medium", location: "src/impl/graphics/vga_graphics.c", description: "Screen flickering and cursor trails. Implemented 800x600 back buffer with swap_buffers().", status: "resolved" },
+  { id: "mouse-buttons", title: "Mouse Button Detection", severity: "medium", location: "src/impl/drivers/mouse.c", description: "Mouse buttons not properly detected. Fixed PS/2 packet decoding with button state in lower 3 bits.", status: "resolved" },
+  { id: "window-dragging", title: "Window Dragging", severity: "medium", location: "src/impl/kernel/main.c", description: "Window dragging was jerky/non-functional. Implemented proper drag state tracking with drag_x, drag_y offsets.", status: "resolved" },
+  { id: "keyboard-buffer", title: "Keyboard Input Buffer", severity: "medium", location: "src/impl/drivers/keyboard.c", description: "No keyboard input buffering. Added 64-character ring buffer with keyboard_getchar() and keyboard_has_input().", status: "resolved" },
+  { id: "vga-mode13h", title: "VGA Mode 13h Initialization", severity: "medium", location: "src/impl/graphics/vga_graphics.c", description: "Dark screen, palette not initialized. Fixed with proper BIOS INT 0x10 mode setting and palette initialization.", status: "resolved" },
+];
 
 const criticalBugs: BugItem[] = [
   {
-    id: "vga-display",
-    title: "VGA graphics display issue - screen shows all black or all white instead of colored bars",
+    id: "triple-fault-vmware",
+    title: "Triple Fault / CPU Disabled in VMware",
     severity: "critical",
-    location: "src/impl/graphics/vga_graphics.c, src/impl/kernel/main.c",
-    description: "Graphics not displaying correctly, making it impossible to verify system functionality. Palette initialization may not be working correctly in long mode.",
+    location: "src/impl/kernel_mode/hal/interrupts/isr.c",
+    description: "VMware shows 'CPU has been disabled by the guest operating system'. Interrupt handling issues including ISR assembly, stack misalignment, IDT IST field, GDT reload problems.",
     status: "open",
-    suggestedFix: "Investigate palette initialization in long mode, ensure I/O port access works correctly",
+    suggestedFix: "IST field and GDT reload partially fixed. Still investigating remaining issues. Kernel boots in QEMU but not VMware.",
   },
 ];
 
 const highBugs: BugItem[] = [
-  { id: "ui-framework", title: "Incomplete UI framework implementation", severity: "high", location: "Multiple files", description: "UI framework has TODO comments indicating incomplete implementations", status: "open" },
-  { id: "executive-services", title: "Missing executive services initialization", severity: "high", location: "src/executive/executive.c", description: "TODO comment indicates incomplete executive services initialization", status: "open" },
-  { id: "ipc-stubbed", title: "IPC system is completely stubbed out - all functions return failure", severity: "high", location: "src/impl/kernel_mode/microkernel/ipc.c", description: "No inter-process communication possible, critical for multitasking OS", status: "open", suggestedFix: "Implement message passing system with proper queue management" },
+  { id: "vesa-incomplete", title: "VESA mode functions incomplete", severity: "high", location: "src/impl/graphics/vga_graphics.c", description: "Cannot use 640x480 or 800x600 modes (fallback to 320x200 works). vesa_set_mode() uses INT 0x10 but may not work in all environments.", status: "open" },
+  { id: "ipc-stubbed", title: "IPC system is completely stubbed out", severity: "high", location: "src/impl/kernel_mode/microkernel/ipc.c", description: "No inter-process communication possible", status: "open" },
+  { id: "executive-services", title: "Incomplete executive services initialization", severity: "high", location: "src/executive/executive.c", description: "Missing critical OS services", status: "open" },
+  { id: "triple-fault-vmware-high", title: "Triple fault in VMware (ongoing investigation)", severity: "high", location: "Interrupt handling system", description: "Cannot run in VMware, only QEMU", status: "open" },
 ];
 
 const mediumBugs: BugItem[] = [
-  { id: "todo-comments", title: "TODO comments indicating incomplete implementations", severity: "medium", location: "Multiple files", description: "Various files contain TODO comments for incomplete functionality", status: "open" },
-  { id: "null-checks", title: "Missing null pointer checks in some functions", severity: "medium", location: "Various", description: "Potential null pointer dereferences", status: "open" },
-  { id: "race-conditions", title: "Potential race conditions in scheduler", severity: "medium", location: "src/impl/kernel_mode/microkernel/process.c", description: "Spinlock usage may cause deadlocks or data corruption", status: "open" },
-  { id: "implicit-strlen", title: "Implicit function declarations in GUI app", severity: "medium", location: "src/impl/gui_app.c", description: "strlen, workstation_create_desktop not declared", status: "open" },
-  { id: "implicit-usermode", title: "Implicit function declarations in user mode init functions", severity: "medium", location: "src/user_mode/user_mode.c", description: "Subsystem init/shutdown functions not declared", status: "open" },
-  { id: "color-overflow", title: "Color value overflow in GUI functions", severity: "medium", location: "src/impl/gui_app.c", description: "32-bit to 8-bit conversion issues", status: "open" },
-  { id: "kmalloc-decl", title: "Missing kmalloc/kfree declarations in object manager", severity: "medium", location: "src/executive/object_manager/object_manager.c", description: "Implicit declarations may cause linking issues", status: "open" },
-  { id: "unused-prev", title: "Unused variable 'prev' in memory.c kmalloc function", severity: "medium", location: "src/impl/kernel_mode/microkernel/memory.c", description: "Compilation warning, minor code cleanliness issue", status: "open" },
-  { id: "switch-decl", title: "Variable declaration in switch statement", severity: "medium", location: "src/impl/graphics/vga_graphics.c", description: "rgb_to_color function has declaration without braces", status: "open" },
-  { id: "memory-leak", title: "Memory leak in kfree - only coalesces with next block", severity: "medium", location: "src/impl/kernel_mode/microkernel/memory.c", description: "Memory fragmentation over time, inefficient memory usage", status: "open" },
+  { id: "vesa-swap", title: "VESA mode display output incomplete", severity: "medium", location: "src/impl/graphics/vga_graphics.c", description: "swap_buffers() only copies up to 320x200 for VESA modes", status: "open" },
+  { id: "notepad-limits", title: "Notepad text editing limitations", severity: "medium", location: "src/impl/kernel/main.c", description: "No cursor movement with arrow keys, limited editing features", status: "open" },
+  { id: "no-rtc", title: "No real-time clock implementation", severity: "medium", location: "src/impl/kernel/main.c", description: 'Taskbar shows static "12:00" time', status: "open" },
+  { id: "start-menu", title: "Start menu non-functional", severity: "medium", location: "src/impl/kernel/main.c", description: "Start button draws but menu doesn't open", status: "open" },
+  { id: "memory-leak", title: "Memory leak in kfree - only coalesces with next block", severity: "medium", location: "src/impl/kernel_mode/microkernel/memory.c", description: "Memory fragmentation over time", status: "open" },
+  { id: "object-pool", title: "Object manager uses static pool instead of kmalloc", severity: "medium", location: "src/executive/object_manager/object_manager.c", description: "Limited to 4096 bytes total for all objects", status: "open" },
+  { id: "user-mode", title: "User mode subsystems are commented out/not initialized", severity: "medium", location: "src/user_mode/user_mode.c", description: "No user mode functionality available", status: "open" },
+  { id: "ui-framework", title: "Incomplete UI framework implementation", severity: "medium", location: "src/user_mode/integral_subsystems/workstation/ui_framework.c", description: "Broken UI event handling and rendering", status: "open" },
+  { id: "window-manager", title: "Window manager incomplete", severity: "medium", location: "src/user_mode/integral_subsystems/workstation/window_manager.c", description: "Window operations (minimize, maximize) not implemented", status: "open" },
   { id: "vesa-undefined", title: "VESA mode support references undefined extern variable", severity: "medium", location: "src/impl/graphics/vga_graphics.c", description: "vesa_success undefined, potential linking errors", status: "open" },
 ];
 
 const lowBugs: BugItem[] = [
-  { id: "code-style", title: "Code style inconsistencies", severity: "low", location: "Various", description: "Minor code style issues across codebase", status: "open" },
-  { id: "missing-docs", title: "Missing documentation comments", severity: "low", location: "Various", description: "Some functions lack proper documentation", status: "open" },
-  { id: "unused-vars", title: "Unused variables in some functions", severity: "low", location: "Various", description: "Compilation warnings for unused variables", status: "open" },
-  { id: "magic-numbers", title: "Hard-coded magic numbers", severity: "low", location: "Various", description: "320, 200, 0xA0000, etc. should be constants", status: "open" },
-  { id: "inefficient-string", title: "Inefficient string operations", severity: "low", location: "Various", description: "String operations could be optimized", status: "open" },
-  { id: "ui-disabled", title: "UI rendering disabled in GUI app loop", severity: "low", location: "src/impl/gui_app.c", description: "ui_render_container() commented out", status: "open" },
-  { id: "theme-colors", title: "Theme colors use 32-bit values but VGA mode 13h only supports 8-bit", severity: "low", location: "src/impl/ui_system/ui_widgets.c", description: "Theme colors won't work correctly in current graphics mode", status: "open" },
+  { id: "code-style", title: "Code style inconsistencies across files", severity: "low", location: "Various", description: "Code readability issues", status: "open" },
+  { id: "missing-docs", title: "Missing documentation comments", severity: "low", location: "Various", description: "Code maintainability issues", status: "open" },
+  { id: "magic-numbers", title: "Hard-coded magic numbers", severity: "low", location: "Multiple files (320, 200, 0xA0000, etc.)", description: "Code maintainability - should be constants", status: "open" },
+  { id: "font-simple", title: "Font rendering uses simple 8x8 font", severity: "low", location: "src/impl/graphics/vga_graphics.c", description: "Limited character support, only basic ASCII", status: "open" },
+  { id: "compat-stubs", title: "Compatibility layers (MSDOS, Windows9x) are stubs", severity: "low", location: "src/user_mode/compatibility_layers/", description: "No backward compatibility", status: "open" },
+  { id: "env-stubs", title: "Environment subsystems (Win32, POSIX, OS/2) are stubs", severity: "low", location: "src/user_mode/environment_subsystems/", description: "No application compatibility layers", status: "open" },
+  { id: "server-stubs", title: "Server service and security subsystems are stubs", severity: "low", location: "src/user_mode/integral_subsystems/", description: "No network services or security", status: "open" },
+  { id: "filesystem", title: "Filesystem operations incomplete", severity: "low", location: "src/executive/filesystem_manager/filesystem_manager.c", description: "Cannot save/load Notepad files", status: "open" },
+  { id: "io-sync", title: "I/O manager uses synchronous operations only", severity: "low", location: "src/executive/io_manager/io_manager.c", description: "No async I/O support", status: "open" },
   { id: "widget-errors", title: "No error handling for failed widget creation", severity: "low", location: "src/impl/ui_system/ui_widgets.c", description: "Potential null pointer dereferences if kmalloc fails", status: "open" },
 ];
 
@@ -226,6 +239,23 @@ const BugTracking = () => {
             </div>
           </section>
 
+          {/* Resolved Bugs */}
+          {resolvedBugs.length > 0 && (
+            <section className="py-12 border-y border-emerald-500/20 bg-emerald-500/5">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                  <Check className="w-6 h-6 text-emerald-500" />
+                  Recently Resolved ({resolvedBugs.length})
+                </h2>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {resolvedBugs.map((bug) => (
+                    <BugCard key={bug.id} bug={bug} />
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
           {/* Critical Bugs */}
           {criticalBugs.length > 0 && (
             <section className="py-12 border-y border-red-500/20 bg-red-500/5">
@@ -317,7 +347,7 @@ const BugTracking = () => {
           <div className="text-center pb-8">
             <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
               <GitCommit className="w-4 h-4" />
-              Last Updated: January 21, 2026
+              Last Updated: February 6, 2026
             </p>
           </div>
         </main>

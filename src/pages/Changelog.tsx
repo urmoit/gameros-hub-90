@@ -44,6 +44,20 @@ interface Version {
 
 const changelogData: Version[] = [
   {
+    version: "1.6.0",
+    date: "February 6, 2026",
+    title: "February Updates & XP Transformation Walkthrough",
+    description: "Added February monthly archive, XP Transformation walkthrough page, updated bug tracking with resolved issues, and 2 new commits.",
+    changes: [
+      { type: "feature", description: "Created 'XP Transformation Walkthrough' dedicated news page", component: "News" },
+      { type: "feature", description: "Added February 2026 monthly archive with 2 new commits", component: "Monthly News" },
+      { type: "feature", description: "Added 2 new commit updates (c8db812, 1abf7fb) to News page", component: "News" },
+      { type: "improvement", description: "Updated Bug Tracking: 25 total bugs, 8 resolved with detailed entries", component: "Bug Tracking" },
+      { type: "improvement", description: "Added resolved bugs section with emerald-themed cards", component: "Bug Tracking" },
+      { type: "fix", description: "Fixed bug tracking page data to match current GamerOS state", component: "Bug Tracking" },
+    ],
+  },
+  {
     version: "1.5.0",
     date: "February 4, 2026",
     title: "Platform Support & Progress Updates",
