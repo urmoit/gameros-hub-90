@@ -49,6 +49,38 @@ interface NewsItem {
 
 const newsItems: NewsItem[] = [
   {
+    id: "xp-walkthrough",
+    title: "Walkthrough - GamerOS: The Windows XP Transformation",
+    date: "February 6, 2026",
+    type: "Announcement",
+    description: "Comprehensive summary of major architectural upgrades: VESA 32-bit graphics, Luna desktop environment, interactive apps, USB stack, kernel rewrite with double buffering, and verified stable build.",
+    icon: Palette,
+    internalLink: "/news/xp-transformation",
+    featured: true,
+  },
+  {
+    id: "commit-c8db812",
+    title: "fix(graphics): address performance issues in VGA Mode 12h rendering",
+    date: "February 6, 2026",
+    type: "Commit",
+    description: "Optimize pixel operations for improved rendering speed in VGA Mode 12h. Refactor graphics driver to enhance efficiency and reduce latency. Implement caching mechanisms for frequently accessed graphics data.",
+    icon: Code2,
+    commitCode: "c8db812",
+    commitUrl: "https://github.com/urmoit/GamerOS/commit/c8db81256d1bbde95dc575a2e5a6ccc139fda86a",
+    featured: true,
+  },
+  {
+    id: "commit-1abf7fb",
+    title: "fix: resolve triple fault and graphics initialization issues",
+    date: "February 6, 2026",
+    type: "Commit",
+    description: "Fix interrupt handling and simplify graphics initialization. IDT entry IST field fix, VGA Mode 12h replaced with simpler VBE modes via GRUB. New serial, USB, and cursor drivers added.",
+    icon: Code2,
+    commitCode: "1abf7fb",
+    commitUrl: "https://github.com/urmoit/GamerOS/commit/1abf7fbeeb7169d215bc79b1215a5d916a261325",
+    featured: true,
+  },
+  {
     id: "xp-impl",
     title: "Implementation Plan: Windows XP Theme & Startup",
     date: "January 28, 2026",
@@ -468,7 +500,7 @@ const News = () => {
 
                     {/* Archive Link */}
                     <Button variant="outline" size="sm" asChild>
-                      <Link to="/news/monthly/january-2026" className="gap-2">
+                      <Link to="/news/monthly/february-2026" className="gap-2">
                         <Calendar className="w-4 h-4" />
                         Monthly Archive
                       </Link>
