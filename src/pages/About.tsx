@@ -22,12 +22,14 @@ import {
 } from "lucide-react";
 
 const currentFeatures = [
-  "Windows 11-style UI (in development)",
-  "Windows app compatibility layer (planned)",
-  "Linux binary support (planned)",
-  "Android APK runtime (planned)",
-  "Modern file manager (planned)",
-  "Settings application (planned)",
+  "VESA 32-bit True Color graphics (1024x768)",
+  "Windows XP Luna Theme desktop environment",
+  "Notepad app with keyboard text input",
+  "Double buffering for flicker-free rendering",
+  "VMware/VirtualBox mouse integration",
+  "USB 1.0-3.0 stack support",
+  "PS/2 keyboard and mouse drivers",
+  "GRUB2 bootloader with Multiboot2",
 ];
 
 const plannedFeatures = [
@@ -42,10 +44,10 @@ const plannedFeatures = [
 
 const techSpecs = [
   { icon: Cpu, title: "Architecture", value: "x86_64" },
-  { icon: Code2, title: "Languages", value: "TBA" },
-  { icon: HardDrive, title: "Bootloader", value: "Custom UEFI" },
-  { icon: Monitor, title: "Graphics", value: "TBA" },
-  { icon: Wrench, title: "Build System", value: "TBA" },
+  { icon: Code2, title: "Languages", value: "C, Assembly" },
+  { icon: HardDrive, title: "Bootloader", value: "GRUB2" },
+  { icon: Monitor, title: "Graphics", value: "VGA 13h, VESA 32-bit" },
+  { icon: Wrench, title: "Build System", value: "Docker + Make" },
   { icon: Scale, title: "License", value: "MIT" },
 ];
 
@@ -73,10 +75,10 @@ const visionPoints = [
 ];
 
 const teamStats = [
-  { value: "TBA", label: "Contributors" },
-  { value: "TBA", label: "Lines of Code" },
-  { value: "TBA", label: "Commits" },
-  { value: "2026", label: "Started" },
+  { value: "1", label: "Core Developer" },
+  { value: "9,100+", label: "Lines of Code" },
+  { value: "13+", label: "Commits" },
+  { value: "Jan 2026", label: "Started" },
 ];
 
 const About = () => {
@@ -131,12 +133,16 @@ const About = () => {
                   </div>
                   <h3 className="text-xl font-semibold">Development Notice</h3>
                 </div>
-                <p className="text-muted-foreground">
-                  GamerOS is currently in early development. We're building the foundational 
-                  components including the kernel, graphics framework, and compatibility layers. 
-                  There are no downloads available yet. Follow our progress and join the community 
-                  to be notified when the first public release becomes available.
+                <p className="text-muted-foreground mb-4">
+                  GamerOS has made significant progress! We now have a working XP-themed desktop 
+                  with VESA graphics, Notepad app, and USB support. We're currently in a 
+                  heavy bug-fixing phase preparing for our first public Alpha release.
                 </p>
+                <Button variant="outline" size="sm" asChild className="mt-2">
+                  <Link to="/news/alpha-release">
+                    Read about the Road to Alpha
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>

@@ -49,6 +49,16 @@ interface NewsItem {
 
 const newsItems: NewsItem[] = [
   {
+    id: "alpha-release",
+    title: "Road to Alpha: Heavy Bug Fix Sprint Begins",
+    date: "February 7, 2026",
+    type: "Announcement",
+    description: "We're entering an intensive bug-fixing phase to resolve every known issue before the first public Alpha release. Focus areas include kernel stability, graphics, input systems, and UI polish.",
+    icon: Rocket,
+    internalLink: "/news/alpha-release",
+    featured: true,
+  },
+  {
     id: "xp-walkthrough",
     title: "Walkthrough - GamerOS: The Windows XP Transformation",
     date: "February 6, 2026",
@@ -88,7 +98,6 @@ const newsItems: NewsItem[] = [
     description: "Detailed implementation plan for transforming the GamerOS UI to resemble Windows XP (Luna Theme), including startup animation, desktop environment, and VM compatibility fixes.",
     icon: Palette,
     internalLink: "/news/xp-implementation",
-    featured: true,
   },
   {
     id: "0",
@@ -100,7 +109,6 @@ const newsItems: NewsItem[] = [
     icon: Code2,
     commitCode: "07d87d3",
     commitUrl: "https://github.com/urmoit/GamerOS/commit/07d87d33d02d67414a5d7052825fcd636154309a",
-    featured: true,
   },
   {
     id: "1",
@@ -112,7 +120,6 @@ const newsItems: NewsItem[] = [
     icon: Code2,
     commitCode: "df1f120",
     commitUrl: "https://github.com/urmoit/GamerOS/commit/df1f120827150086ce6e8ec8eddf9c2876114a9c",
-    featured: true,
   },
   {
     id: "2",
@@ -124,7 +131,6 @@ const newsItems: NewsItem[] = [
     icon: Code2,
     commitCode: "5e16240",
     commitUrl: "https://github.com/urmoit/GamerOS/commit/5e162404ce4538594a882150b7ca466312420e76",
-    featured: true,
   },
   {
     id: "3",
@@ -136,7 +142,6 @@ const newsItems: NewsItem[] = [
     icon: Code2,
     commitCode: "2b860d6",
     commitUrl: "https://github.com/urmoit/GamerOS/commit/2b860d6a1ef736856e217a8e64a6b5c06a089051",
-    featured: true,
   },
   {
     id: "4",
@@ -218,7 +223,6 @@ const newsItems: NewsItem[] = [
     type: "Announcement",
     description: "We've officially started development on GamerOS, a revolutionary operating system that will seamlessly run Windows, Linux, and Android applications.",
     icon: Rocket,
-    featured: true,
   },
   {
     id: "8",

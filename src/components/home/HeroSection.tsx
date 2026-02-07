@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Download, ArrowRight, Monitor, Smartphone, Terminal } from "lucide-react";
+import { Download, ArrowRight, Monitor, Smartphone, Terminal, Rocket, Bug } from "lucide-react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 const HeroSection = () => {
@@ -37,6 +37,23 @@ const HeroSection = () => {
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
+        {/* Alpha Announcement Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.05 }}
+          className="mb-6"
+        >
+          <Link 
+            to="/news/alpha-release"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 text-sm font-medium hover:bg-amber-500/20 transition-colors"
+          >
+            <Rocket className="w-4 h-4" />
+            <span>Road to Alpha: Bug fix sprint in progress</span>
+            <ArrowRight className="w-3 h-3" />
+          </Link>
+        </motion.div>
+
         {/* Badge */}
         <motion.div 
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8"

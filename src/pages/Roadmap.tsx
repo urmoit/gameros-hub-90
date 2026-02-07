@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -26,7 +27,9 @@ import {
   Calendar,
   Flag,
   ArrowRight,
-  Layers
+  Layers,
+  Bug,
+  ArrowLeft
 } from "lucide-react";
 
 type PhaseStatus = "completed" | "in-progress" | "planned";
@@ -164,10 +167,10 @@ const featureRoadmap = [
 
 const milestones = [
   { date: "Jan 2026", title: "Project Start", description: "Initial commit and build system setup", completed: true },
-  { date: "Feb 2026", title: "Boot Success", description: "First successful boot with kernel", completed: false },
-  { date: "Q2 2026", title: "Alpha Release", description: "Basic OS functionality", completed: false },
-  { date: "Q4 2026", title: "Beta Release", description: "App compatibility layers", completed: false },
-  { date: "2027", title: "v1.0 Release", description: "Stable public release", completed: false },
+  { date: "Feb 2026", title: "XP Transformation", description: "VESA 32-bit graphics, Luna desktop, interactive apps", completed: true },
+  { date: "Feb 2026", title: "Alpha Release", description: "Bug fix sprint complete, first public preview", completed: false, isNext: true, link: "/news/alpha-release" },
+  { date: "Q2 2026", title: "Beta Release", description: "App compatibility layers", completed: false },
+  { date: "Q4 2026", title: "v1.0 Release", description: "Stable public release", completed: false },
 ];
 
 const Roadmap = () => {
@@ -325,6 +328,37 @@ const Roadmap = () => {
             </div>
           </section>
 
+          {/* Alpha Banner */}
+          <section className="py-12">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="glass-card p-6 rounded-2xl border-amber-500/20 bg-gradient-to-r from-amber-500/5 to-orange-500/5"
+              >
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shrink-0">
+                      <Bug className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-lg">Road to Alpha</h3>
+                      <p className="text-sm text-muted-foreground">
+                        We're in a heavy bug-fixing phase. Every bug fixed brings us closer to the first public Alpha release.
+                      </p>
+                    </div>
+                  </div>
+                  <Button asChild variant="outline" className="shrink-0">
+                    <Link to="/news/alpha-release" className="gap-2">
+                      Read Update <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </motion.div>
+            </div>
+          </section>
+
           {/* Milestones Timeline */}
           <section className="py-20 bg-secondary/30">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -358,11 +392,16 @@ const Roadmap = () => {
                       <div className={`flex-1 w-full md:w-auto ${i % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
                         <motion.div 
                           whileHover={{ scale: 1.02 }}
-                          className="glass-card p-6 rounded-2xl inline-block max-w-sm"
-                        >
-                          <div className="text-sm text-primary font-semibold mb-2">{milestone.date}</div>
+                          className={`glass-card p-6 rounded-2xl inline-block max-w-sm ${milestone.isNext ? 'border-amber-500/30' : ''}`}
+                      >
+                          <div className={`text-sm font-semibold mb-2 ${milestone.isNext ? 'text-amber-500' : 'text-primary'}`}>{milestone.date}</div>
                           <h3 className="font-bold text-xl mb-2">{milestone.title}</h3>
                           <p className="text-sm text-muted-foreground">{milestone.description}</p>
+                          {milestone.link && (
+                            <Link to={milestone.link} className="inline-flex items-center gap-1 text-sm text-amber-500 hover:underline mt-3">
+                              Learn more <ArrowRight className="w-3 h-3" />
+                            </Link>
+                          )}
                         </motion.div>
                       </div>
                       
@@ -373,11 +412,15 @@ const Roadmap = () => {
                           className={`w-14 h-14 rounded-full flex items-center justify-center shadow-lg ${
                             milestone.completed 
                               ? "bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-emerald-500/30" 
+                              : milestone.isNext
+                              ? "bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-amber-500/30"
                               : "bg-card border-2 border-border shadow-lg"
                           }`}
                         >
                           {milestone.completed ? (
                             <Check className="w-7 h-7" strokeWidth={3} />
+                          ) : milestone.isNext ? (
+                            <Rocket className="w-6 h-6 text-white" />
                           ) : (
                             <Calendar className="w-6 h-6 text-muted-foreground" />
                           )}

@@ -11,7 +11,8 @@ import {
   FileText,
   Clock,
   Rocket,
-  Info
+  Info,
+  Bug
 } from "lucide-react";
 
 const GamerOSChangelog = () => {
@@ -59,57 +60,113 @@ const GamerOSChangelog = () => {
             </div>
           </section>
 
-          {/* Empty State */}
-          <section className="py-20">
-            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Alpha Progress Banner */}
+          <section className="py-8">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="glass-card p-12 rounded-2xl text-center relative overflow-hidden"
+                className="glass-card p-6 rounded-2xl border-amber-500/20 bg-gradient-to-r from-amber-500/5 to-orange-500/5"
               >
-                <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl" />
-                <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl" />
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shrink-0">
+                      <Rocket className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-lg">Pre-Alpha Development</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Currently in heavy bug-fixing phase. Alpha release coming soon.
+                      </p>
+                    </div>
+                  </div>
+                  <Button asChild variant="outline" className="shrink-0">
+                    <Link to="/news/alpha-release" className="gap-2">
+                      Read Update <ArrowLeft className="w-4 h-4 rotate-180" />
+                    </Link>
+                  </Button>
+                </div>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* Development Progress */}
+          <section className="py-12">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <h2 className="text-2xl font-bold mb-6">Development Progress</h2>
                 
-                <div className="relative">
-                  <div className="w-20 h-20 rounded-2xl bg-muted flex items-center justify-center mx-auto mb-6">
-                    <Clock className="w-10 h-10 text-muted-foreground" />
-                  </div>
-                  
-                  <h2 className="text-2xl font-bold mb-4">No Changelog Available Yet</h2>
-                  
-                  <p className="text-muted-foreground max-w-md mx-auto mb-8">
-                    GamerOS is currently in early development. Version history and changelog entries will appear here once we release our first public version.
-                  </p>
-
-                  <div className="glass-card p-4 rounded-xl inline-flex items-start gap-3 text-left max-w-md mx-auto mb-8 border-primary/20">
-                    <Info className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <p className="text-sm text-muted-foreground">
-                      Development is actively ongoing. Follow our{" "}
-                      <Link to="/news" className="text-primary hover:underline">News page</Link>
-                      {" "}for the latest commits and updates.
+                <div className="space-y-4">
+                  {/* Latest Update */}
+                  <div className="glass-card p-6 rounded-2xl border-l-4 border-l-amber-500">
+                    <div className="flex items-start justify-between mb-3">
+                      <div>
+                        <Badge className="mb-2 bg-amber-500/10 text-amber-500 border-amber-500/20">In Progress</Badge>
+                        <h3 className="text-xl font-semibold">Road to Alpha</h3>
+                        <p className="text-sm text-muted-foreground">February 7, 2026</p>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-2xl font-bold text-amber-500">65%</span>
+                        <p className="text-xs text-muted-foreground">Complete</p>
+                      </div>
+                    </div>
+                    <p className="text-muted-foreground mb-4">
+                      Entering heavy bug-fixing phase to resolve every known issue before the first public Alpha release.
+                      Focus areas: kernel stability, graphics, input systems, and UI polish.
                     </p>
+                    <div className="grid sm:grid-cols-2 gap-3 text-sm">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                        <span>VESA 32-bit graphics</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                        <span>XP Luna desktop</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                        <span>Notepad app</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                        <span>USB 1.0-3.0 stack</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-yellow-500" />
+                        <span>Bug fixes in progress</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-yellow-500" />
+                        <span>Alpha release pending</span>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="flex flex-wrap justify-center gap-4">
-                    <Button asChild>
-                      <a href="https://github.com/urmoit/GamerOS" target="_blank" rel="noopener noreferrer">
-                        <GitCommit className="w-4 h-4 mr-2" />
-                        View GitHub
-                      </a>
-                    </Button>
-                    <Button variant="outline" asChild>
-                      <Link to="/roadmap">
-                        <Rocket className="w-4 h-4 mr-2" />
-                        View Roadmap
-                      </Link>
-                    </Button>
-                    <Button variant="outline" asChild>
-                      <Link to="/changelog">
-                        <FileText className="w-4 h-4 mr-2" />
-                        Website Changelog
-                      </Link>
-                    </Button>
+                  {/* Previous Milestone */}
+                  <div className="glass-card p-6 rounded-2xl border-l-4 border-l-emerald-500">
+                    <div className="flex items-start justify-between mb-3">
+                      <div>
+                        <Badge className="mb-2 bg-emerald-500/10 text-emerald-500 border-emerald-500/20">Completed</Badge>
+                        <h3 className="text-xl font-semibold">Windows XP Transformation</h3>
+                        <p className="text-sm text-muted-foreground">February 6, 2026</p>
+                      </div>
+                    </div>
+                    <p className="text-muted-foreground mb-4">
+                      Major architectural upgrade completed. Transitioned from legacy 16-color VGA to modern 32-bit VESA,
+                      implemented XP Luna desktop environment with Notepad app, and added USB stack support.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="outline">VESA True Color</Badge>
+                      <Badge variant="outline">Double Buffering</Badge>
+                      <Badge variant="outline">VMware Mouse</Badge>
+                      <Badge variant="outline">USB Support</Badge>
+                      <Badge variant="outline">Kernel Rewrite</Badge>
+                    </div>
                   </div>
                 </div>
               </motion.div>

@@ -44,6 +44,21 @@ interface Version {
 
 const changelogData: Version[] = [
   {
+    version: "1.6.1",
+    date: "February 7, 2026",
+    title: "Road to Alpha & Site Updates",
+    description: "Added new 'Road to Alpha' announcement, updated Featured section to show only 4 latest news, refreshed About page with current stats.",
+    changes: [
+      { type: "feature", description: "Created 'Road to Alpha: Heavy Bug Fix Sprint Begins' news page", component: "News" },
+      { type: "feature", description: "Redesigned GamerOS Changelog with Alpha progress and development milestones", component: "GamerOS Changelog" },
+      { type: "improvement", description: "Updated Featured section to display only 4 latest news items", component: "News" },
+      { type: "improvement", description: "Updated About page: LOC 9,100+, 13+ commits, C/Assembly languages", component: "About" },
+      { type: "improvement", description: "Added Alpha banner to Roadmap page with link to news", component: "Roadmap" },
+      { type: "improvement", description: "Updated Download page with Alpha release info", component: "Download" },
+      { type: "improvement", description: "Added Alpha announcement banner to Homepage hero", component: "Home" },
+    ],
+  },
+  {
     version: "1.6.0",
     date: "February 6, 2026",
     title: "February Updates & XP Transformation Walkthrough",
@@ -64,7 +79,7 @@ const changelogData: Version[] = [
     description: "Updated VM platform support, homepage statistics, and roadmap progress.",
     changes: [
       { type: "feature", description: "Added VMware, VirtualBox, and QEMU as supported platforms", component: "Download" },
-      { type: "improvement", description: "Updated homepage lines of code to 8,000+", component: "Home" },
+      { type: "improvement", description: "Updated homepage lines of code to 9,100+", component: "Home" },
       { type: "improvement", description: "Marked Roadmap Phase 1 as completed (100%)", component: "Roadmap" },
       { type: "improvement", description: "Redesigned XP Implementation page with progress tracker", component: "News" },
       { type: "improvement", description: "Redesigned Bug Tracking page with native components", component: "Bug Tracking" },

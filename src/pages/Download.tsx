@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { 
   Download as DownloadIcon, 
   Monitor, 
@@ -12,7 +13,10 @@ import {
   Box,
   Clock,
   Bell,
-  GitCommit
+  GitCommit,
+  Rocket,
+  ArrowRight,
+  Bug
 } from "lucide-react";
 
 const requirements = {
@@ -61,20 +65,25 @@ const Download = () => {
           </div>
         </section>
 
-        {/* Coming Soon Section */}
+        {/* Alpha Coming Soon Section */}
         <section className="py-16 bg-secondary/30">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="glass-card p-12 text-center relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent/10 rounded-full blur-3xl" />
+            <div className="glass-card p-12 text-center relative overflow-hidden border-amber-500/20">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl" />
               
               <div className="relative">
-                <div className="w-24 h-24 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                  <Clock className="w-12 h-12 text-primary" />
+                <Badge className="mb-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0">
+                  <Rocket className="w-3 h-3 mr-1" />
+                  Alpha Coming Soon
+                </Badge>
+                <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center mx-auto mb-6">
+                  <Bug className="w-12 h-12 text-white" />
                 </div>
-                <h2 className="text-3xl font-bold mb-4">Coming Soon</h2>
+                <h2 className="text-3xl font-bold mb-4">Heavy Bug Fix Sprint</h2>
                 <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
-                  GamerOS is currently in active development. We're building something special that will revolutionize how you use your computer. The first public release will be available soon.
+                  We're fixing every known bug to ensure a stable first Alpha release. 
+                  The Alpha will include the XP-themed desktop, basic apps, and full virtualization support.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -82,17 +91,26 @@ const Download = () => {
                     <DownloadIcon className="w-5 h-5 mr-2" />
                     Download Not Available
                   </Button>
-                  <Button size="lg" variant="outline" className="min-w-[200px]">
-                    <Bell className="w-5 h-5 mr-2" />
-                    Get Notified
+                  <Button size="lg" variant="outline" className="min-w-[200px]" asChild>
+                    <Link to="/news/alpha-release" className="gap-2">
+                      <Rocket className="w-5 h-5" />
+                      Read Alpha Update
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
                   </Button>
                 </div>
                 
-                <div className="mt-6">
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
                   <Button variant="ghost" size="sm" asChild>
                     <Link to="/gameros-changelog" className="gap-2">
                       <GitCommit className="w-4 h-4" />
                       View GamerOS Changelog
+                    </Link>
+                  </Button>
+                  <Button variant="ghost" size="sm" asChild>
+                    <Link to="/roadmap" className="gap-2">
+                      <Clock className="w-4 h-4" />
+                      View Roadmap
                     </Link>
                   </Button>
                 </div>
