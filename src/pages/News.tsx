@@ -74,10 +74,10 @@ const newsItems: NewsItem[] = [
   },
   {
     id: "alpha-release",
-    title: "Road to Alpha: Heavy Bug Fix Sprint Begins",
-    date: "February 7, 2026",
+    title: "Alpha Released: 00m1-alpha (Build 1.100)",
+    date: "February 10, 2026",
     type: "Announcement",
-    description: "We're entering an intensive bug-fixing phase to resolve every known issue before the first public Alpha release. Focus areas include kernel stability, graphics, input systems, and UI polish.",
+    description: "First public alpha is available with XP-style shell, Notepad app, VMware hardening, and broad kernel/input fixes.",
     icon: Rocket,
     internalLink: "/news/alpha-release",
     featured: true,
@@ -258,10 +258,10 @@ const newsItems: NewsItem[] = [
   },
   {
     id: "9",
-    title: "Looking for Contributors",
+    title: "Community Update",
     date: "January 2026",
     type: "Community",
-    description: "We're actively seeking contributors in kernel development, UI design, documentation, and testing. All skill levels welcome!",
+    description: "Current focus is on testing, bug triage, and release validation across supported virtual machines.",
     icon: Users,
   },
 ];
@@ -360,7 +360,10 @@ const News = () => {
     return items;
   }, [searchQuery, activeFilter, sortOrder]);
 
-  const featuredItems = newsItems.filter((item) => item.featured);
+  const featuredItems = [...newsItems]
+    .filter((item) => item.featured)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 4);
   const stats = {
     total: newsItems.length,
     commits: newsItems.filter((i) => i.type === "Commit").length,
@@ -834,7 +837,7 @@ const News = () => {
                   <Gamepad2 className="w-10 h-10 text-white" />
                 </motion.div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  <span className="text-gaming">Want to Contribute?</span>
+                  <span className="text-gaming">Release Status</span>
                 </h2>
                 <p className="text-white/60 mb-8 max-w-lg mx-auto text-lg">
                   GamerOS is open source and we welcome contributions from developers of all skill levels.
@@ -884,3 +887,4 @@ const News = () => {
 };
 
 export default News;
+

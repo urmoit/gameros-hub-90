@@ -13,7 +13,6 @@ import BugFixPass from "./pages/news/BugFixPass";
 import AlphaRelease from "./pages/news/AlphaRelease";
 import MonthlyNews from "./pages/MonthlyNews";
 import Download from "./pages/Download";
-import BugTracking from "./pages/BugTracking";
 import AllVersions from "./pages/AllVersions";
 import Changelog from "./pages/Changelog";
 import GamerOSChangelog from "./pages/GamerOSChangelog";
@@ -37,7 +36,6 @@ const App = () => (
           <Route path="/changelog" element={<Changelog />} />
           <Route path="/gameros-changelog" element={<GamerOSChangelog />} />
           <Route path="/download" element={<Download />} />
-          <Route path="/bug-tracking" element={<BugTracking />} />
           <Route path="/all-versions" element={<AllVersions />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/news/xp-implementation" element={<XPImplementation />} />

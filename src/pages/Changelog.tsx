@@ -46,6 +46,26 @@ interface Version {
 
 const changelogData: Version[] = [
   {
+    version: "2.2.0",
+    date: "February 13, 2026",
+    title: "00m1-alpha Release Content Update",
+    description: "Updated website pages to reflect the first public alpha release, synced archive/news data, and remade roadmap/navigation structure.",
+    changes: [
+      { type: "feature", description: "Published full GamerOS 00m1-alpha release changelog with build 1.100 details", component: "GamerOS Changelog" },
+      { type: "feature", description: "Added direct ISO download link to release asset", component: "Download" },
+      { type: "feature", description: "Remade Roadmap page layout with release lanes, milestone rail, and focus matrix", component: "Roadmap" },
+      { type: "improvement", description: "Removed Development Phases section from roadmap", component: "Roadmap" },
+      { type: "improvement", description: "Updated roadmap and milestone status to show alpha as released", component: "Roadmap" },
+      { type: "fix", description: "Removed Bug Tracking page route/component and all links to /bug-tracking", component: "Router/Navigation" },
+      { type: "improvement", description: "Updated homepage and about stats to 8,600+ LOC", component: "Home/About" },
+      { type: "improvement", description: "Updated header/footer release messaging for 00m1-alpha", component: "Layout" },
+      { type: "improvement", description: "Updated February monthly archive with latest release and website sync entries", component: "Monthly News" },
+      { type: "fix", description: "Limited News Featured section to only the latest 4 featured posts", component: "News" },
+      { type: "fix", description: "Changed alpha release announcement card date to February 10, 2026", component: "News" },
+      { type: "fix", description: "Removed contributor-focused sections and prompts from public pages", component: "Site Content" },
+    ],
+  },
+  {
     version: "2.1.0",
     date: "February 13, 2026",
     title: "Alpha Release Walkthrough & Bug Tracking Overhaul",
@@ -634,10 +654,10 @@ const Changelog = () => {
                 </div>
 
                 <h2 className="text-3xl font-bold mb-4 text-white">
-                  Join the <span className="text-gaming">Development</span>
+                  Track the <span className="text-gaming">Release</span>
                 </h2>
                 <p className="text-gray-400 mb-8 max-w-lg mx-auto leading-relaxed">
-                  Follow our GitHub repository to get notified about the latest updates, contribute to the project, and be part of the GamerOS community.
+                  Follow the website changelog and GamerOS release notes for each new update.
                 </p>
                 
                 <Button 
@@ -656,14 +676,14 @@ const Changelog = () => {
                   <div className="text-center">
                     <div className="flex items-center justify-center gap-1.5 text-[hsl(180_100%_50%)] mb-1">
                       <GitCommit className="w-4 h-4" />
-                      <span className="font-bold">13+</span>
+                      <span className="font-bold">1.100</span>
                     </div>
-                    <span className="text-xs text-gray-500">Commits</span>
+                    <span className="text-xs text-gray-500">Build</span>
                   </div>
                   <div className="text-center">
                     <div className="flex items-center justify-center gap-1.5 text-[hsl(280_100%_60%)] mb-1">
                       <Code2 className="w-4 h-4" />
-                      <span className="font-bold">9.1k+</span>
+                      <span className="font-bold">8.6k+</span>
                     </div>
                     <span className="text-xs text-gray-500">Lines of Code</span>
                   </div>

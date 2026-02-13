@@ -24,18 +24,20 @@ import {
 
 const requirements = {
   minimum: [
-    { label: "Processor", value: "Unknown" },
-    { label: "Memory", value: "Unknown" },
-    { label: "Storage", value: "Unknown" },
-    { label: "Graphics", value: "Unknown" },
-    { label: "Boot", value: "Unknown" },
+    { label: "CPU", value: "x86_64 (64-bit), 1 core" },
+    { label: "RAM", value: "128 MB" },
+    { label: "Storage", value: "64 MB free (ISO + temp disk)" },
+    { label: "Graphics", value: "VGA-compatible (mode 13h path)" },
+    { label: "Input", value: "PS/2 keyboard + mouse (or VM emulation)" },
+    { label: "Boot", value: "BIOS/Legacy boot via GRUB (Multiboot)" },
   ],
   recommended: [
-    { label: "Processor", value: "Unknown" },
-    { label: "Memory", value: "Unknown" },
-    { label: "Storage", value: "Unknown" },
-    { label: "Graphics", value: "Unknown" },
-    { label: "Boot", value: "Unknown" },
+    { label: "CPU", value: "x86_64, 2 cores" },
+    { label: "RAM", value: "512 MB" },
+    { label: "Storage", value: "1 GB virtual disk" },
+    { label: "Graphics", value: "VMware/QEMU default virtual VGA" },
+    { label: "Input", value: "USB mouse integration enabled in VM" },
+    { label: "Boot", value: "GRUB from ISO in VMware Workstation or QEMU" },
   ],
 };
 
@@ -72,8 +74,8 @@ const Download = () => {
             </h1>
             
             <p className="text-xl text-white/60 max-w-3xl mx-auto leading-relaxed">
-              We're working hard to bring you the next generation operating system. 
-              <span className="text-[hsl(180_100%_50%)]"> Stay tuned</span> for updates!
+              The first public alpha is available now.
+              <span className="text-[hsl(180_100%_50%)]"> Download 00m1-alpha</span> and test in VMware, VirtualBox, or QEMU.
             </p>
             
             {/* Decorative Line */}
@@ -85,7 +87,7 @@ const Download = () => {
           </div>
         </section>
 
-        {/* Alpha Coming Soon Section */}
+        {/* Alpha Release Section */}
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="glass-card p-12 text-center relative overflow-hidden group">
@@ -96,39 +98,41 @@ const Download = () => {
               <div className="relative z-10">
                 <Badge className="mb-6 bg-gradient-to-r from-[hsl(280_100%_60%)] to-[hsl(320_100%_60%)] text-white border-0 shadow-lg shadow-[hsl(280_100%_60%)]/30 px-4 py-1.5">
                   <Rocket className="w-4 h-4 mr-2 animate-bounce" />
-                  Alpha Coming Soon
+                  Alpha Released
                 </Badge>
                 
                 <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-[hsl(180_100%_50%)] to-[hsl(280_100%_60%)] flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-[hsl(180_100%_50%)]/30 group-hover:scale-105 transition-transform duration-500">
                   <Bug className="w-14 h-14 text-[hsl(225_25%_6%)]" />
                 </div>
                 
-                <h2 className="text-4xl font-bold mb-4 text-white">Heavy Bug Fix Sprint</h2>
+                <h2 className="text-4xl font-bold mb-4 text-white">First Alpha Release</h2>
                 
                 <p className="text-lg text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed">
-                  We're fixing every known bug to ensure a stable first Alpha release. 
-                  The Alpha will include the <span className="text-[hsl(180_100%_50%)] font-medium">XP-themed desktop</span>, 
-                  <span className="text-[hsl(280_100%_60%)] font-medium"> basic apps</span>, and 
-                  <span className="text-[hsl(320_100%_60%)] font-medium"> full virtualization support</span>.
+                  GamerOS <span className="text-[hsl(180_100%_50%)] font-medium">00m1-alpha</span> (Build 1.100) includes the
+                  <span className="text-[hsl(280_100%_60%)] font-medium"> XP-style shell</span>,
+                  <span className="text-[hsl(320_100%_60%)] font-medium"> Notepad</span>, and
+                  VMware stability hardening.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-                  <Button 
-                    size="lg" 
-                    disabled 
-                    className="min-w-[220px] bg-white/5 border border-white/10 text-white/40 cursor-not-allowed hover:bg-white/5"
+                  <Button
+                    size="lg"
+                    asChild
+                    className="min-w-[220px] btn-neon border-0"
                   >
+                    <a href="https://github.com/urmoit/gameros-hub-90/releases/download/00m1-alpha-Release-1/GamerOS-00m1-alpha-Release-1.iso" target="_blank" rel="noopener noreferrer">
                     <DownloadIcon className="w-5 h-5 mr-2" />
-                    Download Not Available
+                    Download ISO
+                    </a>
                   </Button>
                   <Button 
                     size="lg" 
                     className="min-w-[220px] btn-neon gap-2 group/btn" 
                     asChild
                   >
-                    <Link to="/news/alpha-release">
+                    <Link to="/gameros-changelog">
                       <Rocket className="w-5 h-5 group-hover/btn:animate-bounce" />
-                      Read Alpha Update
+                      Read Alpha Changelog
                       <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
                   </Button>
@@ -171,7 +175,7 @@ const Download = () => {
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold mb-4 text-gaming-alt">System Requirements</h2>
               <p className="text-white/60">
-                System requirements will be announced closer to release
+                Alpha requirements are still being validated across test VMs
               </p>
             </div>
             
@@ -328,11 +332,11 @@ const Download = () => {
                 </h3>
                 
                 <p className="text-white/50 mb-6 leading-relaxed">
-                  Coming soon - download instructions will be available here.
+                  Download the official alpha ISO from the release link above.
                 </p>
                 
                 <code className="block p-4 rounded-xl bg-black/40 border border-[hsl(180_100%_50%)]/20 text-xs overflow-x-auto text-[hsl(180_100%_50%)]/70 font-mono">
-                  gameros-x64.iso
+                  GamerOS-00m1-alpha-Release-1.iso
                   <span className="animate-pulse">_</span>
                 </code>
               </div>
@@ -351,11 +355,11 @@ const Download = () => {
                 </h3>
                 
                 <p className="text-white/50 mb-6 leading-relaxed">
-                  Coming soon - VM setup instructions will be available here.
+                  Create a VM and attach the ISO as the boot media.
                 </p>
                 
                 <code className="block p-4 rounded-xl bg-black/40 border border-[hsl(280_100%_60%)]/20 text-xs overflow-x-auto text-[hsl(280_100%_60%)]/70 font-mono">
-                  Requirements TBA
+                  VMware/VirtualBox/QEMU
                 </code>
               </div>
 
@@ -373,11 +377,11 @@ const Download = () => {
                 </h3>
                 
                 <p className="text-white/50 mb-6 leading-relaxed">
-                  Coming soon - boot instructions will be available here.
+                  Boot and test XP shell, Notepad, and input stability improvements.
                 </p>
                 
                 <code className="block p-4 rounded-xl bg-black/40 border border-[hsl(320_100%_60%)]/20 text-xs overflow-x-auto text-[hsl(320_100%_60%)]/70 font-mono">
-                  Stay tuned<span className="animate-pulse">...</span>
+                  Release build 1.100
                 </code>
               </div>
             </div>
@@ -394,7 +398,7 @@ const Download = () => {
                 <Bell className="w-12 h-12 text-[hsl(180_100%_50%)] mx-auto mb-6" />
                 <h2 className="text-3xl font-bold mb-4 text-white">Get Notified</h2>
                 <p className="text-white/60 mb-8">
-                  Be the first to know when GamerOS Alpha is available for download.
+                  Follow release updates and changelogs for upcoming patches.
                 </p>
                 <Button 
                   size="lg" 

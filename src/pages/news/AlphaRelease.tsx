@@ -159,7 +159,7 @@ const AlphaRelease = () => {
                     className="border-purple-500/50 bg-purple-500/10 text-purple-300 px-3 py-1"
                   >
                     <Rocket className="w-3.5 h-3.5 mr-1" />
-                    Alpha Coming Soon
+                    Alpha Released
                   </Badge>
                   <span className="text-sm text-white/50 flex items-center gap-1.5">
                     <Calendar className="w-3.5 h-3.5" />
@@ -175,8 +175,7 @@ const AlphaRelease = () => {
                 </h1>
 
                 <p className="text-xl text-white/60 max-w-3xl mb-10">
-                  We're entering a heavy bug-fixing phase to resolve every known issue before 
-                  the first public Alpha. Every bug fixed brings us closer to a stable release.
+                  We're entering a the first alpha release has shipped. Current focus is stabilization, validation, and polish for the next patch cycle.
                 </p>
 
                 {/* Progress Overview */}
@@ -418,7 +417,7 @@ const AlphaRelease = () => {
                     <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
                     <p className="text-sm text-amber-200/80">
                       <strong className="text-amber-400">Note:</strong> Alpha means "feature incomplete but stable." Expect bugs, 
-                      missing features, and rough edges. It's a preview for brave testers and contributors.
+                      missing features, and rough edges. It's an early preview intended for testing and validation.
                     </p>
                   </div>
                 </div>
@@ -447,7 +446,7 @@ const AlphaRelease = () => {
                   Want to <span className="text-gaming-alt">Help?</span>
                 </h2>
                 <p className="text-white/50 mb-10 max-w-xl mx-auto">
-                  We're looking for testers, bug reporters, and contributors. 
+                  We're looking for testers and bug reporters. 
                   Join us on GitHub to track progress and get notified when Alpha drops.
                 </p>
                 
@@ -491,3 +490,4 @@ const AlphaRelease = () => {
 };
 
 export default AlphaRelease;
+

@@ -54,8 +54,14 @@ const monthlyNewsData: Record<string, MonthData> = {
   "february-2026": {
     month: "February",
     year: "2026",
-    summary: "Massive stabilization pass with 33 fixes across kernel, graphics, drivers, and desktop shell. 11 major bugs resolved, VMware hardening, and comprehensive walkthrough of the XP transformation.",
+    summary: "Alpha release month with major stabilization, release publishing, and broad website content/layout updates to match 00m1-alpha.",
     highlights: [
+      "Published first public alpha release: 00m1-alpha (Build 1.100)",
+      "Published full GamerOS release changelog with structured version view",
+      "Remade Roadmap page layout and removed Development Phases section",
+      "Removed Bug Tracking page and all links/routes to it",
+      "Updated News Featured section to show only 4 latest entries",
+      "Adjusted alpha release announcement date in News to February 10, 2026",
       "33 fixes applied in comprehensive src bug fix pass",
       "11 significant bugs marked as resolved",
       "VMware stability improvements with interrupt hardening",
@@ -67,6 +73,27 @@ const monthlyNewsData: Record<string, MonthData> = {
       "Added new serial, USB, and cursor drivers",
     ],
     items: [
+      {
+        title: "Website Sync: 00m1-alpha rollout and navigation cleanup",
+        date: "February 13, 2026",
+        type: "Announcement",
+        description: "Updated website content to match the alpha release: roadmap layout remake, bug page removal, release messaging updates, and changelog synchronization.",
+        commitUrl: "/changelog",
+      },
+      {
+        title: "Roadmap page remade with new release-track layout",
+        date: "February 13, 2026",
+        type: "Announcement",
+        description: "Replaced roadmap structure with new release lanes, milestone rail, and priority focus matrix. Removed old Development Phases section.",
+        commitUrl: "/roadmap",
+      },
+      {
+        title: "News feed updated for alpha launch visibility",
+        date: "February 10, 2026",
+        type: "Announcement",
+        description: "Set alpha-release card date to February 10, 2026 and limited Featured section to the 4 latest entries.",
+        commitUrl: "/news",
+      },
       {
         title: "Alpha Release: Comprehensive src Bug Fix Pass",
         date: "February 13, 2026",
@@ -229,10 +256,10 @@ const monthlyNewsData: Record<string, MonthData> = {
         description: "GamerOS will be fully open source under the MIT license. We believe in transparency and community-driven development. All code, documentation, and assets will be available on GitHub.",
       },
       {
-        title: "Looking for Contributors",
+        title: "Community Update",
         date: "January 2026",
         type: "Community",
-        description: "We're actively seeking contributors in kernel development, UI design, documentation, and testing. All skill levels welcome! Whether you're an experienced OS developer or just getting started, there's a place for you.",
+        description: "Current focus is on testing, bug triage, and release validation across supported virtual machines.",
       },
     ],
   },
@@ -884,7 +911,7 @@ const MonthlyNews = () => {
                 </h2>
                 
                 <p className="text-white/60 mb-10 max-w-lg mx-auto text-lg">
-                  Contribute to GamerOS and help shape the future of gaming operating systems. Every commit counts!
+                  Track release updates and testing status across the GamerOS roadmap and changelog.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -902,9 +929,9 @@ const MonthlyNews = () => {
                   </Button>
                   
                   <Button variant="outline" size="lg" asChild className="border-white/20 text-white/80 hover:bg-white/10 hover:border-cyan-500/50 hover:text-cyan-400 px-8 py-6 text-base">
-                    <Link to="/bug-tracking" className="gap-2">
+                    <Link to="/gameros-changelog" className="gap-2">
                       <MessageSquare className="w-5 h-5" />
-                      View Bug Tracker
+                      View Changelog
                     </Link>
                   </Button>
                 </div>
@@ -920,3 +947,4 @@ const MonthlyNews = () => {
 };
 
 export default MonthlyNews;
+

@@ -347,9 +347,9 @@ const BugFixPass = () => {
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button size="lg" className="btn-neon gap-2" asChild>
-                  <Link to="/bug-tracking">
+                  <Link to="/gameros-changelog">
                     <Bug className="w-5 h-5" />
-                    View Bug Tracker
+                    View Changelog
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" className="gap-2 border-white/20 hover:border-purple-400/50 hover:bg-purple-400/10" asChild>

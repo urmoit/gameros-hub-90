@@ -12,7 +12,6 @@ import {
   Mail,
   Gamepad2,
   Zap,
-  Users,
   Cpu
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -49,7 +48,7 @@ const faqCategories = [
     questions: [
       {
         q: "When will GamerOS be released?",
-        a: "We don't have a fixed release date yet. Development is ongoing, and we're focused on building a solid foundation rather than rushing to release. Follow our News page and join our community to stay updated on progress."
+        a: "The first alpha release is out: 00m1-alpha (Build 1.100), published on February 13, 2026. You can download it from the Download page and follow updates in the GamerOS changelog."
       },
       {
         q: "What programming languages is GamerOS built with?",
@@ -62,29 +61,6 @@ const faqCategories = [
       {
         q: "What are the system requirements?",
         a: "System requirements are still being determined as we develop the OS. Once we have a clearer picture of performance characteristics, we'll publish minimum and recommended specifications."
-      },
-    ]
-  },
-  {
-    title: "Contributing",
-    icon: Users,
-    color: "pink",
-    questions: [
-      {
-        q: "How can I contribute to GamerOS?",
-        a: "There are many ways to contribute! You can help with kernel development, UI design, documentation, testing, or community support. Visit our GitHub repository to get started, or join our Discord community to connect with other contributors."
-      },
-      {
-        q: "Do I need experience to contribute?",
-        a: "No! We welcome contributors of all skill levels. Whether you're an experienced kernel developer or just getting started with programming, there's a place for you. Documentation, testing, and community support are great ways to contribute without deep technical knowledge."
-      },
-      {
-        q: "Is there a code of conduct?",
-        a: "Yes, we maintain a welcoming and inclusive community. We expect all contributors to treat each other with respect and follow our community guidelines. Details are available in our GitHub repository."
-      },
-      {
-        q: "How do I report bugs or suggest features?",
-        a: "You can report bugs and suggest features through our GitHub issues. Please check existing issues first to avoid duplicates, and provide as much detail as possible when creating new ones."
       },
     ]
   },

@@ -1,23 +1,23 @@
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { StaggerContainer, StaggerItem } from "@/components/ui/StaggerContainer";
-import { BarChart3, GitCommit, Users, Calendar } from "lucide-react";
+import { BarChart3, GitCommit, Calendar, Rocket } from "lucide-react";
 
 const stats = [
   { 
-    value: "TBA", 
+    value: "00m1-alpha", 
     label: "Releases",
-    icon: BarChart3,
+    icon: Rocket,
     color: "cyan",
   },
   { 
-    value: "TBA", 
-    label: "Contributors",
-    icon: Users,
+    value: "1.100", 
+    label: "Build",
+    icon: BarChart3,
     color: "purple",
   },
   { 
-    value: "9,100+", 
+    value: "8,600+", 
     label: "Lines of Code",
     icon: GitCommit,
     color: "pink",

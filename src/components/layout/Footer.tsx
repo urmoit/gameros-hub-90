@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import { Github, Coffee, FileText, Gamepad2, Heart, Twitter } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -14,9 +14,7 @@ const Footer = () => {
     ],
     resources: [
       { name: "Download", path: "/download" },
-      { name: "FAQ", path: "/faq" },
-      { name: "Bug Tracking", path: "/bug-tracking" },
-      { name: "Documentation", href: "https://github.com/urmoit/GamerOS" },
+      { name: "FAQ", path: "/faq" },      { name: "Documentation", href: "https://github.com/urmoit/GamerOS" },
       { name: "Website Changelog", path: "/changelog", icon: FileText },
     ],
     social: [
@@ -164,8 +162,8 @@ const Footer = () => {
               ))}
             </div>
             <div className="p-4 rounded-xl bg-gradient-to-br from-cyan-400/10 to-purple-600/10 border border-white/5">
-              <p className="text-xs text-muted-foreground mb-2">Join the development</p>
-              <p className="text-sm font-medium text-foreground">We're looking for contributors!</p>
+              <p className="text-xs text-muted-foreground mb-2">Current release</p>
+              <p className="text-sm font-medium text-foreground">00m1-alpha (Build 1.100)</p>
             </div>
           </motion.div>
         </div>
@@ -190,7 +188,7 @@ const Footer = () => {
             <Link to="/changelog" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               Changelog
             </Link>
-            <span className="text-xs text-cyan-400/60 font-mono">v1.6.1</span>
+            <span className="text-xs text-cyan-400/60 font-mono">00m1-alpha</span>
           </div>
         </motion.div>
       </div>
@@ -199,3 +197,5 @@ const Footer = () => {
 };
 
 export default Footer;
+
+

@@ -10,7 +10,6 @@ const navItems = [
   { name: "About", path: "/about" },
   { name: "Roadmap", path: "/roadmap" },
   { name: "News", path: "/news" },
-  { name: "Bugs", path: "/bug-tracking" },
   { name: "Download", path: "/download" },
 ];
 
@@ -37,7 +36,7 @@ const Header = () => {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
           </span>
           <p className="text-xs font-medium text-amber-400 text-center">
-            Alpha Release Coming Soon — Currently in heavy bug-fixing phase
+            Alpha is out: 00m1-alpha (Build 1.100)
           </p>
         </div>
       </div>
@@ -212,3 +211,4 @@ const Header = () => {
 };
 
 export default Header;
+

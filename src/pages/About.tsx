@@ -15,12 +15,9 @@ import {
   AlertTriangle,
   Zap,
   Clock,
-  Users,
-  Heart,
   Target,
   Sparkles,
   ArrowRight,
-  Github,
   Gamepad2,
   Rocket
 } from "lucide-react";
@@ -75,17 +72,17 @@ const visionPoints = [
     color: "pink",
   },
   {
-    icon: Users,
-    title: "Community Driven",
-    description: "Open source and built by the community, for the community.",
+    icon: Rocket,
+    title: "Release Focused",
+    description: "Each milestone prioritizes stability, usability, and clear release notes.",
     color: "cyan",
   },
 ];
 
 const teamStats = [
   { value: "1", label: "Core Developer", color: "cyan" },
-  { value: "9,100+", label: "Lines of Code", color: "purple" },
-  { value: "13+", label: "Commits", color: "pink" },
+  { value: "8,600+", label: "Lines of Code", color: "purple" },
+  { value: "1.100", label: "Build", color: "pink" },
   { value: "Jan 2026", label: "Started", color: "cyan" },
 ];
 
@@ -176,12 +173,12 @@ const About = () => {
                   </div>
                   <p className="text-muted-foreground mb-4">
                     GamerOS has made significant progress! We now have a working XP-themed desktop 
-                    with VESA graphics, Notepad app, and USB support. We're currently in a 
-                    heavy bug-fixing phase preparing for our first public Alpha release.
+                    with VESA graphics, Notepad app, and USB support. The first alpha release
+                    is now available as <span className="text-amber-400 font-medium">00m1-alpha</span> (Build 1.100).
                   </p>
                   <Button variant="outline" size="sm" asChild className="mt-2 border-amber-400/30 hover:bg-amber-400/10 hover:text-amber-400">
-                    <Link to="/news/alpha-release">
-                      Read about the Road to Alpha
+                    <Link to="/gameros-changelog">
+                      Read Alpha Changelog
                     </Link>
                   </Button>
                 </div>
@@ -347,7 +344,7 @@ const About = () => {
           </div>
         </section>
 
-        {/* Get Involved */}
+        {/* Release Links */}
         <section className="section-padding relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent" />
           <div className="container-gaming relative">
@@ -361,28 +358,21 @@ const About = () => {
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl" />
               
               <div className="relative z-10">
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  <Heart className="w-16 h-16 text-pink-500 mx-auto mb-6 fill-pink-500/20" />
-                </motion.div>
                 <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-                  Join the <span className="text-gaming-alt">Journey</span>
+                  Alpha <span className="text-gaming-alt">Release</span>
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-                  GamerOS is open source and welcomes contributors of all skill levels. 
-                  Whether you're a kernel developer, UI designer, documentation writer, or just 
-                  passionate about operating systems, we'd love to have you on board.
+                  Download `00m1-alpha`, review release notes, and follow the next milestones.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <Button size="lg" className="btn-neon border-0">
-                    <Github className="w-5 h-5 mr-2" />
-                    <span className="relative z-10">Contribute on GitHub</span>
+                  <Button size="lg" className="btn-neon border-0" asChild>
+                    <a href="https://github.com/urmoit/gameros-hub-90/releases/download/00m1-alpha-Release-1/GamerOS-00m1-alpha-Release-1.iso" target="_blank" rel="noopener noreferrer">
+                      <span className="relative z-10">Download ISO</span>
+                    </a>
                   </Button>
                   <Button size="lg" variant="outline" asChild className="border-2 border-white/20 hover:border-purple-400/50 hover:bg-purple-400/10">
-                    <Link to="/roadmap">
-                      View Roadmap
+                    <Link to="/gameros-changelog">
+                      View Changelog
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Link>
                   </Button>
