@@ -46,6 +46,20 @@ interface Version {
 
 const changelogData: Version[] = [
   {
+    version: "2.1.0",
+    date: "February 13, 2026",
+    title: "Alpha Release Walkthrough & Bug Tracking Overhaul",
+    description: "Added comprehensive bug fix pass walkthrough page, updated bug tracking with 20 resolved bugs, added new commit to news and monthly archive.",
+    changes: [
+      { type: "feature", description: "Created 'Alpha Release: src Bug Fix Pass' walkthrough page with 33 fixes documented", component: "News" },
+      { type: "feature", description: "Added new commit (6270119) - VMware stability and interrupt hardening", component: "News" },
+      { type: "improvement", description: "Updated Bug Tracking: 20 of 25 bugs now resolved (80%)", component: "Bug Tracking" },
+      { type: "improvement", description: "Updated February monthly archive with new entries", component: "Monthly News" },
+      { type: "improvement", description: "Updated Roadmap milestones with bug fix pass progress", component: "Roadmap" },
+      { type: "fix", description: "Fixed framer-motion ease type errors in News and MonthlyNews pages", component: "Animations" },
+    ],
+  },
+  {
     version: "2.0.0",
     date: "February 10, 2026",
     title: "Complete Website Redesign - Gaming/Cyberpunk Theme",
