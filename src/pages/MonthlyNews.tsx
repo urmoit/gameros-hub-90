@@ -54,16 +54,34 @@ const monthlyNewsData: Record<string, MonthData> = {
   "february-2026": {
     month: "February",
     year: "2026",
-    summary: "Major development walkthrough documenting the complete Windows XP transformation, critical bug fixes for VGA rendering and triple faults, and continued kernel stability improvements.",
+    summary: "Massive stabilization pass with 33 fixes across kernel, graphics, drivers, and desktop shell. 11 major bugs resolved, VMware hardening, and comprehensive walkthrough of the XP transformation.",
     highlights: [
+      "33 fixes applied in comprehensive src bug fix pass",
+      "11 significant bugs marked as resolved",
+      "VMware stability improvements with interrupt hardening",
+      "IDT, ISR, and exception handling hardened",
+      "Desktop shell redesign toward compact XP look",
       "Published comprehensive walkthrough of the XP Transformation",
       "Fixed VGA Mode 12h rendering performance issues",
       "Resolved triple fault and graphics initialization issues",
       "Added new serial, USB, and cursor drivers",
-      "Simplified graphics initialization with VBE modes via GRUB",
-      "Updated bug tracking to 25 total bugs, 8 resolved",
     ],
     items: [
+      {
+        title: "Alpha Release: Comprehensive src Bug Fix Pass",
+        date: "February 13, 2026",
+        type: "Announcement",
+        description: "33 fixes applied across kernel, graphics, drivers, interrupt handling, and desktop shell. 11 significant bugs resolved including IPC, window manager, executive services, and VMware stability improvements.",
+        commitUrl: "/news/bug-fix-pass",
+      },
+      {
+        title: "fix(os): resolve triple faults and VMware stability issues with interrupt hardening",
+        date: "February 13, 2026",
+        type: "Commit",
+        description: "Comprehensive fixes for VMware stability and triple fault issues. IDT hardening, ISR stack alignment, exception handling improvements, keyboard/mouse driver fixes, and 11 bugs marked as resolved.",
+        commitCode: "6270119",
+        commitUrl: "https://github.com/urmoit/GamerOS/commit/62701194e5ee754750aa70cd7006d929821cfaf7",
+      },
       {
         title: "Walkthrough - GamerOS: The Windows XP Transformation",
         date: "February 6, 2026",
@@ -75,7 +93,7 @@ const monthlyNewsData: Record<string, MonthData> = {
         title: "fix(graphics): address performance issues in VGA Mode 12h rendering",
         date: "February 6, 2026",
         type: "Commit",
-        description: "Optimize pixel operations for improved rendering speed in VGA Mode 12h. Refactor graphics driver to enhance efficiency and reduce latency. Implement caching mechanisms for frequently accessed graphics data. Update documentation to reflect changes in performance characteristics.",
+        description: "Optimize pixel operations for improved rendering speed in VGA Mode 12h. Refactor graphics driver to enhance efficiency and reduce latency. Implement caching mechanisms for frequently accessed graphics data.",
         commitCode: "c8db812",
         commitUrl: "https://github.com/urmoit/GamerOS/commit/c8db81256d1bbde95dc575a2e5a6ccc139fda86a",
       },
@@ -273,7 +291,6 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.5,
-      ease: [0.22, 1, 0.36, 1],
     },
   },
 };

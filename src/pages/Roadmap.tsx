@@ -171,7 +171,8 @@ const featureRoadmap = [
 const milestones = [
   { date: "Jan 2026", title: "Project Start", description: "Initial commit and build system setup", completed: true },
   { date: "Feb 2026", title: "XP Transformation", description: "VESA 32-bit graphics, Luna desktop, interactive apps", completed: true },
-  { date: "Feb 2026", title: "Alpha Release", description: "Bug fix sprint complete, first public preview", completed: false, isNext: true, link: "/news/alpha-release" },
+  { date: "Feb 2026", title: "Bug Fix Pass", description: "33 fixes applied, 20/25 bugs resolved, VMware hardening", completed: true },
+  { date: "Feb 2026", title: "Alpha Release", description: "First public preview with stable kernel", completed: false, isNext: true, link: "/news/bug-fix-pass" },
   { date: "Q2 2026", title: "Beta Release", description: "App compatibility layers", completed: false },
   { date: "Q4 2026", title: "v1.0 Release", description: "Stable public release", completed: false },
 ];

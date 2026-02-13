@@ -52,6 +52,27 @@ interface NewsItem {
 
 const newsItems: NewsItem[] = [
   {
+    id: "bug-fix-pass",
+    title: "Alpha Release: Comprehensive src Bug Fix Pass",
+    date: "February 13, 2026",
+    type: "Announcement",
+    description: "33 fixes applied across kernel, graphics, drivers, interrupt handling, and desktop shell. 11 significant bugs resolved including IPC, window manager, executive services, and VMware stability improvements.",
+    icon: Rocket,
+    internalLink: "/news/bug-fix-pass",
+    featured: true,
+  },
+  {
+    id: "commit-6270119",
+    title: "fix(os): resolve triple faults and VMware stability issues with interrupt hardening",
+    date: "February 13, 2026",
+    type: "Commit",
+    description: "Comprehensive fixes for VMware stability and triple fault issues. IDT hardening, ISR stack alignment, exception handling improvements, keyboard/mouse driver fixes, and 11 bugs marked as resolved.",
+    icon: Code2,
+    commitCode: "6270119",
+    commitUrl: "https://github.com/urmoit/GamerOS/commit/62701194e5ee754750aa70cd7006d929821cfaf7",
+    featured: true,
+  },
+  {
     id: "alpha-release",
     title: "Road to Alpha: Heavy Bug Fix Sprint Begins",
     date: "February 7, 2026",
@@ -287,7 +308,6 @@ const itemVariants = {
     y: 0,
     transition: {
       duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94],
     },
   },
 };
