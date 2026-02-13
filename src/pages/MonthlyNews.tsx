@@ -24,7 +24,11 @@ import {
   ChevronRight,
   Filter,
   Sparkles,
-  FileText
+  FileText,
+  Gamepad2,
+  Zap,
+  Trophy,
+  MessageSquare
 } from "lucide-react";
 
 type NewsType = "All" | "Commit" | "Announcement" | "Community";
@@ -111,7 +115,7 @@ const monthlyNewsData: Record<string, MonthData> = {
         type: "Commit",
         description: "Add VGA Mode 12h (640x480x16) support in bootloader and graphics driver. Implement planar mode pixel operations for efficient 16-color rendering. Create tabbed UI interface with Home, Changelog, and Settings tabs. Add keyboard navigation with arrow keys, tab, and special keys. Integrate mouse support with cursor rendering and click handling. Update build scripts and fix memory management in object manager. Enhance keyboard driver with extended key support (arrows, home, end, etc.). Resolve VGA black screen issue by switching from Mode 13h to Mode 12h.",
         commitCode: "07d87d3",
-        commitUrl: "https://github.com/urmoit/GamerOS/commit/07d87d33d02d67414a5d7052825fcd636154309a",
+        commitUrl: "https://github.com/urmoit/GamerOS/commit/07d87d33d02d67415a5d7052825fcd636154309a",
       },
       {
         title: "Add info and about tabs to gui app",
@@ -176,7 +180,7 @@ const monthlyNewsData: Record<string, MonthData> = {
         type: "Commit",
         description: "Updated run-qemu.bat to use -cpu max and log output to qemu-debug.log. Added detailed CPU state logging to qemu-debug.log for better debugging. Modified GUI application to increase window height and reduce tab count, focusing on home and changelog tabs. Updated changelog content to reflect recent development milestones and features. Adjusted boot configuration in grub.cfg for direct booting without menu display.",
         commitCode: "f50fb62",
-        commitUrl: "https://github.com/urmoit/GamerOS/commit/f50fb62ff112cf56a6025299f8b9bb21f6160d59",
+        commitUrl: "https://github.com/urmoit/GamerOS/commit/f50fb62ff112cf56a6025298f8b9bb21f6160d59",
       },
       {
         title: "Refactor build scripts and update documentation",
@@ -221,28 +225,58 @@ const availableMonths = [
   { slug: "january-2026", label: "January 2026" },
 ];
 
+// Gaming-themed type configuration with neon colors
 const typeConfig = {
   Commit: {
-    color: "bg-emerald-500/10 text-emerald-500 border-emerald-500/20",
+    color: "bg-cyan-500/10 text-cyan-400 border-cyan-500/30",
     icon: GitCommit,
-    bgColor: "bg-emerald-500/10",
-    iconColor: "text-emerald-500",
+    bgColor: "bg-cyan-500/10",
+    iconColor: "text-cyan-400",
+    glowColor: "shadow-cyan-500/20",
+    gradient: "from-cyan-400 to-cyan-500",
   },
   Announcement: {
-    color: "bg-primary/10 text-primary border-primary/20",
+    color: "bg-amber-500/10 text-amber-400 border-amber-500/30",
     icon: Megaphone,
-    bgColor: "bg-primary/10",
-    iconColor: "text-primary",
+    bgColor: "bg-amber-500/10",
+    iconColor: "text-amber-400",
+    glowColor: "shadow-amber-500/20",
+    gradient: "from-amber-400 to-amber-500",
   },
   Community: {
-    color: "bg-purple-500/10 text-purple-500 border-purple-500/20",
+    color: "bg-fuchsia-500/10 text-fuchsia-400 border-fuchsia-500/30",
     icon: Users,
-    bgColor: "bg-purple-500/10",
-    iconColor: "text-purple-500",
+    bgColor: "bg-fuchsia-500/10",
+    iconColor: "text-fuchsia-400",
+    glowColor: "shadow-fuchsia-500/20",
+    gradient: "from-fuchsia-400 to-fuchsia-500",
   },
 };
 
 const filterOptions: NewsType[] = ["All", "Commit", "Announcement", "Community"];
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
 
 const MonthlyNews = () => {
   const { month } = useParams<{ month: string }>();
@@ -297,18 +331,18 @@ const MonthlyNews = () => {
   if (!data) {
     return (
       <PageTransition>
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col bg-[hsl(225_25%_6%)]">
           <Header />
           <main className="flex-1 flex items-center justify-center">
             <div className="text-center py-32 px-4">
-              <div className="w-20 h-20 rounded-full bg-muted flex items-center justify-center mx-auto mb-6">
-                <Calendar className="w-10 h-10 text-muted-foreground" />
+              <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-fuchsia-500/20 border border-cyan-500/30 flex items-center justify-center mx-auto mb-6 shadow-lg shadow-cyan-500/10">
+                <Calendar className="w-12 h-12 text-cyan-400" />
               </div>
-              <h1 className="text-3xl font-bold mb-4">Month Not Found</h1>
-              <p className="text-muted-foreground mb-8 max-w-md mx-auto">
+              <h1 className="text-4xl font-bold mb-4 text-gaming">Month Not Found</h1>
+              <p className="text-white/60 mb-8 max-w-md mx-auto">
                 This monthly news archive doesn't exist yet. Check back later for updates!
               </p>
-              <Button asChild size="lg">
+              <Button asChild size="lg" className="btn-neon">
                 <Link to="/news">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back to News
@@ -324,99 +358,144 @@ const MonthlyNews = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-[hsl(225_25%_6%)]">
         <Header />
 
         <main className="flex-1">
-          {/* Hero Section */}
+          {/* Hero Section with Gaming Aesthetic */}
           <section className="relative pt-32 pb-20 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-emerald-500/5" />
-            <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-10 left-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
+            {/* Background Effects */}
+            <div className="absolute inset-0 grid-pattern opacity-30" />
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-[128px]" />
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-fuchsia-500/20 rounded-full blur-[128px]" />
+            
+            {/* Animated gradient orbs */}
+            <motion.div
+              className="absolute top-1/4 right-10 w-64 h-64 bg-gradient-to-br from-cyan-500/30 to-transparent rounded-full blur-3xl"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.5, 0.3],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            <motion.div
+              className="absolute bottom-1/4 left-10 w-72 h-72 bg-gradient-to-br from-fuchsia-500/20 to-transparent rounded-full blur-3xl"
+              animate={{
+                scale: [1.2, 1, 1.2],
+                opacity: [0.2, 0.4, 0.2],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
 
             <div className="container mx-auto px-4 relative">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="text-center max-w-3xl mx-auto"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="text-center max-w-4xl mx-auto"
               >
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-                  <Calendar className="w-4 h-4 text-primary" />
-                  <span className="text-sm font-medium text-primary">Monthly Archive</span>
-                </div>
-                <h1 className="text-4xl md:text-6xl font-bold mb-4">
-                  {data.month} <span className="text-primary">{data.year}</span>
-                </h1>
-                <p className="text-lg text-muted-foreground">
+                {/* Gaming Badge */}
+                <motion.div variants={itemVariants} className="mb-6">
+                  <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-card border-cyan-500/30">
+                    <Gamepad2 className="w-5 h-5 text-cyan-400" />
+                    <span className="text-sm font-bold text-gaming uppercase tracking-wider">Monthly Archive</span>
+                  </div>
+                </motion.div>
+
+                {/* Month/Year Display */}
+                <motion.div variants={itemVariants}>
+                  <h1 className="text-5xl md:text-7xl font-black mb-6">
+                    <span className="text-gaming">{data.month}</span>
+                    <span className="text-white/90"> {data.year}</span>
+                  </h1>
+                </motion.div>
+
+                <motion.p variants={itemVariants} className="text-lg md:text-xl text-white/70 mb-8 max-w-2xl mx-auto leading-relaxed">
                   {data.summary}
-                </p>
-              </motion.div>
+                </motion.p>
 
-              {/* Month Navigation */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="flex items-center justify-center gap-4 mt-8"
-              >
-                {prevMonth ? (
-                  <Button variant="outline" asChild>
-                    <Link to={`/news/monthly/${prevMonth.slug}`}>
-                      <ChevronLeft className="w-4 h-4 mr-1" />
-                      {prevMonth.label}
+                {/* Month Navigation */}
+                <motion.div variants={itemVariants} className="flex items-center justify-center gap-4">
+                  {prevMonth ? (
+                    <Link
+                      to={`/news/monthly/${prevMonth.slug}`}
+                      className="group flex items-center gap-2 px-5 py-3 rounded-xl glass-card glass-card-hover border-white/10 hover:border-cyan-500/50 transition-all duration-300"
+                    >
+                      <ChevronLeft className="w-5 h-5 text-cyan-400 group-hover:-translate-x-1 transition-transform" />
+                      <span className="text-white/80 font-medium">{prevMonth.label}</span>
                     </Link>
-                  </Button>
-                ) : (
-                  <Button variant="outline" disabled>
-                    <ChevronLeft className="w-4 h-4 mr-1" />
-                    Previous
-                  </Button>
-                )}
+                  ) : (
+                    <div className="px-5 py-3 rounded-xl glass-card border-white/5 opacity-50 cursor-not-allowed">
+                      <span className="text-white/40 font-medium flex items-center gap-2">
+                        <ChevronLeft className="w-5 h-5" />
+                        Previous
+                      </span>
+                    </div>
+                  )}
 
-                <Button variant="ghost" asChild>
-                  <Link to="/news" className="gap-2">
-                    <FileText className="w-4 h-4" />
-                    All News
+                  <Link
+                    to="/news"
+                    className="flex items-center gap-2 px-5 py-3 rounded-xl glass-card glass-card-hover border-white/10 hover:border-fuchsia-500/50 transition-all duration-300"
+                  >
+                    <FileText className="w-5 h-5 text-fuchsia-400" />
+                    <span className="text-white/80 font-medium">All News</span>
                   </Link>
-                </Button>
 
-                {nextMonth ? (
-                  <Button variant="outline" asChild>
-                    <Link to={`/news/monthly/${nextMonth.slug}`}>
-                      {nextMonth.label}
-                      <ChevronRight className="w-4 h-4 ml-1" />
+                  {nextMonth ? (
+                    <Link
+                      to={`/news/monthly/${nextMonth.slug}`}
+                      className="group flex items-center gap-2 px-5 py-3 rounded-xl glass-card glass-card-hover border-white/10 hover:border-cyan-500/50 transition-all duration-300"
+                    >
+                      <span className="text-white/80 font-medium">{nextMonth.label}</span>
+                      <ChevronRight className="w-5 h-5 text-cyan-400 group-hover:translate-x-1 transition-transform" />
                     </Link>
-                  </Button>
-                ) : (
-                  <Button variant="outline" disabled>
-                    Next
-                    <ChevronRight className="w-4 h-4 ml-1" />
-                  </Button>
-                )}
+                  ) : (
+                    <div className="px-5 py-3 rounded-xl glass-card border-white/5 opacity-50 cursor-not-allowed">
+                      <span className="text-white/40 font-medium flex items-center gap-2">
+                        Next
+                        <ChevronRight className="w-5 h-5" />
+                      </span>
+                    </div>
+                  )}
+                </motion.div>
               </motion.div>
 
-              {/* Stats */}
+              {/* Gaming Stats Cards */}
               {stats && (
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 max-w-3xl mx-auto"
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 max-w-4xl mx-auto"
                 >
                   {[
-                    { label: "Total Updates", value: stats.total, icon: Tag, color: "text-foreground" },
-                    { label: "Commits", value: stats.commits, icon: GitCommit, color: "text-emerald-500" },
-                    { label: "Announcements", value: stats.announcements, icon: Megaphone, color: "text-primary" },
-                    { label: "Community", value: stats.community, icon: Users, color: "text-purple-500" },
-                  ].map((stat) => (
-                    <div key={stat.label} className="glass-card p-4 text-center">
-                      <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center mx-auto mb-2">
-                        <stat.icon className={`w-5 h-5 ${stat.color}`} />
+                    { label: "Total Updates", value: stats.total, icon: Trophy, color: "from-cyan-400 to-cyan-500", shadowColor: "shadow-cyan-500/20" },
+                    { label: "Commits", value: stats.commits, icon: GitCommit, color: "from-cyan-400 to-blue-500", shadowColor: "shadow-cyan-500/20" },
+                    { label: "Announcements", value: stats.announcements, icon: Megaphone, color: "from-amber-400 to-orange-500", shadowColor: "shadow-amber-500/20" },
+                    { label: "Community", value: stats.community, icon: Users, color: "from-fuchsia-400 to-purple-500", shadowColor: "shadow-fuchsia-500/20" },
+                  ].map((stat, i) => (
+                    <motion.div
+                      key={stat.label}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
+                      whileHover={{ scale: 1.05, y: -4 }}
+                      className="glass-card glass-card-hover p-5 text-center group"
+                    >
+                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center mx-auto mb-3 shadow-lg ${stat.shadowColor} group-hover:shadow-xl group-hover:${stat.shadowColor} transition-shadow duration-300`}>
+                        <stat.icon className="w-6 h-6 text-white" />
                       </div>
-                      <div className={`text-2xl font-bold ${stat.color}`}>{stat.value}</div>
-                      <div className="text-xs text-muted-foreground">{stat.label}</div>
-                    </div>
+                      <div className={`text-3xl font-black bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>{stat.value}</div>
+                      <div className="text-xs text-white/50 font-medium uppercase tracking-wider mt-1">{stat.label}</div>
+                    </motion.div>
                   ))}
                 </motion.div>
               )}
@@ -425,25 +504,36 @@ const MonthlyNews = () => {
 
           {/* Highlights Section */}
           {data.highlights && data.highlights.length > 0 && (
-            <section className="py-12 border-y border-border/50 bg-muted/30">
+            <section className="py-16 border-y border-white/5 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent">
               <div className="container mx-auto px-4">
-                <div className="flex items-center gap-2 mb-6">
-                  <Sparkles className="w-5 h-5 text-primary" />
-                  <h2 className="text-xl font-semibold">Month Highlights</h2>
-                </div>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="flex items-center gap-3 mb-8 justify-center"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/20">
+                    <Sparkles className="w-5 h-5 text-white" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-gaming">Month Highlights</h2>
+                </motion.div>
+                
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
                   {data.highlights.map((highlight, i) => (
                     <motion.div
                       key={i}
                       initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: i * 0.1 }}
-                      className="glass-card p-4 flex items-start gap-3"
+                      whileHover={{ scale: 1.02, y: -4 }}
+                      className="glass-card glass-card-hover p-5 flex items-start gap-4 group"
                     >
-                      <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
-                        <span className="text-xs font-bold text-primary">{i + 1}</span>
+                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500/20 to-fuchsia-500/20 border border-cyan-500/30 flex items-center justify-center shrink-0 group-hover:border-cyan-400/50 transition-colors">
+                        <span className="text-sm font-bold text-cyan-400">{i + 1}</span>
                       </div>
-                      <p className="text-sm text-muted-foreground">{highlight}</p>
+                      <p className="text-sm text-white/70 leading-relaxed">{highlight}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -452,61 +542,80 @@ const MonthlyNews = () => {
           )}
 
           {/* Filter & Content */}
-          <section className="py-12">
+          <section className="py-16">
             <div className="container mx-auto px-4">
-              {/* Filter Bar */}
+              {/* Gaming Filter Bar */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="glass-card p-4 mb-8"
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="glass-card p-6 mb-10 border-white/10"
               >
-                <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
-                  {/* Search */}
-                  <div className="relative w-full lg:w-80">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
+                  {/* Search with Gaming Style */}
+                  <div className="relative w-full lg:w-96 group">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-cyan-400/60 group-focus-within:text-cyan-400 transition-colors" />
                     <Input
-                      placeholder="Search this month..."
+                      placeholder="Search updates..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 bg-background/50"
+                      className="pl-12 pr-10 py-6 bg-white/5 border-white/10 focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 rounded-xl text-white placeholder:text-white/40 transition-all"
                     />
                     {searchQuery && (
                       <button
                         onClick={() => setSearchQuery("")}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-cyan-400 transition-colors"
                       >
-                        <X className="w-4 h-4" />
+                        <X className="w-5 h-5" />
                       </button>
                     )}
                   </div>
 
-                  {/* Type Filters */}
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <Filter className="w-4 h-4 text-muted-foreground" />
-                    <div className="flex items-center gap-1 p-1 rounded-lg bg-muted/50">
-                      {filterOptions.map((filter) => (
-                        <button
-                          key={filter}
-                          onClick={() => setActiveFilter(filter)}
-                          className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${activeFilter === filter
-                            ? "bg-primary text-primary-foreground shadow-sm"
-                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                  {/* Gaming Filter Buttons */}
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <Filter className="w-5 h-5 text-cyan-400/60" />
+                    <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-white/5 border border-white/10">
+                      {filterOptions.map((filter) => {
+                        const isActive = activeFilter === filter;
+                        const filterColors: Record<string, string> = {
+                          All: "from-cyan-400 to-fuchsia-400",
+                          Commit: "from-cyan-400 to-cyan-500",
+                          Announcement: "from-amber-400 to-orange-500",
+                          Community: "from-fuchsia-400 to-purple-500",
+                        };
+                        
+                        return (
+                          <button
+                            key={filter}
+                            onClick={() => setActiveFilter(filter)}
+                            className={`relative px-5 py-2.5 text-sm font-bold rounded-xl transition-all duration-300 ${
+                              isActive
+                                ? "text-white shadow-lg"
+                                : "text-white/50 hover:text-white/80 hover:bg-white/5"
                             }`}
-                        >
-                          {filter}
-                        </button>
-                      ))}
+                          >
+                            {isActive && (
+                              <motion.div
+                                layoutId="activeFilter"
+                                className={`absolute inset-0 bg-gradient-to-r ${filterColors[filter]} rounded-xl`}
+                                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                              />
+                            )}
+                            <span className="relative z-10">{filter}</span>
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
               </motion.div>
 
               {/* Results Count */}
-              <div className="flex items-center justify-between mb-6">
-                <p className="text-sm text-muted-foreground">
-                  Showing <span className="font-medium text-foreground">{filteredItems.length}</span> of{" "}
-                  <span className="font-medium text-foreground">{data.items.length}</span> updates
+              <div className="flex items-center justify-between mb-8">
+                <p className="text-sm text-white/50">
+                  Showing <span className="font-bold text-cyan-400">{filteredItems.length}</span> of{" "}
+                  <span className="font-bold text-white/80">{data.items.length}</span> updates
                 </p>
                 {(searchQuery || activeFilter !== "All") && (
                   <button
@@ -514,14 +623,14 @@ const MonthlyNews = () => {
                       setSearchQuery("");
                       setActiveFilter("All");
                     }}
-                    className="text-sm text-primary hover:underline flex items-center gap-1"
+                    className="text-sm text-cyan-400 hover:text-cyan-300 flex items-center gap-1.5 font-medium transition-colors"
                   >
-                    Clear filters <X className="w-3 h-3" />
+                    Clear filters <X className="w-4 h-4" />
                   </button>
                 )}
               </div>
 
-              {/* Timeline */}
+              {/* Gaming Timeline */}
               <AnimatePresence mode="wait">
                 {filteredItems.length > 0 ? (
                   <motion.div
@@ -531,10 +640,10 @@ const MonthlyNews = () => {
                     exit={{ opacity: 0 }}
                     className="relative"
                   >
-                    {/* Timeline line */}
-                    <div className="absolute left-6 top-0 bottom-0 w-px bg-border hidden md:block" />
+                    {/* Glowing Timeline Line */}
+                    <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-500/50 via-fuchsia-500/30 to-transparent hidden md:block" />
 
-                    <div className="space-y-4">
+                    <div className="space-y-6">
                       {filteredItems.map((item, i) => {
                         const config = typeConfig[item.type];
                         const TypeIcon = config.icon;
@@ -543,48 +652,58 @@ const MonthlyNews = () => {
                         return (
                           <motion.div
                             key={i}
-                            initial={{ opacity: 0, x: -20 }}
+                            initial={{ opacity: 0, x: -30 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.3, delay: i * 0.05 }}
-                            className="relative md:pl-16"
+                            transition={{ duration: 0.4, delay: i * 0.08 }}
+                            className="relative md:pl-20"
                           >
-                            {/* Timeline dot */}
-                            <div className={`absolute left-4 top-6 w-5 h-5 rounded-full border-2 border-background ${config.bgColor} hidden md:flex items-center justify-center z-10`}>
-                              <div className={`w-2 h-2 rounded-full ${item.type === "Commit" ? "bg-emerald-500" : item.type === "Announcement" ? "bg-primary" : "bg-purple-500"}`} />
+                            {/* Glowing Timeline Dot */}
+                            <div className={`absolute left-4 top-6 w-5 h-5 rounded-full border-2 border-[hsl(225_25%_6%)] ${config.bgColor} hidden md:flex items-center justify-center z-10 shadow-lg ${config.glowColor}`}>
+                              <motion.div
+                                className={`w-2 h-2 rounded-full bg-gradient-to-r ${config.gradient}`}
+                                animate={{ scale: [1, 1.2, 1] }}
+                                transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
+                              />
                             </div>
 
-                            <div
-                              className="glass-card p-5 fluent-hover cursor-pointer group"
+                            <motion.div
+                              whileHover={{ scale: 1.01 }}
+                              className={`glass-card glass-card-hover p-6 cursor-pointer group border-white/10 hover:border-cyan-500/30 transition-all duration-300 ${isExpanded ? 'ring-1 ring-cyan-500/20' : ''}`}
                               onClick={() => toggleExpand(i)}
                             >
-                              <div className="flex flex-col gap-3">
+                              <div className="flex flex-col gap-4">
                                 {/* Header */}
                                 <div className="flex items-start justify-between gap-4">
-                                  <div className="flex items-start gap-3 flex-1 min-w-0">
-                                    <div className={`w-10 h-10 rounded-lg ${config.bgColor} flex items-center justify-center shrink-0 md:hidden`}>
-                                      <TypeIcon className={`w-5 h-5 ${config.iconColor}`} />
+                                  <div className="flex items-start gap-4 flex-1 min-w-0">
+                                    {/* Mobile Icon */}
+                                    <div className={`w-12 h-12 rounded-xl ${config.bgColor} border ${config.color.split(' ')[2]} flex items-center justify-center shrink-0 md:hidden shadow-lg ${config.glowColor}`}>
+                                      <TypeIcon className={`w-6 h-6 ${config.iconColor}`} />
                                     </div>
+                                    
                                     <div className="flex-1 min-w-0">
-                                      <div className="flex flex-wrap items-center gap-2 mb-1">
-                                        <Badge variant="outline" className={`text-xs ${config.color}`}>
+                                      <div className="flex flex-wrap items-center gap-2 mb-2">
+                                        <Badge className={`text-xs font-bold px-3 py-1 rounded-lg border ${config.color} shadow-sm ${config.glowColor}`}>
+                                          <TypeIcon className={`w-3 h-3 mr-1 ${config.iconColor}`} />
                                           {item.type}
                                         </Badge>
                                         {item.commitCode && (
-                                          <Badge variant="secondary" className="font-mono text-xs">
+                                          <Badge className="font-mono text-xs bg-white/10 text-cyan-400 border-cyan-500/30 px-3 py-1 rounded-lg">
+                                            <Code2 className="w-3 h-3 mr-1" />
                                             {item.commitCode}
                                           </Badge>
                                         )}
-                                        <span className="text-xs text-muted-foreground flex items-center gap-1">
-                                          <Clock className="w-3 h-3" />
+                                        <span className="text-xs text-white/40 flex items-center gap-1.5">
+                                          <Clock className="w-3.5 h-3.5" />
                                           {item.date}
                                         </span>
                                       </div>
-                                      <h3 className="font-semibold group-hover:text-primary transition-colors">
+                                      <h3 className="font-bold text-lg text-white/90 group-hover:text-cyan-400 transition-colors leading-tight">
                                         {item.title}
                                       </h3>
                                     </div>
                                   </div>
-                                  <ChevronRight className={`w-5 h-5 text-muted-foreground transition-transform shrink-0 ${isExpanded ? "rotate-90" : ""}`} />
+                                  
+                                  <ChevronRight className={`w-6 h-6 text-white/30 transition-all duration-300 shrink-0 group-hover:text-cyan-400 ${isExpanded ? "rotate-90 text-cyan-400" : ""}`} />
                                 </div>
 
                                 {/* Description */}
@@ -594,42 +713,45 @@ const MonthlyNews = () => {
                                       initial={{ opacity: 0, height: 0 }}
                                       animate={{ opacity: 1, height: "auto" }}
                                       exit={{ opacity: 0, height: 0 }}
-                                      transition={{ duration: 0.2 }}
+                                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                                       className="overflow-hidden"
                                     >
-                                      <p className="text-sm text-muted-foreground leading-relaxed pt-2 border-t border-border/50">
+                                      <p className="text-sm text-white/60 leading-relaxed pt-4 border-t border-white/10">
                                         {item.description}
                                       </p>
+                                      
                                       {item.commitUrl && (
-                                        item.commitUrl.startsWith("/") ? (
-                                          <Link
-                                            to={item.commitUrl}
-                                            onClick={(e) => e.stopPropagation()}
-                                            className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-lg bg-primary/10 text-primary text-sm hover:bg-primary/20 transition-colors"
-                                          >
-                                            <FileText className="w-4 h-4" />
-                                            <span>Read More</span>
-                                            <ArrowRight className="w-3 h-3" />
-                                          </Link>
-                                        ) : (
-                                          <a
-                                            href={item.commitUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            onClick={(e) => e.stopPropagation()}
-                                            className="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-lg bg-primary/10 text-primary text-sm hover:bg-primary/20 transition-colors"
-                                          >
-                                            <GitCommit className="w-4 h-4" />
-                                            <code className="font-mono">{item.commitCode}</code>
-                                            <ExternalLink className="w-3 h-3" />
-                                          </a>
-                                        )
+                                        <div className="mt-4">
+                                          {item.commitUrl.startsWith("/") ? (
+                                            <Link
+                                              to={item.commitUrl}
+                                              onClick={(e) => e.stopPropagation()}
+                                              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500/20 to-cyan-600/20 border border-cyan-500/30 text-cyan-400 text-sm font-bold hover:from-cyan-500/30 hover:to-cyan-600/30 hover:border-cyan-400/50 transition-all duration-300 shadow-lg shadow-cyan-500/10 hover:shadow-cyan-500/20"
+                                            >
+                                              <FileText className="w-4 h-4" />
+                                              <span>Read More</span>
+                                              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                            </Link>
+                                          ) : (
+                                            <a
+                                              href={item.commitUrl}
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                              onClick={(e) => e.stopPropagation()}
+                                              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-fuchsia-500/20 to-purple-600/20 border border-fuchsia-500/30 text-fuchsia-400 text-sm font-bold hover:from-fuchsia-500/30 hover:to-purple-600/30 hover:border-fuchsia-400/50 transition-all duration-300 shadow-lg shadow-fuchsia-500/10 hover:shadow-fuchsia-500/20"
+                                            >
+                                              <GitCommit className="w-4 h-4" />
+                                              <code className="font-mono">{item.commitCode}</code>
+                                              <ExternalLink className="w-4 h-4" />
+                                            </a>
+                                          )}
+                                        </div>
                                       )}
                                     </motion.div>
                                   )}
                                 </AnimatePresence>
                               </div>
-                            </div>
+                            </motion.div>
                           </motion.div>
                         );
                       })}
@@ -641,13 +763,13 @@ const MonthlyNews = () => {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
-                    className="text-center py-16"
+                    className="text-center py-20"
                   >
-                    <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
-                      <Search className="w-8 h-8 text-muted-foreground" />
+                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-white/5 to-white/10 border border-white/10 flex items-center justify-center mx-auto mb-6">
+                      <Search className="w-10 h-10 text-white/30" />
                     </div>
-                    <h3 className="text-lg font-medium mb-2">No results found</h3>
-                    <p className="text-muted-foreground mb-4">
+                    <h3 className="text-xl font-bold text-white/80 mb-3">No results found</h3>
+                    <p className="text-white/50 mb-6">
                       Try adjusting your search or filter criteria
                     </p>
                     <Button
@@ -656,6 +778,7 @@ const MonthlyNews = () => {
                         setSearchQuery("");
                         setActiveFilter("All");
                       }}
+                      className="border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-400/50"
                     >
                       Clear filters
                     </Button>
@@ -665,58 +788,110 @@ const MonthlyNews = () => {
             </div>
           </section>
 
-          {/* Available Months */}
-          <section className="py-12 border-t border-border/50 bg-muted/30">
+          {/* Available Months - Gaming Style */}
+          <section className="py-16 border-t border-white/5 bg-gradient-to-b from-transparent to-white/[0.02]">
             <div className="container mx-auto px-4">
-              <h2 className="text-xl font-semibold mb-6 text-center">Browse Archives</h2>
-              <div className="flex flex-wrap justify-center gap-3">
-                {availableMonths.map((m) => (
-                  <Link
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-center mb-10"
+              >
+                <h2 className="text-2xl font-bold text-gaming-alt mb-2">Browse Archives</h2>
+                <p className="text-white/50">Explore previous months</p>
+              </motion.div>
+              
+              <div className="flex flex-wrap justify-center gap-4">
+                {availableMonths.map((m, i) => (
+                  <motion.div
                     key={m.slug}
-                    to={`/news/monthly/${m.slug}`}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${currentMonth === m.slug
-                      ? "bg-primary text-primary-foreground shadow-md"
-                      : "glass-card hover:bg-muted"
-                      }`}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.1 }}
                   >
-                    {m.label}
-                  </Link>
+                    <Link
+                      to={`/news/monthly/${m.slug}`}
+                      className={`group relative px-6 py-4 rounded-xl font-bold transition-all duration-300 block overflow-hidden ${
+                        currentMonth === m.slug
+                          ? "bg-gradient-to-r from-cyan-500 to-cyan-600 text-white shadow-lg shadow-cyan-500/30"
+                          : "glass-card glass-card-hover border-white/10 hover:border-cyan-500/30 text-white/70 hover:text-white"
+                      }`}
+                    >
+                      {currentMonth === m.slug && (
+                        <motion.div
+                          layoutId="activeMonth"
+                          className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-cyan-600"
+                          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                        />
+                      )}
+                      <span className="relative z-10 flex items-center gap-2">
+                        <Calendar className="w-4 h-4" />
+                        {m.label}
+                      </span>
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* CTA */}
-          <section className="py-16">
-            <div className="container mx-auto px-4">
-              <div className="glass-card p-8 md:p-12 text-center max-w-3xl mx-auto">
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                  <Code2 className="w-7 h-7 text-primary" />
-                </div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                  Want to Contribute?
+          {/* Gaming CTA Section */}
+          <section className="py-20 relative overflow-hidden">
+            {/* Background Effects */}
+            <div className="absolute inset-0 grid-pattern opacity-20" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-cyan-500/10 via-fuchsia-500/10 to-cyan-500/10 rounded-full blur-3xl" />
+            
+            <div className="container mx-auto px-4 relative">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="glass-card p-10 md:p-14 text-center max-w-3xl mx-auto border-cyan-500/20 shadow-2xl shadow-cyan-500/5"
+              >
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2, type: "spring" }}
+                  className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 to-fuchsia-500 flex items-center justify-center mx-auto mb-8 shadow-xl shadow-cyan-500/20"
+                >
+                  <Zap className="w-10 h-10 text-white" />
+                </motion.div>
+                
+                <h2 className="text-3xl md:text-4xl font-black mb-4">
+                  <span className="text-gaming">Join the</span>{" "}
+                  <span className="text-gaming-alt">Development</span>
                 </h2>
-                <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
-                  Check out our GitHub repository and join the development. Every contribution counts!
+                
+                <p className="text-white/60 mb-10 max-w-lg mx-auto text-lg">
+                  Contribute to GamerOS and help shape the future of gaming operating systems. Every commit counts!
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <Button asChild size="lg">
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button asChild size="lg" className="btn-neon px-8 py-6 text-base">
                     <a
                       href="https://github.com/urmoit/GamerOS"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="gap-2"
                     >
-                      View on GitHub <ArrowRight className="w-4 h-4" />
+                      <Code2 className="w-5 h-5" />
+                      View on GitHub
+                      <ArrowRight className="w-5 h-5" />
                     </a>
                   </Button>
-                  <Button variant="outline" size="lg" asChild>
+                  
+                  <Button variant="outline" size="lg" asChild className="border-white/20 text-white/80 hover:bg-white/10 hover:border-cyan-500/50 hover:text-cyan-400 px-8 py-6 text-base">
                     <Link to="/bug-tracking" className="gap-2">
+                      <MessageSquare className="w-5 h-5" />
                       View Bug Tracker
                     </Link>
                   </Button>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </section>
         </main>

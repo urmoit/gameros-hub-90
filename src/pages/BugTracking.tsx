@@ -17,7 +17,11 @@ import {
   ChevronDown,
   ChevronUp,
   FileCode,
-  GitCommit
+  GitCommit,
+  Zap,
+  Target,
+  Cpu,
+  ShieldAlert
 } from "lucide-react";
 import { useState } from "react";
 
@@ -101,13 +105,49 @@ const lowBugs: BugItem[] = [
 const getSeverityConfig = (severity: BugSeverity) => {
   switch (severity) {
     case "critical":
-      return { icon: AlertCircle, color: "text-red-500", bg: "bg-red-500/10", border: "border-red-500/30", label: "Critical" };
+      return { 
+        icon: ShieldAlert, 
+        color: "text-rose-400", 
+        bg: "bg-rose-500/10", 
+        border: "border-rose-500/40",
+        glow: "shadow-[0_0_20px_rgba(251,113,133,0.3)]",
+        glowHover: "hover:shadow-[0_0_30px_rgba(251,113,133,0.5)]",
+        gradient: "from-rose-500 to-pink-600",
+        label: "Critical"
+      };
     case "high":
-      return { icon: AlertTriangle, color: "text-orange-500", bg: "bg-orange-500/10", border: "border-orange-500/30", label: "High" };
+      return { 
+        icon: AlertTriangle, 
+        color: "text-amber-400", 
+        bg: "bg-amber-500/10", 
+        border: "border-amber-500/40",
+        glow: "shadow-[0_0_20px_rgba(251,191,36,0.3)]",
+        glowHover: "hover:shadow-[0_0_30px_rgba(251,191,36,0.5)]",
+        gradient: "from-amber-500 to-orange-600",
+        label: "High"
+      };
     case "medium":
-      return { icon: Info, color: "text-yellow-500", bg: "bg-yellow-500/10", border: "border-yellow-500/30", label: "Medium" };
+      return { 
+        icon: Zap, 
+        color: "text-purple-400", 
+        bg: "bg-purple-500/10", 
+        border: "border-purple-500/40",
+        glow: "shadow-[0_0_20px_rgba(192,132,252,0.3)]",
+        glowHover: "hover:shadow-[0_0_30px_rgba(192,132,252,0.5)]",
+        gradient: "from-purple-500 to-fuchsia-600",
+        label: "Medium"
+      };
     case "low":
-      return { icon: Circle, color: "text-green-500", bg: "bg-green-500/10", border: "border-green-500/30", label: "Low" };
+      return { 
+        icon: Info, 
+        color: "text-cyan-400", 
+        bg: "bg-cyan-500/10", 
+        border: "border-cyan-500/40",
+        glow: "shadow-[0_0_20px_rgba(34,211,238,0.3)]",
+        glowHover: "hover:shadow-[0_0_30px_rgba(34,211,238,0.5)]",
+        gradient: "from-cyan-500 to-blue-600",
+        label: "Low"
+      };
   }
 };
 
@@ -121,43 +161,43 @@ const BugCard = ({ bug }: { bug: BugItem }) => {
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className={`glass-card p-4 rounded-xl border ${config.border} ${config.bg} transition-all hover:shadow-lg`}
+      className={`glass-card glass-card-hover p-5 rounded-xl border ${config.border} ${config.bg} ${config.glow} ${config.glowHover} transition-all duration-300`}
     >
-      <div className="flex items-start gap-3">
-        <div className={`w-8 h-8 rounded-lg ${config.bg} flex items-center justify-center shrink-0`}>
+      <div className="flex items-start gap-4">
+        <div className={`w-10 h-10 rounded-xl ${config.bg} flex items-center justify-center shrink-0 border ${config.border}`}>
           {bug.status === "resolved" ? (
-            <Check className="w-4 h-4 text-emerald-500" />
+            <Check className="w-5 h-5 text-emerald-400" />
           ) : (
-            <Icon className={`w-4 h-4 ${config.color}`} />
+            <Icon className={`w-5 h-5 ${config.color}`} />
           )}
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
-            <h4 className={`font-medium ${bug.status === "resolved" ? "line-through text-muted-foreground" : ""}`}>
+            <h4 className={`font-semibold text-lg ${bug.status === "resolved" ? "line-through text-white/40" : "text-white/90"}`}>
               {bug.title}
             </h4>
             <button
               onClick={() => setExpanded(!expanded)}
-              className="p-1 hover:bg-muted rounded transition-colors shrink-0"
+              className={`p-2 rounded-lg transition-all duration-300 shrink-0 ${config.bg} ${config.color} hover:brightness-125`}
             >
               {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
             </button>
           </div>
-          <div className="flex items-center gap-2 mt-1">
-            <FileCode className="w-3 h-3 text-muted-foreground" />
-            <code className="text-xs text-muted-foreground font-mono truncate">{bug.location}</code>
+          <div className="flex items-center gap-2 mt-2">
+            <FileCode className="w-4 h-4 text-white/40" />
+            <code className="text-xs text-cyan-300/70 font-mono truncate">{bug.location}</code>
           </div>
           {expanded && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
-              className="mt-3 pt-3 border-t border-border/50"
+              className="mt-4 pt-4 border-t border-white/10"
             >
-              <p className="text-sm text-muted-foreground mb-2">{bug.description}</p>
+              <p className="text-sm text-white/60 mb-3 leading-relaxed">{bug.description}</p>
               {bug.suggestedFix && (
-                <div className="text-sm">
-                  <span className="font-medium text-primary">Suggested Fix: </span>
-                  <span className="text-muted-foreground">{bug.suggestedFix}</span>
+                <div className="text-sm p-3 rounded-lg bg-white/5 border border-white/10">
+                  <span className={`font-medium bg-gradient-to-r ${config.gradient} bg-clip-text text-transparent`}>Suggested Fix: </span>
+                  <span className="text-white/60">{bug.suggestedFix}</span>
                 </div>
               )}
             </motion.div>
@@ -168,20 +208,61 @@ const BugCard = ({ bug }: { bug: BugItem }) => {
   );
 };
 
+const StatCard = ({ label, count, icon: Icon, gradient, delay }: { label: string; count: number; icon: any; gradient: string; delay: number }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.9 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ delay }}
+    className="glass-card glass-card-hover p-5 rounded-2xl text-center group"
+  >
+    <div className={`w-12 h-12 mx-auto mb-3 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+      <Icon className="w-6 h-6 text-white" />
+    </div>
+    <div className={`text-4xl font-bold bg-gradient-to-r ${gradient} bg-clip-text text-transparent mb-1`}>{count}</div>
+    <div className="text-sm text-white/50 font-medium uppercase tracking-wider">{label}</div>
+  </motion.div>
+);
+
 const BugTracking = () => {
   const resolvedPercent = Math.round((bugStats.resolved / bugStats.total) * 100);
 
   return (
     <PageTransition>
-      <div className="min-h-screen flex flex-col bg-background">
+      <div className="min-h-screen flex flex-col bg-[hsl(225_25%_6%)]">
         <Header />
 
         <main className="flex-1">
-          {/* Hero Section */}
+          {/* Hero Section with Animated Background */}
           <section className="relative pt-32 pb-20 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-orange-500/5" />
-            <div className="absolute top-20 left-10 w-72 h-72 bg-red-500/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-10 right-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl" />
+            {/* Animated Background Elements */}
+            <div className="absolute inset-0 grid-pattern opacity-30" />
+            <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 via-transparent to-purple-500/5" />
+            
+            {/* Floating Orbs */}
+            <motion.div 
+              className="absolute top-20 left-[10%] w-64 h-64 bg-cyan-500/20 rounded-full blur-[100px]"
+              animate={{ 
+                scale: [1, 1.2, 1],
+                opacity: [0.2, 0.4, 0.2]
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div 
+              className="absolute bottom-10 right-[10%] w-80 h-80 bg-purple-500/20 rounded-full blur-[100px]"
+              animate={{ 
+                scale: [1.2, 1, 1.2],
+                opacity: [0.2, 0.4, 0.2]
+              }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div 
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-pink-500/10 rounded-full blur-[120px]"
+              animate={{ 
+                scale: [1, 1.3, 1],
+                opacity: [0.1, 0.25, 0.1]
+              }}
+              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+            />
 
             <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
@@ -189,51 +270,85 @@ const BugTracking = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="text-center"
               >
-                <Badge variant="outline" className="mb-6 px-4 py-2 text-sm border-red-500/30 bg-red-500/5">
+                <Badge className="mb-6 px-4 py-2 text-sm bg-cyan-500/10 border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/20 transition-colors">
                   <Bug className="w-4 h-4 mr-2" />
-                  Bug Tracking
+                  System Diagnostics
                 </Badge>
 
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-                  Issue{" "}
-                  <span className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 bg-clip-text text-transparent">
-                    Tracker
-                  </span>
+                  <span className="text-white">Bug </span>
+                  <span className="text-gaming">Tracker</span>
                 </h1>
 
-                <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-12">
-                  Tracking and resolving bugs to make GamerOS stable and reliable.
+                <p className="text-xl text-white/50 max-w-2xl mx-auto mb-12">
+                  Tracking and resolving system anomalies to ensure GamerOS runs at peak performance.
                 </p>
 
-                {/* Stats Overview */}
+                {/* Stats Overview with Progress */}
                 <div className="max-w-4xl mx-auto">
-                  <div className="glass-card p-6 rounded-2xl mb-8">
+                  <motion.div 
+                    className="glass-card p-8 rounded-2xl mb-8 border border-white/10"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
                     <div className="flex items-center justify-between mb-4">
-                      <span className="font-medium">Resolution Progress</span>
-                      <span className="text-2xl font-bold">{bugStats.resolved}/{bugStats.total} resolved</span>
+                      <div className="flex items-center gap-2">
+                        <Target className="w-5 h-5 text-cyan-400" />
+                        <span className="font-medium text-white/80">Resolution Progress</span>
+                      </div>
+                      <span className="text-2xl font-bold text-gaming">{bugStats.resolved}/{bugStats.total}</span>
                     </div>
-                    <Progress value={resolvedPercent} className="h-3 mb-6" />
+                    
+                    {/* Animated Progress Bar with Glow */}
+                    <div className="relative mb-8">
+                      <div className="h-3 bg-white/5 rounded-full overflow-hidden">
+                        <motion.div 
+                          className="h-full bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 rounded-full"
+                          initial={{ width: 0 }}
+                          animate={{ width: `${resolvedPercent}%` }}
+                          transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
+                        />
+                      </div>
+                      <div className="absolute top-0 left-0 h-3 bg-gradient-to-r from-cyan-400/50 via-purple-500/50 to-pink-500/50 rounded-full blur-md"
+                        style={{ width: `${resolvedPercent}%` }}
+                      />
+                      <div className="mt-2 text-right">
+                        <span className="text-sm text-cyan-400 font-mono">{resolvedPercent}% COMPLETE</span>
+                      </div>
+                    </div>
                     
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                      {[
-                        { label: "Critical", count: bugStats.critical, color: "text-red-500", bg: "bg-red-500/10" },
-                        { label: "High", count: bugStats.high, color: "text-orange-500", bg: "bg-orange-500/10" },
-                        { label: "Medium", count: bugStats.medium, color: "text-yellow-500", bg: "bg-yellow-500/10" },
-                        { label: "Low", count: bugStats.low, color: "text-green-500", bg: "bg-green-500/10" },
-                      ].map((stat, i) => (
-                        <motion.div
-                          key={i}
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: i * 0.1 }}
-                          className={`p-4 rounded-xl ${stat.bg} text-center`}
-                        >
-                          <div className={`text-3xl font-bold ${stat.color}`}>{stat.count}</div>
-                          <div className="text-sm text-muted-foreground">{stat.label}</div>
-                        </motion.div>
-                      ))}
+                      <StatCard 
+                        label="Critical" 
+                        count={bugStats.critical} 
+                        icon={ShieldAlert}
+                        gradient="from-rose-500 to-pink-600"
+                        delay={0.3}
+                      />
+                      <StatCard 
+                        label="High" 
+                        count={bugStats.high} 
+                        icon={AlertTriangle}
+                        gradient="from-amber-500 to-orange-600"
+                        delay={0.4}
+                      />
+                      <StatCard 
+                        label="Medium" 
+                        count={bugStats.medium} 
+                        icon={Zap}
+                        gradient="from-purple-500 to-fuchsia-600"
+                        delay={0.5}
+                      />
+                      <StatCard 
+                        label="Low" 
+                        count={bugStats.low} 
+                        icon={Info}
+                        gradient="from-cyan-500 to-blue-600"
+                        delay={0.6}
+                      />
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               </motion.div>
             </div>
@@ -241,15 +356,35 @@ const BugTracking = () => {
 
           {/* Resolved Bugs */}
           {resolvedBugs.length > 0 && (
-            <section className="py-12 border-y border-emerald-500/20 bg-emerald-500/5">
+            <section className="py-12 border-y border-emerald-500/20 bg-gradient-to-b from-emerald-500/5 to-transparent">
               <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                  <Check className="w-6 h-6 text-emerald-500" />
-                  Recently Resolved ({resolvedBugs.length})
-                </h2>
+                <motion.div 
+                  className="flex items-center gap-3 mb-8"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center">
+                    <Check className="w-5 h-5 text-emerald-400" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-white">
+                    Resolved <span className="text-gaming-alt">Issues</span>
+                  </h2>
+                  <Badge className="bg-emerald-500/10 border-emerald-500/30 text-emerald-300">
+                    {resolvedBugs.length}
+                  </Badge>
+                </motion.div>
                 <div className="grid md:grid-cols-2 gap-4">
-                  {resolvedBugs.map((bug) => (
-                    <BugCard key={bug.id} bug={bug} />
+                  {resolvedBugs.map((bug, index) => (
+                    <motion.div
+                      key={bug.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.05 }}
+                    >
+                      <BugCard bug={bug} />
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -258,12 +393,25 @@ const BugTracking = () => {
 
           {/* Critical Bugs */}
           {criticalBugs.length > 0 && (
-            <section className="py-12 border-y border-red-500/20 bg-red-500/5">
-              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                  <AlertCircle className="w-6 h-6 text-red-500" />
-                  Critical Issues
-                </h2>
+            <section className="py-16 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-b from-rose-500/10 via-rose-500/5 to-transparent" />
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                <motion.div 
+                  className="flex items-center gap-3 mb-8"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="w-10 h-10 rounded-xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center shadow-[0_0_20px_rgba(251,113,133,0.3)]">
+                    <ShieldAlert className="w-5 h-5 text-rose-400" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-white">
+                    Critical <span className="text-rose-400">Threats</span>
+                  </h2>
+                  <Badge className="bg-rose-500/10 border-rose-500/30 text-rose-300">
+                    {criticalBugs.length}
+                  </Badge>
+                </motion.div>
                 <div className="space-y-4">
                   {criticalBugs.map((bug) => (
                     <BugCard key={bug.id} bug={bug} />
@@ -274,12 +422,24 @@ const BugTracking = () => {
           )}
 
           {/* High Priority */}
-          <section className="py-12">
+          <section className="py-16 relative">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <AlertTriangle className="w-6 h-6 text-orange-500" />
-                High Priority
-              </h2>
+              <motion.div 
+                className="flex items-center gap-3 mb-8"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center shadow-[0_0_20px_rgba(251,191,36,0.3)]">
+                  <AlertTriangle className="w-5 h-5 text-amber-400" />
+                </div>
+                <h2 className="text-2xl font-bold text-white">
+                  High <span className="text-amber-400">Priority</span>
+                </h2>
+                <Badge className="bg-amber-500/10 border-amber-500/30 text-amber-300">
+                  {highBugs.length}
+                </Badge>
+              </motion.div>
               <div className="grid gap-4">
                 {highBugs.map((bug) => (
                   <BugCard key={bug.id} bug={bug} />
@@ -289,12 +449,24 @@ const BugTracking = () => {
           </section>
 
           {/* Medium Priority */}
-          <section className="py-12 bg-card/30">
+          <section className="py-16 relative bg-gradient-to-b from-purple-500/5 to-transparent">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <Info className="w-6 h-6 text-yellow-500" />
-                Medium Priority
-              </h2>
+              <motion.div 
+                className="flex items-center gap-3 mb-8"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <div className="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center shadow-[0_0_20px_rgba(192,132,252,0.3)]">
+                  <Zap className="w-5 h-5 text-purple-400" />
+                </div>
+                <h2 className="text-2xl font-bold text-white">
+                  Medium <span className="text-purple-400">Priority</span>
+                </h2>
+                <Badge className="bg-purple-500/10 border-purple-500/30 text-purple-300">
+                  {mediumBugs.length}
+                </Badge>
+              </motion.div>
               <div className="grid md:grid-cols-2 gap-4">
                 {mediumBugs.map((bug) => (
                   <BugCard key={bug.id} bug={bug} />
@@ -304,12 +476,24 @@ const BugTracking = () => {
           </section>
 
           {/* Low Priority */}
-          <section className="py-12">
+          <section className="py-16 relative">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <Circle className="w-6 h-6 text-green-500" />
-                Low Priority
-              </h2>
+              <motion.div 
+                className="flex items-center gap-3 mb-8"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <div className="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.3)]">
+                  <Info className="w-5 h-5 text-cyan-400" />
+                </div>
+                <h2 className="text-2xl font-bold text-white">
+                  Low <span className="text-cyan-400">Priority</span>
+                </h2>
+                <Badge className="bg-cyan-500/10 border-cyan-500/30 text-cyan-300">
+                  {lowBugs.length}
+                </Badge>
+              </motion.div>
               <div className="grid md:grid-cols-2 gap-4">
                 {lowBugs.map((bug) => (
                   <BugCard key={bug.id} bug={bug} />
@@ -318,34 +502,48 @@ const BugTracking = () => {
             </div>
           </section>
 
-          {/* CTA */}
-          <section className="py-16 border-t border-border/50">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h2 className="text-2xl font-bold mb-4">Found a bug?</h2>
-              <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-                Help us improve GamerOS by reporting issues on GitHub.
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <Button asChild size="lg" className="gap-2">
-                  <a
-                    href="https://github.com/urmoit/GamerOS/issues/new"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    Report a Bug
-                  </a>
-                </Button>
-                <Button asChild variant="outline" size="lg">
-                  <Link to="/roadmap">View Roadmap</Link>
-                </Button>
-              </div>
+          {/* CTA Section */}
+          <section className="py-20 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/10 via-transparent to-purple-500/10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-full blur-[100px]" />
+            
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-cyan-500 to-purple-600 flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.4)]">
+                  <Cpu className="w-8 h-8 text-white" />
+                </div>
+                <h2 className="text-3xl font-bold text-white mb-4">
+                  Found a <span className="text-gaming">Bug?</span>
+                </h2>
+                <p className="text-white/50 mb-8 max-w-xl mx-auto text-lg">
+                  Help us improve GamerOS by reporting issues on GitHub. Your feedback drives the evolution of the system.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <Button asChild size="lg" className="btn-neon gap-2 text-base px-8">
+                    <a
+                      href="https://github.com/urmoit/GamerOS/issues/new"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <ExternalLink className="w-5 h-5" />
+                      Report a Bug
+                    </a>
+                  </Button>
+                  <Button asChild variant="outline" size="lg" className="gap-2 text-base px-8 border-white/20 hover:bg-white/10 hover:border-cyan-500/50 transition-all">
+                    <Link to="/roadmap">View Roadmap</Link>
+                  </Button>
+                </div>
+              </motion.div>
             </div>
           </section>
 
           {/* Last Updated */}
-          <div className="text-center pb-8">
-            <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
+          <div className="text-center pb-12">
+            <p className="text-sm text-white/30 flex items-center justify-center gap-2 font-mono">
               <GitCommit className="w-4 h-4" />
               Last Updated: February 6, 2026
             </p>

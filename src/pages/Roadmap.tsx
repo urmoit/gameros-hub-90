@@ -29,17 +29,20 @@ import {
   ArrowRight,
   Layers,
   Bug,
-  ArrowLeft
+  ArrowLeft,
+  Crosshair,
+  Trophy,
+  Terminal
 } from "lucide-react";
 
 type PhaseStatus = "completed" | "in-progress" | "planned";
 type FilterType = "All" | "completed" | "in-progress" | "planned";
 
 const visionCards = [
-  { icon: Target, title: "Focused Development", description: "Prioritizing core functionality before expanding features", color: "from-blue-500 to-cyan-500" },
-  { icon: Zap, title: "Performance First", description: "Optimizing for speed and efficiency at every level", color: "from-yellow-500 to-orange-500" },
-  { icon: Code2, title: "Developer Friendly", description: "Creating intuitive APIs and documentation", color: "from-purple-500 to-pink-500" },
-  { icon: Users, title: "User Experience", description: "Designing with the end user always in mind", color: "from-green-500 to-emerald-500" },
+  { icon: Target, title: "Focused Development", description: "Prioritizing core functionality before expanding features", color: "from-[hsl(180_100%_50%)] to-[hsl(180_80%_40%)]" },
+  { icon: Zap, title: "Performance First", description: "Optimizing for speed and efficiency at every level", color: "from-[hsl(320_100%_60%)] to-[hsl(320_80%_50%)]" },
+  { icon: Code2, title: "Developer Friendly", description: "Creating intuitive APIs and documentation", color: "from-[hsl(280_100%_60%)] to-[hsl(280_80%_50%)]" },
+  { icon: Users, title: "User Experience", description: "Designing with the end user always in mind", color: "from-[hsl(180_100%_50%)] to-[hsl(280_100%_60%)]" },
 ];
 
 const phases = [
@@ -158,11 +161,11 @@ const phases = [
 ];
 
 const featureRoadmap = [
-  { icon: Monitor, category: "Graphics", color: "from-blue-500 to-indigo-500", items: ["VGA text mode", "Framebuffer graphics", "Hardware acceleration", "Multi-monitor", "HDR support"] },
-  { icon: Wifi, category: "Connectivity", color: "from-cyan-500 to-teal-500", items: ["Ethernet drivers", "WiFi chipset support", "Bluetooth stack", "USB 3.2 support", "NVMe drivers"] },
-  { icon: Shield, category: "Security", color: "from-red-500 to-rose-500", items: ["Secure boot chain", "App sandboxing", "Disk encryption", "Memory protection", "Firewall"] },
-  { icon: Gamepad2, category: "Gaming", color: "from-purple-500 to-violet-500", items: ["Game mode", "Controller support", "Low latency audio", "DirectX translation", "Proton-like layer"] },
-  { icon: Cpu, category: "Core Systems", color: "from-orange-500 to-amber-500", items: ["SMP support", "NUMA awareness", "Power management", "ACPI support", "Real-time scheduling"] },
+  { icon: Monitor, category: "Graphics", color: "from-[hsl(180_100%_50%)] to-[hsl(180_80%_40%)]", items: ["VGA text mode", "Framebuffer graphics", "Hardware acceleration", "Multi-monitor", "HDR support"] },
+  { icon: Wifi, category: "Connectivity", color: "from-[hsl(280_100%_60%)] to-[hsl(280_80%_50%)]", items: ["Ethernet drivers", "WiFi chipset support", "Bluetooth stack", "USB 3.2 support", "NVMe drivers"] },
+  { icon: Shield, category: "Security", color: "from-[hsl(320_100%_60%)] to-[hsl(320_80%_50%)]", items: ["Secure boot chain", "App sandboxing", "Disk encryption", "Memory protection", "Firewall"] },
+  { icon: Gamepad2, category: "Gaming", color: "from-[hsl(180_100%_50%)] to-[hsl(280_100%_60%)]", items: ["Game mode", "Controller support", "Low latency audio", "DirectX translation", "Proton-like layer"] },
+  { icon: Cpu, category: "Core Systems", color: "from-[hsl(280_100%_60%)] to-[hsl(320_100%_60%)]", items: ["SMP support", "NUMA awareness", "Power management", "ACPI support", "Real-time scheduling"] },
 ];
 
 const milestones = [
@@ -201,9 +204,17 @@ const Roadmap = () => {
 
   const getStatusColor = (status: PhaseStatus) => {
     switch (status) {
-      case "completed": return "bg-emerald-500/10 text-emerald-500 border-emerald-500/20";
-      case "in-progress": return "bg-primary/10 text-primary border-primary/20";
-      default: return "bg-muted text-muted-foreground border-border";
+      case "completed": return "bg-[hsl(180_100%_50%)]/10 text-[hsl(180_100%_50%)] border-[hsl(180_100%_50%)]/30 shadow-[0_0_10px_hsl(180_100%_50%/20%)]";
+      case "in-progress": return "bg-[hsl(320_100%_60%)]/10 text-[hsl(320_100%_60%)] border-[hsl(320_100%_60%)]/30 shadow-[0_0_10px_hsl(320_100%_60%/20%)]";
+      default: return "bg-[hsl(280_100%_60%)]/10 text-[hsl(280_100%_60%)] border-[hsl(280_100%_60%)]/30";
+    }
+  };
+
+  const getStatusGlow = (status: PhaseStatus) => {
+    switch (status) {
+      case "completed": return "shadow-[0_0_20px_hsl(180_100%_50%/30%)]";
+      case "in-progress": return "shadow-[0_0_20px_hsl(320_100%_60%/30%)]";
+      default: return "shadow-[0_0_20px_hsl(280_100%_60%/20%)]";
     }
   };
 
@@ -213,15 +224,26 @@ const Roadmap = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen flex flex-col bg-background">
+      <div className="min-h-screen flex flex-col bg-[hsl(225_25%_6%)]">
         <Header />
         
         <main className="flex-1">
           {/* Hero Section */}
           <section className="relative pt-32 pb-20 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5" />
-            <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
+            {/* Gaming Background Effects */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[hsl(180_100%_50%)]/5 via-transparent to-[hsl(280_100%_60%)]/5" />
+            <div className="absolute top-20 left-10 w-72 h-72 bg-[hsl(180_100%_50%)]/10 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-10 right-10 w-96 h-96 bg-[hsl(280_100%_60%)]/10 rounded-full blur-3xl" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[hsl(320_100%_60%)]/5 rounded-full blur-3xl" />
+            
+            {/* Grid Pattern */}
+            <div 
+              className="absolute inset-0 opacity-[0.03]"
+              style={{
+                backgroundImage: `linear-gradient(hsl(180_100%_50%) 1px, transparent 1px), linear-gradient(90deg, hsl(180_100%_50%) 1px, transparent 1px)`,
+                backgroundSize: '50px 50px'
+              }}
+            />
             
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
@@ -229,63 +251,75 @@ const Roadmap = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="text-center"
               >
-                <Badge variant="outline" className="mb-6 px-4 py-2 text-sm border-primary/30 bg-primary/5">
-                  <Rocket className="w-4 h-4 mr-2" />
+                <Badge variant="outline" className="mb-6 px-4 py-2 text-sm border-[hsl(180_100%_50%)]/30 bg-[hsl(180_100%_50%)]/5 text-[hsl(180_100%_50%)] shadow-[0_0_15px_hsl(180_100%_50%/20%)]">
+                  <Crosshair className="w-4 h-4 mr-2" />
                   Development Roadmap
                 </Badge>
                 
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-white">
                   Building the{" "}
-                  <span className="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[hsl(180_100%_50%)] via-[hsl(280_100%_60%)] to-[hsl(320_100%_60%)] bg-clip-text text-transparent">
                     Future
                   </span>
                 </h1>
                 
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
+                <p className="text-xl text-white/60 max-w-3xl mx-auto mb-12">
                   Follow our journey from a hobby project to a fully-featured operating system. 
                   Track progress, explore features, and see what's coming next.
                 </p>
 
                 {/* Progress Overview */}
                 <div className="max-w-2xl mx-auto">
-                  <div className="glass-card p-6 rounded-2xl">
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="glass-card p-6 rounded-2xl border border-white/10 backdrop-blur-xl bg-white/5 shadow-[0_0_40px_hsl(180_100%_50%/10%)]"
+                  >
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-sm font-medium text-muted-foreground">Overall Progress</span>
-                      <span className="text-2xl font-bold text-primary">{totalProgress}%</span>
+                      <span className="text-sm font-medium text-white/60">Overall Progress</span>
+                      <span className="text-2xl font-bold text-[hsl(180_100%_50%)] drop-shadow-[0_0_10px_hsl(180_100%_50%)]">{totalProgress}%</span>
                     </div>
-                    <Progress value={totalProgress} className="h-3 mb-4" />
-                    <div className="flex justify-between text-sm text-muted-foreground">
+                    <div className="relative h-3 bg-white/10 rounded-full overflow-hidden mb-4">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        animate={{ width: `${totalProgress}%` }}
+                        transition={{ duration: 1, delay: 0.5 }}
+                        className="absolute inset-y-0 left-0 bg-gradient-to-r from-[hsl(180_100%_50%)] to-[hsl(280_100%_60%)] rounded-full shadow-[0_0_20px_hsl(180_100%_50%)]"
+                      />
+                    </div>
+                    <div className="flex justify-between text-sm text-white/60">
                       <span>{completedFeatures} of {totalFeatures} features completed</span>
                       <span>{phases.filter(p => p.status === "in-progress").length} phases in progress</span>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               </motion.div>
             </div>
           </section>
 
           {/* Stats Section */}
-          <section className="py-12 border-y border-border bg-card/50">
+          <section className="py-12 border-y border-white/10 bg-white/[0.02]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {[
-                  { label: "Development Phases", value: phases.length, icon: Layers },
-                  { label: "Total Features", value: totalFeatures, icon: Sparkles },
-                  { label: "Features Complete", value: completedFeatures, icon: Check },
-                  { label: "Target Year", value: "2027", icon: Flag },
+                  { label: "Development Phases", value: phases.length, icon: Layers, color: "[hsl(180_100%_50%)]" },
+                  { label: "Total Features", value: totalFeatures, icon: Sparkles, color: "[hsl(280_100%_60%)]" },
+                  { label: "Features Complete", value: completedFeatures, icon: Check, color: "[hsl(320_100%_60%)]" },
+                  { label: "Target Year", value: "2027", icon: Flag, color: "[hsl(180_100%_50%)]" },
                 ].map((stat, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
-                    className="text-center"
+                    className="text-center group"
                   >
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 mb-3">
-                      <stat.icon className="w-6 h-6 text-primary" />
+                    <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-${stat.color}/10 mb-3 border border-${stat.color}/20 shadow-[0_0_20px_hsl(${stat.color === '[hsl(180_100%_50%)]' ? '180_100%_50%' : stat.color === '[hsl(280_100%_60%)]' ? '280_100%_60%' : '320_100%_60%'}/20%)] group-hover:scale-110 transition-transform duration-300`}>
+                      <stat.icon className="w-6 h-6" style={{ color: `hsl(${stat.color === '[hsl(180_100%_50%)]' ? '180 100% 50%' : stat.color === '[hsl(280_100%_60%)]' ? '280 100% 60%' : '320 100% 60%'})` }} />
                     </div>
-                    <div className="text-3xl font-bold mb-1">{stat.value}</div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                    <div className="text-3xl font-bold mb-1 text-white">{stat.value}</div>
+                    <div className="text-sm text-white/60">{stat.label}</div>
                   </motion.div>
                 ))}
               </div>
@@ -301,8 +335,10 @@ const Roadmap = () => {
                 viewport={{ once: true }}
                 className="text-center mb-12"
               >
-                <h2 className="text-3xl font-bold mb-4">Our Vision</h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">
+                <h2 className="text-3xl font-bold mb-4 text-white">
+                  Our <span className="text-gaming">Vision</span>
+                </h2>
+                <p className="text-white/60 max-w-2xl mx-auto">
                   The guiding principles that drive every decision we make
                 </p>
               </motion.div>
@@ -315,13 +351,13 @@ const Roadmap = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="group glass-card p-6 rounded-2xl hover:shadow-xl transition-all duration-300"
+                    className="group glass-card p-6 rounded-2xl border border-white/10 backdrop-blur-xl bg-white/5 hover:bg-white/10 transition-all duration-300 hover:shadow-[0_0_30px_hsl(180_100%_50%/15%)] hover:-translate-y-1"
                   >
-                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${card.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${card.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                       <card.icon className="w-7 h-7 text-white" />
                     </div>
-                    <h3 className="font-semibold text-lg mb-2">{card.title}</h3>
-                    <p className="text-sm text-muted-foreground">{card.description}</p>
+                    <h3 className="font-semibold text-lg mb-2 text-white">{card.title}</h3>
+                    <p className="text-sm text-white/60">{card.description}</p>
                   </motion.div>
                 ))}
               </div>
@@ -335,21 +371,21 @@ const Roadmap = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="glass-card p-6 rounded-2xl border-amber-500/20 bg-gradient-to-r from-amber-500/5 to-orange-500/5"
+                className="glass-card p-6 rounded-2xl border-[hsl(320_100%_60%)]/30 bg-gradient-to-r from-[hsl(320_100%_60%)]/10 to-[hsl(280_100%_60%)]/10 backdrop-blur-xl shadow-[0_0_40px_hsl(320_100%_60%/15%)]"
               >
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[hsl(320_100%_60%)] to-[hsl(280_100%_60%)] flex items-center justify-center shrink-0 shadow-[0_0_20px_hsl(320_100%_60%/40%)]">
                       <Bug className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-lg">Road to Alpha</h3>
-                      <p className="text-sm text-muted-foreground">
+                      <h3 className="font-semibold text-lg text-white">Road to Alpha</h3>
+                      <p className="text-sm text-white/60">
                         We're in a heavy bug-fixing phase. Every bug fixed brings us closer to the first public Alpha release.
                       </p>
                     </div>
                   </div>
-                  <Button asChild variant="outline" className="shrink-0">
+                  <Button asChild variant="outline" className="shrink-0 border-[hsl(320_100%_60%)]/50 text-[hsl(320_100%_60%)] hover:bg-[hsl(320_100%_60%)]/10">
                     <Link to="/news/alpha-release" className="gap-2">
                       Read Update <ArrowRight className="w-4 h-4" />
                     </Link>
@@ -360,7 +396,7 @@ const Roadmap = () => {
           </section>
 
           {/* Milestones Timeline */}
-          <section className="py-20 bg-secondary/30">
+          <section className="py-20 bg-white/[0.02]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -368,13 +404,15 @@ const Roadmap = () => {
                 viewport={{ once: true }}
                 className="text-center mb-12"
               >
-                <h2 className="text-3xl font-bold mb-4">Key Milestones</h2>
-                <p className="text-muted-foreground">Major checkpoints on our journey</p>
+                <h2 className="text-3xl font-bold mb-4 text-white">
+                  Key <span className="text-gaming-alt">Milestones</span>
+                </h2>
+                <p className="text-white/60">Major checkpoints on our journey</p>
               </motion.div>
               
               <div className="relative">
                 {/* Timeline line - centered */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary/50 to-border rounded-full hidden md:block" />
+                <div className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[hsl(180_100%_50%)] via-[hsl(280_100%_60%)] to-[hsl(320_100%_60%)] rounded-full hidden md:block shadow-[0_0_20px_hsl(180_100%_50%/50%)]" />
                 
                 <div className="space-y-12 md:space-y-16">
                   {milestones.map((milestone, i) => (
@@ -392,13 +430,13 @@ const Roadmap = () => {
                       <div className={`flex-1 w-full md:w-auto ${i % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
                         <motion.div 
                           whileHover={{ scale: 1.02 }}
-                          className={`glass-card p-6 rounded-2xl inline-block max-w-sm ${milestone.isNext ? 'border-amber-500/30' : ''}`}
+                          className={`glass-card p-6 rounded-2xl inline-block max-w-sm border border-white/10 backdrop-blur-xl bg-white/5 hover:border-white/20 transition-all duration-300 ${milestone.isNext ? 'border-[hsl(320_100%_60%)]/50 shadow-[0_0_30px_hsl(320_100%_60%/20%)]' : ''}`}
                       >
-                          <div className={`text-sm font-semibold mb-2 ${milestone.isNext ? 'text-amber-500' : 'text-primary'}`}>{milestone.date}</div>
-                          <h3 className="font-bold text-xl mb-2">{milestone.title}</h3>
-                          <p className="text-sm text-muted-foreground">{milestone.description}</p>
+                          <div className={`text-sm font-semibold mb-2 ${milestone.isNext ? 'text-[hsl(320_100%_60%)]' : milestone.completed ? 'text-[hsl(180_100%_50%)]' : 'text-[hsl(280_100%_60%)]'}`}>{milestone.date}</div>
+                          <h3 className="font-bold text-xl mb-2 text-white">{milestone.title}</h3>
+                          <p className="text-sm text-white/60">{milestone.description}</p>
                           {milestone.link && (
-                            <Link to={milestone.link} className="inline-flex items-center gap-1 text-sm text-amber-500 hover:underline mt-3">
+                            <Link to={milestone.link} className="inline-flex items-center gap-1 text-sm text-[hsl(320_100%_60%)] hover:underline mt-3">
                               Learn more <ArrowRight className="w-3 h-3" />
                             </Link>
                           )}
@@ -411,10 +449,10 @@ const Roadmap = () => {
                           whileHover={{ scale: 1.1 }}
                           className={`w-14 h-14 rounded-full flex items-center justify-center shadow-lg ${
                             milestone.completed 
-                              ? "bg-gradient-to-br from-emerald-400 to-emerald-600 text-white shadow-emerald-500/30" 
+                              ? "bg-gradient-to-br from-[hsl(180_100%_50%)] to-[hsl(180_80%_40%)] text-white shadow-[0_0_30px_hsl(180_100%_50%/50%)]" 
                               : milestone.isNext
-                              ? "bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-amber-500/30"
-                              : "bg-card border-2 border-border shadow-lg"
+                              ? "bg-gradient-to-br from-[hsl(320_100%_60%)] to-[hsl(280_100%_60%)] text-white shadow-[0_0_30px_hsl(320_100%_60%/50%)]"
+                              : "bg-white/5 border-2 border-white/20 text-white/60"
                           }`}
                         >
                           {milestone.completed ? (
@@ -422,7 +460,7 @@ const Roadmap = () => {
                           ) : milestone.isNext ? (
                             <Rocket className="w-6 h-6 text-white" />
                           ) : (
-                            <Calendar className="w-6 h-6 text-muted-foreground" />
+                            <Calendar className="w-6 h-6 text-white/60" />
                           )}
                         </motion.div>
                       </div>
@@ -445,8 +483,10 @@ const Roadmap = () => {
                 viewport={{ once: true }}
                 className="text-center mb-8"
               >
-                <h2 className="text-3xl font-bold mb-4">Development Phases</h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+                <h2 className="text-3xl font-bold mb-4 text-white">
+                  Development <span className="text-gaming">Phases</span>
+                </h2>
+                <p className="text-white/60 max-w-2xl mx-auto mb-8">
                   Detailed breakdown of each development phase and its features
                 </p>
               </motion.div>
@@ -459,7 +499,11 @@ const Roadmap = () => {
                     variant={activeFilter === filter ? "default" : "outline"}
                     size="sm"
                     onClick={() => setActiveFilter(filter)}
-                    className="capitalize"
+                    className={`capitalize ${
+                      activeFilter === filter 
+                        ? "bg-gradient-to-r from-[hsl(180_100%_50%)] to-[hsl(280_100%_60%)] text-black font-semibold border-0 shadow-[0_0_20px_hsl(180_100%_50%/40%)]" 
+                        : "border-white/20 text-white/70 hover:bg-white/10 hover:text-white"
+                    }`}
                   >
                     {filter === "in-progress" ? "In Progress" : filter}
                   </Button>
@@ -480,12 +524,12 @@ const Roadmap = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="glass-card rounded-2xl overflow-hidden"
+                        className={`glass-card rounded-2xl overflow-hidden border border-white/10 backdrop-blur-xl bg-white/5 hover:border-white/20 transition-all duration-300 ${getStatusGlow(phase.status)}`}
                       >
                         {/* Phase Header */}
                         <button
                           onClick={() => togglePhase(originalIndex)}
-                          className="w-full p-6 flex items-center gap-6 hover:bg-muted/50 transition-colors text-left"
+                          className="w-full p-6 flex items-center gap-6 hover:bg-white/5 transition-colors text-left"
                         >
                           {/* Status Indicator */}
                           <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${getStatusColor(phase.status)}`}>
@@ -495,27 +539,39 @@ const Roadmap = () => {
                           {/* Phase Info */}
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-3 mb-1">
-                              <span className="text-sm font-medium text-primary">{phase.phase}</span>
+                              <span className="text-sm font-medium text-[hsl(180_100%_50%)]">{phase.phase}</span>
                               <Badge variant="outline" className={getStatusColor(phase.status)}>
                                 {phase.status === "in-progress" ? "In Progress" : phase.status}
                               </Badge>
-                              <span className="text-sm text-muted-foreground hidden sm:inline">ETA: {phase.eta}</span>
+                              <span className="text-sm text-white/50 hidden sm:inline">ETA: {phase.eta}</span>
                             </div>
-                            <h3 className="text-xl font-semibold truncate">{phase.title}</h3>
-                            <p className="text-sm text-muted-foreground hidden md:block">{phase.description}</p>
+                            <h3 className="text-xl font-semibold truncate text-white">{phase.title}</h3>
+                            <p className="text-sm text-white/50 hidden md:block">{phase.description}</p>
                           </div>
                           
                           {/* Progress */}
                           <div className="hidden sm:block w-32">
                             <div className="flex items-center justify-between text-sm mb-1">
-                              <span className="text-muted-foreground">Progress</span>
-                              <span className="font-medium">{phase.progress}%</span>
+                              <span className="text-white/50">Progress</span>
+                              <span className="font-medium text-[hsl(180_100%_50%)]">{phase.progress}%</span>
                             </div>
-                            <Progress value={phase.progress} className="h-2" />
+                            <div className="relative h-2 bg-white/10 rounded-full overflow-hidden">
+                              <motion.div 
+                                initial={{ width: 0 }}
+                                animate={{ width: `${phase.progress}%` }}
+                                className={`absolute inset-y-0 left-0 rounded-full ${
+                                  phase.status === "completed" 
+                                    ? "bg-gradient-to-r from-[hsl(180_100%_50%)] to-[hsl(180_80%_40%)] shadow-[0_0_10px_hsl(180_100%_50%)]" 
+                                    : phase.status === "in-progress"
+                                    ? "bg-gradient-to-r from-[hsl(320_100%_60%)] to-[hsl(320_80%_50%)] shadow-[0_0_10px_hsl(320_100%_60%)]"
+                                    : "bg-gradient-to-r from-[hsl(280_100%_60%)] to-[hsl(280_80%_50%)]"
+                                }`}
+                              />
+                            </div>
                           </div>
                           
                           {/* Expand Icon */}
-                          <div className="text-muted-foreground">
+                          <div className="text-white/50">
                             {isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
                           </div>
                         </button>
@@ -530,37 +586,52 @@ const Roadmap = () => {
                               transition={{ duration: 0.2 }}
                               className="overflow-hidden"
                             >
-                              <div className="px-6 pb-6 pt-2 border-t border-border">
+                              <div className="px-6 pb-6 pt-2 border-t border-white/10">
                                 <div className="sm:hidden mb-4">
                                   <div className="flex items-center justify-between text-sm mb-1">
-                                    <span className="text-muted-foreground">Progress</span>
-                                    <span className="font-medium">{phase.progress}%</span>
+                                    <span className="text-white/50">Progress</span>
+                                    <span className="font-medium text-[hsl(180_100%_50%)]">{phase.progress}%</span>
                                   </div>
-                                  <Progress value={phase.progress} className="h-2" />
+                                  <div className="relative h-2 bg-white/10 rounded-full overflow-hidden">
+                                    <motion.div 
+                                      initial={{ width: 0 }}
+                                      animate={{ width: `${phase.progress}%` }}
+                                      className={`absolute inset-y-0 left-0 rounded-full ${
+                                        phase.status === "completed" 
+                                          ? "bg-gradient-to-r from-[hsl(180_100%_50%)] to-[hsl(180_80%_40%)] shadow-[0_0_10px_hsl(180_100%_50%)]" 
+                                          : phase.status === "in-progress"
+                                          ? "bg-gradient-to-r from-[hsl(320_100%_60%)] to-[hsl(320_80%_50%)] shadow-[0_0_10px_hsl(320_100%_60%)]"
+                                          : "bg-gradient-to-r from-[hsl(280_100%_60%)] to-[hsl(280_80%_50%)]"
+                                      }`}
+                                    />
+                                  </div>
                                 </div>
                                 
-                                <h4 className="text-sm font-medium text-muted-foreground mb-4">Features</h4>
+                                <h4 className="text-sm font-medium text-white/50 mb-4">Features</h4>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                                   {phase.features.map((feature, fi) => (
-                                    <div
+                                    <motion.div
                                       key={fi}
-                                      className={`flex items-center gap-3 p-3 rounded-xl ${
+                                      initial={{ opacity: 0, y: 10 }}
+                                      animate={{ opacity: 1, y: 0 }}
+                                      transition={{ delay: fi * 0.05 }}
+                                      className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-300 ${
                                         feature.done 
-                                          ? "bg-emerald-500/10 border border-emerald-500/20" 
-                                          : "bg-muted/50 border border-border"
+                                          ? "bg-[hsl(180_100%_50%)]/10 border-[hsl(180_100%_50%)]/30 shadow-[0_0_15px_hsl(180_100%_50%/10%)]" 
+                                          : "bg-white/5 border-white/10 hover:border-white/20"
                                       }`}
                                     >
                                       <div className={`w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 ${
                                         feature.done 
-                                          ? "bg-emerald-500 text-white" 
-                                          : "border-2 border-muted-foreground/30"
+                                          ? "bg-gradient-to-br from-[hsl(180_100%_50%)] to-[hsl(180_80%_40%)] text-black shadow-[0_0_10px_hsl(180_100%_50%/50%)]" 
+                                          : "border-2 border-white/30"
                                       }`}>
                                         {feature.done && <Check className="w-3 h-3" />}
                                       </div>
-                                      <span className={`text-sm ${feature.done ? "text-foreground" : "text-muted-foreground"}`}>
+                                      <span className={`text-sm ${feature.done ? "text-white" : "text-white/50"}`}>
                                         {feature.name}
                                       </span>
-                                    </div>
+                                    </motion.div>
                                   ))}
                                 </div>
                               </div>
@@ -576,7 +647,7 @@ const Roadmap = () => {
           </section>
 
           {/* Feature Roadmap */}
-          <section className="py-20 bg-secondary/30">
+          <section className="py-20 bg-white/[0.02]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -584,8 +655,10 @@ const Roadmap = () => {
                 viewport={{ once: true }}
                 className="text-center mb-12"
               >
-                <h2 className="text-3xl font-bold mb-4">Feature Categories</h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">
+                <h2 className="text-3xl font-bold mb-4 text-white">
+                  Feature <span className="text-gaming-alt">Categories</span>
+                </h2>
+                <p className="text-white/60 max-w-2xl mx-auto">
                   Explore the different areas of development and planned features
                 </p>
               </motion.div>
@@ -598,16 +671,16 @@ const Roadmap = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="glass-card p-6 rounded-2xl group hover:shadow-xl transition-all duration-300"
+                    className="glass-card p-6 rounded-2xl group border border-white/10 backdrop-blur-xl bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_hsl(280_100%_60%/15%)]"
                   >
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                       <category.icon className="w-6 h-6 text-white" />
                     </div>
-                    <h3 className="font-semibold text-lg mb-4">{category.category}</h3>
+                    <h3 className="font-semibold text-lg mb-4 text-white">{category.category}</h3>
                     <ul className="space-y-2">
                       {category.items.map((item, ii) => (
-                        <li key={ii} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <ArrowRight className="w-3 h-3 text-primary flex-shrink-0" />
+                        <li key={ii} className="flex items-center gap-2 text-sm text-white/60">
+                          <ArrowRight className="w-3 h-3 text-[hsl(180_100%_50%)] flex-shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -625,22 +698,26 @@ const Roadmap = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="glass-card p-12 rounded-3xl bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5"
+                className="glass-card p-12 rounded-3xl border border-white/10 backdrop-blur-xl bg-gradient-to-br from-[hsl(180_100%_50%)]/5 via-white/5 to-[hsl(280_100%_60%)]/5 shadow-[0_0_60px_hsl(180_100%_50%/10%)]"
               >
-                <Sparkles className="w-12 h-12 text-primary mx-auto mb-6" />
-                <h2 className="text-3xl font-bold mb-4">Want to Contribute?</h2>
-                <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[hsl(180_100%_50%)] to-[hsl(280_100%_60%)] flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_hsl(180_100%_50%/40%)]">
+                  <Terminal className="w-6 h-6 text-black" />
+                </div>
+                <h2 className="text-3xl font-bold mb-4 text-white">
+                  Want to <span className="text-gaming">Contribute?</span>
+                </h2>
+                <p className="text-white/60 mb-8 max-w-xl mx-auto">
                   GamerOS is open source and we welcome contributions from developers 
                   of all skill levels. Help us build something amazing!
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
-                  <Button asChild size="lg">
+                  <Button asChild size="lg" className="btn-neon font-semibold">
                     <a href="https://github.com/urmoit/GamerOS" target="_blank" rel="noopener noreferrer">
                       View on GitHub
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </a>
                   </Button>
-                  <Button variant="outline" size="lg" asChild>
+                  <Button variant="outline" size="lg" asChild className="border-white/20 text-white hover:bg-white/10">
                     <a href="https://github.com/urmoit/GamerOS/issues" target="_blank" rel="noopener noreferrer">
                       View Open Issues
                     </a>

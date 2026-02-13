@@ -17,7 +17,10 @@ import {
   ChevronDown,
   X,
   Sparkles,
-  Palette
+  Palette,
+  Zap,
+  Flame,
+  Gamepad2,
 } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -157,7 +160,7 @@ const newsItems: NewsItem[] = [
   },
   {
     id: "5",
-    title: "Update bug tracking documentation and enhance kernel functionality",
+    title: "Update current bugs documentation and enhance kernel functionality",
     date: "January 15, 2026",
     type: "Commit",
     description: "Revised `currentbugs.md` to reflect a decrease in total bugs to 19, with updated counts for critical and resolved issues. Removed the critical bug entry for the DEXLFOK boot hang as it has been resolved. Added a fallback mechanism in `vga_draw_char` to render text in text mode if graphics mode is not initialized.",
@@ -244,18 +247,63 @@ const newsItems: NewsItem[] = [
 
 const filterOptions: NewsType[] = ["All", "Commit", "Announcement", "Community"];
 
+// Gaming theme color configuration
 const typeConfig = {
   Commit: {
-    color: "bg-emerald-500/10 text-emerald-500 border-emerald-500/20",
+    color: "bg-cyan-500/10 text-cyan-400 border-cyan-500/30",
+    glowColor: "group-hover:shadow-[0_0_20px_rgba(6,182,212,0.3)]",
     icon: GitCommit,
+    gradient: "from-cyan-500 to-cyan-400",
   },
   Announcement: {
-    color: "bg-primary/10 text-primary border-primary/20",
+    color: "bg-amber-500/10 text-amber-400 border-amber-500/30",
+    glowColor: "group-hover:shadow-[0_0_20px_rgba(251,191,36,0.3)]",
     icon: Megaphone,
+    gradient: "from-amber-500 to-amber-400",
   },
   Community: {
-    color: "bg-purple-500/10 text-purple-500 border-purple-500/20",
+    color: "bg-purple-500/10 text-purple-400 border-purple-500/30",
+    glowColor: "group-hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]",
     icon: Users,
+    gradient: "from-purple-500 to-purple-400",
+  },
+};
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+};
+
+const glowPulse = {
+  animate: {
+    boxShadow: [
+      "0 0 20px rgba(6,182,212,0.3)",
+      "0 0 40px rgba(168,85,247,0.3)",
+      "0 0 20px rgba(6,182,212,0.3)",
+    ],
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
   },
 };
 
@@ -302,109 +350,153 @@ const News = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-[hsl(225_25%_6%)]">
         <Header />
 
         <main className="flex-1">
           {/* Hero Section */}
           <section className="relative pt-32 pb-20 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5" />
-            <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
-
-            <div className="container mx-auto px-4 relative">
+            {/* Background Effects */}
+            <div className="absolute inset-0">
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-500/10 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent" />
+              {/* Grid Pattern */}
+              <div className="absolute inset-0 grid-pattern opacity-30" />
+              {/* Animated Glow Orbs */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="text-center max-w-3xl mx-auto"
-              >
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-                  <Sparkles className="w-4 h-4 text-primary" />
-                  <span className="text-sm font-medium text-primary">Latest Updates</span>
-                </div>
-                <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                  News & Updates
-                </h1>
-                <p className="text-lg text-muted-foreground">
-                  Stay up to date with the latest GamerOS development news, commits, and community announcements.
-                </p>
-              </motion.div>
-
-              {/* Stats */}
+                animate={{
+                  x: [0, 100, 0],
+                  y: [0, -50, 0],
+                }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="absolute top-20 left-10 w-96 h-96 bg-cyan-500/20 rounded-full blur-[120px]"
+              />
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="flex flex-wrap justify-center gap-6 mt-10"
+                animate={{
+                  x: [0, -100, 0],
+                  y: [0, 50, 0],
+                }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                className="absolute bottom-10 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px]"
+              />
+            </div>
+
+            <div className="container mx-auto px-4 relative z-10">
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="text-center max-w-4xl mx-auto"
               >
-                {[
-                  { label: "Total Updates", value: stats.total, icon: Tag },
-                  { label: "Commits", value: stats.commits, icon: GitCommit },
-                  { label: "Announcements", value: stats.announcements, icon: Megaphone },
-                  { label: "Community", value: stats.community, icon: Users },
-                ].map((stat, i) => (
-                  <div
-                    key={stat.label}
-                    className="flex items-center gap-3 px-5 py-3 rounded-xl glass-card"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <stat.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold">{stat.value}</div>
-                      <div className="text-xs text-muted-foreground">{stat.label}</div>
-                    </div>
+                {/* Badge */}
+                <motion.div variants={itemVariants} className="mb-6">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-cyan-500/30">
+                    <Zap className="w-4 h-4 text-cyan-400" />
+                    <span className="text-sm font-medium text-cyan-400">Latest Updates</span>
                   </div>
-                ))}
+                </motion.div>
+
+                {/* Title */}
+                <motion.h1
+                  variants={itemVariants}
+                  className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6"
+                >
+                  <span className="text-gaming">News & Updates</span>
+                </motion.h1>
+
+                {/* Description */}
+                <motion.p
+                  variants={itemVariants}
+                  className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto"
+                >
+                  Stay up to date with the latest GamerOS development news, commits, and community announcements.
+                </motion.p>
+
+                {/* Stats */}
+                <motion.div
+                  variants={itemVariants}
+                  className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12"
+                >
+                  {[
+                    { label: "Total Updates", value: stats.total, icon: Tag, color: "cyan" },
+                    { label: "Commits", value: stats.commits, icon: GitCommit, color: "emerald" },
+                    { label: "Announcements", value: stats.announcements, icon: Megaphone, color: "amber" },
+                    { label: "Community", value: stats.community, icon: Users, color: "purple" },
+                  ].map((stat, i) => (
+                    <motion.div
+                      key={stat.label}
+                      variants={itemVariants}
+                      whileHover={{ scale: 1.05, y: -5 }}
+                      className="glass-card p-4 border border-white/10 group cursor-default"
+                    >
+                      <div className="flex flex-col items-center gap-2">
+                        <div className={`w-12 h-12 rounded-xl bg-${stat.color}-500/10 flex items-center justify-center group-hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-shadow duration-300`}>
+                          <stat.icon className={`w-6 h-6 text-${stat.color}-400`} />
+                        </div>
+                        <div className="text-3xl font-bold text-white">{stat.value}</div>
+                        <div className="text-xs text-white/50 uppercase tracking-wider">{stat.label}</div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
               </motion.div>
             </div>
           </section>
 
           {/* Featured Section */}
           {featuredItems.length > 0 && (
-            <section className="py-12 border-y border-border/50 bg-muted/30">
+            <section className="py-16 border-y border-white/5 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent">
               <div className="container mx-auto px-4">
-                <div className="flex items-center gap-2 mb-6">
-                  <Sparkles className="w-5 h-5 text-primary" />
-                  <h2 className="text-xl font-semibold">Featured</h2>
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="flex items-center gap-3 mb-8"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-[0_0_20px_rgba(251,191,36,0.3)]">
+                    <Flame className="w-5 h-5 text-white" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-gaming-alt">Featured</h2>
+                </motion.div>
+
                 <div className="grid md:grid-cols-2 gap-6">
                   {featuredItems.map((item, i) => (
                     <motion.div
                       key={item.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: i * 0.1 }}
-                      className="glass-card p-6 fluent-hover group"
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: i * 0.1 }}
+                      whileHover={{ y: -5 }}
+                      className={`glass-card glass-card-hover p-6 group ${typeConfig[item.type].glowColor} transition-all duration-300`}
                     >
                       <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center shrink-0">
-                          <item.icon className="w-6 h-6 text-primary-foreground" />
+                        <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${typeConfig[item.type].gradient} flex items-center justify-center shrink-0 shadow-lg`}>
+                          <item.icon className="w-7 h-7 text-white" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 mb-2">
+                          <div className="flex items-center gap-2 mb-2 flex-wrap">
                             <Badge variant="outline" className={typeConfig[item.type].color}>
                               {item.type}
                             </Badge>
                             {item.commitCode && (
-                              <Badge variant="secondary" className="font-mono text-xs">
+                              <Badge variant="secondary" className="font-mono text-xs bg-white/5 text-white/70 border-white/10">
                                 {item.commitCode}
                               </Badge>
                             )}
                           </div>
-                          <h3 className="font-semibold mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                          <h3 className="font-semibold text-lg mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors">
                             {item.internalLink ? (
                               <Link to={item.internalLink}>{item.title}</Link>
                             ) : (
                               item.title
                             )}
                           </h3>
-                          <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
+                          <p className="text-sm text-white/50 line-clamp-2 mb-4">
                             {item.description}
                           </p>
                           <div className="flex items-center justify-between">
-                            <span className="text-xs text-muted-foreground flex items-center gap-1">
+                            <span className="text-xs text-white/40 flex items-center gap-1">
                               <Clock className="w-3 h-3" />
                               {item.date}
                             </span>
@@ -413,7 +505,7 @@ const News = () => {
                                 href={item.commitUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-xs text-primary flex items-center gap-1 hover:underline"
+                                className="text-xs text-cyan-400 flex items-center gap-1 hover:text-cyan-300 transition-colors"
                               >
                                 View commit <ExternalLink className="w-3 h-3" />
                               </a>
@@ -421,7 +513,7 @@ const News = () => {
                             {item.internalLink && (
                               <Link
                                 to={item.internalLink}
-                                className="text-xs text-primary flex items-center gap-1 hover:underline"
+                                className="text-xs text-cyan-400 flex items-center gap-1 hover:text-cyan-300 transition-colors"
                               >
                                 Read more <ArrowRight className="w-3 h-3" />
                               </Link>
@@ -437,29 +529,29 @@ const News = () => {
           )}
 
           {/* Filters & Content */}
-          <section className="py-12">
+          <section className="py-16">
             <div className="container mx-auto px-4">
               {/* Filter Bar */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="glass-card p-4 mb-8"
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="glass-card p-6 mb-8 border border-white/10"
               >
-                <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
+                <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
                   {/* Search */}
-                  <div className="relative w-full lg:w-80">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <div className="relative w-full lg:w-96">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
                     <Input
                       placeholder="Search news..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 bg-background/50"
+                      className="pl-11 bg-white/5 border-white/10 text-white placeholder:text-white/40 focus:border-cyan-500/50 focus:ring-cyan-500/20"
                     />
                     {searchQuery && (
                       <button
                         onClick={() => setSearchQuery("")}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
                       >
                         <X className="w-4 h-4" />
                       </button>
@@ -467,71 +559,115 @@ const News = () => {
                   </div>
 
                   <div className="flex flex-wrap items-center gap-3">
-                    {/* Type Filters */}
-                    <div className="flex items-center gap-1 p-1 rounded-lg bg-muted/50">
-                      {filterOptions.map((filter) => (
-                        <button
-                          key={filter}
-                          onClick={() => setActiveFilter(filter)}
-                          className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${activeFilter === filter
-                            ? "bg-primary text-primary-foreground shadow-sm"
-                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    {/* Type Filters - Gaming Style */}
+                    <div className="flex items-center gap-2 p-1.5 rounded-xl bg-white/5 border border-white/10">
+                      {filterOptions.map((filter) => {
+                        const isActive = activeFilter === filter;
+                        const filterColors: Record<string, string> = {
+                          All: "from-cyan-500 to-purple-500",
+                          Commit: "from-cyan-500 to-cyan-400",
+                          Announcement: "from-amber-500 to-orange-500",
+                          Community: "from-purple-500 to-pink-500",
+                        };
+                        return (
+                          <button
+                            key={filter}
+                            onClick={() => setActiveFilter(filter)}
+                            className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
+                              isActive
+                                ? "text-white"
+                                : "text-white/50 hover:text-white hover:bg-white/5"
                             }`}
-                        >
-                          {filter}
-                        </button>
-                      ))}
+                          >
+                            {isActive && (
+                              <motion.div
+                                layoutId="activeFilter"
+                                className={`absolute inset-0 bg-gradient-to-r ${filterColors[filter]} rounded-lg`}
+                                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                              />
+                            )}
+                            <span className="relative z-10">{filter}</span>
+                          </button>
+                        );
+                      })}
                     </div>
 
                     {/* Sort Dropdown */}
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="outline" size="sm" className="gap-2">
-                          <Filter className="w-4 h-4" />
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="gap-2 bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white"
+                        >
+                          <Filter className="w-4 h-4 text-cyan-400" />
                           {sortOrder === "newest" ? "Newest First" : "Oldest First"}
                           <ChevronDown className="w-3 h-3" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuItem onClick={() => setSortOrder("newest")}>
+                      <DropdownMenuContent align="end" className="bg-[hsl(225_25%_8%)] border-white/10">
+                        <DropdownMenuItem 
+                          onClick={() => setSortOrder("newest")}
+                          className="text-white/70 hover:text-white focus:bg-white/5 cursor-pointer"
+                        >
                           Newest First
                         </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setSortOrder("oldest")}>
+                        <DropdownMenuItem 
+                          onClick={() => setSortOrder("oldest")}
+                          className="text-white/70 hover:text-white focus:bg-white/5 cursor-pointer"
+                        >
                           Oldest First
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
 
                     {/* Archive Link */}
-                    <Button variant="outline" size="sm" asChild>
-                      <Link to="/news/monthly/february-2026" className="gap-2">
-                        <Calendar className="w-4 h-4" />
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      asChild
+                      className="gap-2 bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white"
+                    >
+                      <Link to="/news/monthly/february-2026">
+                        <Calendar className="w-4 h-4 text-purple-400" />
                         Monthly Archive
                       </Link>
                     </Button>
-
-                    {/* Changelog Links */}
-                    <Button variant="outline" size="sm" asChild>
-                      <Link to="/gameros-changelog" className="gap-2">
-                        <GitCommit className="w-4 h-4" />
-                        GamerOS Changelog
-                      </Link>
-                    </Button>
-                    <Button variant="outline" size="sm" asChild>
-                      <Link to="/changelog" className="gap-2">
-                        <Tag className="w-4 h-4" />
-                        Website Changelog
-                      </Link>
-                    </Button>
                   </div>
+                </div>
+
+                {/* Secondary Actions */}
+                <div className="flex flex-wrap gap-3 mt-4 pt-4 border-t border-white/5">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    asChild
+                    className="gap-2 bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white"
+                  >
+                    <Link to="/gameros-changelog">
+                      <GitCommit className="w-4 h-4 text-cyan-400" />
+                      GamerOS Changelog
+                    </Link>
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    asChild
+                    className="gap-2 bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white"
+                  >
+                    <Link to="/changelog">
+                      <Tag className="w-4 h-4 text-pink-400" />
+                      Website Changelog
+                    </Link>
+                  </Button>
                 </div>
               </motion.div>
 
               {/* Results Count */}
               <div className="flex items-center justify-between mb-6">
-                <p className="text-sm text-muted-foreground">
-                  Showing <span className="font-medium text-foreground">{filteredItems.length}</span> of{" "}
-                  <span className="font-medium text-foreground">{newsItems.length}</span> updates
+                <p className="text-sm text-white/50">
+                  Showing <span className="font-medium text-white">{filteredItems.length}</span> of{" "}
+                  <span className="font-medium text-white">{newsItems.length}</span> updates
                 </p>
                 {(searchQuery || activeFilter !== "All") && (
                   <button
@@ -539,7 +675,7 @@ const News = () => {
                       setSearchQuery("");
                       setActiveFilter("All");
                     }}
-                    className="text-sm text-primary hover:underline flex items-center gap-1"
+                    className="text-sm text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-1"
                   >
                     Clear filters <X className="w-3 h-3" />
                   </button>
@@ -563,43 +699,41 @@ const News = () => {
                           key={item.id}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -20 }}
                           transition={{ duration: 0.3, delay: i * 0.05 }}
-                          className="glass-card p-5 fluent-hover group"
+                          whileHover={{ x: 5 }}
+                          className={`glass-card glass-card-hover p-5 group ${typeConfig[item.type].glowColor} transition-all duration-300 border border-white/5`}
                         >
                           <div className="flex flex-col md:flex-row md:items-center gap-4">
                             <div className="flex items-center gap-4 flex-1 min-w-0">
-                              <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${item.type === "Commit" ? "bg-emerald-500/10" :
-                                item.type === "Announcement" ? "bg-primary/10" : "bg-purple-500/10"
-                                }`}>
-                                <TypeIcon className={`w-5 h-5 ${item.type === "Commit" ? "text-emerald-500" :
-                                  item.type === "Announcement" ? "text-primary" : "text-purple-500"
-                                  }`} />
+                              <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${typeConfig[item.type].gradient} shadow-lg`}>
+                                <TypeIcon className="w-6 h-6 text-white" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2 mb-1">
+                                <div className="flex items-center gap-2 mb-1 flex-wrap">
                                   <Badge variant="outline" className={`text-xs ${typeConfig[item.type].color}`}>
                                     {item.type}
                                   </Badge>
                                   {item.commitCode && (
-                                    <Badge variant="secondary" className="font-mono text-xs">
+                                    <Badge variant="secondary" className="font-mono text-xs bg-white/5 text-white/70 border-white/10">
                                       {item.commitCode}
                                     </Badge>
                                   )}
                                 </div>
-                                <h3 className="font-medium line-clamp-1 group-hover:text-primary transition-colors">
+                                <h3 className="font-medium text-white line-clamp-1 group-hover:text-cyan-400 transition-colors">
                                   {item.internalLink ? (
                                     <Link to={item.internalLink}>{item.title}</Link>
                                   ) : (
                                     item.title
                                   )}
                                 </h3>
-                                <p className="text-sm text-muted-foreground line-clamp-1 mt-1">
+                                <p className="text-sm text-white/40 line-clamp-1 mt-1">
                                   {item.description}
                                 </p>
                               </div>
                             </div>
                             <div className="flex items-center gap-4 md:shrink-0">
-                              <span className="text-xs text-muted-foreground flex items-center gap-1 whitespace-nowrap">
+                              <span className="text-xs text-white/40 flex items-center gap-1 whitespace-nowrap">
                                 <Clock className="w-3 h-3" />
                                 {item.date}
                               </span>
@@ -608,7 +742,7 @@ const News = () => {
                                   href={item.commitUrl}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="flex items-center gap-1 text-sm text-primary hover:underline whitespace-nowrap"
+                                  className="flex items-center gap-1 text-sm text-cyan-400 hover:text-cyan-300 transition-colors whitespace-nowrap"
                                 >
                                   View <ExternalLink className="w-3 h-3" />
                                 </a>
@@ -616,7 +750,7 @@ const News = () => {
                               {item.internalLink && (
                                 <Link
                                   to={item.internalLink}
-                                  className="flex items-center gap-1 text-sm text-primary hover:underline whitespace-nowrap"
+                                  className="flex items-center gap-1 text-sm text-cyan-400 hover:text-cyan-300 transition-colors whitespace-nowrap"
                                 >
                                   Read more <ArrowRight className="w-3 h-3" />
                                 </Link>
@@ -633,13 +767,13 @@ const News = () => {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
-                    className="text-center py-16"
+                    className="text-center py-20"
                   >
-                    <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
-                      <Search className="w-8 h-8 text-muted-foreground" />
+                    <div className="w-20 h-20 rounded-2xl glass-card flex items-center justify-center mx-auto mb-6 border border-white/10">
+                      <Search className="w-10 h-10 text-white/30" />
                     </div>
-                    <h3 className="text-lg font-medium mb-2">No results found</h3>
-                    <p className="text-muted-foreground mb-4">
+                    <h3 className="text-xl font-semibold text-white mb-2">No results found</h3>
+                    <p className="text-white/50 mb-6">
                       Try adjusting your search or filter criteria
                     </p>
                     <Button
@@ -648,7 +782,9 @@ const News = () => {
                         setSearchQuery("");
                         setActiveFilter("All");
                       }}
+                      className="gap-2 bg-white/5 border-white/10 text-white hover:bg-white/10"
                     >
+                      <X className="w-4 h-4" />
                       Clear filters
                     </Button>
                   </motion.div>
@@ -658,37 +794,65 @@ const News = () => {
           </section>
 
           {/* CTA Section */}
-          <section className="py-16 border-t border-border/50">
-            <div className="container mx-auto px-4">
-              <div className="glass-card p-8 md:p-12 text-center max-w-3xl mx-auto">
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                  <Users className="w-7 h-7 text-primary" />
-                </div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                  Want to Contribute?
+          <section className="py-20 border-t border-white/5 relative overflow-hidden">
+            {/* Background Glow */}
+            <div className="absolute inset-0">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-full blur-[100px]" />
+            </div>
+
+            <div className="container mx-auto px-4 relative z-10">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="glass-card p-8 md:p-12 text-center max-w-3xl mx-auto border border-white/10"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 to-purple-500 flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(6,182,212,0.3)]"
+                >
+                  <Gamepad2 className="w-10 h-10 text-white" />
+                </motion.div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  <span className="text-gaming">Want to Contribute?</span>
                 </h2>
-                <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
+                <p className="text-white/60 mb-8 max-w-lg mx-auto text-lg">
                   GamerOS is open source and we welcome contributions from developers of all skill levels.
                   Join our community and help shape the future of gaming.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <Button asChild size="lg">
-                    <a
-                      href="https://github.com/urmoit/GamerOS"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="gap-2"
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button 
+                      asChild 
+                      size="lg"
+                      className="btn-neon gap-2 text-white border-0"
                     >
-                      View on GitHub <ArrowRight className="w-4 h-4" />
-                    </a>
-                  </Button>
-                  <Button variant="outline" size="lg" asChild>
-                    <Link to="/roadmap" className="gap-2">
-                      View Roadmap
-                    </Link>
-                  </Button>
+                      <a
+                        href="https://github.com/urmoit/GamerOS"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <GitCommit className="w-5 h-5" />
+                        View on GitHub
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
+                    </Button>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button 
+                      variant="outline" 
+                      size="lg" 
+                      asChild
+                      className="gap-2 bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white"
+                    >
+                      <Link to="/roadmap">
+                        <Rocket className="w-5 h-5 text-purple-400" />
+                        View Roadmap
+                      </Link>
+                    </Button>
+                  </motion.div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </section>
         </main>

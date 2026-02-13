@@ -1,88 +1,198 @@
 import { Link } from "react-router-dom";
-import { Github, Coffee, FileText } from "lucide-react";
+import { Github, Coffee, FileText, Gamepad2, Heart, Twitter } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
+  const footerLinks = {
+    navigation: [
+      { name: "Home", path: "/" },
+      { name: "About", path: "/about" },
+      { name: "Roadmap", path: "/roadmap" },
+      { name: "News", path: "/news" },
+    ],
+    resources: [
+      { name: "Download", path: "/download" },
+      { name: "FAQ", path: "/faq" },
+      { name: "Bug Tracking", path: "/bug-tracking" },
+      { name: "Documentation", href: "https://github.com/urmoit/GamerOS" },
+      { name: "Website Changelog", path: "/changelog", icon: FileText },
+    ],
+    social: [
+      { name: "GitHub", href: "https://github.com/urmoit/GamerOS", icon: Github },
+      { name: "Twitter", href: "#", icon: Twitter, comingSoon: true },
+    ],
+  };
+
   return (
-    <footer className="bg-card border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="relative overflow-hidden">
+      {/* Gradient border top */}
+      <div className="h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
+      
+      {/* Background glow */}
+      <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 via-transparent to-transparent pointer-events-none" />
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
-          <div className="md:col-span-1">
-            <Link to="/" className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">G</span>
+          <motion.div 
+            className="lg:col-span-1"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <Link to="/" className="flex items-center gap-3 mb-6 group">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-purple-600 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-purple-600/0 group-hover:from-cyan-400/30 group-hover:to-purple-600/30 transition-all duration-300" />
+                <Gamepad2 className="w-6 h-6 text-white relative z-10" />
               </div>
-              <span className="font-semibold text-lg">GamerOS</span>
+              <div>
+                <span className="font-bold text-xl text-gaming">GamerOS</span>
+                <p className="text-xs text-muted-foreground">Next-Gen Gaming OS</p>
+              </div>
             </Link>
-            <p className="text-sm text-muted-foreground mb-4">
-              A modern operating system supporting Windows, Linux, and Android apps.
+            <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+              A revolutionary operating system designed for gamers. 
+              Run Windows, Linux, and Android apps seamlessly on one platform.
             </p>
             <a
               href="https://buymeacoffee.com/urmoit"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-yellow-500/10 text-yellow-600 dark:text-yellow-500 text-sm font-medium hover:bg-yellow-500/20 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/30 text-amber-400 text-sm font-medium hover:from-amber-500/30 hover:to-orange-500/30 transition-all duration-300"
             >
               <Coffee className="w-4 h-4" />
               Support the Developer
             </a>
-          </div>
+          </motion.div>
 
           {/* Navigation */}
-          <div>
-            <h4 className="font-semibold mb-4">Navigation</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link to="/" className="hover:text-foreground transition-colors">Home</Link></li>
-              <li><Link to="/about" className="hover:text-foreground transition-colors">About</Link></li>
-              <li><Link to="/roadmap" className="hover:text-foreground transition-colors">Roadmap</Link></li>
-              <li><Link to="/news" className="hover:text-foreground transition-colors">News</Link></li>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <h4 className="font-semibold mb-6 text-foreground flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" style={{ boxShadow: '0 0 8px hsl(180 100% 50%)' }} />
+              Navigation
+            </h4>
+            <ul className="space-y-3">
+              {footerLinks.navigation.map((item) => (
+                <li key={item.name}>
+                  <Link 
+                    to={item.path} 
+                    className="text-sm text-muted-foreground hover:text-cyan-400 transition-colors duration-200 flex items-center gap-2 group"
+                  >
+                    <span className="w-0 h-px bg-cyan-400 group-hover:w-3 transition-all duration-200" />
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
-          </div>
+          </motion.div>
 
-          <div>
-            <h4 className="font-semibold mb-4">Resources</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link to="/download" className="hover:text-foreground transition-colors">Download</Link></li>
-              <li><Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link></li>
-              <li><Link to="/bug-tracking" className="hover:text-foreground transition-colors">Bug Tracking</Link></li>
-              <li><a href="https://github.com/urmoit/GamerOS" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Documentation</a></li>
-              <li>
-                <Link to="/changelog" className="hover:text-foreground transition-colors inline-flex items-center gap-1.5">
-                  <FileText className="w-3.5 h-3.5" />
-                  Website Changelog
-                </Link>
-              </li>
+          {/* Resources */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <h4 className="font-semibold mb-6 text-foreground flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-purple-400" style={{ boxShadow: '0 0 8px hsl(280 100% 60%)' }} />
+              Resources
+            </h4>
+            <ul className="space-y-3">
+              {footerLinks.resources.map((item) => (
+                <li key={item.name}>
+                  {'href' in item ? (
+                    <a 
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-muted-foreground hover:text-purple-400 transition-colors duration-200 flex items-center gap-2 group"
+                    >
+                      <span className="w-0 h-px bg-purple-400 group-hover:w-3 transition-all duration-200" />
+                      {'icon' in item && item.icon && <item.icon className="w-3.5 h-3.5" />}
+                      {item.name}
+                    </a>
+                  ) : (
+                    <Link 
+                      to={item.path}
+                      className="text-sm text-muted-foreground hover:text-purple-400 transition-colors duration-200 flex items-center gap-2 group"
+                    >
+                      <span className="w-0 h-px bg-purple-400 group-hover:w-3 transition-all duration-200" />
+                      {'icon' in item && item.icon && <item.icon className="w-3.5 h-3.5" />}
+                      {item.name}
+                    </Link>
+                  )}
+                </li>
+              ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Community */}
-          <div>
-            <h4 className="font-semibold mb-4">Community</h4>
-            <div className="flex gap-3">
-              <a
-                href="https://github.com/urmoit/GamerOS"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
-              >
-                <Github size={20} />
-              </a>
-              <div
-                className="w-10 h-10 rounded-lg bg-secondary/50 flex items-center justify-center cursor-not-allowed opacity-60"
-                title="Discord coming soon"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-                </svg>
-              </div>
-              <span className="text-xs text-muted-foreground self-center">Coming soon</span>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <h4 className="font-semibold mb-6 text-foreground flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-pink-400" style={{ boxShadow: '0 0 8px hsl(320 100% 60%)' }} />
+              Community
+            </h4>
+            <div className="flex gap-3 mb-6">
+              {footerLinks.social.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.comingSoon ? undefined : item.href}
+                  target={item.comingSoon ? undefined : "_blank"}
+                  rel={item.comingSoon ? undefined : "noopener noreferrer"}
+                  className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                    item.comingSoon 
+                      ? 'bg-white/5 text-muted-foreground cursor-not-allowed' 
+                      : 'bg-white/5 text-muted-foreground hover:bg-cyan-400/20 hover:text-cyan-400 hover:scale-110'
+                  }`}
+                  title={item.comingSoon ? `${item.name} coming soon` : item.name}
+                >
+                  <item.icon size={20} />
+                </a>
+              ))}
             </div>
-          </div>
+            <div className="p-4 rounded-xl bg-gradient-to-br from-cyan-400/10 to-purple-600/10 border border-white/5">
+              <p className="text-xs text-muted-foreground mb-2">Join the development</p>
+              <p className="text-sm font-medium text-foreground">We're looking for contributors!</p>
+            </div>
+          </motion.div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>© 2026 GamerOS. Built with ❤️ by a solo developer.</p>
-        </div>
+        {/* Bottom bar */}
+        <motion.div 
+          className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <p className="text-sm text-muted-foreground flex items-center gap-1">
+            © {currentYear} GamerOS. Built with 
+            <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500 animate-pulse" /> 
+            by a solo developer
+          </p>
+          <div className="flex items-center gap-6">
+            <Link to="/faq" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+              FAQ
+            </Link>
+            <Link to="/changelog" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+              Changelog
+            </Link>
+            <span className="text-xs text-cyan-400/60 font-mono">v1.6.1</span>
+          </div>
+        </motion.div>
       </div>
     </footer>
   );
