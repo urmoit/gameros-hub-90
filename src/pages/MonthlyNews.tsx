@@ -56,6 +56,7 @@ const monthlyNewsData: Record<string, MonthData> = {
     year: "2026",
     summary: "Alpha release month with major stabilization, release publishing, and broad website content/layout updates to match 00m1-alpha.",
     highlights: [
+      "Storage-backed filesystem with File Explorer and Settings app",
       "Published first public alpha release: 00m1-alpha (Build 1.100)",
       "Published full GamerOS release changelog with structured version view",
       "Remade Roadmap page layout and removed Development Phases section",
@@ -73,6 +74,14 @@ const monthlyNewsData: Record<string, MonthData> = {
       "Added new serial, USB, and cursor drivers",
     ],
     items: [
+      {
+        title: "refactor(filesystem): integrate storage-backed filesystem and enhance desktop shell",
+        date: "February 14, 2026",
+        type: "Commit",
+        description: "Added storage-backed filesystem with directory support and file management. Implemented File Explorer app, upgraded Settings app, and updated build system.",
+        commitCode: "f6e1180",
+        commitUrl: "https://github.com/urmoit/GamerOS/commit/f6e11801ea082a8ff2e51408d0ced263b7ad8a08",
+      },
       {
         title: "Website Sync: 00m1-alpha rollout and navigation cleanup",
         date: "February 13, 2026",

@@ -683,7 +683,7 @@ const Changelog = () => {
                   <div className="text-center">
                     <div className="flex items-center justify-center gap-1.5 text-[hsl(280_100%_60%)] mb-1">
                       <Code2 className="w-4 h-4" />
-                      <span className="font-bold">8.6k+</span>
+                      <span className="font-bold">9.8k+</span>
                     </div>
                     <span className="text-xs text-gray-500">Lines of Code</span>
                   </div>
