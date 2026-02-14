@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import alphaPreview from "@/assets/alpha-preview.png";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import PageTransition from "@/components/ui/PageTransition";
@@ -230,6 +231,33 @@ const AlphaRelease = () => {
                     </span>
                   </div>
                 </motion.div>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* Alpha Preview Screenshot */}
+          <section className="py-16 border-b border-white/10">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-center mb-8"
+              >
+                <h2 className="text-2xl font-bold text-white mb-2">Alpha Preview</h2>
+                <p className="text-white/50">GamerOS 00m1 desktop with Notepad, Settings, and File Explorer</p>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-cyan-500/10"
+              >
+                <img 
+                  src={alphaPreview} 
+                  alt="GamerOS 00m1 Alpha Preview - Desktop with Notepad, Settings, and Explorer apps" 
+                  className="w-full h-auto"
+                />
               </motion.div>
             </div>
           </section>
@@ -472,9 +500,9 @@ const AlphaRelease = () => {
                     size="lg" 
                     className="gap-2 border-white/20 text-white hover:bg-white/10 hover:border-cyan-500/50"
                   >
-                    <Link to="/roadmap">
+                    <Link to="/download">
                       <ArrowRight className="w-4 h-4" />
-                      View Roadmap
+                      Download Alpha
                     </Link>
                   </Button>
                 </div>
