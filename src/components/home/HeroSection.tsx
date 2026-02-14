@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Download, ArrowRight, Monitor, Smartphone, Terminal, Rocket, Sparkles } from "lucide-react";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import alphaPreview from "@/assets/alpha-preview.png";
 
 const HeroSection = () => {
   return (
@@ -212,32 +213,12 @@ const HeroSection = () => {
                   <span className="text-xs text-muted-foreground ml-2 font-mono">GamerOS Desktop — Alpha Preview</span>
                 </div>
                 {/* Window content */}
-                <div className="aspect-video bg-gradient-to-br from-purple-900/20 via-background to-cyan-900/20 flex items-center justify-center relative overflow-hidden">
-                  {/* Animated grid background */}
-                  <div className="absolute inset-0 grid-pattern opacity-30" />
-                  
-                  <motion.div 
-                    className="text-center relative z-10"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.8, duration: 0.5 }}
-                  >
-                    <motion.div 
-                      className="w-28 h-28 rounded-3xl bg-gradient-to-br from-cyan-400 to-purple-600 flex items-center justify-center mx-auto mb-6 relative"
-                      animate={{ 
-                        boxShadow: [
-                          '0 0 30px hsl(180 100% 50% / 0.3)',
-                          '0 0 50px hsl(280 100% 60% / 0.3)',
-                          '0 0 30px hsl(180 100% 50% / 0.3)',
-                        ]
-                      }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                    >
-                      <span className="text-5xl font-bold text-white">G</span>
-                    </motion.div>
-                    <p className="text-lg text-foreground font-medium mb-2">Modern. Fast. Universal.</p>
-                    <p className="text-sm text-muted-foreground">Experience the future of gaming OS</p>
-                  </motion.div>
+                <div className="relative">
+                  <img 
+                    src={alphaPreview} 
+                    alt="GamerOS 00m1 Alpha Preview - Desktop with Notepad, Settings, and Explorer apps" 
+                    className="w-full h-auto"
+                  />
                 </div>
               </div>
             </motion.div>
