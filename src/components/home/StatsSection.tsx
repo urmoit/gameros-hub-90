@@ -17,7 +17,7 @@ const stats = [
     color: "purple",
   },
   { 
-    value: "8,600+", 
+    value: "9,800+", 
     label: "Lines of Code",
     icon: GitCommit,
     color: "pink",

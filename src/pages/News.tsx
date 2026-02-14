@@ -52,6 +52,17 @@ interface NewsItem {
 
 const newsItems: NewsItem[] = [
   {
+    id: "commit-f6e1180",
+    title: "refactor(filesystem): integrate storage-backed filesystem and enhance desktop shell",
+    date: "February 14, 2026",
+    type: "Commit",
+    description: "Added storage-backed filesystem with directory support and file management. Implemented File Explorer app, upgraded Settings app, and updated build system.",
+    icon: Code2,
+    commitCode: "f6e1180",
+    commitUrl: "https://github.com/urmoit/GamerOS/commit/f6e11801ea082a8ff2e51408d0ced263b7ad8a08",
+    featured: true,
+  },
+  {
     id: "bug-fix-pass",
     title: "Alpha Release: Comprehensive src Bug Fix Pass",
     date: "February 13, 2026",
