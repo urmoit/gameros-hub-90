@@ -879,9 +879,9 @@ const News = () => {
                       asChild
                       className="gap-2 bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white"
                     >
-                      <Link to="/roadmap">
+                      <Link to="/download">
                         <Rocket className="w-5 h-5 text-purple-400" />
-                        View Roadmap
+                        Download
                       </Link>
                     </Button>
                   </motion.div>

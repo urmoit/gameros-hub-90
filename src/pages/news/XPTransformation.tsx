@@ -434,9 +434,9 @@ const XPTransformation = () => {
                 {/* CTA Buttons */}
                 <div className="flex flex-wrap justify-center gap-4 mt-12">
                   <Button asChild className="btn-neon gap-2">
-                    <Link to="/roadmap">
+                    <Link to="/download">
                       <Zap className="w-4 h-4" />
-                      View Roadmap
+                      Download
                     </Link>
                   </Button>
                   <Button 
