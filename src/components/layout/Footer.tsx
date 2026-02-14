@@ -9,7 +9,7 @@ const Footer = () => {
     navigation: [
       { name: "Home", path: "/" },
       { name: "About", path: "/about" },
-      { name: "Roadmap", path: "/roadmap" },
+      
       { name: "News", path: "/news" },
     ],
     resources: [

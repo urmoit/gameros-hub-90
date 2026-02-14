@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import About from "./pages/About";
-import Roadmap from "./pages/Roadmap";
+
 import News from "./pages/News";
 import XPImplementation from "./pages/news/XPImplementation";
 import XPTransformation from "./pages/news/XPTransformation";
@@ -30,7 +30,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
-          <Route path="/roadmap" element={<Roadmap />} />
+          
           <Route path="/news" element={<News />} />
           <Route path="/news/monthly/:month" element={<MonthlyNews />} />
           <Route path="/changelog" element={<Changelog />} />

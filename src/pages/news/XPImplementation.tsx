@@ -877,14 +877,6 @@ const XPImplementation = () => {
                       View on GitHub
                     </a>
                   </Button>
-                  <Button 
-                    asChild 
-                    variant="outline" 
-                    size="lg"
-                    className="gap-2 border-white/20 hover:bg-white/10 text-white"
-                  >
-                    <Link to="/roadmap">View Full Roadmap</Link>
-                  </Button>
                 </div>
               </motion.div>
             </div>

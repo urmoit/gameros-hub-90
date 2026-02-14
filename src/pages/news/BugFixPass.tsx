@@ -352,12 +352,6 @@ const BugFixPass = () => {
                     View Changelog
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" className="gap-2 border-white/20 hover:border-purple-400/50 hover:bg-purple-400/10" asChild>
-                  <Link to="/roadmap">
-                    <Target className="w-5 h-5" />
-                    View Roadmap
-                  </Link>
-                </Button>
               </div>
             </div>
           </section>
