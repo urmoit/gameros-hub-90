@@ -52,6 +52,27 @@ interface NewsItem {
 
 const newsItems: NewsItem[] = [
   {
+    id: "build-1200-walkthrough",
+    title: "Walkthrough: Build 1.200 — Filesystem, 640×480, & 30 Fixes",
+    date: "February 15, 2026",
+    type: "Announcement",
+    description: "Comprehensive walkthrough of 30 fixes and features: storage-backed filesystem, File Explorer, Settings app, VGA 640×480 mode 12h, cursor smoothing, resizable windows, and core subsystem TODO completions.",
+    icon: Rocket,
+    internalLink: "/news/build-1200",
+    featured: true,
+  },
+  {
+    id: "commit-f62d110",
+    title: "feat(changelog, walkthrough): enhance changelog and complete core TODOs across subsystems",
+    date: "February 15, 2026",
+    type: "Commit",
+    description: "Font size API, RTC date API, window manager resize/focus/z-order, security subsystem, user-mode process isolation, GUI input handling, freestanding sprintf.",
+    icon: Code2,
+    commitCode: "f62d110",
+    commitUrl: "https://github.com/urmoit/GamerOS/commit/f62d110fcd08dc7eacd7d4ecd31f3931be3cb55c",
+    featured: true,
+  },
+  {
     id: "commit-f6e1180",
     title: "refactor(filesystem): integrate storage-backed filesystem and enhance desktop shell",
     date: "February 14, 2026",
