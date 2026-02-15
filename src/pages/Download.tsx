@@ -105,13 +105,13 @@ const Download = () => {
                   <Bug className="w-14 h-14 text-[hsl(225_25%_6%)]" />
                 </div>
                 
-                <h2 className="text-4xl font-bold mb-4 text-white">First Alpha Release</h2>
+                <h2 className="text-4xl font-bold mb-4 text-white">Latest Alpha Release</h2>
                 
                 <p className="text-lg text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed">
-                  GamerOS <span className="text-[hsl(180_100%_50%)] font-medium">00m1-alpha</span> (Build 1.100) includes the
-                  <span className="text-[hsl(280_100%_60%)] font-medium"> XP-style shell</span>,
-                  <span className="text-[hsl(320_100%_60%)] font-medium"> Notepad</span>, and
-                  VMware stability hardening.
+                  GamerOS <span className="text-[hsl(180_100%_50%)] font-medium">00m1-alpha</span> (Build 1.200) includes
+                  <span className="text-[hsl(280_100%_60%)] font-medium"> filesystem integration</span>,
+                  <span className="text-[hsl(320_100%_60%)] font-medium"> 640×480 mode</span>,
+                  File Explorer, Settings app, and 30 stability fixes.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
@@ -120,9 +120,9 @@ const Download = () => {
                     asChild
                     className="min-w-[220px] btn-neon border-0"
                   >
-                    <a href="https://github.com/urmoit/gameros-hub-90/releases/download/00m1-alpha-Release-1/GamerOS-00m1-alpha-Release-1.iso" target="_blank" rel="noopener noreferrer">
+                     <a href="https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.200/GamerOS_Alpha_Build_1.200.iso" target="_blank" rel="noopener noreferrer">
                     <DownloadIcon className="w-5 h-5 mr-2" />
-                    Download ISO
+                    Download Build 1.200 ISO
                     </a>
                   </Button>
                   <Button 
@@ -336,7 +336,7 @@ const Download = () => {
                 </p>
                 
                 <code className="block p-4 rounded-xl bg-black/40 border border-[hsl(180_100%_50%)]/20 text-xs overflow-x-auto text-[hsl(180_100%_50%)]/70 font-mono">
-                  GamerOS-00m1-alpha-Release-1.iso
+                  GamerOS_Alpha_Build_1.200.iso
                   <span className="animate-pulse">_</span>
                 </code>
               </div>
@@ -377,11 +377,11 @@ const Download = () => {
                 </h3>
                 
                 <p className="text-white/50 mb-6 leading-relaxed">
-                  Boot and test XP shell, Notepad, and input stability improvements.
+                  Boot and test the desktop shell, File Explorer, Settings, Notepad, and 640×480 mode.
                 </p>
                 
                 <code className="block p-4 rounded-xl bg-black/40 border border-[hsl(320_100%_60%)]/20 text-xs overflow-x-auto text-[hsl(320_100%_60%)]/70 font-mono">
-                  Release build 1.100
+                  Release Build 1.200
                 </code>
               </div>
             </div>

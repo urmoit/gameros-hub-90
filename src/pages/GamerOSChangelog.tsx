@@ -42,9 +42,49 @@ interface Version {
 }
 
 const isoUrl =
-  "https://github.com/urmoit/gameros-hub-90/releases/download/00m1-alpha-Release-1/GamerOS-00m1-alpha-Release-1.iso";
+  "https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.200/GamerOS_Alpha_Build_1.200.iso";
 
 const changelogData: Version[] = [
+  {
+    version: "00m1-alpha",
+    build: "1.200",
+    date: "February 15, 2026",
+    title: "Filesystem, 640×480, & 30 Fixes",
+    description:
+      "Storage-backed filesystem, File Explorer, Settings app overhaul, VGA 640×480 mode 12h, cursor smoothing, resizable windows, and core subsystem completions.",
+    changes: [
+      { type: "feature", description: "Storage-backed filesystem with directory support, file metadata, and Windows-style paths.", component: "Filesystem" },
+      { type: "feature", description: "File Explorer app with 'This PC' drive view and folder navigation.", component: "Apps" },
+      { type: "feature", description: "Settings app as tabbed app: System, Personalization, Accounts, About, Changelog.", component: "Apps" },
+      { type: "feature", description: "Notepad restored with storage-backed persistence (load/save/auto-save).", component: "Apps" },
+      { type: "feature", description: "Mouse wheel input API and scrolling in Settings and Notepad.", component: "Input" },
+      { type: "feature", description: "GamerOS storage namespace: C:/GamerOS/System32 with app/system entries.", component: "Filesystem" },
+      { type: "feature", description: "Font size support API for 8×8, 12×12, and 16×16 rendering.", component: "Graphics" },
+      { type: "feature", description: "RTC date API (get_date) for day/month/year/weekday.", component: "Kernel" },
+      { type: "feature", description: "Window manager resize, focus, and z-order control.", component: "Window Manager" },
+      { type: "feature", description: "Baseline security subsystem with authentication and access control.", component: "Security" },
+      { type: "feature", description: "User-mode process isolation with per-process tags.", component: "Subsystems" },
+      { type: "feature", description: "Resizable windows with bottom-right drag handle.", component: "UI" },
+      { type: "feature", description: "Desktop watermark: 'GamerOS 00m1 Preview / Build 1.200'.", component: "UI" },
+      { type: "improvement", description: "VGA mode 12h (640×480×16) with full runtime register programming.", component: "Graphics" },
+      { type: "improvement", description: "Taskbar text/buttons centered with font metrics and synced hitboxes.", component: "UI" },
+      { type: "improvement", description: "Cursor partial present for smoother movement with delta clamping.", component: "Input" },
+      { type: "improvement", description: "Startup animation centered and faster for 640×480.", component: "UI" },
+      { type: "improvement", description: "Notepad buffer: 160 lines × 96 cols with viewport scrolling.", component: "Apps" },
+      { type: "improvement", description: "Freestanding-safe sprintf with compiler vararg builtins.", component: "Kernel" },
+      { type: "improvement", description: "GUI app input: mouse-click tabs, keyboard shortcuts, Esc exit.", component: "UI" },
+      { type: "fix", description: "VMware CPU-disabled popup fixes across Settings, Explorer, Notepad open paths.", component: "VMware" },
+      { type: "fix", description: "Lazy storage initialization isolated from boot for startup stability.", component: "Boot" },
+      { type: "fix", description: "Mode 12h stripe artifacts fixed with deterministic per-plane byte writes.", component: "Graphics" },
+      { type: "fix", description: "Black screen mode mismatch between boot and runtime renderer.", component: "Boot" },
+      { type: "fix", description: "Cursor black trail artifacts in mode 12h partial present.", component: "Graphics" },
+      { type: "fix", description: "Inverted mouse-wheel scroll direction normalized.", component: "Input" },
+      { type: "fix", description: "draw_rect() out-of-bounds backbuffer write guard.", component: "Graphics" },
+      { type: "fix", description: "Repeated click-trigger execution fixed with last_buttons update.", component: "Input" },
+      { type: "fix", description: "stdarg.h include failure fixed with compiler builtins.", component: "Build" },
+      { type: "breaking", description: "File Explorer runs in safe-mode on VMware while deeper storage interactions are stabilized.", component: "Limitations" },
+    ],
+  },
   {
     version: "00m1-alpha",
     build: "1.100",
