@@ -42,9 +42,42 @@ interface Version {
 }
 
 const isoUrl =
-  "https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.200/GamerOS_Alpha_Build_1.200.iso";
+  "https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.300/GamerOS_Alpha_Build_1.300.iso";
 
 const changelogData: Version[] = [
+  {
+    version: "00m1-alpha",
+    build: "1.300",
+    date: "February 17, 2026",
+    title: "App Framework, Win7 Theme & Custom Wallpaper",
+    description:
+      "New .EXE application framework, Windows 7-inspired shell theme, custom wallpaper support, expanded Settings categories, taskbar date display, and 6 stability fixes.",
+    changes: [
+      { type: "feature", description: "New application framework at src/apps with centralized built-in app registry.", component: "Apps" },
+      { type: "feature", description: "Per-app source folders (notepad, settings, explorer) with .EXE.manifest files.", component: "Apps" },
+      { type: "feature", description: "App UI content modules: notepad_ui.c, settings_ui.c, explorer_ui.c.", component: "Apps" },
+      { type: "feature", description: "Public app-launch interface src/intf/apps.h for executable resolution.", component: "Apps" },
+      { type: "feature", description: "Settings navigation expanded to 12 GamerOS-style categories.", component: "Apps" },
+      { type: "feature", description: "Markdown viewer support and file-backed changelog in Settings.", component: "Apps" },
+      { type: "feature", description: "Start menu expanded with GamerOS Update and About GamerOS entries.", component: "UI" },
+      { type: "feature", description: "Windows 7-inspired global shell theme: Aero desktop, glossy taskbar, modern Start menu.", component: "UI" },
+      { type: "feature", description: "Remade startup/loading screen with Windows 7-style presentation.", component: "UI" },
+      { type: "feature", description: "Custom wallpaper from PNG integrated as live desktop background.", component: "UI" },
+      { type: "feature", description: "Taskbar clock now shows both time and date (HH:MM DD/MM/YYYY).", component: "UI" },
+      { type: "improvement", description: "Desktop/Start menu launch flow switched from direct window IDs to .EXE resolution.", component: "Shell" },
+      { type: "improvement", description: "UI scaling groundwork with runtime scale profile and adaptive Start menu metrics.", component: "UI" },
+      { type: "improvement", description: "Startup animation with eased progress timing for smoother feel.", component: "UI" },
+      { type: "improvement", description: "Unified modernized Windows XP-style theme across all app windows.", component: "UI" },
+      { type: "improvement", description: "Explorer restored from safe-static to interactive storage-backed navigation.", component: "Apps" },
+      { type: "improvement", description: "Changelog content sourced from markdown file, not hardcoded items.", component: "Apps" },
+      { type: "fix", description: "Notepad launch path consistently loads storage-backed content via .EXE flow.", component: "Apps" },
+      { type: "fix", description: "Settings content/header overlap fixed for readable content.", component: "UI" },
+      { type: "fix", description: "VMware crash path fixed when opening Start menu.", component: "VMware" },
+      { type: "fix", description: "Explorer popup regression in VMware fixed.", component: "VMware" },
+      { type: "fix", description: "Notepad typing responsiveness improved — keyboard buffer expanded 64→256.", component: "Input" },
+      { type: "fix", description: "Taskbar app-button hitbox alignment fixed after clock width increase.", component: "UI" },
+    ],
+  },
   {
     version: "00m1-alpha",
     build: "1.200",

@@ -52,6 +52,27 @@ interface NewsItem {
 
 const newsItems: NewsItem[] = [
   {
+    id: "build-1300-walkthrough",
+    title: "Walkthrough: Build 1.300 — App Framework, Win7 Theme & Custom Wallpaper",
+    date: "February 17, 2026",
+    type: "Announcement",
+    description: "New .EXE application framework, Windows 7-inspired shell theme, custom wallpaper support, expanded Settings categories, taskbar date display, and 6 stability fixes.",
+    icon: Rocket,
+    internalLink: "/news/build-1300",
+    featured: true,
+  },
+  {
+    id: "commit-e44244d",
+    title: "feat(apps): integrate new applications and enhance UI components",
+    date: "February 17, 2026",
+    type: "Commit",
+    description: "Introduced Notepad, Settings, Explorer apps with UI components. Updated Makefile, enhanced kernel for new app windows. Increased keyboard buffer, expanded filesystem for app directories.",
+    icon: Code2,
+    commitCode: "e44244d",
+    commitUrl: "https://github.com/urmoit/GamerOS/commit/e44244deed04af17b8c278b228c7376308702bd7",
+    featured: true,
+  },
+  {
     id: "build-1200-walkthrough",
     title: "Walkthrough: Build 1.200 — Filesystem, 640×480, & 30 Fixes",
     date: "February 15, 2026",

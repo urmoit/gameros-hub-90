@@ -82,7 +82,7 @@ const visionPoints = [
 const teamStats = [
   { value: "1", label: "Core Developer", color: "cyan" },
   { value: "9,800+", label: "Lines of Code", color: "purple" },
-  { value: "1.100", label: "Build", color: "pink" },
+  { value: "1.300", label: "Build", color: "pink" },
   { value: "Jan 2026", label: "Started", color: "cyan" },
 ];
 
@@ -172,9 +172,9 @@ const About = () => {
                     <h3 className="text-xl font-bold">Development Notice</h3>
                   </div>
                   <p className="text-muted-foreground mb-4">
-                    GamerOS has made significant progress! We now have a working XP-themed desktop 
-                    with VESA graphics, Notepad app, and USB support. The first alpha release
-                    is now available as <span className="text-amber-400 font-medium">00m1-alpha</span> (Build 1.100).
+                    GamerOS has made significant progress! We now have a Windows 7-inspired desktop 
+                    with custom wallpaper, .EXE app framework, Notepad, Settings, File Explorer, and USB support. The latest alpha release
+                    is now available as <span className="text-amber-400 font-medium">00m1-alpha</span> (Build 1.300).
                   </p>
                   <Button variant="outline" size="sm" asChild className="mt-2 border-amber-400/30 hover:bg-amber-400/10 hover:text-amber-400">
                     <Link to="/gameros-changelog">
@@ -366,7 +366,7 @@ const About = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <Button size="lg" className="btn-neon border-0" asChild>
-                    <a href="https://github.com/urmoit/gameros-hub-90/releases/download/00m1-alpha-Release-1/GamerOS-00m1-alpha-Release-1.iso" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.300/GamerOS_Alpha_Build_1.300.iso" target="_blank" rel="noopener noreferrer">
                       <span className="relative z-10">Download ISO</span>
                     </a>
                   </Button>

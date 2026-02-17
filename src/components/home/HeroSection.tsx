@@ -81,7 +81,7 @@ const HeroSection = () => {
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 border border-amber-500/30 text-amber-400 text-sm font-medium hover:from-amber-500/20 hover:via-orange-500/20 hover:to-amber-500/20 transition-all duration-300 group"
           >
             <Rocket className="w-4 h-4 group-hover:animate-bounce" />
-            <span>Alpha Build 1.200 released — Filesystem, 640×480, 30 fixes</span>
+            <span>Alpha Build 1.300 released — App Framework, Win7 Theme, Custom Wallpaper</span>
             <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>
@@ -210,7 +210,7 @@ const HeroSection = () => {
                     <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                     <div className="w-3 h-3 rounded-full bg-green-500/80" />
                   </div>
-                  <span className="text-xs text-muted-foreground ml-2 font-mono">GamerOS Desktop — Alpha Build 1.200</span>
+                  <span className="text-xs text-muted-foreground ml-2 font-mono">GamerOS Desktop — Alpha Build 1.300</span>
                 </div>
                 {/* Window content */}
                 <div className="relative">

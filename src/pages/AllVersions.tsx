@@ -14,9 +14,18 @@ import { Badge } from "@/components/ui/badge";
 const versions = [
   {
     version: "00m1-alpha",
+    build: "1.300",
+    date: "February 17, 2026",
+    label: "Latest",
+    downloadUrl: "https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.300/GamerOS_Alpha_Build_1.300.iso",
+    filename: "GamerOS_Alpha_Build_1.300.iso",
+    highlights: ["App framework", "Win7 theme", "Custom wallpaper", "Taskbar date"],
+  },
+  {
+    version: "00m1-alpha",
     build: "1.200",
     date: "February 15, 2026",
-    label: "Latest",
+    label: "",
     downloadUrl: "https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.200/GamerOS_Alpha_Build_1.200.iso",
     filename: "GamerOS_Alpha_Build_1.200.iso",
     highlights: ["Filesystem integration", "640×480 mode", "30 fixes", "File Explorer & Settings"],

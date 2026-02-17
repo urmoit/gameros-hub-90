@@ -28,19 +28,6 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Development Notice Banner */}
-      <div className="bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-amber-500/20 border-b border-amber-500/30 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center gap-2">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-          </span>
-          <p className="text-xs font-medium text-amber-400 text-center">
-            Alpha is out: 00m1-alpha (Build 1.100)
-          </p>
-        </div>
-      </div>
-
       {/* Main Navigation */}
       <motion.div 
         className={`transition-all duration-300 ${

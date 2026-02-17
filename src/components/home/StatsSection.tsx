@@ -11,7 +11,7 @@ const stats = [
     color: "cyan",
   },
   { 
-    value: "1.100", 
+    value: "1.300", 
     label: "Build",
     icon: BarChart3,
     color: "purple",
