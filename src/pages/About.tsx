@@ -81,7 +81,7 @@ const visionPoints = [
 
 const teamStats = [
   { value: "1", label: "Core Developer", color: "cyan" },
-  { value: "9,800+", label: "Lines of Code", color: "purple" },
+  { value: "23,000+", label: "Lines of Code", color: "purple" },
   { value: "1.300", label: "Build", color: "pink" },
   { value: "Jan 2026", label: "Started", color: "cyan" },
 ];
@@ -388,3 +388,4 @@ const About = () => {
 };
 
 export default About;
+
