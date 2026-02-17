@@ -17,7 +17,7 @@ const stats = [
     color: "purple",
   },
   { 
-    value: "9,800+", 
+    value: "23,000+", 
     label: "Lines of Code",
     icon: GitCommit,
     color: "pink",
@@ -110,3 +110,4 @@ const StatsSection = () => {
 };
 
 export default StatsSection;
+
