@@ -12,6 +12,7 @@ import XPTransformation from "./pages/news/XPTransformation";
 import BugFixPass from "./pages/news/BugFixPass";
 import AlphaRelease from "./pages/news/AlphaRelease";
 import Build1200Walkthrough from "./pages/news/Build1200Walkthrough";
+import Build1300Walkthrough from "./pages/news/Build1300Walkthrough";
 import MonthlyNews from "./pages/MonthlyNews";
 import Download from "./pages/Download";
 import AllVersions from "./pages/AllVersions";
@@ -44,6 +45,7 @@ const App = () => (
           <Route path="/news/bug-fix-pass" element={<BugFixPass />} />
           <Route path="/news/alpha-release" element={<AlphaRelease />} />
           <Route path="/news/build-1200" element={<Build1200Walkthrough />} />
+          <Route path="/news/build-1300" element={<Build1300Walkthrough />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
