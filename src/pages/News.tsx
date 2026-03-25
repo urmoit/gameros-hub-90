@@ -58,7 +58,7 @@ const newsItems: NewsItem[] = [
     type: "Announcement",
     description: "The next alpha release (Build 1.400) is scheduled for March 27, 2026. Expect ATA PIO disk driver improvements, GOSAPP executable loader enhancements, expanded storage layout with real app install roots, and further Settings UI upgrades.",
     icon: Rocket,
-    internalLink: "/news",
+    internalLink: "/news/build-1400",
     featured: true,
   },
   {

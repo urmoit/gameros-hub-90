@@ -47,6 +47,7 @@ const App = () => (
           <Route path="/news/alpha-release" element={<AlphaRelease />} />
           <Route path="/news/build-1200" element={<Build1200Walkthrough />} />
           <Route path="/news/build-1300" element={<Build1300Walkthrough />} />
+          <Route path="/news/build-1400" element={<Build1400Announcement />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
