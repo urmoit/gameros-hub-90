@@ -746,17 +746,6 @@ const News = () => {
                       GamerOS Changelog
                     </Link>
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    asChild
-                    className="gap-2 bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white"
-                  >
-                    <Link to="/changelog">
-                      <Tag className="w-4 h-4 text-pink-400" />
-                      Website Changelog
-                    </Link>
-                  </Button>
                 </div>
               </motion.div>
 

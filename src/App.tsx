@@ -35,7 +35,7 @@ const App = () => (
           
           <Route path="/news" element={<News />} />
           <Route path="/news/monthly/:month" element={<MonthlyNews />} />
-          <Route path="/changelog" element={<Changelog />} />
+          
           <Route path="/gameros-changelog" element={<GamerOSChangelog />} />
           <Route path="/download" element={<Download />} />
           <Route path="/all-versions" element={<AllVersions />} />
