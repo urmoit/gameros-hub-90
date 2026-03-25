@@ -13,6 +13,7 @@ import BugFixPass from "./pages/news/BugFixPass";
 import AlphaRelease from "./pages/news/AlphaRelease";
 import Build1200Walkthrough from "./pages/news/Build1200Walkthrough";
 import Build1300Walkthrough from "./pages/news/Build1300Walkthrough";
+import Build1400Announcement from "./pages/news/Build1400Announcement";
 import MonthlyNews from "./pages/MonthlyNews";
 import Download from "./pages/Download";
 import AllVersions from "./pages/AllVersions";
