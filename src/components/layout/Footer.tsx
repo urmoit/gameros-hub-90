@@ -106,7 +106,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.resources.map((item) => (
                 <li key={item.name}>
-                  {'href' in item ? (
+                  {'href' in item && item.href ? (
                     <a 
                       href={item.href}
                       target="_blank"
@@ -114,16 +114,14 @@ const Footer = () => {
                       className="text-sm text-muted-foreground hover:text-purple-400 transition-colors duration-200 flex items-center gap-2 group"
                     >
                       <span className="w-0 h-px bg-purple-400 group-hover:w-3 transition-all duration-200" />
-                      {'icon' in item && item.icon && <item.icon className="w-3.5 h-3.5" />}
                       {item.name}
                     </a>
                   ) : (
                     <Link 
-                      to={item.path}
+                      to={'path' in item ? item.path : '/'}
                       className="text-sm text-muted-foreground hover:text-purple-400 transition-colors duration-200 flex items-center gap-2 group"
                     >
                       <span className="w-0 h-px bg-purple-400 group-hover:w-3 transition-all duration-200" />
-                      {'icon' in item && item.icon && <item.icon className="w-3.5 h-3.5" />}
                       {item.name}
                     </Link>
                   )}
