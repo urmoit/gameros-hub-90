@@ -174,7 +174,8 @@ const About = () => {
                   <p className="text-muted-foreground mb-4">
                     GamerOS has made significant progress! We now have an ATA PIO disk driver, disk-backed filesystem persistence, 
                     GOSAPP executable loader, runtime resolution switching, and enhanced Settings UI. The latest alpha release
-                    is now available as <span className="text-amber-400 font-medium">00m1-alpha</span> (Build 1.300).
+                    is <span className="text-amber-400 font-medium">00m1-alpha</span> (Build 1.300). 
+                    <span className="text-cyan-400 font-medium">Build 1.400 is coming March 27, 2026</span> with further enhancements.
                   </p>
                   <Button variant="outline" size="sm" asChild className="mt-2 border-amber-400/30 hover:bg-amber-400/10 hover:text-amber-400">
                     <Link to="/gameros-changelog">

@@ -67,6 +67,12 @@ const monthlyNewsData: Record<string, MonthData> = {
     ],
     items: [
       {
+        title: "Build 1.400 Coming March 27, 2026",
+        date: "March 25, 2026",
+        type: "Announcement",
+        description: "The next alpha release (Build 1.400) is scheduled for March 27, 2026 with ATA PIO disk driver improvements, GOSAPP loader enhancements, expanded storage layout, and Settings UI upgrades.",
+      },
+      {
         title: "feat(storage, apps, ui): implement ATA PIO disk driver and enhance app management",
         date: "March 25, 2026",
         type: "Commit",
