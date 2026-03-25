@@ -51,6 +51,30 @@ interface MonthData {
 }
 
 const monthlyNewsData: Record<string, MonthData> = {
+  "march-2026": {
+    month: "March",
+    year: "2026",
+    summary: "Major storage and app management update: real ATA PIO disk driver, disk-backed filesystem persistence, GOSAPP executable loader, runtime resolution switching, and enhanced Settings UI.",
+    highlights: [
+      "ATA PIO disk driver for primary IDE I/O with sector-level read/write",
+      "Disk-backed filesystem persistence with superblock and file tables",
+      "GOSAPP executable loader format for concrete process/task model",
+      "Real app install roots and user data directories in storage layout",
+      "Settings UI Display tab for runtime resolution switching",
+      "Boot diagnostic debug overlays",
+      "Docker ISO staging fixes and input polling safety improvements",
+    ],
+    items: [
+      {
+        title: "feat(storage, apps, ui): implement ATA PIO disk driver and enhance app management",
+        date: "March 25, 2026",
+        type: "Commit",
+        description: "Added real ATA PIO disk driver, reworked filesystem persistence with disk-backed metadata, introduced GOSAPP executable loader, enhanced Settings UI with Display tab, fixed Docker ISO staging and input polling.",
+        commitCode: "9c5055c",
+        commitUrl: "http://github.com/urmoit/GamerOS/commit/9c5055c254868f02463fb72ba7c1f02a22f771db",
+      },
+    ],
+  },
   "february-2026": {
     month: "February",
     year: "2026",
@@ -294,6 +318,7 @@ const monthlyNewsData: Record<string, MonthData> = {
 };
 
 const availableMonths = [
+  { slug: "march-2026", label: "March 2026" },
   { slug: "february-2026", label: "February 2026" },
   { slug: "january-2026", label: "January 2026" },
 ];
