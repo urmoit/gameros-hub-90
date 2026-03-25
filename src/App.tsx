@@ -16,7 +16,7 @@ import Build1300Walkthrough from "./pages/news/Build1300Walkthrough";
 import MonthlyNews from "./pages/MonthlyNews";
 import Download from "./pages/Download";
 import AllVersions from "./pages/AllVersions";
-import Changelog from "./pages/Changelog";
+
 import GamerOSChangelog from "./pages/GamerOSChangelog";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
