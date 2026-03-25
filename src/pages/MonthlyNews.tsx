@@ -54,8 +54,9 @@ const monthlyNewsData: Record<string, MonthData> = {
   "march-2026": {
     month: "March",
     year: "2026",
-    summary: "Major storage and app management update: real ATA PIO disk driver, disk-backed filesystem persistence, GOSAPP executable loader, runtime resolution switching, and enhanced Settings UI.",
+    summary: "Major storage and app management update: real ATA PIO disk driver, disk-backed filesystem persistence, GOSAPP executable loader, runtime resolution switching, and enhanced Settings UI. Build 1.400 announced for March 27.",
     highlights: [
+      "Build 1.400 announced for March 27, 2026",
       "ATA PIO disk driver for primary IDE I/O with sector-level read/write",
       "Disk-backed filesystem persistence with superblock and file tables",
       "GOSAPP executable loader format for concrete process/task model",
@@ -65,6 +66,12 @@ const monthlyNewsData: Record<string, MonthData> = {
       "Docker ISO staging fixes and input polling safety improvements",
     ],
     items: [
+      {
+        title: "Build 1.400 Coming March 27, 2026",
+        date: "March 25, 2026",
+        type: "Announcement",
+        description: "The next alpha release (Build 1.400) is scheduled for March 27, 2026 with ATA PIO disk driver improvements, GOSAPP loader enhancements, expanded storage layout, and Settings UI upgrades.",
+      },
       {
         title: "feat(storage, apps, ui): implement ATA PIO disk driver and enhance app management",
         date: "March 25, 2026",
