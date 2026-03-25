@@ -1,5 +1,5 @@
 ﻿import { Link } from "react-router-dom";
-import { Github, Coffee, FileText, Gamepad2, Heart, Twitter } from "lucide-react";
+import { Github, Coffee, Gamepad2, Heart, Twitter } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Footer = () => {
