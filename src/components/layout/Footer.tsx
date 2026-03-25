@@ -15,7 +15,7 @@ const Footer = () => {
     resources: [
       { name: "Download", path: "/download" },
       { name: "FAQ", path: "/faq" },      { name: "Documentation", href: "https://github.com/urmoit/GamerOS" },
-      { name: "Website Changelog", path: "/changelog", icon: FileText },
+      
     ],
     social: [
       { name: "GitHub", href: "https://github.com/urmoit/GamerOS", icon: Github },
