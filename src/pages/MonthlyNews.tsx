@@ -54,8 +54,9 @@ const monthlyNewsData: Record<string, MonthData> = {
   "march-2026": {
     month: "March",
     year: "2026",
-    summary: "Major storage and app management update: real ATA PIO disk driver, disk-backed filesystem persistence, GOSAPP executable loader, runtime resolution switching, and enhanced Settings UI.",
+    summary: "Major storage and app management update: real ATA PIO disk driver, disk-backed filesystem persistence, GOSAPP executable loader, runtime resolution switching, and enhanced Settings UI. Build 1.400 announced for March 27.",
     highlights: [
+      "Build 1.400 announced for March 27, 2026",
       "ATA PIO disk driver for primary IDE I/O with sector-level read/write",
       "Disk-backed filesystem persistence with superblock and file tables",
       "GOSAPP executable loader format for concrete process/task model",
