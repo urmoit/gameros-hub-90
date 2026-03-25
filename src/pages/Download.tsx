@@ -153,17 +153,6 @@ const Download = () => {
                       View Changelog
                     </Link>
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="glass-card-hover border-[hsl(280_100%_60%)]/30 text-[hsl(280_100%_60%)] hover:bg-[hsl(280_100%_60%)]/10" 
-                    asChild
-                  >
-                    <Link to="/changelog" className="gap-2">
-                      <Clock className="w-4 h-4" />
-                      View Changelog
-                    </Link>
-                  </Button>
                 </div>
               </div>
             </div>

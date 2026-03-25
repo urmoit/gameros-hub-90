@@ -1,5 +1,5 @@
 ﻿import { Link } from "react-router-dom";
-import { Github, Coffee, FileText, Gamepad2, Heart, Twitter } from "lucide-react";
+import { Github, Coffee, Gamepad2, Heart, Twitter } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Footer = () => {
@@ -15,7 +15,7 @@ const Footer = () => {
     resources: [
       { name: "Download", path: "/download" },
       { name: "FAQ", path: "/faq" },      { name: "Documentation", href: "https://github.com/urmoit/GamerOS" },
-      { name: "Website Changelog", path: "/changelog", icon: FileText },
+      
     ],
     social: [
       { name: "GitHub", href: "https://github.com/urmoit/GamerOS", icon: Github },
@@ -106,7 +106,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.resources.map((item) => (
                 <li key={item.name}>
-                  {'href' in item ? (
+                  {'href' in item && item.href ? (
                     <a 
                       href={item.href}
                       target="_blank"
@@ -114,16 +114,14 @@ const Footer = () => {
                       className="text-sm text-muted-foreground hover:text-purple-400 transition-colors duration-200 flex items-center gap-2 group"
                     >
                       <span className="w-0 h-px bg-purple-400 group-hover:w-3 transition-all duration-200" />
-                      {'icon' in item && item.icon && <item.icon className="w-3.5 h-3.5" />}
                       {item.name}
                     </a>
                   ) : (
                     <Link 
-                      to={item.path}
+                      to={'path' in item ? item.path : '/'}
                       className="text-sm text-muted-foreground hover:text-purple-400 transition-colors duration-200 flex items-center gap-2 group"
                     >
                       <span className="w-0 h-px bg-purple-400 group-hover:w-3 transition-all duration-200" />
-                      {'icon' in item && item.icon && <item.icon className="w-3.5 h-3.5" />}
                       {item.name}
                     </Link>
                   )}
@@ -186,7 +184,7 @@ const Footer = () => {
             <Link to="/faq" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               FAQ
             </Link>
-            <Link to="/changelog" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+            <Link to="/gameros-changelog" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               Changelog
             </Link>
             <span className="text-xs text-cyan-400/60 font-mono">00m1-alpha (Build 1.300)</span>

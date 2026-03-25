@@ -58,7 +58,7 @@ const newsItems: NewsItem[] = [
     type: "Announcement",
     description: "The next alpha release (Build 1.400) is scheduled for March 27, 2026. Expect ATA PIO disk driver improvements, GOSAPP executable loader enhancements, expanded storage layout with real app install roots, and further Settings UI upgrades.",
     icon: Rocket,
-    internalLink: "/news",
+    internalLink: "/news/build-1400",
     featured: true,
   },
   {
@@ -744,17 +744,6 @@ const News = () => {
                     <Link to="/gameros-changelog">
                       <GitCommit className="w-4 h-4 text-cyan-400" />
                       GamerOS Changelog
-                    </Link>
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    asChild
-                    className="gap-2 bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white"
-                  >
-                    <Link to="/changelog">
-                      <Tag className="w-4 h-4 text-pink-400" />
-                      Website Changelog
                     </Link>
                   </Button>
                 </div>

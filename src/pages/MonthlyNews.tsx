@@ -144,7 +144,6 @@ const monthlyNewsData: Record<string, MonthData> = {
         date: "February 13, 2026",
         type: "Announcement",
         description: "Updated website content to match the alpha release: page cleanup, release messaging updates, and changelog synchronization.",
-        commitUrl: "/changelog",
       },
       {
         title: "News feed updated for alpha launch visibility",
