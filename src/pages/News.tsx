@@ -52,6 +52,17 @@ interface NewsItem {
 
 const newsItems: NewsItem[] = [
   {
+    id: "commit-9c5055c",
+    title: "feat(storage, apps, ui): implement ATA PIO disk driver and enhance app management",
+    date: "March 25, 2026",
+    type: "Commit",
+    description: "Added real ATA PIO disk driver for primary IDE I/O with sector-level read/write. Reworked filesystem persistence with disk-backed metadata. Introduced GOSAPP executable loader format. Enhanced Settings UI with Display tab for runtime resolution switching and boot debug overlays.",
+    icon: Code2,
+    commitCode: "9c5055c",
+    commitUrl: "http://github.com/urmoit/GamerOS/commit/9c5055c254868f02463fb72ba7c1f02a22f771db",
+    featured: true,
+  },
+  {
     id: "build-1300-walkthrough",
     title: "Walkthrough: Build 1.300 — App Framework, Win7 Theme & Custom Wallpaper",
     date: "February 17, 2026",
