@@ -318,6 +318,7 @@ const monthlyNewsData: Record<string, MonthData> = {
 };
 
 const availableMonths = [
+  { slug: "march-2026", label: "March 2026" },
   { slug: "february-2026", label: "February 2026" },
   { slug: "january-2026", label: "January 2026" },
 ];
