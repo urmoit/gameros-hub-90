@@ -328,7 +328,7 @@ const Download = () => {
                 </p>
                 
                 <code className="block p-4 rounded-xl bg-black/40 border border-[hsl(180_100%_50%)]/20 text-xs overflow-x-auto text-[hsl(180_100%_50%)]/70 font-mono">
-                  GamerOS_Alpha_Build_1.300.iso
+                  GamerOS_Alpha_Build_1.400.iso
                   <span className="animate-pulse">_</span>
                 </code>
               </div>
