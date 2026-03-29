@@ -52,11 +52,11 @@ interface NewsItem {
 
 const newsItems: NewsItem[] = [
   {
-    id: "build-1400-announcement",
-    title: "Build 1.400 Coming March 27, 2026",
-    date: "March 25, 2026",
+    id: "build-1400-release",
+    title: "Build 1.400 Released — Fluent UI, ATA Disk Driver & More",
+    date: "March 27, 2026",
     type: "Announcement",
-    description: "The next alpha release (Build 1.400) is scheduled for March 27, 2026. Expect ATA PIO disk driver improvements, GOSAPP executable loader enhancements, expanded storage layout with real app install roots, and further Settings UI upgrades.",
+    description: "Alpha Build 1.400 is out! Features Fluent UI dark theme (Windows 11 design language), ATA PIO disk driver, GOSAPP executable loader, disk-backed filesystem, modernized shell with rounded chrome, and dozens of fixes.",
     icon: Rocket,
     internalLink: "/news/build-1400",
     featured: true,

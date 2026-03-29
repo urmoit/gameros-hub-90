@@ -42,7 +42,7 @@ interface Version {
 }
 
 const isoUrl =
-  "https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.300/GamerOS_Alpha_Build_1.300.iso";
+  "https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.400/GamerOS_Alpha_Build_1.400.iso";
 
 const changelogData: Version[] = [
   {
