@@ -161,8 +161,8 @@ const Footer = () => {
             </div>
             <div className="p-4 rounded-xl bg-gradient-to-br from-cyan-400/10 to-purple-600/10 border border-white/5">
               <p className="text-xs text-muted-foreground mb-2">Current release</p>
-              <p className="text-sm font-medium text-foreground">00m1-alpha (Build 1.300)</p>
-              <p className="text-xs text-cyan-400/70 mt-1">Build 1.400 — March 27</p>
+              <p className="text-sm font-medium text-foreground">00m1-alpha (Build 1.400)</p>
+              <p className="text-xs text-cyan-400/70 mt-1">Released March 27, 2026</p>
             </div>
           </motion.div>
         </div>
