@@ -81,7 +81,7 @@ const HeroSection = () => {
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 border border-amber-500/30 text-amber-400 text-sm font-medium hover:from-amber-500/20 hover:via-orange-500/20 hover:to-amber-500/20 transition-all duration-300 group"
           >
             <Rocket className="w-4 h-4 group-hover:animate-bounce" />
-            <span>Build 1.400 coming March 27 — ATA Disk Driver, GOSAPP Loader & More</span>
+            <span>Build 1.400 Released — Fluent UI, ATA Disk Driver, GOSAPP Loader & More</span>
             <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>
