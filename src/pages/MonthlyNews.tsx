@@ -51,6 +51,29 @@ interface MonthData {
 }
 
 const monthlyNewsData: Record<string, MonthData> = {
+  "april-2026": {
+    month: "April",
+    year: "2026",
+    summary: "Build 1.500 released — a stability-focused update with comprehensive hardening across kernel boot, graphics, input, filesystem, shell, window manager, executive layer, and build system. 22+ bug fixes and 11 new diagnostic APIs.",
+    highlights: [
+      "Build 1.500 released April 3, 2026 — stability & reliability hardening",
+      "Kernel boot robustness: reordered init, page table self-checks, BSS alignment",
+      "Graphics subsystem: bounds validation, memory barriers, cursor clipping",
+      "Input drivers: keyboard timeout, mouse packet sync, spurious IRQ handlers",
+      "Filesystem: NULL checks, ATA PIO timeouts, superblock validation",
+      "Shell: bounded polling, drag/resize validation, clean focus handling",
+      "Driver hardening: NMI-safe RTC, serial timeouts, VMware exception handler",
+      "Build system: pinned Docker base, tool checks, error code reporting",
+    ],
+    items: [
+      {
+        title: "Build 1.500 Released — Stability & Reliability Hardening",
+        date: "April 3, 2026",
+        type: "Announcement",
+        description: "Stability-focused release with 22+ fixes across kernel, graphics, input, filesystem, shell, drivers, executive, and build system. 11 new diagnostic APIs added.",
+      },
+    ],
+  },
   "march-2026": {
     month: "March",
     year: "2026",
