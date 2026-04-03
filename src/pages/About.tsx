@@ -366,7 +366,7 @@ const About = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <Button size="lg" className="btn-neon border-0" asChild>
-                    <a href="https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.400/GamerOS_Alpha_Build_1.400.iso" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.500/GamerOS_Alpha_Build_1.500.iso" target="_blank" rel="noopener noreferrer">
                       <span className="relative z-10">Download ISO</span>
                     </a>
                   </Button>

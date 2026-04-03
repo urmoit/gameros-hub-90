@@ -210,7 +210,7 @@ const HeroSection = () => {
                     <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                     <div className="w-3 h-3 rounded-full bg-green-500/80" />
                   </div>
-                  <span className="text-xs text-muted-foreground ml-2 font-mono">GamerOS Desktop — Alpha Build 1.400</span>
+                  <span className="text-xs text-muted-foreground ml-2 font-mono">GamerOS Desktop — Alpha Build 1.500</span>
                 </div>
                 {/* Window content */}
                 <div className="relative">
