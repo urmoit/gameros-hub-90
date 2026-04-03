@@ -108,13 +108,14 @@ const Download = () => {
                 <h2 className="text-4xl font-bold mb-4 text-white">Latest Alpha Release</h2>
                 
                 <p className="text-lg text-white/60 max-w-2xl mx-auto mb-4 leading-relaxed">
-                  GamerOS <span className="text-[hsl(180_100%_50%)] font-medium">00m1-alpha</span> (Build 1.400) features
-                  <span className="text-[hsl(280_100%_60%)] font-medium"> Fluent UI dark theme</span>,
-                  <span className="text-[hsl(320_100%_60%)] font-medium"> ATA PIO disk driver</span>,
-                  GOSAPP executable loader, disk-backed filesystem, and a completely modernized shell.
+                  GamerOS <span className="text-[hsl(180_100%_50%)] font-medium">00m1-alpha</span> (Build 1.500) is a stability-focused release
+                  that hardens every subsystem with
+                  <span className="text-[hsl(280_100%_60%)] font-medium"> 22+ bug fixes</span>,
+                  <span className="text-[hsl(320_100%_60%)] font-medium"> 11 new diagnostic APIs</span>,
+                  and comprehensive input/graphics/filesystem/kernel reliability improvements.
                 </p>
                 <p className="text-sm text-emerald-400/80 mb-10 font-medium">
-                  ✅ Build 1.400 released March 27, 2026
+                  ✅ Build 1.500 released April 3, 2026
                 </p>
                 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
