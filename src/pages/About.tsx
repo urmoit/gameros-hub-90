@@ -82,7 +82,7 @@ const visionPoints = [
 const teamStats = [
   { value: "1", label: "Core Developer", color: "cyan" },
   { value: "27,000+", label: "Lines of Code", color: "purple" },
-  { value: "1.400", label: "Build", color: "pink" },
+  { value: "1.500", label: "Build", color: "pink" },
   { value: "Jan 2026", label: "Started", color: "cyan" },
 ];
 
