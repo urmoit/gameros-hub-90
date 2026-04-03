@@ -172,9 +172,9 @@ const About = () => {
                     <h3 className="text-xl font-bold">Development Notice</h3>
                   </div>
                   <p className="text-muted-foreground mb-4">
-                    GamerOS has made significant progress! Build 1.400 is now released with Fluent UI dark theme (Windows 11 design language), 
-                    ATA PIO disk driver, GOSAPP executable loader, disk-backed filesystem persistence, and a completely modernized shell. The latest alpha release
-                    is <span className="text-amber-400 font-medium">00m1-alpha</span> (Build 1.400), released March 27, 2026.
+                    GamerOS has made significant progress! Build 1.500 is now released — a stability-focused update that hardens every subsystem 
+                    (kernel boot, graphics, input, filesystem, shell, drivers, executive layer, and build system) with 22+ fixes and 11 new diagnostic APIs. 
+                    The latest alpha release is <span className="text-amber-400 font-medium">00m1-alpha</span> (Build 1.500), released April 3, 2026.
                   </p>
                   <Button variant="outline" size="sm" asChild className="mt-2 border-amber-400/30 hover:bg-amber-400/10 hover:text-amber-400">
                     <Link to="/gameros-changelog">
