@@ -124,9 +124,9 @@ const Download = () => {
                     asChild
                     className="min-w-[220px] btn-neon border-0"
                   >
-                     <a href="https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.400/GamerOS_Alpha_Build_1.400.iso" target="_blank" rel="noopener noreferrer">
+                     <a href="https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.500/GamerOS_Alpha_Build_1.500.iso" target="_blank" rel="noopener noreferrer">
                     <DownloadIcon className="w-5 h-5 mr-2" />
-                    Download Build 1.400 ISO
+                    Download Build 1.500 ISO
                     </a>
                   </Button>
                   <Button 
