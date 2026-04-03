@@ -52,6 +52,16 @@ interface NewsItem {
 
 const newsItems: NewsItem[] = [
   {
+    id: "build-1500-release",
+    title: "Build 1.500 Released — Stability & Reliability Hardening",
+    date: "April 3, 2026",
+    type: "Announcement",
+    description: "Alpha Build 1.500 is out! A stability-focused release with comprehensive hardening across kernel boot, graphics, input drivers, filesystem, shell, window manager, executive layer, and build system. 22+ bug fixes and 11 new diagnostic APIs.",
+    icon: Rocket,
+    internalLink: "/news/build-1500",
+    featured: true,
+  },
+  {
     id: "build-1400-release",
     title: "Build 1.400 Released — Fluent UI, ATA Disk Driver & More",
     date: "March 27, 2026",

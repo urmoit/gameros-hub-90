@@ -374,7 +374,7 @@ const Download = () => {
                 </p>
                 
                 <code className="block p-4 rounded-xl bg-black/40 border border-[hsl(320_100%_60%)]/20 text-xs overflow-x-auto text-[hsl(320_100%_60%)]/70 font-mono">
-                  Release Build 1.400
+                  Release Build 1.500
                 </code>
               </div>
             </div>
