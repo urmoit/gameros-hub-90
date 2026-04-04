@@ -134,9 +134,9 @@ const Download = () => {
                     className="min-w-[220px] btn-neon gap-2 group/btn" 
                     asChild
                   >
-                    <Link to="/gameros-changelog">
+                    <Link to="/news/build-1500">
                       <Rocket className="w-5 h-5 group-hover/btn:animate-bounce" />
-                      Read Alpha Changelog
+                      Build 1.500 Release Notes
                       <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
                   </Button>
@@ -149,9 +149,9 @@ const Download = () => {
                     className="glass-card-hover border-[hsl(180_100%_50%)]/30 text-[hsl(180_100%_50%)] hover:bg-[hsl(180_100%_50%)]/10" 
                     asChild
                   >
-                    <Link to="/gameros-changelog" className="gap-2">
+                    <Link to="/news" className="gap-2">
                       <GitCommit className="w-4 h-4" />
-                      View Changelog
+                      View All News
                     </Link>
                   </Button>
                 </div>

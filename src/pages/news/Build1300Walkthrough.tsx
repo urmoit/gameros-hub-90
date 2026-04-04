@@ -414,12 +414,8 @@ const Build1300Walkthrough = () => {
                         Download ISO
                       </a>
                     </Button>
-                    <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10 gap-2">
-                      <Link to="/gameros-changelog">
-                        View Full Changelog
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
-                    </Button>
+
+
                   </div>
                 </div>
               </div>

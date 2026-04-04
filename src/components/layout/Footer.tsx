@@ -184,9 +184,8 @@ const Footer = () => {
             <Link to="/faq" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               FAQ
             </Link>
-            <Link to="/gameros-changelog" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-              Changelog
-            </Link>
+
+
             <span className="text-xs text-cyan-400/60 font-mono">00m1-alpha (Build 1.500)</span>
           </div>
         </motion.div>

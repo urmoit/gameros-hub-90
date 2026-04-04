@@ -19,7 +19,7 @@ import MonthlyNews from "./pages/MonthlyNews";
 import Download from "./pages/Download";
 import AllVersions from "./pages/AllVersions";
 
-import GamerOSChangelog from "./pages/GamerOSChangelog";
+
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 
@@ -38,7 +38,7 @@ const App = () => (
           <Route path="/news" element={<News />} />
           <Route path="/news/monthly/:month" element={<MonthlyNews />} />
           
-          <Route path="/gameros-changelog" element={<GamerOSChangelog />} />
+          
           <Route path="/download" element={<Download />} />
           <Route path="/all-versions" element={<AllVersions />} />
           <Route path="/faq" element={<FAQ />} />

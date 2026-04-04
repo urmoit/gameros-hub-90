@@ -124,16 +124,8 @@ const AllVersions = () => {
           </div>
         </section>
 
-        <section className="py-12">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10 gap-2">
-              <Link to="/gameros-changelog">
-                <ArrowRight className="w-4 h-4" />
-                View Full Changelog
-              </Link>
-            </Button>
-          </div>
-        </section>
+
+
       </main>
       <Footer />
     </div>

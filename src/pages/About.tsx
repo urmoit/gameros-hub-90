@@ -177,8 +177,8 @@ const About = () => {
                     The latest alpha release is <span className="text-amber-400 font-medium">00m1-alpha</span> (Build 1.500), released April 3, 2026.
                   </p>
                   <Button variant="outline" size="sm" asChild className="mt-2 border-amber-400/30 hover:bg-amber-400/10 hover:text-amber-400">
-                    <Link to="/gameros-changelog">
-                      Read Alpha Changelog
+                    <Link to="/news/build-1500">
+                      Read Build 1.500 Release Notes
                     </Link>
                   </Button>
                 </div>
@@ -371,8 +371,8 @@ const About = () => {
                     </a>
                   </Button>
                   <Button size="lg" variant="outline" asChild className="border-2 border-white/20 hover:border-purple-400/50 hover:bg-purple-400/10">
-                    <Link to="/gameros-changelog">
-                      View Changelog
+                    <Link to="/news">
+                      View News
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Link>
                   </Button>

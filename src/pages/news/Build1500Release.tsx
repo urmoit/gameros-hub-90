@@ -303,12 +303,8 @@ const Build1500Release = () => {
                         <span className="relative z-10">Download ISO</span>
                       </a>
                     </Button>
-                    <Button variant="outline" size="lg" asChild className="border-white/20 text-white hover:bg-white/10">
-                      <Link to="/gameros-changelog" className="gap-2">
-                        View Full Changelog
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
-                    </Button>
+
+
                   </div>
                 </div>
               </div>

@@ -745,17 +745,8 @@ const News = () => {
 
                 {/* Secondary Actions */}
                 <div className="flex flex-wrap gap-3 mt-4 pt-4 border-t border-white/5">
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    asChild
-                    className="gap-2 bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white"
-                  >
-                    <Link to="/gameros-changelog">
-                      <GitCommit className="w-4 h-4 text-cyan-400" />
-                      GamerOS Changelog
-                    </Link>
-                  </Button>
+
+
                 </div>
               </motion.div>
 
