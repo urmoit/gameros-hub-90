@@ -1011,9 +1011,9 @@ const MonthlyNews = () => {
                   </Button>
                   
                   <Button variant="outline" size="lg" asChild className="border-white/20 text-white/80 hover:bg-white/10 hover:border-cyan-500/50 hover:text-cyan-400 px-8 py-6 text-base">
-                    <Link to="/gameros-changelog" className="gap-2">
+                    <Link to="/news" className="gap-2">
                       <MessageSquare className="w-5 h-5" />
-                      View Changelog
+                      View All News
                     </Link>
                   </Button>
                 </div>

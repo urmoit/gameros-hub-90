@@ -371,8 +371,8 @@ const About = () => {
                     </a>
                   </Button>
                   <Button size="lg" variant="outline" asChild className="border-2 border-white/20 hover:border-purple-400/50 hover:bg-purple-400/10">
-                    <Link to="/gameros-changelog">
-                      View Changelog
+                    <Link to="/news">
+                      View News
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Link>
                   </Button>

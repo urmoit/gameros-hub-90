@@ -444,9 +444,9 @@ const XPTransformation = () => {
                     asChild
                     className="border-purple-500/50 text-purple-400 hover:bg-purple-500/10 hover:text-purple-300 gap-2"
                   >
-                    <Link to="/gameros-changelog">
+                    <Link to="/news">
                       <Wrench className="w-4 h-4" />
-                      Changelog
+                      All News
                     </Link>
                   </Button>
                 </div>
