@@ -19,7 +19,7 @@ import MonthlyNews from "./pages/MonthlyNews";
 import Download from "./pages/Download";
 import AllVersions from "./pages/AllVersions";
 
-import GamerOSChangelog from "./pages/GamerOSChangelog";
+
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 
