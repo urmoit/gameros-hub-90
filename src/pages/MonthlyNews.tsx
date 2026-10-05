@@ -51,6 +51,25 @@ interface MonthData {
 }
 
 const monthlyNewsData: Record<string, MonthData> = {
+  "october-2026": {
+    month: "October",
+    year: "2026",
+    summary: "Website visual refresh focused on cleaner styling: dark-mode toggle removed, neon-heavy accents reduced, changelog synced, and header behavior upgraded with animated docked scrolling.",
+    highlights: [
+      "Removed dark theme toggle from the website header",
+      "Replaced neon-heavy primary button styling with a cleaner default",
+      "Updated website changelog entries for the UI refresh",
+      "Added animated docked header with rounded corners on scroll",
+    ],
+    items: [
+      {
+        title: "Website UI Refresh — Theme Cleanup & Docked Header",
+        date: "October 5, 2026",
+        type: "Announcement",
+        description: "Removed dark-mode switching and neon-heavy styling, synced changelog entries, and introduced an animated docked header that rounds and docks while scrolling.",
+      },
+    ],
+  },
   "april-2026": {
     month: "April",
     year: "2026",
@@ -347,6 +366,7 @@ const monthlyNewsData: Record<string, MonthData> = {
 };
 
 const availableMonths = [
+  { slug: "october-2026", label: "October 2026" },
   { slug: "march-2026", label: "March 2026" },
   { slug: "february-2026", label: "February 2026" },
   { slug: "january-2026", label: "January 2026" },
@@ -1029,4 +1049,3 @@ const MonthlyNews = () => {
 };
 
 export default MonthlyNews;
-
