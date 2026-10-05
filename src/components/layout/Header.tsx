@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Coffee, Gamepad2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import ThemeToggle from "@/components/ui/ThemeToggle";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = [
@@ -30,16 +29,16 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50">
       {/* Main Navigation */}
       <motion.div 
-        className={`transition-all duration-300 ${
+        className={`mx-auto transition-all duration-300 ${
           isScrolled 
-            ? 'bg-background/80 backdrop-blur-xl border-b border-white/5 shadow-lg shadow-black/20' 
-            : 'bg-transparent'
+            ? "mt-2 max-w-6xl rounded-2xl border border-white/10 bg-background/90 backdrop-blur-xl shadow-lg shadow-black/20"
+            : "mt-0 max-w-full rounded-none bg-transparent"
         }`}
         initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
+        animate={{ y: 0, scale: isScrolled ? 0.985 : 1 }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3 group">
@@ -99,7 +98,6 @@ const Header = () => {
                 <Coffee className="w-4 h-4" />
                 <span className="hidden lg:inline">Support</span>
               </a>
-              <ThemeToggle />
               <Button 
                 asChild 
                 className="btn-neon border-0 text-foreground font-semibold"
@@ -120,7 +118,6 @@ const Header = () => {
               >
                 <Coffee className="w-5 h-5" />
               </a>
-              <ThemeToggle />
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="p-2 rounded-lg hover:bg-white/5 transition-colors"
@@ -198,4 +195,3 @@ const Header = () => {
 };
 
 export default Header;
-

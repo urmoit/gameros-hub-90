@@ -52,6 +52,16 @@ interface NewsItem {
 
 const newsItems: NewsItem[] = [
   {
+    id: "website-ui-refresh",
+    title: "Website UI Refresh — Theme Cleanup & Docked Header",
+    date: "October 5, 2026",
+    type: "Announcement",
+    description: "Removed dark-mode switching and neon-heavy styling, refreshed the website changelog entries, and added an animated docked header with rounded corners on scroll.",
+    icon: Megaphone,
+    internalLink: "/news/monthly/october-2026",
+    featured: true,
+  },
+  {
     id: "build-1500-release",
     title: "Build 1.500 Released — Stability & Reliability Hardening",
     date: "April 3, 2026",
@@ -735,7 +745,7 @@ const News = () => {
                       asChild
                       className="gap-2 bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white"
                     >
-                      <Link to="/news/monthly/february-2026">
+                      <Link to="/news/monthly/october-2026">
                         <Calendar className="w-4 h-4 text-purple-400" />
                         Monthly Archive
                       </Link>
@@ -951,4 +961,3 @@ const News = () => {
 };
 
 export default News;
-
