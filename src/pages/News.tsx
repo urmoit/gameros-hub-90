@@ -52,6 +52,16 @@ interface NewsItem {
 
 const newsItems: NewsItem[] = [
   {
+    id: "build-1520-release",
+    title: "Build 1.520 Released — 00m2 Build, Safety & Stability Update",
+    date: "October 10, 2026",
+    type: "Announcement",
+    description: "Alpha Build 1.520 (00m2) is out with build-system recovery, memory-safety fixes, boot and driver hardening, correctness fixes, and major Settings/Explorer/Notepad UI improvements.",
+    icon: Rocket,
+    internalLink: "/news/build-1520",
+    featured: true,
+  },
+  {
     id: "website-ui-refresh",
     title: "Website UI Refresh — Theme Cleanup & Docked Header",
     date: "October 5, 2026",

@@ -74,8 +74,8 @@ const Download = () => {
             </h1>
             
             <p className="text-xl text-white/60 max-w-3xl mx-auto leading-relaxed">
-              The first public alpha is available now.
-              <span className="text-[hsl(180_100%_50%)]"> Download 00m1-alpha</span> and test in VMware, VirtualBox, or QEMU.
+              The latest alpha is available now.
+              <span className="text-[hsl(180_100%_50%)]"> Download 00m2</span> and test in VMware, VirtualBox, or QEMU.
             </p>
             
             {/* Decorative Line */}
@@ -108,14 +108,11 @@ const Download = () => {
                 <h2 className="text-4xl font-bold mb-4 text-white">Latest Alpha Release</h2>
                 
                 <p className="text-lg text-white/60 max-w-2xl mx-auto mb-4 leading-relaxed">
-                  GamerOS <span className="text-[hsl(180_100%_50%)] font-medium">00m1-alpha</span> (Build 1.500) is a stability-focused release
-                  that hardens every subsystem with
-                  <span className="text-[hsl(280_100%_60%)] font-medium"> 22+ bug fixes</span>,
-                  <span className="text-[hsl(320_100%_60%)] font-medium"> 11 new diagnostic APIs</span>,
-                  and comprehensive input/graphics/filesystem/kernel reliability improvements.
+                  GamerOS <span className="text-[hsl(180_100%_50%)] font-medium">00m2</span> (Build 1.520) is the new compile-verified release
+                  with major build-system fixes, memory-safety hardening, and broad UI/driver stability upgrades across the OS.
                 </p>
                 <p className="text-sm text-emerald-400/80 mb-10 font-medium">
-                  ✅ Build 1.500 released April 3, 2026
+                  ✅ Build 1.520 released October 10, 2026
                 </p>
                 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
@@ -124,9 +121,9 @@ const Download = () => {
                     asChild
                     className="min-w-[220px] btn-neon border-0"
                   >
-                     <a href="https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.500/GamerOS_Alpha_Build_1.500.iso" target="_blank" rel="noopener noreferrer">
+                     <a href="https://github.com/urmoit/GamerOS/releases/download/00m2-alpha-Build-1.520/GamerOS_Alpha_Build_1.520.iso" target="_blank" rel="noopener noreferrer">
                     <DownloadIcon className="w-5 h-5 mr-2" />
-                    Download Build 1.500 ISO
+                    Download Build 1.520 ISO
                     </a>
                   </Button>
                   <Button 
@@ -134,9 +131,9 @@ const Download = () => {
                     className="min-w-[220px] btn-neon gap-2 group/btn" 
                     asChild
                   >
-                    <Link to="/news/build-1500">
+                    <Link to="/news/build-1520">
                       <Rocket className="w-5 h-5 group-hover/btn:animate-bounce" />
-                      Build 1.500 Release Notes
+                      Build 1.520 Release Notes
                       <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
                   </Button>
@@ -329,7 +326,7 @@ const Download = () => {
                 </p>
                 
                 <code className="block p-4 rounded-xl bg-black/40 border border-[hsl(180_100%_50%)]/20 text-xs overflow-x-auto text-[hsl(180_100%_50%)]/70 font-mono">
-                  GamerOS_Alpha_Build_1.500.iso
+                  GamerOS_Alpha_Build_1.520.iso
                   <span className="animate-pulse">_</span>
                 </code>
               </div>
@@ -374,7 +371,7 @@ const Download = () => {
                 </p>
                 
                 <code className="block p-4 rounded-xl bg-black/40 border border-[hsl(320_100%_60%)]/20 text-xs overflow-x-auto text-[hsl(320_100%_60%)]/70 font-mono">
-                  Release Build 1.500
+                  Release Build 1.520
                 </code>
               </div>
             </div>

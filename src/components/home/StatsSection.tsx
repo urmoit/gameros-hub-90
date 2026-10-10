@@ -5,13 +5,13 @@ import { BarChart3, GitCommit, Calendar, Rocket } from "lucide-react";
 
 const stats = [
   { 
-    value: "00m1-alpha", 
+    value: "00m2", 
     label: "Releases",
     icon: Rocket,
     color: "cyan",
   },
   { 
-    value: "1.500", 
+    value: "1.520", 
     label: "Build",
     icon: BarChart3,
     color: "purple",
@@ -110,4 +110,3 @@ const StatsSection = () => {
 };
 
 export default StatsSection;
-

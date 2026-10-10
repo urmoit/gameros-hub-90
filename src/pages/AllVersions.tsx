@@ -13,10 +13,19 @@ import { Badge } from "@/components/ui/badge";
 
 const versions = [
   {
+    version: "00m2",
+    build: "1.520",
+    date: "October 10, 2026",
+    label: "Latest",
+    downloadUrl: "https://github.com/urmoit/GamerOS/releases/download/00m2-alpha-Build-1.520/GamerOS_Alpha_Build_1.520.iso",
+    filename: "GamerOS_Alpha_Build_1.520.iso",
+    highlights: ["Build blockers fixed", "Memory-safety hardening", "Boot/driver stability", "Settings & UI redesign"],
+  },
+  {
     version: "00m1-alpha",
     build: "1.500",
     date: "April 3, 2026",
-    label: "Latest",
+    label: "",
     downloadUrl: "https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.500/GamerOS_Alpha_Build_1.500.iso",
     filename: "GamerOS_Alpha_Build_1.500.iso",
     highlights: ["Stability hardening", "22+ bug fixes", "11 new APIs", "Build system reliability"],

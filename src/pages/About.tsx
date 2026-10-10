@@ -82,7 +82,7 @@ const visionPoints = [
 const teamStats = [
   { value: "1", label: "Core Developer", color: "cyan" },
   { value: "27,000+", label: "Lines of Code", color: "purple" },
-  { value: "1.500", label: "Build", color: "pink" },
+  { value: "1.520", label: "Build", color: "pink" },
   { value: "Jan 2026", label: "Started", color: "cyan" },
 ];
 
@@ -172,13 +172,13 @@ const About = () => {
                     <h3 className="text-xl font-bold">Development Notice</h3>
                   </div>
                   <p className="text-muted-foreground mb-4">
-                    GamerOS has made significant progress! Build 1.500 is now released — a stability-focused update that hardens every subsystem 
-                    (kernel boot, graphics, input, filesystem, shell, drivers, executive layer, and build system) with 22+ fixes and 11 new diagnostic APIs. 
-                    The latest alpha release is <span className="text-amber-400 font-medium">00m1-alpha</span> (Build 1.500), released April 3, 2026.
+                    GamerOS has made significant progress! Build 1.520 is now released — the 00m2 update that fixes major build blockers,
+                    memory safety issues, and driver/boot reliability problems while improving Settings, Notepad, Explorer, and release tooling.
+                    The latest alpha release is <span className="text-amber-400 font-medium">00m2</span> (Build 1.520), released October 10, 2026.
                   </p>
                   <Button variant="outline" size="sm" asChild className="mt-2 border-amber-400/30 hover:bg-amber-400/10 hover:text-amber-400">
-                    <Link to="/news/build-1500">
-                      Read Build 1.500 Release Notes
+                    <Link to="/news/build-1520">
+                      Read Build 1.520 Release Notes
                     </Link>
                   </Button>
                 </div>
@@ -362,11 +362,11 @@ const About = () => {
                   Alpha <span className="text-gaming-alt">Release</span>
                 </h2>
                 <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-                  Download `00m1-alpha`, review release notes, and follow the next milestones.
+                  Download `00m2`, review release notes, and follow the next milestones.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <Button size="lg" className="btn-neon border-0" asChild>
-                    <a href="https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.500/GamerOS_Alpha_Build_1.500.iso" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/urmoit/GamerOS/releases/download/00m2-alpha-Build-1.520/GamerOS_Alpha_Build_1.520.iso" target="_blank" rel="noopener noreferrer">
                       <span className="relative z-10">Download ISO</span>
                     </a>
                   </Button>
@@ -388,4 +388,3 @@ const About = () => {
 };
 
 export default About;
-
