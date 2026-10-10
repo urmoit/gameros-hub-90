@@ -92,32 +92,32 @@ const faqCategories = [
 const getCategoryStyles = (color: string) => {
   const styles = {
     cyan: {
-      badge: "bg-[hsl(180_100%_50%)]/10 text-[hsl(180_100%_50%)] border-[hsl(180_100%_50%)]/30 shadow-[0_0_10px_hsl(180_100%_50%/30%)]",
-      icon: "text-[hsl(180_100%_50%)]",
-      glow: "group-hover:shadow-[0_0_20px_hsl(180_100%_50%/40%)]",
-      border: "group-hover:border-[hsl(180_100%_50%)]/50",
-      line: "bg-gradient-to-r from-[hsl(180_100%_50%)] to-transparent",
+      badge: "bg-muted text-primary border-border shadow-none",
+      icon: "text-primary",
+      glow: "shadow-none",
+      border: "group-hover:border-border",
+      line: "bg-muted  to-transparent",
     },
     purple: {
-      badge: "bg-[hsl(280_100%_60%)]/10 text-[hsl(280_100%_60%)] border-[hsl(280_100%_60%)]/30 shadow-[0_0_10px_hsl(280_100%_60%/30%)]",
-      icon: "text-[hsl(280_100%_60%)]",
-      glow: "group-hover:shadow-[0_0_20px_hsl(280_100%_60%/40%)]",
-      border: "group-hover:border-[hsl(280_100%_60%)]/50",
-      line: "bg-gradient-to-r from-[hsl(280_100%_60%)] to-transparent",
+      badge: "bg-muted text-primary border-border shadow-none",
+      icon: "text-primary",
+      glow: "shadow-none",
+      border: "group-hover:border-border",
+      line: "bg-muted  to-transparent",
     },
     pink: {
-      badge: "bg-[hsl(320_100%_60%)]/10 text-[hsl(320_100%_60%)] border-[hsl(320_100%_60%)]/30 shadow-[0_0_10px_hsl(320_100%_60%/30%)]",
-      icon: "text-[hsl(320_100%_60%)]",
-      glow: "group-hover:shadow-[0_0_20px_hsl(320_100%_60%/40%)]",
-      border: "group-hover:border-[hsl(320_100%_60%)]/50",
-      line: "bg-gradient-to-r from-[hsl(320_100%_60%)] to-transparent",
+      badge: "bg-muted text-primary border-border shadow-none",
+      icon: "text-primary",
+      glow: "shadow-none",
+      border: "group-hover:border-border",
+      line: "bg-muted  to-transparent",
     },
     amber: {
-      badge: "bg-[hsl(45_100%_50%)]/10 text-[hsl(45_100%_50%)] border-[hsl(45_100%_50%)]/30 shadow-[0_0_10px_hsl(45_100%_50%/30%)]",
-      icon: "text-[hsl(45_100%_50%)]",
-      glow: "group-hover:shadow-[0_0_20px_hsl(45_100%_50%/40%)]",
-      border: "group-hover:border-[hsl(45_100%_50%)]/50",
-      line: "bg-gradient-to-r from-[hsl(45_100%_50%)] to-transparent",
+      badge: "bg-warning/10 text-warning border-border shadow-none",
+      icon: "text-warning",
+      glow: "shadow-none",
+      border: "group-hover:border-border",
+      line: "bg-muted  to-transparent",
     },
   };
   return styles[color as keyof typeof styles] || styles.cyan;
@@ -141,13 +141,13 @@ const FAQItem = ({ question, answer, color }: { question: string; answer: string
       >
         {/* Hover glow effect */}
         <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
-          color === "cyan" ? "bg-[hsl(180_100%_50%)]/5" :
-          color === "purple" ? "bg-[hsl(280_100%_60%)]/5" :
-          color === "pink" ? "bg-[hsl(320_100%_60%)]/5" :
-          "bg-[hsl(45_100%_50%)]/5"
+          color === "cyan" ? "bg-muted" :
+          color === "purple" ? "bg-muted" :
+          color === "pink" ? "bg-muted" :
+          "bg-warning/10"
         }`} />
         
-        <span className="font-medium pr-4 relative z-10 text-white group-hover:text-white/90 transition-colors">
+        <span className="font-medium pr-4 relative z-10 text-foreground group-hover:text-foreground transition-colors">
           {question}
         </span>
         <motion.div
@@ -168,7 +168,7 @@ const FAQItem = ({ question, answer, color }: { question: string; answer: string
           >
             {/* Gradient line */}
             <div className={`h-[1px] w-full ${styles.line} opacity-50`} />
-            <div className="px-6 py-4 text-white/70 bg-white/[0.02]">
+            <div className="px-6 py-4 text-muted-foreground bg-muted">
               {answer}
             </div>
           </motion.div>
@@ -180,23 +180,20 @@ const FAQItem = ({ question, answer, color }: { question: string; answer: string
 
 const FAQ = () => {
   return (
-    <div className="min-h-screen bg-[hsl(225_25%_6%)]">
+    <div className="min-h-screen bg-background">
       <Header />
       <PageTransition>
         <main className="pt-24 pb-16">
           {/* Hero Section with Animated Background */}
-          <section className="relative py-20 overflow-hidden">
+          <section className="relative py-12 overflow-hidden">
             {/* Animated background grid */}
             <div className="absolute inset-0 grid-pattern opacity-30" />
             
             {/* Animated gradient orbs */}
             <div className="absolute inset-0 overflow-hidden">
               <motion.div
-                className="absolute w-[600px] h-[600px] rounded-full opacity-20"
-                style={{
-                  background: "radial-gradient(circle, hsl(180 100% 50%) 0%, transparent 70%)",
-                  filter: "blur(60px)",
-                }}
+                className="absolute w-[600px] h-[600px] rounded-full opacity-20 hidden"
+                
                 animate={{
                   x: ["-20%", "10%", "-20%"],
                   y: ["-20%", "10%", "-20%"],
@@ -208,13 +205,8 @@ const FAQ = () => {
                 }}
               />
               <motion.div
-                className="absolute w-[500px] h-[500px] rounded-full opacity-15"
-                style={{
-                  background: "radial-gradient(circle, hsl(280 100% 60%) 0%, transparent 70%)",
-                  filter: "blur(60px)",
-                  right: "-10%",
-                  top: "20%",
-                }}
+                className="absolute w-[500px] h-[500px] rounded-full opacity-15 hidden"
+                style={{ right: "-10%", top: "20%" }}
                 animate={{
                   x: ["0%", "-15%", "0%"],
                   y: ["0%", "15%", "0%"],
@@ -230,25 +222,23 @@ const FAQ = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
               <ScrollReveal>
                 <motion.div 
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[hsl(180_100%_50%)]/10 text-[hsl(180_100%_50%)] text-sm font-medium mb-6 border border-[hsl(180_100%_50%)]/30"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted text-primary text-sm font-medium mb-6 border border-border"
                   whileHover={{ scale: 1.05 }}
-                  style={{
-                    boxShadow: "0 0 20px hsl(180 100% 50% / 20%)",
-                  }}
+                  
                 >
                   <Gamepad2 className="w-4 h-4" />
                   Help Center
                 </motion.div>
               </ScrollReveal>
               <ScrollReveal delay={0.1}>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+                <h1 className="text-4xl sm:text-5xl lg:text-4xl font-bold mb-6">
                   <span className="text-gaming">Frequently Asked</span>
                   <br />
-                  <span className="text-white">Questions</span>
+                  <span className="text-foreground">Questions</span>
                 </h1>
               </ScrollReveal>
               <ScrollReveal delay={0.2}>
-                <p className="text-xl text-white/60 max-w-3xl mx-auto">
+                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                   Find answers to common questions about GamerOS, development, and how to get involved in our gaming revolution.
                 </p>
               </ScrollReveal>
@@ -263,7 +253,7 @@ const FAQ = () => {
             return (
               <section key={catIndex} className="py-12 relative">
                 {/* Subtle gradient background for alternating sections */}
-                <div className={`absolute inset-0 ${catIndex % 2 === 1 ? 'bg-gradient-to-b from-white/[0.02] to-transparent' : ''}`} />
+                <div className={`absolute inset-0 ${catIndex % 2 === 1 ? 'bg-muted  to-transparent' : ''}`} />
                 
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
                   <ScrollReveal>
@@ -271,7 +261,7 @@ const FAQ = () => {
                       <div className={`p-2 rounded-lg ${styles.badge}`}>
                         <Icon className="w-6 h-6" />
                       </div>
-                      <h2 className="text-2xl font-bold text-white">{category.title}</h2>
+                      <h2 className="text-2xl font-bold text-foreground">{category.title}</h2>
                       <div className={`flex-1 h-[1px] ${styles.line} opacity-30 ml-4`} />
                     </div>
                   </ScrollReveal>
@@ -291,23 +281,20 @@ const FAQ = () => {
           })}
 
           {/* Gaming-style CTA Section */}
-          <section className="py-16 relative overflow-hidden">
+          <section className="py-12 relative overflow-hidden">
             {/* Background effects */}
             <div className="absolute inset-0">
-              <div className="absolute inset-0 bg-gradient-to-t from-[hsl(280_100%_60%)]/10 via-transparent to-[hsl(180_100%_50%)]/10" />
-              <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[hsl(180_100%_50%)]/50 to-transparent" />
+              <div className="absolute inset-0 bg-muted  via-transparent " />
+              <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-muted from-transparent  to-transparent" />
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
               <ScrollReveal>
-                <div className="glass-card p-8 lg:p-12 text-center relative overflow-hidden">
+                <div className="glass-card p-5 sm:p-6 lg:p-5 sm:p-6 text-center relative overflow-hidden">
                   {/* Animated border glow */}
                   <motion.div
-                    className="absolute inset-0 opacity-50"
-                    style={{
-                      background: "linear-gradient(90deg, transparent, hsl(180 100% 50% / 20%), hsl(280 100% 60% / 20%), transparent)",
-                      backgroundSize: "200% 100%",
-                    }}
+                    className="absolute inset-0 opacity-50 bg-muted"
+                    
                     animate={{
                       backgroundPosition: ["200% 0", "-200% 0"],
                     }}
@@ -320,10 +307,8 @@ const FAQ = () => {
                   
                   <div className="relative z-10">
                     <motion.div
-                      className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-[hsl(180_100%_50%)] to-[hsl(280_100%_60%)] flex items-center justify-center"
-                      style={{
-                        boxShadow: "0 0 40px hsl(180 100% 50% / 40%)",
-                      }}
+                      className="w-20 h-20 mx-auto mb-6 rounded-full bg-muted   flex items-center justify-center"
+                      
                       animate={{
                         boxShadow: [
                           "0 0 40px hsl(180 100% 50% / 40%)",
@@ -337,13 +322,13 @@ const FAQ = () => {
                         ease: "easeInOut",
                       }}
                     >
-                      <MessageCircle className="w-10 h-10 text-[hsl(225_25%_6%)]" />
+                      <MessageCircle className="w-10 h-10 text-foreground" />
                     </motion.div>
                     
                     <h2 className="text-3xl lg:text-4xl font-bold mb-4">
                       <span className="text-gaming-alt">Still Have Questions?</span>
                     </h2>
-                    <p className="text-white/60 max-w-2xl mx-auto mb-8">
+                    <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
                       Can't find what you're looking for? Join our community or reach out directly. 
                       We're happy to help you on your GamerOS journey!
                     </p>
@@ -352,7 +337,7 @@ const FAQ = () => {
                       <Button 
                         size="lg" 
                         disabled 
-                        className="opacity-60 border-[hsl(180_100%_50%)]/30 text-white"
+                        className="opacity-60 border-border text-foreground"
                       >
                         <MessageCircle className="w-5 h-5 mr-2" />
                         Discord Coming Soon
@@ -361,7 +346,7 @@ const FAQ = () => {
                         size="lg" 
                         variant="outline" 
                         asChild
-                        className="border-[hsl(280_100%_60%)]/50 hover:bg-[hsl(280_100%_60%)]/10 hover:border-[hsl(280_100%_60%)] text-white"
+                        className="border-border hover:bg-muted hover:border-border text-foreground"
                       >
                         <a href="https://github.com/urmoit/GamerOS" target="_blank" rel="noopener noreferrer">
                           <Github className="w-5 h-5 mr-2" />
@@ -372,7 +357,7 @@ const FAQ = () => {
                         size="lg" 
                         variant="outline" 
                         asChild
-                        className="border-[hsl(320_100%_60%)]/50 hover:bg-[hsl(320_100%_60%)]/10 hover:border-[hsl(320_100%_60%)] text-white"
+                        className="border-border hover:bg-muted hover:border-border text-foreground"
                       >
                         <Link to="/about">
                           <Mail className="w-5 h-5 mr-2" />

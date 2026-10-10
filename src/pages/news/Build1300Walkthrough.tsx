@@ -187,74 +187,74 @@ const bugFixes = [
 
 const colorMap: Record<string, { bg: string; border: string; text: string; gradient: string }> = {
   cyan: {
-    bg: "bg-cyan-400/10",
-    border: "border-cyan-400/30",
-    text: "text-cyan-400",
-    gradient: "from-cyan-400 to-cyan-500",
+    bg: "bg-muted",
+    border: "border-border",
+    text: "text-primary",
+    gradient: " ",
   },
   purple: {
-    bg: "bg-purple-400/10",
-    border: "border-purple-400/30",
-    text: "text-purple-400",
-    gradient: "from-purple-400 to-purple-500",
+    bg: "bg-muted",
+    border: "border-border",
+    text: "text-primary",
+    gradient: " ",
   },
   pink: {
-    bg: "bg-pink-400/10",
-    border: "border-pink-400/30",
-    text: "text-pink-400",
-    gradient: "from-pink-400 to-pink-500",
+    bg: "bg-muted",
+    border: "border-border",
+    text: "text-primary",
+    gradient: " ",
   },
 };
 
 const Build1300Walkthrough = () => {
   return (
     <PageTransition>
-      <div className="min-h-screen flex flex-col" style={{ background: "hsl(225 25% 6%)" }}>
+      <div className="min-h-screen flex flex-col bg-muted" >
         <Header />
 
         <main className="flex-1">
           {/* Hero */}
           <section className="relative pt-32 pb-20 overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(180_100%_50%_/_0.15),_transparent_50%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_hsl(280_100%_60%_/_0.1),_transparent_50%)]" />
+            <div className="absolute inset-0 hidden" />
+            <div className="absolute inset-0 hidden" />
 
             <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
               <Link
                 to="/news"
-                className="group inline-flex items-center gap-2 text-gray-400 hover:text-[hsl(180_100%_50%)] mb-8 transition-all duration-300"
+                className="group inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-8 transition-all duration-300"
               >
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                <span className="text-sm uppercase tracking-wider">Back to News</span>
+                <span className="text-sm uppercase tracking-normal">Back to News</span>
               </Link>
 
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                 <div className="flex flex-wrap items-center gap-3 mb-6">
-                  <Badge className="bg-gradient-to-r from-[hsl(180_100%_50%)] to-[hsl(280_100%_60%)] text-white border-0 shadow-lg">
+                  <Badge className="bg-muted   text-foreground border-0 shadow-lg">
                     <Sparkles className="w-3 h-3 mr-1" />
                     Build 1.300
                   </Badge>
-                  <Badge variant="outline" className="border-white/20 text-gray-400">
+                  <Badge variant="outline" className="border-border text-muted-foreground">
                     <Calendar className="w-3 h-3 mr-1" />
                     February 17, 2026
                   </Badge>
-                  <Badge variant="outline" className="border-white/20 text-gray-400">
+                  <Badge variant="outline" className="border-border text-muted-foreground">
                     <GitBranch className="w-3 h-3 mr-1" />
                     e44244d
                   </Badge>
                 </div>
 
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-                  <span className="text-white">Build 1.300: </span>
+                <h1 className="text-4xl sm:text-5xl lg:text-4xl font-bold mb-6 tracking-normal">
+                  <span className="text-foreground">Build 1.300: </span>
                   <span className="text-gaming">App Framework, Win7 Theme & Custom Wallpaper</span>
                 </h1>
 
-                <p className="text-lg text-gray-400 max-w-3xl mb-8 leading-relaxed">
+                <p className="text-lg text-muted-foreground max-w-3xl mb-8 leading-relaxed">
                   New .EXE application framework, Windows 7-inspired shell theme, custom wallpaper support, 
                   expanded Settings categories, taskbar date display, and 6 stability fixes.
                 </p>
 
                 <div className="flex flex-wrap gap-3">
-                  <Button asChild className="btn-neon border-0 gap-2">
+                  <Button asChild className="btn-solid border-0 gap-2">
                     <a
                       href="https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.300/GamerOS_Alpha_Build_1.300.iso"
                       target="_blank"
@@ -264,7 +264,7 @@ const Build1300Walkthrough = () => {
                       Download Build 1.300 ISO
                     </a>
                   </Button>
-                  <Button asChild variant="outline" className="border-white/20 text-white hover:bg-white/10 gap-2">
+                  <Button asChild variant="outline" className="border-border text-foreground hover:bg-muted gap-2">
                     <a
                       href="https://github.com/urmoit/GamerOS/commit/e44244deed04af17b8c278b228c7376308702bd7"
                       target="_blank"
@@ -280,7 +280,7 @@ const Build1300Walkthrough = () => {
           </section>
 
           {/* Summary Stats */}
-          <section className="py-12 border-y border-[hsl(225_20%_15%)]">
+          <section className="py-12 border-y border-border">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {[
@@ -296,13 +296,13 @@ const Build1300Walkthrough = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.1 }}
-                      className="glass-card rounded-2xl p-5 text-center"
+                      className="glass-card rounded-lg p-5 text-center"
                     >
-                      <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-3 ${colors.bg} border ${colors.border}`}>
+                      <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg mb-3 ${colors.bg} border ${colors.border}`}>
                         <stat.icon className={`w-6 h-6 ${colors.text}`} />
                       </div>
-                      <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
-                      <div className="text-sm text-gray-400">{stat.label}</div>
+                      <div className="text-3xl font-bold text-foreground mb-1">{stat.value}</div>
+                      <div className="text-sm text-muted-foreground">{stat.label}</div>
                     </motion.div>
                   );
                 })}
@@ -311,9 +311,9 @@ const Build1300Walkthrough = () => {
           </section>
 
           {/* Walkthrough Sections */}
-          <section className="py-20">
+          <section className="py-12">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h2 className="text-3xl font-bold text-white mb-12">
+              <h2 className="text-3xl font-bold text-foreground mb-12">
                 Implementation <span className="text-gaming">Walkthrough</span>
               </h2>
 
@@ -327,21 +327,21 @@ const Build1300Walkthrough = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.05 }}
-                      className="glass-card p-6 rounded-2xl relative overflow-hidden group"
+                      className="glass-card p-6 rounded-lg relative overflow-hidden group"
                     >
-                      <div className={`absolute top-0 left-0 w-1 h-full bg-gradient-to-b ${colors.gradient}`} />
+                      <div className={`absolute top-0 left-0 w-1 h-full bg-muted ${colors.gradient}`} />
 
                       <div className="flex items-start gap-4">
-                        <div className={`w-12 h-12 rounded-xl ${colors.bg} border ${colors.border} flex items-center justify-center shrink-0`}>
+                        <div className={`w-12 h-12 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center shrink-0`}>
                           <section.icon className={`w-6 h-6 ${colors.text}`} />
                         </div>
 
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-lg font-bold text-white mb-3">{section.title}</h3>
+                          <h3 className="text-lg font-bold text-foreground mb-3">{section.title}</h3>
 
                           <div className="flex flex-wrap gap-1.5 mb-3">
                             {section.files.map((file, j) => (
-                              <span key={j} className="text-xs px-2 py-0.5 rounded bg-white/5 text-gray-500 font-mono">
+                              <span key={j} className="text-xs px-2 py-0.5 rounded bg-muted text-muted-foreground font-mono">
                                 {file}
                               </span>
                             ))}
@@ -349,14 +349,14 @@ const Build1300Walkthrough = () => {
 
                           <ul className="space-y-1.5 mb-3">
                             {section.changes.map((change, j) => (
-                              <li key={j} className="flex items-start gap-2 text-sm text-gray-300">
+                              <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
                                 <span className={`w-1.5 h-1.5 rounded-full ${colors.bg} border ${colors.border} shrink-0 mt-1.5`} />
                                 {change}
                               </li>
                             ))}
                           </ul>
 
-                          <p className="text-xs text-gray-500 italic">{section.reason}</p>
+                          <p className="text-xs text-muted-foreground italic">{section.reason}</p>
                         </div>
                       </div>
                     </motion.div>
@@ -367,9 +367,9 @@ const Build1300Walkthrough = () => {
           </section>
 
           {/* Bug Fixes */}
-          <section className="py-16 border-t border-[hsl(225_20%_15%)]">
+          <section className="py-12 border-t border-border">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h2 className="text-3xl font-bold text-white mb-8">
+              <h2 className="text-3xl font-bold text-foreground mb-8">
                 Bug <span className="text-gaming-alt">Fixes</span>
               </h2>
 
@@ -381,10 +381,10 @@ const Build1300Walkthrough = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.05 }}
-                    className="flex items-start gap-3 p-4 rounded-xl bg-pink-400/5 border border-pink-400/20"
+                    className="flex items-start gap-3 p-4 rounded-lg bg-muted border border-border"
                   >
-                    <Bug className="w-4 h-4 text-pink-400 shrink-0 mt-0.5" />
-                    <span className="text-sm text-gray-300">{fix}</span>
+                    <Bug className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                    <span className="text-sm text-muted-foreground">{fix}</span>
                   </motion.div>
                 ))}
               </div>
@@ -392,19 +392,19 @@ const Build1300Walkthrough = () => {
           </section>
 
           {/* CTA */}
-          <section className="py-16">
+          <section className="py-12">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <div className="glass-card p-10 rounded-2xl relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-[hsl(180_100%_50%)]/5 via-[hsl(280_100%_60%)]/5 to-[hsl(320_100%_60%)]/5" />
+              <div className="glass-card p-5 sm:p-6 rounded-lg relative overflow-hidden">
+                <div className="absolute inset-0 bg-muted   " />
                 <div className="relative z-10">
-                  <h2 className="text-3xl font-bold text-white mb-4">
+                  <h2 className="text-3xl font-bold text-foreground mb-4">
                     Try Build <span className="text-gaming">1.300</span>
                   </h2>
-                  <p className="text-gray-400 mb-8 max-w-xl mx-auto">
+                  <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
                     Download the latest alpha ISO and explore the new .EXE app framework, Windows 7-style theme, and custom wallpaper.
                   </p>
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <Button asChild className="btn-neon border-0 gap-2">
+                    <Button asChild className="btn-solid border-0 gap-2">
                       <a
                         href="https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.300/GamerOS_Alpha_Build_1.300.iso"
                         target="_blank"

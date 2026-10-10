@@ -375,22 +375,22 @@ const filterOptions: NewsType[] = ["All", "Commit", "Announcement", "Community"]
 // Gaming theme color configuration
 const typeConfig = {
   Commit: {
-    color: "bg-cyan-500/10 text-cyan-400 border-cyan-500/30",
-    glowColor: "group-hover:shadow-[0_0_20px_rgba(6,182,212,0.3)]",
+    color: "bg-muted text-primary border-border",
+    glowColor: "shadow-none",
     icon: GitCommit,
-    gradient: "from-cyan-500 to-cyan-400",
+    gradient: " ",
   },
   Announcement: {
-    color: "bg-amber-500/10 text-amber-400 border-amber-500/30",
-    glowColor: "group-hover:shadow-[0_0_20px_rgba(251,191,36,0.3)]",
+    color: "bg-warning/10 text-warning border-border",
+    glowColor: "shadow-none",
     icon: Megaphone,
-    gradient: "from-amber-500 to-amber-400",
+    gradient: " ",
   },
   Community: {
-    color: "bg-purple-500/10 text-purple-400 border-purple-500/30",
-    glowColor: "group-hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]",
+    color: "bg-muted text-primary border-border",
+    glowColor: "shadow-none",
     icon: Users,
-    gradient: "from-purple-500 to-purple-400",
+    gradient: " ",
   },
 };
 
@@ -419,9 +419,9 @@ const itemVariants = {
 const glowPulse = {
   animate: {
     boxShadow: [
-      "0 0 20px rgba(6,182,212,0.3)",
-      "0 0 40px rgba(168,85,247,0.3)",
-      "0 0 20px rgba(6,182,212,0.3)",
+      "none",
+      "none",
+      "none",
     ],
     transition: {
       duration: 3,
@@ -477,7 +477,7 @@ const News = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen flex flex-col bg-[hsl(225_25%_6%)]">
+      <div className="min-h-screen flex flex-col bg-background">
         <Header />
 
         <main className="flex-1">
@@ -485,8 +485,8 @@ const News = () => {
           <section className="relative pt-32 pb-20 overflow-hidden">
             {/* Background Effects */}
             <div className="absolute inset-0">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-500/10 via-transparent to-transparent" />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent" />
+              <div className="absolute inset-0 hidden  via-transparent to-transparent" />
+              <div className="absolute inset-0 hidden  via-transparent to-transparent" />
               {/* Grid Pattern */}
               <div className="absolute inset-0 grid-pattern opacity-30" />
               {/* Animated Glow Orbs */}
@@ -496,7 +496,7 @@ const News = () => {
                   y: [0, -50, 0],
                 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute top-20 left-10 w-96 h-96 bg-cyan-500/20 rounded-full blur-[120px]"
+                className="absolute top-20 left-10 w-96 h-96 bg-muted rounded-full hidden"
               />
               <motion.div
                 animate={{
@@ -504,7 +504,7 @@ const News = () => {
                   y: [0, 50, 0],
                 }}
                 transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                className="absolute bottom-10 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px]"
+                className="absolute bottom-10 right-10 w-96 h-96 bg-muted rounded-full hidden"
               />
             </div>
 
@@ -517,16 +517,16 @@ const News = () => {
               >
                 {/* Badge */}
                 <motion.div variants={itemVariants} className="mb-6">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-cyan-500/30">
-                    <Zap className="w-4 h-4 text-cyan-400" />
-                    <span className="text-sm font-medium text-cyan-400">Latest Updates</span>
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-border">
+                    <Zap className="w-4 h-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Latest Updates</span>
                   </div>
                 </motion.div>
 
                 {/* Title */}
                 <motion.h1
                   variants={itemVariants}
-                  className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6"
+                  className="text-5xl md:text-4xl lg:text-5xl font-bold mb-6"
                 >
                   <span className="text-gaming">News & Updates</span>
                 </motion.h1>
@@ -534,7 +534,7 @@ const News = () => {
                 {/* Description */}
                 <motion.p
                   variants={itemVariants}
-                  className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto"
+                  className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
                 >
                   Stay up to date with the latest GamerOS development news, commits, and community announcements.
                 </motion.p>
@@ -554,14 +554,14 @@ const News = () => {
                       key={stat.label}
                       variants={itemVariants}
                       whileHover={{ scale: 1.05, y: -5 }}
-                      className="glass-card p-4 border border-white/10 group cursor-default"
+                      className="glass-card p-4 border border-border group cursor-default"
                     >
                       <div className="flex flex-col items-center gap-2">
-                        <div className={`w-12 h-12 rounded-xl bg-${stat.color}-500/10 flex items-center justify-center group-hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-shadow duration-300`}>
-                          <stat.icon className={`w-6 h-6 text-${stat.color}-400`} />
+                        <div className={`w-12 h-12 rounded-lg bg-muted flex items-center justify-center shadow-none transition-shadow duration-300`}>
+                          <stat.icon className={`w-6 h-6 text-primary`} />
                         </div>
-                        <div className="text-3xl font-bold text-white">{stat.value}</div>
-                        <div className="text-xs text-white/50 uppercase tracking-wider">{stat.label}</div>
+                        <div className="text-3xl font-bold text-foreground">{stat.value}</div>
+                        <div className="text-xs text-muted-foreground uppercase tracking-normal">{stat.label}</div>
                       </div>
                     </motion.div>
                   ))}
@@ -572,7 +572,7 @@ const News = () => {
 
           {/* Featured Section */}
           {featuredItems.length > 0 && (
-            <section className="py-16 border-y border-white/5 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent">
+            <section className="py-12 border-y border-border bg-muted from-transparent  to-transparent">
               <div className="container mx-auto px-4">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -580,8 +580,8 @@ const News = () => {
                   viewport={{ once: true }}
                   className="flex items-center gap-3 mb-8"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-[0_0_20px_rgba(251,191,36,0.3)]">
-                    <Flame className="w-5 h-5 text-white" />
+                  <div className="w-10 h-10 rounded-lg bg-muted   flex items-center justify-center shadow-none">
+                    <Flame className="w-5 h-5 text-foreground" />
                   </div>
                   <h2 className="text-2xl font-bold text-gaming-alt">Featured</h2>
                 </motion.div>
@@ -598,8 +598,8 @@ const News = () => {
                       className={`glass-card glass-card-hover p-6 group ${typeConfig[item.type].glowColor} transition-all duration-300`}
                     >
                       <div className="flex items-start gap-4">
-                        <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${typeConfig[item.type].gradient} flex items-center justify-center shrink-0 shadow-lg`}>
-                          <item.icon className="w-7 h-7 text-white" />
+                        <div className={`w-14 h-14 rounded-lg bg-muted ${typeConfig[item.type].gradient} flex items-center justify-center shrink-0 shadow-lg`}>
+                          <item.icon className="w-7 h-7 text-foreground" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-2 flex-wrap">
@@ -607,23 +607,23 @@ const News = () => {
                               {item.type}
                             </Badge>
                             {item.commitCode && (
-                              <Badge variant="secondary" className="font-mono text-xs bg-white/5 text-white/70 border-white/10">
+                              <Badge variant="secondary" className="font-mono text-xs bg-muted text-muted-foreground border-border">
                                 {item.commitCode}
                               </Badge>
                             )}
                           </div>
-                          <h3 className="font-semibold text-lg mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors">
+                          <h3 className="font-semibold text-lg mb-2 line-clamp-2 group-hover:text-primary transition-colors">
                             {item.internalLink ? (
                               <Link to={item.internalLink}>{item.title}</Link>
                             ) : (
                               item.title
                             )}
                           </h3>
-                          <p className="text-sm text-white/50 line-clamp-2 mb-4">
+                          <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
                             {item.description}
                           </p>
                           <div className="flex items-center justify-between">
-                            <span className="text-xs text-white/40 flex items-center gap-1">
+                            <span className="text-xs text-muted-foreground flex items-center gap-1">
                               <Clock className="w-3 h-3" />
                               {item.date}
                             </span>
@@ -632,7 +632,7 @@ const News = () => {
                                 href={item.commitUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-xs text-cyan-400 flex items-center gap-1 hover:text-cyan-300 transition-colors"
+                                className="text-xs text-primary flex items-center gap-1 hover:text-primary transition-colors"
                               >
                                 View commit <ExternalLink className="w-3 h-3" />
                               </a>
@@ -640,7 +640,7 @@ const News = () => {
                             {item.internalLink && (
                               <Link
                                 to={item.internalLink}
-                                className="text-xs text-cyan-400 flex items-center gap-1 hover:text-cyan-300 transition-colors"
+                                className="text-xs text-primary flex items-center gap-1 hover:text-primary transition-colors"
                               >
                                 Read more <ArrowRight className="w-3 h-3" />
                               </Link>
@@ -656,29 +656,29 @@ const News = () => {
           )}
 
           {/* Filters & Content */}
-          <section className="py-16">
+          <section className="py-12">
             <div className="container mx-auto px-4">
               {/* Filter Bar */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="glass-card p-6 mb-8 border border-white/10"
+                className="glass-card p-6 mb-8 border border-border"
               >
                 <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
                   {/* Search */}
                   <div className="relative w-full lg:w-96">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     <Input
                       placeholder="Search news..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-11 bg-white/5 border-white/10 text-white placeholder:text-white/40 focus:border-cyan-500/50 focus:ring-cyan-500/20"
+                      className="pl-11 bg-muted border-border text-foreground placeholder:text-muted-foreground focus:border-border focus:ring-ring"
                     />
                     {searchQuery && (
                       <button
                         onClick={() => setSearchQuery("")}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                       >
                         <X className="w-4 h-4" />
                       </button>
@@ -687,14 +687,14 @@ const News = () => {
 
                   <div className="flex flex-wrap items-center gap-3">
                     {/* Type Filters - Gaming Style */}
-                    <div className="flex items-center gap-2 p-1.5 rounded-xl bg-white/5 border border-white/10">
+                    <div className="flex items-center gap-2 p-1.5 rounded-lg bg-muted border border-border">
                       {filterOptions.map((filter) => {
                         const isActive = activeFilter === filter;
                         const filterColors: Record<string, string> = {
-                          All: "from-cyan-500 to-purple-500",
-                          Commit: "from-cyan-500 to-cyan-400",
-                          Announcement: "from-amber-500 to-orange-500",
-                          Community: "from-purple-500 to-pink-500",
+                          All: " ",
+                          Commit: " ",
+                          Announcement: " ",
+                          Community: " ",
                         };
                         return (
                           <button
@@ -702,14 +702,14 @@ const News = () => {
                             onClick={() => setActiveFilter(filter)}
                             className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
                               isActive
-                                ? "text-white"
-                                : "text-white/50 hover:text-white hover:bg-white/5"
+                                ? "text-foreground"
+                                : "text-muted-foreground hover:text-foreground hover:bg-muted"
                             }`}
                           >
                             {isActive && (
                               <motion.div
                                 layoutId="activeFilter"
-                                className={`absolute inset-0 bg-gradient-to-r ${filterColors[filter]} rounded-lg`}
+                                className={`absolute inset-0 bg-muted ${filterColors[filter]} rounded-lg`}
                                 transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                               />
                             )}
@@ -725,23 +725,23 @@ const News = () => {
                         <Button 
                           variant="outline" 
                           size="sm" 
-                          className="gap-2 bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white"
+                          className="gap-2 bg-muted border-border text-foreground hover:bg-muted hover:text-foreground"
                         >
-                          <Filter className="w-4 h-4 text-cyan-400" />
+                          <Filter className="w-4 h-4 text-primary" />
                           {sortOrder === "newest" ? "Newest First" : "Oldest First"}
                           <ChevronDown className="w-3 h-3" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="bg-[hsl(225_25%_8%)] border-white/10">
+                      <DropdownMenuContent align="end" className="bg-background border-border">
                         <DropdownMenuItem 
                           onClick={() => setSortOrder("newest")}
-                          className="text-white/70 hover:text-white focus:bg-white/5 cursor-pointer"
+                          className="text-muted-foreground hover:text-foreground focus:bg-muted cursor-pointer"
                         >
                           Newest First
                         </DropdownMenuItem>
                         <DropdownMenuItem 
                           onClick={() => setSortOrder("oldest")}
-                          className="text-white/70 hover:text-white focus:bg-white/5 cursor-pointer"
+                          className="text-muted-foreground hover:text-foreground focus:bg-muted cursor-pointer"
                         >
                           Oldest First
                         </DropdownMenuItem>
@@ -753,10 +753,10 @@ const News = () => {
                       variant="outline" 
                       size="sm" 
                       asChild
-                      className="gap-2 bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white"
+                      className="gap-2 bg-muted border-border text-foreground hover:bg-muted hover:text-foreground"
                     >
                       <Link to="/news/monthly/october-2026">
-                        <Calendar className="w-4 h-4 text-purple-400" />
+                        <Calendar className="w-4 h-4 text-primary" />
                         Monthly Archive
                       </Link>
                     </Button>
@@ -764,7 +764,7 @@ const News = () => {
                 </div>
 
                 {/* Secondary Actions */}
-                <div className="flex flex-wrap gap-3 mt-4 pt-4 border-t border-white/5">
+                <div className="flex flex-wrap gap-3 mt-4 pt-4 border-t border-border">
 
 
                 </div>
@@ -772,9 +772,9 @@ const News = () => {
 
               {/* Results Count */}
               <div className="flex items-center justify-between mb-6">
-                <p className="text-sm text-white/50">
-                  Showing <span className="font-medium text-white">{filteredItems.length}</span> of{" "}
-                  <span className="font-medium text-white">{newsItems.length}</span> updates
+                <p className="text-sm text-muted-foreground">
+                  Showing <span className="font-medium text-foreground">{filteredItems.length}</span> of{" "}
+                  <span className="font-medium text-foreground">{newsItems.length}</span> updates
                 </p>
                 {(searchQuery || activeFilter !== "All") && (
                   <button
@@ -782,7 +782,7 @@ const News = () => {
                       setSearchQuery("");
                       setActiveFilter("All");
                     }}
-                    className="text-sm text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-1"
+                    className="text-sm text-primary hover:text-primary transition-colors flex items-center gap-1"
                   >
                     Clear filters <X className="w-3 h-3" />
                   </button>
@@ -809,12 +809,12 @@ const News = () => {
                           exit={{ opacity: 0, y: -20 }}
                           transition={{ duration: 0.3, delay: i * 0.05 }}
                           whileHover={{ x: 5 }}
-                          className={`glass-card glass-card-hover p-5 group ${typeConfig[item.type].glowColor} transition-all duration-300 border border-white/5`}
+                          className={`glass-card glass-card-hover p-5 group ${typeConfig[item.type].glowColor} transition-all duration-300 border border-border`}
                         >
                           <div className="flex flex-col md:flex-row md:items-center gap-4">
                             <div className="flex items-center gap-4 flex-1 min-w-0">
-                              <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${typeConfig[item.type].gradient} shadow-lg`}>
-                                <TypeIcon className="w-6 h-6 text-white" />
+                              <div className={`w-12 h-12 rounded-lg flex items-center justify-center shrink-0 bg-muted ${typeConfig[item.type].gradient} shadow-lg`}>
+                                <TypeIcon className="w-6 h-6 text-foreground" />
                               </div>
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-1 flex-wrap">
@@ -822,25 +822,25 @@ const News = () => {
                                     {item.type}
                                   </Badge>
                                   {item.commitCode && (
-                                    <Badge variant="secondary" className="font-mono text-xs bg-white/5 text-white/70 border-white/10">
+                                    <Badge variant="secondary" className="font-mono text-xs bg-muted text-muted-foreground border-border">
                                       {item.commitCode}
                                     </Badge>
                                   )}
                                 </div>
-                                <h3 className="font-medium text-white line-clamp-1 group-hover:text-cyan-400 transition-colors">
+                                <h3 className="font-medium text-foreground line-clamp-1 group-hover:text-primary transition-colors">
                                   {item.internalLink ? (
                                     <Link to={item.internalLink}>{item.title}</Link>
                                   ) : (
                                     item.title
                                   )}
                                 </h3>
-                                <p className="text-sm text-white/40 line-clamp-1 mt-1">
+                                <p className="text-sm text-muted-foreground line-clamp-1 mt-1">
                                   {item.description}
                                 </p>
                               </div>
                             </div>
                             <div className="flex items-center gap-4 md:shrink-0">
-                              <span className="text-xs text-white/40 flex items-center gap-1 whitespace-nowrap">
+                              <span className="text-xs text-muted-foreground flex items-center gap-1 whitespace-nowrap">
                                 <Clock className="w-3 h-3" />
                                 {item.date}
                               </span>
@@ -849,7 +849,7 @@ const News = () => {
                                   href={item.commitUrl}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="flex items-center gap-1 text-sm text-cyan-400 hover:text-cyan-300 transition-colors whitespace-nowrap"
+                                  className="flex items-center gap-1 text-sm text-primary hover:text-primary transition-colors whitespace-nowrap"
                                 >
                                   View <ExternalLink className="w-3 h-3" />
                                 </a>
@@ -857,7 +857,7 @@ const News = () => {
                               {item.internalLink && (
                                 <Link
                                   to={item.internalLink}
-                                  className="flex items-center gap-1 text-sm text-cyan-400 hover:text-cyan-300 transition-colors whitespace-nowrap"
+                                  className="flex items-center gap-1 text-sm text-primary hover:text-primary transition-colors whitespace-nowrap"
                                 >
                                   Read more <ArrowRight className="w-3 h-3" />
                                 </Link>
@@ -874,13 +874,13 @@ const News = () => {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
-                    className="text-center py-20"
+                    className="text-center py-12"
                   >
-                    <div className="w-20 h-20 rounded-2xl glass-card flex items-center justify-center mx-auto mb-6 border border-white/10">
-                      <Search className="w-10 h-10 text-white/30" />
+                    <div className="w-20 h-20 rounded-lg glass-card flex items-center justify-center mx-auto mb-6 border border-border">
+                      <Search className="w-10 h-10 text-muted-foreground" />
                     </div>
-                    <h3 className="text-xl font-semibold text-white mb-2">No results found</h3>
-                    <p className="text-white/50 mb-6">
+                    <h3 className="text-xl font-semibold text-foreground mb-2">No results found</h3>
+                    <p className="text-muted-foreground mb-6">
                       Try adjusting your search or filter criteria
                     </p>
                     <Button
@@ -889,7 +889,7 @@ const News = () => {
                         setSearchQuery("");
                         setActiveFilter("All");
                       }}
-                      className="gap-2 bg-white/5 border-white/10 text-white hover:bg-white/10"
+                      className="gap-2 bg-muted border-border text-foreground hover:bg-muted"
                     >
                       <X className="w-4 h-4" />
                       Clear filters
@@ -901,10 +901,10 @@ const News = () => {
           </section>
 
           {/* CTA Section */}
-          <section className="py-20 border-t border-white/5 relative overflow-hidden">
+          <section className="py-12 border-t border-border relative overflow-hidden">
             {/* Background Glow */}
             <div className="absolute inset-0">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-full blur-[100px]" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-muted   rounded-full hidden" />
             </div>
 
             <div className="container mx-auto px-4 relative z-10">
@@ -912,18 +912,18 @@ const News = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="glass-card p-8 md:p-12 text-center max-w-3xl mx-auto border border-white/10"
+                className="glass-card p-5 sm:p-6 md:p-5 sm:p-6 text-center max-w-3xl mx-auto border border-border"
               >
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 to-purple-500 flex items-center justify-center mx-auto mb-6 shadow-[0_0_30px_rgba(6,182,212,0.3)]"
+                  className="w-20 h-20 rounded-lg bg-muted   flex items-center justify-center mx-auto mb-6 shadow-none"
                 >
-                  <Gamepad2 className="w-10 h-10 text-white" />
+                  <Gamepad2 className="w-10 h-10 text-foreground" />
                 </motion.div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
                   <span className="text-gaming">Release Status</span>
                 </h2>
-                <p className="text-white/60 mb-8 max-w-lg mx-auto text-lg">
+                <p className="text-muted-foreground mb-8 max-w-lg mx-auto text-lg">
                   GamerOS is open source and we welcome contributions from developers of all skill levels.
                   Join our community and help shape the future of gaming.
                 </p>
@@ -932,7 +932,7 @@ const News = () => {
                     <Button 
                       asChild 
                       size="lg"
-                      className="btn-neon gap-2 text-white border-0"
+                      className="btn-solid gap-2 text-foreground border-0"
                     >
                       <a
                         href="https://github.com/urmoit/GamerOS"
@@ -950,10 +950,10 @@ const News = () => {
                       variant="outline" 
                       size="lg" 
                       asChild
-                      className="gap-2 bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-white"
+                      className="gap-2 bg-muted border-border text-foreground hover:bg-muted hover:text-foreground"
                     >
                       <Link to="/download">
-                        <Rocket className="w-5 h-5 text-purple-400" />
+                        <Rocket className="w-5 h-5 text-primary" />
                         Download
                       </Link>
                     </Button>

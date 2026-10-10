@@ -51,67 +51,67 @@ const platforms = [
 
 const Download = () => {
   return (
-    <div className="min-h-screen bg-[hsl(225_25%_6%)]">
+    <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-24 pb-16">
         {/* Hero Section with Animated Background */}
-        <section className="py-20 relative overflow-hidden">
+        <section className="py-12 relative overflow-hidden">
           {/* Animated Background Elements */}
           <div className="absolute inset-0 grid-pattern opacity-30" />
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[hsl(180_100%_50%)]/10 rounded-full blur-[100px] animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[hsl(280_100%_60%)]/10 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[hsl(320_100%_60%)]/5 rounded-full blur-[120px]" />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-muted rounded-full hidden " />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-muted rounded-full hidden " style={{ animationDelay: '1s' }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-muted rounded-full hidden" />
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[hsl(180_100%_50%)]/10 border border-[hsl(180_100%_50%)]/30 text-[hsl(180_100%_50%)] text-sm font-medium mb-8 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border border-border text-primary text-sm font-medium mb-8 backdrop-blur-sm">
               <DownloadIcon className="w-4 h-4" />
               <span>Download Center</span>
-              <Sparkles className="w-3 h-3 animate-pulse" />
+              <Sparkles className="w-3 h-3 " />
             </div>
             
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-gaming tracking-tight">
+            <h1 className="text-5xl sm:text-4xl lg:text-5xl font-bold mb-6 text-gaming tracking-normal">
               Download GamerOS
             </h1>
             
-            <p className="text-xl text-white/60 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               The latest alpha is available now.
-              <span className="text-[hsl(180_100%_50%)]"> Download 00m2</span> and test in VMware, VirtualBox, or QEMU.
+              <span className="text-primary"> Download 00m2</span> and test in VMware, VirtualBox, or QEMU.
             </p>
             
             {/* Decorative Line */}
             <div className="mt-12 flex items-center justify-center gap-4">
-              <div className="h-px w-20 bg-gradient-to-r from-transparent to-[hsl(180_100%_50%)]" />
-              <Gamepad2 className="w-6 h-6 text-[hsl(280_100%_60%)]" />
-              <div className="h-px w-20 bg-gradient-to-l from-transparent to-[hsl(280_100%_60%)]" />
+              <div className="h-px w-20 bg-muted from-transparent " />
+              <Gamepad2 className="w-6 h-6 text-primary" />
+              <div className="h-px w-20 bg-muted from-transparent " />
             </div>
           </div>
         </section>
 
         {/* Alpha Release Section */}
-        <section className="py-16">
+        <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="glass-card p-12 text-center relative overflow-hidden group">
+            <div className="glass-card p-5 sm:p-6 text-center relative overflow-hidden group">
               {/* Animated Background Glows */}
-              <div className="absolute top-0 right-0 w-96 h-96 bg-[hsl(280_100%_60%)]/20 rounded-full blur-[100px] group-hover:bg-[hsl(280_100%_60%)]/30 transition-all duration-700" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-[hsl(180_100%_50%)]/20 rounded-full blur-[80px] group-hover:bg-[hsl(180_100%_50%)]/30 transition-all duration-700" />
+              <div className="absolute top-0 right-0 w-96 h-96 bg-muted rounded-full hidden group-hover:bg-muted transition-all duration-700" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-muted rounded-full hidden group-hover:bg-muted transition-all duration-700" />
               
               <div className="relative z-10">
-                <Badge className="mb-6 bg-gradient-to-r from-[hsl(280_100%_60%)] to-[hsl(320_100%_60%)] text-white border-0 shadow-lg shadow-[hsl(280_100%_60%)]/30 px-4 py-1.5">
-                  <Rocket className="w-4 h-4 mr-2 animate-bounce" />
+                <Badge className="mb-6 bg-muted   text-foreground border-0 shadow-lg  px-4 py-1.5">
+                  <Rocket className="w-4 h-4 mr-2 " />
                   Alpha Released
                 </Badge>
                 
-                <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-[hsl(180_100%_50%)] to-[hsl(280_100%_60%)] flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-[hsl(180_100%_50%)]/30 group-hover:scale-105 transition-transform duration-500">
-                  <Bug className="w-14 h-14 text-[hsl(225_25%_6%)]" />
+                <div className="w-28 h-28 rounded-lg bg-muted   flex items-center justify-center mx-auto mb-8 shadow-2xl  group-hover:scale-105 transition-transform duration-500">
+                  <Bug className="w-14 h-14 text-foreground" />
                 </div>
                 
-                <h2 className="text-4xl font-bold mb-4 text-white">Latest Alpha Release</h2>
+                <h2 className="text-4xl font-bold mb-4 text-foreground">Latest Alpha Release</h2>
                 
-                <p className="text-lg text-white/60 max-w-2xl mx-auto mb-4 leading-relaxed">
-                  GamerOS <span className="text-[hsl(180_100%_50%)] font-medium">00m2</span> (Build 1.520) is the new compile-verified release
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-4 leading-relaxed">
+                  GamerOS <span className="text-primary font-medium">00m2</span> (Build 1.520) is the new compile-verified release
                   with major build-system fixes, memory-safety hardening, and broad UI/driver stability upgrades across the OS.
                 </p>
-                <p className="text-sm text-emerald-400/80 mb-10 font-medium">
+                <p className="text-sm text-success mb-10 font-medium">
                   ✅ Build 1.520 released October 10, 2026
                 </p>
                 
@@ -119,7 +119,7 @@ const Download = () => {
                   <Button
                     size="lg"
                     asChild
-                    className="min-w-[220px] btn-neon border-0"
+                    className="min-w-[220px] btn-solid border-0"
                   >
                      <a href="https://github.com/urmoit/GamerOS/releases/download/00m2-alpha-Build-1.520/GamerOS_Alpha_Build_1.520.iso" target="_blank" rel="noopener noreferrer">
                     <DownloadIcon className="w-5 h-5 mr-2" />
@@ -128,11 +128,11 @@ const Download = () => {
                   </Button>
                   <Button 
                     size="lg" 
-                    className="min-w-[220px] btn-neon gap-2 group/btn" 
+                    className="min-w-[220px] btn-solid gap-2 group/btn" 
                     asChild
                   >
                     <Link to="/news/build-1520">
-                      <Rocket className="w-5 h-5 group-hover/btn:animate-bounce" />
+                      <Rocket className="w-5 h-5 group-hover/btn:" />
                       Build 1.520 Release Notes
                       <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
@@ -143,7 +143,7 @@ const Download = () => {
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="glass-card-hover border-[hsl(180_100%_50%)]/30 text-[hsl(180_100%_50%)] hover:bg-[hsl(180_100%_50%)]/10" 
+                    className="glass-card-hover border-border text-primary hover:bg-muted" 
                     asChild
                   >
                     <Link to="/news" className="gap-2">
@@ -158,67 +158,67 @@ const Download = () => {
         </section>
 
         {/* System Requirements */}
-        <section className="py-16 relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[hsl(280_100%_60%)]/5 to-transparent" />
+        <section className="py-12 relative">
+          <div className="absolute inset-0 bg-muted from-transparent  to-transparent" />
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold mb-4 text-gaming-alt">System Requirements</h2>
-              <p className="text-white/60">
+              <p className="text-muted-foreground">
                 Alpha requirements are still being validated across test VMs
               </p>
             </div>
             
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-5 sm:p-6">
               {/* Minimum Requirements */}
-              <div className="glass-card glass-card-hover p-8 border-l-4 border-l-[hsl(180_100%_50%)] relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-[hsl(180_100%_50%)]/10 rounded-full blur-[60px] group-hover:bg-[hsl(180_100%_50%)]/20 transition-all duration-500" />
+              <div className="glass-card glass-card-hover p-5 sm:p-6 border-l-4 border-l-border relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-muted rounded-full hidden group-hover:bg-muted transition-all duration-500" />
                 
                 <div className="flex items-center gap-4 mb-8 relative z-10">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[hsl(180_100%_50%)]/20 to-[hsl(180_100%_50%)]/5 border border-[hsl(180_100%_50%)]/30 flex items-center justify-center shadow-lg shadow-[hsl(180_100%_50%)]/20">
-                    <Cpu className="w-7 h-7 text-[hsl(180_100%_50%)]" />
+                  <div className="w-14 h-14 rounded-lg bg-muted   border border-border flex items-center justify-center shadow-lg ">
+                    <Cpu className="w-7 h-7 text-primary" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-white">Minimum</h3>
-                    <p className="text-sm text-white/50">Basic requirements</p>
+                    <h3 className="text-2xl font-bold text-foreground">Minimum</h3>
+                    <p className="text-sm text-muted-foreground">Basic requirements</p>
                   </div>
                 </div>
                 
                 <ul className="space-y-4 relative z-10">
                   {requirements.minimum.map((req, i) => (
-                    <li key={i} className="flex justify-between items-center py-3 border-b border-white/10 last:border-0">
-                      <span className="text-white/50 flex items-center gap-2">
-                        <Zap className="w-3 h-3 text-[hsl(180_100%_50%)]" />
+                    <li key={i} className="flex justify-between items-center py-3 border-b border-border last:border-0">
+                      <span className="text-muted-foreground flex items-center gap-2">
+                        <Zap className="w-3 h-3 text-primary" />
                         {req.label}
                       </span>
-                      <span className="font-medium text-white/30">{req.value}</span>
+                      <span className="font-medium text-muted-foreground">{req.value}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               {/* Recommended Requirements */}
-              <div className="glass-card glass-card-hover p-8 border-l-4 border-l-[hsl(280_100%_60%)] relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-[hsl(280_100%_60%)]/10 rounded-full blur-[60px] group-hover:bg-[hsl(280_100%_60%)]/20 transition-all duration-500" />
+              <div className="glass-card glass-card-hover p-5 sm:p-6 border-l-4 border-l-border relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-40 h-40 bg-muted rounded-full hidden group-hover:bg-muted transition-all duration-500" />
                 
                 <div className="flex items-center gap-4 mb-8 relative z-10">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[hsl(280_100%_60%)]/20 to-[hsl(280_100%_60%)]/5 border border-[hsl(280_100%_60%)]/30 flex items-center justify-center shadow-lg shadow-[hsl(280_100%_60%)]/20">
-                    <Sparkles className="w-7 h-7 text-[hsl(280_100%_60%)]" />
+                  <div className="w-14 h-14 rounded-lg bg-muted   border border-border flex items-center justify-center shadow-lg ">
+                    <Sparkles className="w-7 h-7 text-primary" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-white">Recommended</h3>
-                    <p className="text-sm text-white/50">For optimal experience</p>
+                    <h3 className="text-2xl font-bold text-foreground">Recommended</h3>
+                    <p className="text-sm text-muted-foreground">For optimal experience</p>
                   </div>
                 </div>
                 
                 <ul className="space-y-4 relative z-10">
                   {requirements.recommended.map((req, i) => (
-                    <li key={i} className="flex justify-between items-center py-3 border-b border-white/10 last:border-0">
-                      <span className="text-white/50 flex items-center gap-2">
-                        <Zap className="w-3 h-3 text-[hsl(280_100%_60%)]" />
+                    <li key={i} className="flex justify-between items-center py-3 border-b border-border last:border-0">
+                      <span className="text-muted-foreground flex items-center gap-2">
+                        <Zap className="w-3 h-3 text-primary" />
                         {req.label}
                       </span>
-                      <span className="font-medium text-white/30">{req.value}</span>
+                      <span className="font-medium text-muted-foreground">{req.value}</span>
                     </li>
                   ))}
                 </ul>
@@ -228,11 +228,11 @@ const Download = () => {
         </section>
 
         {/* Platform Support */}
-        <section className="py-16">
+        <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold mb-4 text-gaming">Platform Support</h2>
-              <p className="text-white/60">
+              <p className="text-muted-foreground">
                 We're working on supporting these platforms
               </p>
             </div>
@@ -248,36 +248,36 @@ const Download = () => {
                   {/* Glow Effect */}
                   <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
                     platform.color === 'cyan' 
-                      ? 'bg-[hsl(180_100%_50%)]/5' 
+                      ? 'bg-muted' 
                       : platform.color === 'purple'
-                      ? 'bg-[hsl(280_100%_60%)]/5'
-                      : 'bg-[hsl(320_100%_60%)]/5'
+                      ? 'bg-muted'
+                      : 'bg-muted'
                   }`} />
                   
-                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:scale-110 ${
+                  <div className={`w-16 h-16 rounded-lg flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:scale-110 ${
                     platform.supported 
                       ? platform.color === 'cyan'
-                        ? 'bg-gradient-to-br from-[hsl(180_100%_50%)]/20 to-[hsl(180_100%_50%)]/5 border border-[hsl(180_100%_50%)]/40 shadow-lg shadow-[hsl(180_100%_50%)]/20'
-                        : 'bg-gradient-to-br from-[hsl(280_100%_60%)]/20 to-[hsl(280_100%_60%)]/5 border border-[hsl(280_100%_60%)]/40 shadow-lg shadow-[hsl(280_100%_60%)]/20'
-                      : 'bg-white/5 border border-white/10'
+                        ? 'bg-muted   border border-border shadow-lg '
+                        : 'bg-muted   border border-border shadow-lg '
+                      : 'bg-muted border border-border'
                   }`}>
                     <platform.icon className={`w-8 h-8 transition-colors ${
                       platform.supported 
                         ? platform.color === 'cyan'
-                          ? 'text-[hsl(180_100%_50%)]'
-                          : 'text-[hsl(280_100%_60%)]'
-                        : 'text-white/30'
+                          ? 'text-primary'
+                          : 'text-primary'
+                        : 'text-muted-foreground'
                     }`} />
                   </div>
                   
-                  <h4 className="font-semibold text-white mb-1 relative z-10">{platform.name}</h4>
+                  <h4 className="font-semibold text-foreground mb-1 relative z-10">{platform.name}</h4>
                   
                   <p className={`text-sm font-medium relative z-10 ${
                     platform.supported 
                       ? platform.color === 'cyan'
-                        ? 'text-[hsl(180_100%_50%)]'
-                        : 'text-[hsl(280_100%_60%)]'
-                      : 'text-[hsl(320_100%_60%)]'
+                        ? 'text-primary'
+                        : 'text-primary'
+                      : 'text-primary'
                   }`}>
                     {platform.supported ? (
                       <span className="flex items-center justify-center gap-1">
@@ -298,79 +298,79 @@ const Download = () => {
         </section>
 
         {/* Getting Started */}
-        <section className="py-16 relative">
-          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(180_100%_50%)]/5 via-transparent to-transparent" />
+        <section className="py-12 relative">
+          <div className="absolute inset-0 bg-muted  via-transparent to-transparent" />
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold mb-4 text-gaming-alt">Getting Started</h2>
-              <p className="text-white/60">Your journey begins here</p>
+              <p className="text-muted-foreground">Your journey begins here</p>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-5 sm:p-6">
               {/* Step 1 */}
-              <div className="glass-card glass-card-hover p-8 relative group">
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[hsl(180_100%_50%)] to-transparent opacity-50" />
+              <div className="glass-card glass-card-hover p-5 sm:p-6 relative group">
+                <div className="absolute top-0 left-0 w-full h-1 bg-muted  to-transparent opacity-50" />
                 
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[hsl(180_100%_50%)]/20 to-transparent border border-[hsl(180_100%_50%)]/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <span className="font-bold text-2xl text-[hsl(180_100%_50%)]">1</span>
+                <div className="w-14 h-14 rounded-lg bg-muted  to-transparent border border-border flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <span className="font-bold text-2xl text-primary">1</span>
                 </div>
                 
-                <h3 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                <h3 className="text-xl font-bold text-foreground mb-3 flex items-center gap-2">
                   Download
-                  <Sparkles className="w-4 h-4 text-[hsl(180_100%_50%)] animate-pulse" />
+                  <Sparkles className="w-4 h-4 text-primary " />
                 </h3>
                 
-                <p className="text-white/50 mb-6 leading-relaxed">
+                <p className="text-muted-foreground mb-6 leading-relaxed">
                   Download the official alpha ISO from the release link above.
                 </p>
                 
-                <code className="block p-4 rounded-xl bg-black/40 border border-[hsl(180_100%_50%)]/20 text-xs overflow-x-auto text-[hsl(180_100%_50%)]/70 font-mono">
+                <code className="block p-4 rounded-lg bg-background border border-border text-xs overflow-x-auto text-primary font-mono">
                   GamerOS_Alpha_Build_1.520.iso
-                  <span className="animate-pulse">_</span>
+                  <span className="">_</span>
                 </code>
               </div>
 
               {/* Step 2 */}
-              <div className="glass-card glass-card-hover p-8 relative group">
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[hsl(280_100%_60%)] to-transparent opacity-50" />
+              <div className="glass-card glass-card-hover p-5 sm:p-6 relative group">
+                <div className="absolute top-0 left-0 w-full h-1 bg-muted  to-transparent opacity-50" />
                 
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[hsl(280_100%_60%)]/20 to-transparent border border-[hsl(280_100%_60%)]/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <span className="font-bold text-2xl text-[hsl(280_100%_60%)]">2</span>
+                <div className="w-14 h-14 rounded-lg bg-muted  to-transparent border border-border flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <span className="font-bold text-2xl text-primary">2</span>
                 </div>
                 
-                <h3 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                <h3 className="text-xl font-bold text-foreground mb-3 flex items-center gap-2">
                   Create VM
-                  <Monitor className="w-4 h-4 text-[hsl(280_100%_60%)]" />
+                  <Monitor className="w-4 h-4 text-primary" />
                 </h3>
                 
-                <p className="text-white/50 mb-6 leading-relaxed">
+                <p className="text-muted-foreground mb-6 leading-relaxed">
                   Create a VM and attach the ISO as the boot media.
                 </p>
                 
-                <code className="block p-4 rounded-xl bg-black/40 border border-[hsl(280_100%_60%)]/20 text-xs overflow-x-auto text-[hsl(280_100%_60%)]/70 font-mono">
+                <code className="block p-4 rounded-lg bg-background border border-border text-xs overflow-x-auto text-primary font-mono">
                   VMware/VirtualBox/QEMU
                 </code>
               </div>
 
               {/* Step 3 */}
-              <div className="glass-card glass-card-hover p-8 relative group">
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[hsl(320_100%_60%)] to-transparent opacity-50" />
+              <div className="glass-card glass-card-hover p-5 sm:p-6 relative group">
+                <div className="absolute top-0 left-0 w-full h-1 bg-muted  to-transparent opacity-50" />
                 
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[hsl(320_100%_60%)]/20 to-transparent border border-[hsl(320_100%_60%)]/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <span className="font-bold text-2xl text-[hsl(320_100%_60%)]">3</span>
+                <div className="w-14 h-14 rounded-lg bg-muted  to-transparent border border-border flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <span className="font-bold text-2xl text-primary">3</span>
                 </div>
                 
-                <h3 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                <h3 className="text-xl font-bold text-foreground mb-3 flex items-center gap-2">
                   Boot & Explore
-                  <Rocket className="w-4 h-4 text-[hsl(320_100%_60%)]" />
+                  <Rocket className="w-4 h-4 text-primary" />
                 </h3>
                 
-                <p className="text-white/50 mb-6 leading-relaxed">
+                <p className="text-muted-foreground mb-6 leading-relaxed">
                   Boot and test the desktop shell, File Explorer, Settings, Notepad, and 640×480 mode.
                 </p>
                 
-                <code className="block p-4 rounded-xl bg-black/40 border border-[hsl(320_100%_60%)]/20 text-xs overflow-x-auto text-[hsl(320_100%_60%)]/70 font-mono">
+                <code className="block p-4 rounded-lg bg-background border border-border text-xs overflow-x-auto text-primary font-mono">
                   Release Build 1.520
                 </code>
               </div>
@@ -379,20 +379,20 @@ const Download = () => {
         </section>
 
         {/* Newsletter/Notify Section */}
-        <section className="py-16">
+        <section className="py-12">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="glass-card p-10 text-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-[hsl(180_100%_50%)]/10 via-[hsl(280_100%_60%)]/10 to-[hsl(320_100%_60%)]/10" />
+            <div className="glass-card p-5 sm:p-6 text-center relative overflow-hidden">
+              <div className="absolute inset-0 bg-muted   " />
               
               <div className="relative z-10">
-                <Bell className="w-12 h-12 text-[hsl(180_100%_50%)] mx-auto mb-6" />
-                <h2 className="text-3xl font-bold mb-4 text-white">Get Notified</h2>
-                <p className="text-white/60 mb-8">
+                <Bell className="w-12 h-12 text-primary mx-auto mb-6" />
+                <h2 className="text-3xl font-bold mb-4 text-foreground">Get Notified</h2>
+                <p className="text-muted-foreground mb-8">
                   Follow release updates and changelogs for upcoming patches.
                 </p>
                 <Button 
                   size="lg" 
-                  className="btn-neon"
+                  className="btn-solid"
                   asChild
                 >
                   <Link to="/newsletter">

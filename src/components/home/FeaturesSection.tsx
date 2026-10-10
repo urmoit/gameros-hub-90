@@ -53,22 +53,22 @@ const features = [
 
 const colorMap: Record<string, { bg: string; border: string; glow: string; text: string }> = {
   cyan: {
-    bg: 'bg-cyan-400/10',
-    border: 'border-cyan-400/30',
-    glow: 'shadow-cyan-400/20',
-    text: 'text-cyan-400',
+    bg: 'bg-muted',
+    border: 'border-border',
+    glow: '',
+    text: 'text-primary',
   },
   purple: {
-    bg: 'bg-purple-400/10',
-    border: 'border-purple-400/30',
-    glow: 'shadow-purple-400/20',
-    text: 'text-purple-400',
+    bg: 'bg-muted',
+    border: 'border-border',
+    glow: '',
+    text: 'text-primary',
   },
   pink: {
-    bg: 'bg-pink-400/10',
-    border: 'border-pink-400/30',
-    glow: 'shadow-pink-400/20',
-    text: 'text-pink-400',
+    bg: 'bg-muted',
+    border: 'border-border',
+    glow: '',
+    text: 'text-primary',
   },
 };
 
@@ -77,15 +77,15 @@ const FeaturesSection = () => {
     <section className="section-padding relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-purple-400/30 to-transparent" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-muted from-transparent  to-transparent" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-px bg-muted from-transparent  to-transparent" />
       </div>
 
       <div className="container-gaming relative">
         <ScrollReveal>
           <div className="text-center mb-16">
             <motion.div 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-400 text-sm font-medium mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border border-border text-primary text-sm font-medium mb-6"
               whileHover={{ scale: 1.05 }}
             >
               <Cpu className="w-4 h-4" />
@@ -111,7 +111,7 @@ const FeaturesSection = () => {
                   transition={{ duration: 0.3 }}
                   className={`h-full glass-card glass-card-hover p-6 group`}
                 >
-                  <div className={`w-14 h-14 rounded-2xl ${colors.bg} border ${colors.border} flex items-center justify-center mb-5 transition-all duration-300 group-hover:shadow-lg ${colors.glow}`}>
+                  <div className={`w-14 h-14 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center mb-5 transition-all duration-300 group-hover:shadow-lg ${colors.glow}`}>
                     <feature.icon className={`w-7 h-7 ${colors.text}`} />
                   </div>
                   <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-gaming transition-colors">

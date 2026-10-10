@@ -48,13 +48,13 @@ const releaseSections = [
 const Build1520Release = () => {
   return (
     <PageTransition>
-      <div className="min-h-screen bg-[hsl(225_25%_6%)]">
+      <div className="min-h-screen bg-background">
         <Header />
         <main className="pt-24 pb-16">
-          <section className="py-16 relative overflow-hidden">
+          <section className="py-12 relative overflow-hidden">
             <div className="absolute inset-0 grid-pattern opacity-30" />
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-              <Button variant="ghost" asChild className="mb-8 text-white/60 hover:text-white hover:bg-white/5">
+              <Button variant="ghost" asChild className="mb-8 text-muted-foreground hover:text-foreground hover:bg-muted">
                 <Link to="/news" className="gap-2">
                   <ArrowLeft className="w-4 h-4" />
                   Back to News
@@ -62,33 +62,33 @@ const Build1520Release = () => {
               </Button>
 
               <div className="flex flex-wrap items-center gap-3 mb-6">
-                <Badge className="bg-emerald-500/10 text-emerald-400 border-emerald-500/30">
+                <Badge className="bg-success/10 text-success border-border">
                   <Rocket className="w-3 h-3 mr-1" />
                   Released
                 </Badge>
-                <Badge className="bg-[hsl(180_100%_50%)]/10 text-[hsl(180_100%_50%)] border-[hsl(180_100%_50%)]/30">
+                <Badge className="bg-muted text-primary border-border">
                   Version 00m2
                 </Badge>
-                <Badge className="bg-[hsl(280_100%_60%)]/10 text-[hsl(280_100%_60%)] border-[hsl(280_100%_60%)]/30">
+                <Badge className="bg-muted text-primary border-border">
                   Build 1.520
                 </Badge>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-                GamerOS 00m2 — <span className="text-[hsl(180_100%_50%)]">Build 1.520</span>
+              <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
+                GamerOS 00m2 — <span className="text-primary">Build 1.520</span>
               </h1>
 
-              <div className="flex items-center gap-2 text-white/50 mb-6">
+              <div className="flex items-center gap-2 text-muted-foreground mb-6">
                 <Calendar className="w-4 h-4" />
                 <span>October 10, 2026</span>
               </div>
 
-              <p className="text-lg text-white/60 leading-relaxed max-w-3xl mb-8">
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mb-8">
                 Build 1.520 is the first cleanly compile-verified 00m2 release with broad fixes across build reliability,
                 memory safety, boot stability, drivers, correctness, UI behavior, and release tooling.
               </p>
 
-              <Button size="lg" className="btn-neon border-0" asChild>
+              <Button size="lg" className="btn-solid border-0" asChild>
                 <a
                   href="https://github.com/urmoit/GamerOS/releases/download/00m2-alpha-Build-1.520/GamerOS_Alpha_Build_1.520.iso"
                   target="_blank"
@@ -105,10 +105,10 @@ const Build1520Release = () => {
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
               {releaseSections.map((section) => (
                 <div key={section.title} className="glass-card p-6">
-                  <h2 className="text-2xl font-bold text-white mb-4">{section.title}</h2>
+                  <h2 className="text-2xl font-bold text-foreground mb-4">{section.title}</h2>
                   <ul className="space-y-3">
                     {section.items.map((item) => (
-                      <li key={item} className="text-sm text-white/70 leading-relaxed">
+                      <li key={item} className="text-sm text-muted-foreground leading-relaxed">
                         • {item}
                       </li>
                     ))}

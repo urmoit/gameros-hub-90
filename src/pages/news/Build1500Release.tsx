@@ -117,25 +117,25 @@ const newAPIs = [
 ];
 
 const colorMap: Record<string, { bg: string; border: string; text: string }> = {
-  cyan: { bg: "bg-cyan-400/10", border: "border-cyan-400/30", text: "text-cyan-400" },
-  purple: { bg: "bg-purple-400/10", border: "border-purple-400/30", text: "text-purple-400" },
-  pink: { bg: "bg-pink-400/10", border: "border-pink-400/30", text: "text-pink-400" },
+  cyan: { bg: "bg-muted", border: "border-border", text: "text-primary" },
+  purple: { bg: "bg-muted", border: "border-border", text: "text-primary" },
+  pink: { bg: "bg-muted", border: "border-border", text: "text-primary" },
 };
 
 const Build1500Release = () => {
   return (
     <PageTransition>
-      <div className="min-h-screen bg-[hsl(225_25%_6%)]">
+      <div className="min-h-screen bg-background">
         <Header />
         <main className="pt-24 pb-16">
           {/* Hero */}
-          <section className="py-16 relative overflow-hidden">
+          <section className="py-12 relative overflow-hidden">
             <div className="absolute inset-0 grid-pattern opacity-30" />
-            <div className="absolute top-20 left-10 w-72 h-72 bg-[hsl(180_100%_50%)]/10 rounded-full blur-[100px]" />
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-[hsl(280_100%_60%)]/10 rounded-full blur-[100px]" />
+            <div className="absolute top-20 left-10 w-72 h-72 bg-muted rounded-full hidden" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-muted rounded-full hidden" />
 
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-              <Button variant="ghost" asChild className="mb-8 text-white/60 hover:text-white hover:bg-white/5">
+              <Button variant="ghost" asChild className="mb-8 text-muted-foreground hover:text-foreground hover:bg-muted">
                 <Link to="/news" className="gap-2">
                   <ArrowLeft className="w-4 h-4" />
                   Back to News
@@ -143,28 +143,28 @@ const Build1500Release = () => {
               </Button>
 
               <div className="flex flex-wrap items-center gap-3 mb-6">
-                <Badge className="bg-emerald-500/10 text-emerald-400 border-emerald-500/30">
+                <Badge className="bg-success/10 text-success border-border">
                   <Rocket className="w-3 h-3 mr-1" />
                   Released
                 </Badge>
-                <Badge className="bg-[hsl(180_100%_50%)]/10 text-[hsl(180_100%_50%)] border-[hsl(180_100%_50%)]/30">
+                <Badge className="bg-muted text-primary border-border">
                   Build 1.500
                 </Badge>
-                <Badge className="bg-[hsl(280_100%_60%)]/10 text-[hsl(280_100%_60%)] border-[hsl(280_100%_60%)]/30">
+                <Badge className="bg-muted text-primary border-border">
                   Stability Release
                 </Badge>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-                Build 1.500 — <span className="text-[hsl(180_100%_50%)]">Stability & Reliability Hardening</span>
+              <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
+                Build 1.500 — <span className="text-primary">Stability & Reliability Hardening</span>
               </h1>
 
-              <div className="flex items-center gap-2 text-white/50 mb-6">
+              <div className="flex items-center gap-2 text-muted-foreground mb-6">
                 <Calendar className="w-4 h-4" />
                 <span>April 3, 2026</span>
               </div>
 
-              <p className="text-lg text-white/60 leading-relaxed max-w-3xl">
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
                 A stability-focused release with no new user-visible features. Every subsystem received comprehensive 
                 hardening — kernel boot, graphics, input drivers, filesystem, shell, window manager, executive layer, 
                 and build system. 22+ bug fixes and 11 new diagnostic APIs.
@@ -176,18 +176,18 @@ const Build1500Release = () => {
           <section className="py-8">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="glass-card p-6 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-[hsl(180_100%_50%)]" />
+                <div className="absolute top-0 left-0 w-full h-1 bg-muted  " />
                 <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-emerald-400/10 border border-emerald-400/30 flex items-center justify-center">
-                      <Download className="w-5 h-5 text-emerald-400" />
+                    <div className="w-10 h-10 rounded-lg bg-success/10 border border-border flex items-center justify-center">
+                      <Download className="w-5 h-5 text-success" />
                     </div>
                     <div>
-                      <p className="text-sm text-white/50">Download now</p>
-                      <p className="font-mono text-sm text-emerald-400">GamerOS_Alpha_Build_1.500.iso</p>
+                      <p className="text-sm text-muted-foreground">Download now</p>
+                      <p className="font-mono text-sm text-success">GamerOS_Alpha_Build_1.500.iso</p>
                     </div>
                   </div>
-                  <Button size="lg" className="btn-neon border-0 sm:ml-auto" asChild>
+                  <Button size="lg" className="btn-solid border-0 sm:ml-auto" asChild>
                     <a
                       href="https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.500/GamerOS_Alpha_Build_1.500.iso"
                       target="_blank"
@@ -207,10 +207,10 @@ const Build1500Release = () => {
           <section className="py-12">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-lg bg-[hsl(280_100%_60%)]/10 border border-[hsl(280_100%_60%)]/30 flex items-center justify-center">
-                  <Shield className="w-5 h-5 text-[hsl(280_100%_60%)]" />
+                <div className="w-10 h-10 rounded-lg bg-muted border border-border flex items-center justify-center">
+                  <Shield className="w-5 h-5 text-primary" />
                 </div>
-                <h2 className="text-2xl font-bold text-white">Hardened Subsystems</h2>
+                <h2 className="text-2xl font-bold text-foreground">Hardened Subsystems</h2>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
@@ -223,8 +223,8 @@ const Build1500Release = () => {
                           <area.icon className={`w-5 h-5 ${colors.text}`} />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-white mb-2">{area.title}</h3>
-                          <p className="text-sm text-white/50 leading-relaxed">{area.description}</p>
+                          <h3 className="font-semibold text-foreground mb-2">{area.title}</h3>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{area.description}</p>
                         </div>
                       </div>
                     </div>
@@ -238,18 +238,18 @@ const Build1500Release = () => {
           <section className="py-12">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-lg bg-[hsl(180_100%_50%)]/10 border border-[hsl(180_100%_50%)]/30 flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-[hsl(180_100%_50%)]" />
+                <div className="w-10 h-10 rounded-lg bg-muted border border-border flex items-center justify-center">
+                  <Sparkles className="w-5 h-5 text-primary" />
                 </div>
-                <h2 className="text-2xl font-bold text-white">New APIs & Diagnostics ({newAPIs.length})</h2>
+                <h2 className="text-2xl font-bold text-foreground">New APIs & Diagnostics ({newAPIs.length})</h2>
               </div>
 
               <div className="glass-card p-6">
                 <ul className="space-y-3">
                   {newAPIs.map((api, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <Zap className="w-4 h-4 text-[hsl(180_100%_50%)] mt-0.5 shrink-0" />
-                      <span className="text-sm text-white/60">{api}</span>
+                      <Zap className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                      <span className="text-sm text-muted-foreground">{api}</span>
                     </li>
                   ))}
                 </ul>
@@ -261,18 +261,18 @@ const Build1500Release = () => {
           <section className="py-12">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-lg bg-emerald-400/10 border border-emerald-400/30 flex items-center justify-center">
-                  <Bug className="w-5 h-5 text-emerald-400" />
+                <div className="w-10 h-10 rounded-lg bg-success/10 border border-border flex items-center justify-center">
+                  <Bug className="w-5 h-5 text-success" />
                 </div>
-                <h2 className="text-2xl font-bold text-white">Bug Fixes ({bugFixes.length})</h2>
+                <h2 className="text-2xl font-bold text-foreground">Bug Fixes ({bugFixes.length})</h2>
               </div>
 
               <div className="glass-card p-6">
                 <ul className="space-y-3">
                   {bugFixes.map((fix, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <Bug className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" />
-                      <span className="text-sm text-white/60">{fix}</span>
+                      <Bug className="w-4 h-4 text-success mt-0.5 shrink-0" />
+                      <span className="text-sm text-muted-foreground">{fix}</span>
                     </li>
                   ))}
                 </ul>
@@ -281,19 +281,19 @@ const Build1500Release = () => {
           </section>
 
           {/* CTA */}
-          <section className="py-16">
+          <section className="py-12">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <div className="glass-card p-10 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-[hsl(180_100%_50%)]/5 via-[hsl(280_100%_60%)]/5 to-[hsl(320_100%_60%)]/5" />
+              <div className="glass-card p-5 sm:p-6 relative overflow-hidden">
+                <div className="absolute inset-0 bg-muted   " />
                 <div className="relative z-10">
-                  <h2 className="text-3xl font-bold text-white mb-4">
+                  <h2 className="text-3xl font-bold text-foreground mb-4">
                     Download Build 1.500
                   </h2>
-                  <p className="text-white/60 mb-8 max-w-lg mx-auto">
+                  <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
                     The most stable alpha yet — comprehensive hardening across every subsystem with 22+ fixes and backward compatibility.
                   </p>
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <Button size="lg" className="btn-neon border-0" asChild>
+                    <Button size="lg" className="btn-solid border-0" asChild>
                       <a
                         href="https://github.com/urmoit/GamerOS/releases/download/00m1-alpha-Build-1.500/GamerOS_Alpha_Build_1.500.iso"
                         target="_blank"
