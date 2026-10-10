@@ -54,14 +54,26 @@ const monthlyNewsData: Record<string, MonthData> = {
   "october-2026": {
     month: "October",
     year: "2026",
-    summary: "Website visual refresh focused on cleaner styling: dark-mode toggle removed, neon-heavy accents reduced, changelog synced, and header behavior upgraded with animated docked scrolling.",
+    summary: "Build 1.520 (00m2) released with compile verification, blocker fixes, memory-safety hardening, and broad UI/driver stability work, alongside website changelog and header polish updates.",
     highlights: [
+      "Build 1.520 released October 10, 2026 (version 00m2)",
+      "First verified clean compile and ISO build with zero warnings/errors/undefined symbols",
+      "Major build blocker fixes: allocator, Makefile rules, header conflicts, and graphics buffer accessor safety",
+      "Memory safety fixes across filesystem, widgets, textbox input, progress bar, and framebuffer scaling",
+      "Settings, Notepad, Explorer, and changelog/roadmap UI behavior redesigned and aligned",
       "Removed dark theme toggle from the website header",
       "Replaced neon-heavy primary button styling with a cleaner default",
       "Updated website changelog entries for the UI refresh",
       "Added animated docked header with rounded corners on scroll",
     ],
     items: [
+      {
+        title: "Build 1.520 Released — 00m2 Build, Safety & Stability Update",
+        date: "October 10, 2026",
+        type: "Announcement",
+        description: "Release includes critical compile/link fixes, memory and boot stability hardening, input/driver reliability updates, and broad UI correctness improvements.",
+        commitUrl: "/news/build-1520",
+      },
       {
         title: "Website UI Refresh — Theme Cleanup & Docked Header",
         date: "October 5, 2026",

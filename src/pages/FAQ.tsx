@@ -48,7 +48,7 @@ const faqCategories = [
     questions: [
       {
         q: "When will GamerOS be released?",
-        a: "The first alpha release is out: 00m1-alpha (Build 1.100), published on February 13, 2026. You can download it from the Download page and follow updates in the GamerOS changelog."
+        a: "The latest alpha release is out: 00m2 (Build 1.520), published on October 10, 2026. You can download it from the Download page and follow updates in the GamerOS changelog."
       },
       {
         q: "What programming languages is GamerOS built with?",
