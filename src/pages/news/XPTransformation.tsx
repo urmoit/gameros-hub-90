@@ -36,16 +36,16 @@ import {
 
 // Gaming-themed color assignments for sections
 const sectionThemes = [
-  { border: "border-cyan-500/50", glow: "shadow-cyan-500/20", iconBg: "bg-cyan-500/20", text: "text-cyan-400", gradient: "from-cyan-400 to-cyan-600" },
-  { border: "border-pink-500/50", glow: "shadow-pink-500/20", iconBg: "bg-pink-500/20", text: "text-pink-400", gradient: "from-pink-400 to-pink-600" },
-  { border: "border-purple-500/50", glow: "shadow-purple-500/20", iconBg: "bg-purple-500/20", text: "text-purple-400", gradient: "from-purple-400 to-purple-600" },
-  { border: "border-orange-500/50", glow: "shadow-orange-500/20", iconBg: "bg-orange-500/20", text: "text-orange-400", gradient: "from-orange-400 to-orange-600" },
-  { border: "border-emerald-500/50", glow: "shadow-emerald-500/20", iconBg: "bg-emerald-500/20", text: "text-emerald-400", gradient: "from-emerald-400 to-emerald-600" },
-  { border: "border-cyan-500/50", glow: "shadow-cyan-500/20", iconBg: "bg-cyan-500/20", text: "text-cyan-400", gradient: "from-cyan-400 to-cyan-600" },
-  { border: "border-purple-500/50", glow: "shadow-purple-500/20", iconBg: "bg-purple-500/20", text: "text-purple-400", gradient: "from-purple-400 to-purple-600" },
-  { border: "border-pink-500/50", glow: "shadow-pink-500/20", iconBg: "bg-pink-500/20", text: "text-pink-400", gradient: "from-pink-400 to-pink-600" },
-  { border: "border-orange-500/50", glow: "shadow-orange-500/20", iconBg: "bg-orange-500/20", text: "text-orange-400", gradient: "from-orange-400 to-orange-600" },
-  { border: "border-emerald-500/50", glow: "shadow-emerald-500/20", iconBg: "bg-emerald-500/20", text: "text-emerald-400", gradient: "from-emerald-400 to-emerald-600" },
+  { border: "border-border", glow: "", iconBg: "bg-muted", text: "text-primary", gradient: " " },
+  { border: "border-border", glow: "", iconBg: "bg-muted", text: "text-primary", gradient: " " },
+  { border: "border-border", glow: "", iconBg: "bg-muted", text: "text-primary", gradient: " " },
+  { border: "border-border", glow: "", iconBg: "bg-warning/10", text: "text-warning", gradient: " " },
+  { border: "border-border", glow: "", iconBg: "bg-success/10", text: "text-success", gradient: " " },
+  { border: "border-border", glow: "", iconBg: "bg-muted", text: "text-primary", gradient: " " },
+  { border: "border-border", glow: "", iconBg: "bg-muted", text: "text-primary", gradient: " " },
+  { border: "border-border", glow: "", iconBg: "bg-muted", text: "text-primary", gradient: " " },
+  { border: "border-border", glow: "", iconBg: "bg-warning/10", text: "text-warning", gradient: " " },
+  { border: "border-border", glow: "", iconBg: "bg-success/10", text: "text-success", gradient: " " },
 ];
 
 const sections = [
@@ -184,7 +184,7 @@ const nextSteps = [
 const XPTransformation = () => {
   return (
     <PageTransition>
-      <div className="min-h-screen flex flex-col bg-[hsl(225,25%,6%)]">
+      <div className="min-h-screen flex flex-col bg-background">
         <Header />
 
         <main className="flex-1">
@@ -192,11 +192,11 @@ const XPTransformation = () => {
           <section className="relative pt-32 pb-20 overflow-hidden">
             {/* Animated Background Effects */}
             <div className="absolute inset-0 grid-pattern opacity-30" />
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5" />
+            <div className="absolute top-0 left-0 w-full h-full bg-muted  via-transparent " />
             
             {/* Glowing Orbs */}
             <motion.div 
-              className="absolute top-20 left-10 w-72 h-72 bg-cyan-500/20 rounded-full blur-3xl"
+              className="absolute top-20 left-10 w-72 h-72 bg-muted rounded-full hidden"
               animate={{ 
                 scale: [1, 1.2, 1],
                 opacity: [0.3, 0.5, 0.3]
@@ -204,7 +204,7 @@ const XPTransformation = () => {
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             />
             <motion.div 
-              className="absolute bottom-10 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
+              className="absolute bottom-10 right-10 w-96 h-96 bg-muted rounded-full hidden"
               animate={{ 
                 scale: [1.2, 1, 1.2],
                 opacity: [0.3, 0.5, 0.3]
@@ -212,7 +212,7 @@ const XPTransformation = () => {
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             />
             <motion.div 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-pink-500/10 rounded-full blur-3xl"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-muted rounded-full hidden"
               animate={{ 
                 rotate: 360
               }}
@@ -222,7 +222,7 @@ const XPTransformation = () => {
             <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
               <Link
                 to="/news"
-                className="inline-flex items-center gap-2 text-white/60 hover:text-cyan-400 mb-8 transition-colors group"
+                className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-8 transition-colors group"
               >
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                 Back to News
@@ -235,36 +235,36 @@ const XPTransformation = () => {
               >
                 {/* Badges */}
                 <div className="flex flex-wrap items-center gap-3 mb-6">
-                  <Badge className="bg-gradient-to-r from-cyan-500 to-cyan-600 text-white border-0 px-4 py-1.5 text-sm font-medium shadow-lg shadow-cyan-500/25">
+                  <Badge className="bg-muted   text-foreground border-0 px-4 py-1.5 text-sm font-medium shadow-lg ">
                     <Trophy className="w-3.5 h-3.5 mr-2" />
                     Major Walkthrough
                   </Badge>
-                  <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 px-4 py-1.5 text-sm font-medium shadow-lg shadow-purple-500/25">
+                  <Badge className="bg-muted   text-foreground border-0 px-4 py-1.5 text-sm font-medium shadow-lg ">
                     <Sparkles className="w-3.5 h-3.5 mr-2" />
                     Verified Build
                   </Badge>
-                  <span className="text-sm text-white/60 flex items-center gap-1.5">
+                  <span className="text-sm text-muted-foreground flex items-center gap-1.5">
                     <Calendar className="w-3.5 h-3.5" />
                     February 6, 2026
                   </span>
                 </div>
 
                 {/* Animated Title */}
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-4xl font-bold mb-6 leading-tight">
                   <span className="text-gaming">GamerOS: The Windows XP</span>
                   <span className="block text-2xl sm:text-3xl lg:text-4xl mt-2 text-gaming-alt">
                     Transformation
                   </span>
                 </h1>
 
-                <p className="text-xl text-white/70 max-w-3xl mb-8">
+                <p className="text-xl text-muted-foreground max-w-3xl mb-8">
                   A comprehensive summary of the major architectural upgrades and feature implementations — 
                   from legacy VGA to 32-bit VESA, complete desktop environment, USB stack, and verified stable build.
                 </p>
 
                 {/* CTA Buttons */}
                 <div className="flex flex-wrap gap-4">
-                  <Button asChild className="btn-neon gap-2">
+                  <Button asChild className="btn-solid gap-2">
                     <a href="https://github.com/urmoit/GamerOS" target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="w-4 h-4" />
                       View on GitHub
@@ -273,7 +273,7 @@ const XPTransformation = () => {
                   <Button 
                     variant="outline" 
                     asChild
-                    className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 hover:text-cyan-300 gap-2"
+                    className="border-border text-primary hover:bg-muted hover:text-primary gap-2"
                   >
                     <Link to="/news/xp-implementation">
                       <ArrowRight className="w-4 h-4" />
@@ -286,7 +286,7 @@ const XPTransformation = () => {
           </section>
 
           {/* Sections - Gaming Cards */}
-          <section className="py-16">
+          <section className="py-12">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
               {/* Section Header */}
               <motion.div
@@ -296,7 +296,7 @@ const XPTransformation = () => {
                 className="text-center mb-12"
               >
                 <h2 className="text-3xl sm:text-4xl font-bold text-gaming mb-4">Development Milestones</h2>
-                <p className="text-white/60 max-w-2xl mx-auto">
+                <p className="text-muted-foreground max-w-2xl mx-auto">
                   Track the evolution of GamerOS through each major feature implementation
                 </p>
               </motion.div>
@@ -311,24 +311,24 @@ const XPTransformation = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.05 }}
-                      className={`glass-card glass-card-hover p-6 rounded-2xl border-l-4 ${theme.border} ${theme.glow} transition-all duration-300`}
+                      className={`glass-card glass-card-hover p-6 rounded-lg border-l-4 ${theme.border} ${theme.glow} transition-all duration-300`}
                     >
                       <div className="flex items-start gap-4">
                         {/* Icon with Gaming Style */}
-                        <div className={`w-14 h-14 rounded-2xl ${theme.iconBg} border border-${theme.text.split('-')[1]}-500/30 flex items-center justify-center shrink-0 shadow-lg ${theme.glow}`}>
+                        <div className={`w-14 h-14 rounded-lg ${theme.iconBg} border border-border flex items-center justify-center shrink-0 shadow-lg ${theme.glow}`}>
                           <section.icon className={`w-7 h-7 ${theme.text}`} />
                         </div>
                         
                         <div className="flex-1">
                           {/* Title Row with Achievement Badge */}
                           <div className="flex items-center gap-3 mb-2 flex-wrap">
-                            <div className={`px-3 py-1 rounded-full bg-gradient-to-r ${theme.gradient} text-white text-xs font-bold shadow-lg`}>
+                            <div className={`px-3 py-1 rounded-full bg-muted ${theme.gradient} text-foreground text-xs font-bold shadow-lg`}>
                               LV.{section.id}
                             </div>
-                            <h3 className="text-xl font-semibold text-white">{section.title}</h3>
+                            <h3 className="text-xl font-semibold text-foreground">{section.title}</h3>
                           </div>
                           
-                          <p className="text-white/60 mb-4">{section.description}</p>
+                          <p className="text-muted-foreground mb-4">{section.description}</p>
                           
                           {/* Feature List with Hover Effects */}
                           <ul className="space-y-3">
@@ -344,7 +344,7 @@ const XPTransformation = () => {
                                 </div>
                                 <div>
                                   <strong className={`${theme.text}`}>{detail.label}:</strong>
-                                  <span className="text-white/60 ml-1">{detail.text}</span>
+                                  <span className="text-muted-foreground ml-1">{detail.text}</span>
                                 </div>
                               </motion.li>
                             ))}
@@ -359,7 +359,7 @@ const XPTransformation = () => {
           </section>
 
           {/* Verification Results - Achievement Grid */}
-          <section className="py-16 border-y border-white/10 bg-black/20">
+          <section className="py-12 border-y border-border bg-background">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -368,7 +368,7 @@ const XPTransformation = () => {
               >
                 <div className="text-center mb-8">
                   <h2 className="text-3xl font-bold text-gaming mb-2">Achievement Unlocked</h2>
-                  <p className="text-white/60">Final ISO: <code className="text-xs bg-cyan-500/20 text-cyan-400 px-2 py-1 rounded font-mono border border-cyan-500/30">dist/x86_64/kernel.iso</code> (5.2MB)</p>
+                  <p className="text-muted-foreground">Final ISO: <code className="text-xs bg-muted text-primary px-2 py-1 rounded font-mono border border-border">dist/x86_64/kernel.iso</code> (5.2MB)</p>
                 </div>
 
                 <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -380,13 +380,13 @@ const XPTransformation = () => {
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.05 }}
                       whileHover={{ scale: 1.05, y: -4 }}
-                      className="glass-card glass-card-hover p-4 rounded-xl border border-emerald-500/30 text-center group"
+                      className="glass-card glass-card-hover p-4 rounded-lg border border-border text-center group"
                     >
-                      <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-emerald-500/20 flex items-center justify-center group-hover:shadow-lg group-hover:shadow-emerald-500/30 transition-all">
-                        <result.icon className="w-6 h-6 text-emerald-400" />
+                      <div className="w-12 h-12 mx-auto mb-3 rounded-full bg-success/10 flex items-center justify-center group-hover:shadow-lg  transition-all">
+                        <result.icon className="w-6 h-6 text-success" />
                       </div>
-                      <div className="font-medium text-sm text-white mb-1">{result.label}</div>
-                      <p className="text-xs text-emerald-400">{result.value}</p>
+                      <div className="font-medium text-sm text-foreground mb-1">{result.label}</div>
+                      <p className="text-xs text-success">{result.value}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -395,20 +395,20 @@ const XPTransformation = () => {
           </section>
 
           {/* Next Steps - Quest Board Style */}
-          <section className="py-16">
+          <section className="py-12">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/20 border border-purple-500/30 mb-6">
-                  <Target className="w-4 h-4 text-purple-400" />
-                  <span className="text-sm text-purple-400 font-medium">Upcoming Quests</span>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border border-border mb-6">
+                  <Target className="w-4 h-4 text-primary" />
+                  <span className="text-sm text-primary font-medium">Upcoming Quests</span>
                 </div>
                 
                 <h2 className="text-3xl font-bold text-gaming-alt mb-4">Next Steps</h2>
-                <p className="text-white/60 mb-8 max-w-xl mx-auto">
+                <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
                   Future sessions will focus on expanding capabilities and unlocking new features.
                 </p>
                 
@@ -421,19 +421,19 @@ const XPTransformation = () => {
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.1 }}
                       whileHover={{ y: -4, scale: 1.02 }}
-                      className="glass-card glass-card-hover p-5 rounded-xl border border-pink-500/20 group cursor-pointer"
+                      className="glass-card glass-card-hover p-5 rounded-lg border border-border group cursor-pointer"
                     >
-                      <div className="w-10 h-10 mx-auto mb-3 rounded-lg bg-pink-500/20 flex items-center justify-center group-hover:shadow-lg group-hover:shadow-pink-500/30 transition-all">
-                        <step.icon className="w-5 h-5 text-pink-400" />
+                      <div className="w-10 h-10 mx-auto mb-3 rounded-lg bg-muted flex items-center justify-center group-hover:shadow-lg  transition-all">
+                        <step.icon className="w-5 h-5 text-primary" />
                       </div>
-                      <p className="text-sm text-white/80">{step.text}</p>
+                      <p className="text-sm text-foreground">{step.text}</p>
                     </motion.div>
                   ))}
                 </div>
 
                 {/* CTA Buttons */}
                 <div className="flex flex-wrap justify-center gap-4 mt-12">
-                  <Button asChild className="btn-neon gap-2">
+                  <Button asChild className="btn-solid gap-2">
                     <Link to="/download">
                       <Zap className="w-4 h-4" />
                       Download
@@ -442,7 +442,7 @@ const XPTransformation = () => {
                   <Button 
                     variant="outline" 
                     asChild
-                    className="border-purple-500/50 text-purple-400 hover:bg-purple-500/10 hover:text-purple-300 gap-2"
+                    className="border-border text-primary hover:bg-muted hover:text-primary gap-2"
                   >
                     <Link to="/news">
                       <Wrench className="w-4 h-4" />

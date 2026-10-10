@@ -32,22 +32,22 @@ const stats = [
 
 const colorMap: Record<string, { bg: string; border: string; text: string; glow: string }> = {
   cyan: {
-    bg: 'bg-cyan-400/10',
-    border: 'border-cyan-400/30',
-    text: 'text-cyan-400',
-    glow: 'shadow-cyan-400/20',
+    bg: 'bg-muted',
+    border: 'border-border',
+    text: 'text-primary',
+    glow: '',
   },
   purple: {
-    bg: 'bg-purple-400/10',
-    border: 'border-purple-400/30',
-    text: 'text-purple-400',
-    glow: 'shadow-purple-400/20',
+    bg: 'bg-muted',
+    border: 'border-border',
+    text: 'text-primary',
+    glow: '',
   },
   pink: {
-    bg: 'bg-pink-400/10',
-    border: 'border-pink-400/30',
-    text: 'text-pink-400',
-    glow: 'shadow-pink-400/20',
+    bg: 'bg-muted',
+    border: 'border-border',
+    text: 'text-primary',
+    glow: '',
   },
 };
 
@@ -55,13 +55,13 @@ const StatsSection = () => {
   return (
     <section className="section-padding relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-transparent to-purple-900/10" />
+      <div className="absolute inset-0 bg-muted  via-transparent " />
       
       <div className="container-gaming relative">
         <ScrollReveal>
           <div className="text-center mb-12">
             <motion.div 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink-400/10 border border-pink-400/30 text-pink-400 text-sm font-medium mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border border-border text-primary text-sm font-medium mb-6"
               whileHover={{ scale: 1.05 }}
             >
               <BarChart3 className="w-4 h-4" />
@@ -86,7 +86,7 @@ const StatsSection = () => {
                   transition={{ duration: 0.3 }}
                   className="glass-card glass-card-hover p-6 text-center group"
                 >
-                  <div className={`w-12 h-12 rounded-xl ${colors.bg} border ${colors.border} flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:shadow-lg ${colors.glow}`}>
+                  <div className={`w-12 h-12 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:shadow-lg ${colors.glow}`}>
                     <stat.icon className={`w-6 h-6 ${colors.text}`} />
                   </div>
                   <motion.div 

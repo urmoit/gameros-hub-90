@@ -1,197 +1,66 @@
-import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Coffee, Gamepad2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Coffee, Download, Gamepad2, Menu, Moon, Sun, X } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { useTheme } from 'next-themes';
+import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 const navItems = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  
-  { name: "News", path: "/news" },
-  { name: "Download", path: "/download" },
+  { name: 'Home', path: '/' },
+  { name: 'About', path: '/about' },
+  { name: 'News', path: '/news' },
+  { name: 'Download', path: '/download' },
 ];
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
   const location = useLocation();
-
+  const reducedMotion = useReducedMotion();
+  const dark = resolvedTheme === 'dark';
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 16);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
+  useEffect(() => { setIsOpen(false); }, [location.pathname]);
+  const active = (path: string) => path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Main Navigation */}
-      <motion.div 
-        className={`mx-auto transition-all duration-300 ${
-          isScrolled 
-            ? "mt-2 max-w-6xl rounded-2xl border border-white/10 bg-background/90 backdrop-blur-xl shadow-lg shadow-black/20"
-            : "mt-0 max-w-full rounded-none bg-transparent"
-        }`}
-        initial={{ y: -100 }}
-        animate={{ y: 0, scale: isScrolled ? 0.985 : 1 }}
-        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <div className="px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group">
-              <motion.div 
-                className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-purple-600 flex items-center justify-center relative overflow-hidden"
-                whileHover={{ scale: 1.05, rotate: 5 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-purple-600/0 group-hover:from-cyan-400/30 group-hover:to-purple-600/30 transition-all duration-300" />
-                <Gamepad2 className="w-5 h-5 text-white relative z-10" />
-              </motion.div>
-              <div className="flex flex-col">
-                <span className="font-bold text-lg leading-none text-gaming">GamerOS</span>
-                <span className="text-[10px] text-muted-foreground leading-none mt-0.5">Gaming Optimized</span>
-              </div>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                    location.pathname === item.path
-                      ? "text-cyan-400"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {location.pathname === item.path && (
-                    <motion.div
-                      layoutId="activeNav"
-                      className="absolute inset-0 bg-cyan-400/10 rounded-lg"
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                    />
-                  )}
-                  <span className="relative z-10">{item.name}</span>
-                  {location.pathname === item.path && (
-                    <motion.div
-                      layoutId="activeNavBorder"
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-cyan-400"
-                      style={{ boxShadow: '0 0 10px hsl(180 100% 50%)' }}
-                    />
-                  )}
-                </Link>
-              ))}
-            </nav>
-
-            {/* Right side actions */}
-            <div className="hidden md:flex items-center gap-3">
-              <a
-                href="https://buymeacoffee.com/urmoit"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-amber-400 hover:bg-amber-400/10 transition-colors"
-              >
-                <Coffee className="w-4 h-4" />
-                <span className="hidden lg:inline">Support</span>
-              </a>
-              <Button 
-                asChild 
-                className="btn-neon border-0 text-foreground font-semibold"
-              >
-                <Link to="/download">
-                  <span className="relative z-10">Download</span>
-                </Link>
-              </Button>
-            </div>
-
-            {/* Mobile Menu Toggle */}
-            <div className="flex md:hidden items-center gap-2">
-              <a
-                href="https://buymeacoffee.com/urmoit"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg text-amber-400 hover:bg-amber-400/10 transition-colors"
-              >
-                <Coffee className="w-5 h-5" />
-              </a>
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="p-2 rounded-lg hover:bg-white/5 transition-colors"
-              >
-                {isOpen ? <X size={24} className="text-cyan-400" /> : <Menu size={24} />}
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Navigation */}
-          <AnimatePresence>
-            {isOpen && (
-              <motion.nav 
-                className="md:hidden py-4 border-t border-white/5"
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="flex flex-col gap-2">
-                  {navItems.map((item, index) => (
-                    <motion.div
-                      key={item.path}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                    >
-                      <Link
-                        to={item.path}
-                        onClick={() => setIsOpen(false)}
-                        className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                          location.pathname === item.path
-                            ? "bg-cyan-400/10 text-cyan-400"
-                            : "text-muted-foreground hover:text-foreground hover:bg-white/5"
-                        }`}
-                      >
-                        {item.name}
-                        {location.pathname === item.path && (
-                          <span className="ml-auto w-1.5 h-1.5 rounded-full bg-cyan-400" style={{ boxShadow: '0 0 8px hsl(180 100% 50%)' }} />
-                        )}
-                      </Link>
-                    </motion.div>
-                  ))}
-                  <motion.a
-                    href="https://buymeacoffee.com/urmoit"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium text-amber-400 hover:bg-amber-400/10 transition-colors"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: navItems.length * 0.05 }}
-                  >
-                    <Coffee className="w-4 h-4" />
-                    Support the Developer
-                  </motion.a>
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: (navItems.length + 1) * 0.05 }}
-                  >
-                    <Button asChild className="btn-neon border-0 w-full mt-2">
-                      <Link to="/download" onClick={() => setIsOpen(false)}>
-                        <span className="relative z-10">Download Now</span>
-                      </Link>
-                    </Button>
-                  </motion.div>
-                </div>
-              </motion.nav>
-            )}
-          </AnimatePresence>
+    <motion.header initial={reducedMotion ? false : { opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}
+      className={`fixed inset-x-0 top-0 z-50 border-b border-border bg-background/95 backdrop-blur-md transition-shadow duration-200 ${isScrolled ? 'shadow-sm' : ''}`}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex h-16 items-center gap-6">
+        <Link to="/" className="flex items-center gap-2.5 shrink-0" aria-label="GamerOS home">
+          <Gamepad2 className="h-6 w-6 text-primary" />
+          <span className="text-lg font-semibold">GamerOS<span className="ml-2 text-[10px] font-mono font-normal text-muted-foreground hidden lg:inline">00m2</span></span>
+        </Link>
+        <nav aria-label="Main navigation" className="hidden md:flex self-stretch gap-6 ml-4">
+          {navItems.map(item => <Link key={item.path} to={item.path} aria-current={active(item.path) ? 'page' : undefined}
+            className={`relative flex items-center text-sm transition-colors ${active(item.path) ? 'text-foreground font-medium' : 'text-muted-foreground hover:text-foreground'}`}>
+            {item.name}
+            {active(item.path) && <motion.span layoutId="header-active" className="absolute bottom-0 inset-x-0 h-0.5 bg-primary" transition={{ duration: reducedMotion ? 0 : 0.2, ease: 'easeOut' }} />}
+          </Link>)}
+        </nav>
+        <div className="ml-auto flex items-center gap-1 sm:gap-2">
+          <Button variant="ghost" size="sm" asChild className="hidden lg:inline-flex text-muted-foreground"><a href="https://buymeacoffee.com/urmoit" target="_blank" rel="noopener noreferrer"><Coffee />Support</a></Button>
+          <Tooltip><TooltipTrigger asChild><Button variant="ghost" size="icon" aria-label={dark ? 'Switch to light theme' : 'Switch to dark theme'} onClick={() => setTheme(dark ? 'light' : 'dark')}>
+            <AnimatePresence mode="wait" initial={false}><motion.span key={dark ? 'dark' : 'light'} initial={{ opacity: 0, rotate: reducedMotion ? 0 : -30 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }}>
+              {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </motion.span></AnimatePresence>
+          </Button></TooltipTrigger><TooltipContent>{dark ? 'Light theme' : 'Dark theme'}</TooltipContent></Tooltip>
+          <Button asChild size="sm" className="hidden md:inline-flex"><Link to="/download"><Download />Download</Link></Button>
+          <Button variant="ghost" size="icon" className="md:hidden" aria-label={isOpen ? 'Close menu' : 'Open menu'} aria-expanded={isOpen} aria-controls="mobile-navigation" onClick={() => setIsOpen(open => !open)}>{isOpen ? <X /> : <Menu />}</Button>
         </div>
-      </motion.div>
-    </header>
+      </div>
+      <AnimatePresence initial={false}>{isOpen && <motion.nav id="mobile-navigation" aria-label="Mobile navigation" className="md:hidden overflow-hidden border-t border-border bg-background"
+        initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: reducedMotion ? 0 : 0.18 }}>
+        <div className="px-4 py-3 space-y-1">{navItems.map(item => <Button asChild variant="ghost" key={item.path} className={`w-full justify-start ${active(item.path) ? 'bg-muted text-foreground' : 'text-muted-foreground'}`}><Link to={item.path} aria-current={active(item.path) ? 'page' : undefined}>{item.name}</Link></Button>)}
+        <Button variant="ghost" asChild className="w-full justify-start text-muted-foreground"><a href="https://buymeacoffee.com/urmoit" target="_blank" rel="noopener noreferrer"><Coffee />Support</a></Button></div>
+      </motion.nav>}</AnimatePresence>
+    </motion.header>
   );
 };
-
 export default Header;

@@ -35,22 +35,22 @@ const highlights = [
 
 const colorMap: Record<string, { bg: string; border: string; text: string; shadow: string }> = {
   cyan: {
-    bg: 'bg-cyan-400/10',
-    border: 'border-cyan-400/30',
-    text: 'text-cyan-400',
-    shadow: 'shadow-cyan-400/20',
+    bg: 'bg-muted',
+    border: 'border-border',
+    text: 'text-primary',
+    shadow: '',
   },
   purple: {
-    bg: 'bg-purple-400/10',
-    border: 'border-purple-400/30',
-    text: 'text-purple-400',
-    shadow: 'shadow-purple-400/20',
+    bg: 'bg-muted',
+    border: 'border-border',
+    text: 'text-primary',
+    shadow: '',
   },
   pink: {
-    bg: 'bg-pink-400/10',
-    border: 'border-pink-400/30',
-    text: 'text-pink-400',
-    shadow: 'shadow-pink-400/20',
+    bg: 'bg-muted',
+    border: 'border-border',
+    text: 'text-primary',
+    shadow: '',
   },
 };
 
@@ -58,7 +58,7 @@ const CompatibilitySection = () => {
   return (
     <section className="section-padding relative overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/10 to-transparent" />
+      <div className="absolute inset-0 bg-muted from-transparent  to-transparent" />
       
       <div className="container-gaming relative">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -66,7 +66,7 @@ const CompatibilitySection = () => {
           <ScrollReveal direction="left">
             <div>
               <motion.div 
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-400/10 border border-purple-400/30 text-purple-400 text-sm font-medium mb-6"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border border-border text-primary text-sm font-medium mb-6"
                 whileHover={{ scale: 1.05 }}
               >
                 <Layers className="w-4 h-4" />
@@ -86,14 +86,14 @@ const CompatibilitySection = () => {
                 {highlights.map((item, index) => (
                   <motion.div 
                     key={index} 
-                    className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/5 group hover:border-cyan-400/30 hover:bg-cyan-400/5 transition-all duration-300"
+                    className="flex items-center gap-3 p-3 rounded-lg bg-muted border border-border group hover:border-border hover:bg-muted transition-all duration-300"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.05, duration: 0.3 }}
                   >
-                    <div className="w-6 h-6 rounded-lg bg-cyan-400/20 flex items-center justify-center flex-shrink-0 group-hover:bg-cyan-400/30 transition-colors">
-                      <Check className="w-3.5 h-3.5 text-cyan-400" />
+                    <div className="w-6 h-6 rounded-lg bg-muted flex items-center justify-center flex-shrink-0 group-hover:bg-muted transition-colors">
+                      <Check className="w-3.5 h-3.5 text-primary" />
                     </div>
                     <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">{item}</span>
                   </motion.div>
@@ -113,7 +113,7 @@ const CompatibilitySection = () => {
                     transition={{ duration: 0.2 }}
                     className={`glass-card p-5 flex items-center gap-4 group cursor-default`}
                   >
-                    <div className={`w-14 h-14 rounded-2xl ${colors.bg} border ${colors.border} flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:shadow-lg ${colors.shadow}`}>
+                    <div className={`w-14 h-14 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:shadow-lg ${colors.shadow}`}>
                       <platform.icon className={`w-7 h-7 ${colors.text}`} />
                     </div>
                     <div>
