@@ -54,8 +54,9 @@ const monthlyNewsData: Record<string, MonthData> = {
   "october-2026": {
     month: "October",
     year: "2026",
-    summary: "Build 1.520 (00m2) released with compile verification, blocker fixes, memory-safety hardening, and broad UI/driver stability work, alongside website changelog and header polish updates.",
+    summary: "Build 1.550 (00m2) released October 11 with time zones, real disk storage, a floating dock and a Start menu triple-fault fix, following Build 1.520 (00m2) released with compile verification, blocker fixes, memory-safety hardening, and broad UI/driver stability work, alongside website changelog and header polish updates.",
     highlights: [
+      "Build 1.550 released October 11, 2026 — time zones, disk storage, floating dock",
       "Build 1.520 released October 10, 2026 (version 00m2)",
       "First verified clean compile and ISO build with zero warnings/errors/undefined symbols",
       "Major build blocker fixes: allocator, Makefile rules, header conflicts, and graphics buffer accessor safety",
@@ -67,6 +68,13 @@ const monthlyNewsData: Record<string, MonthData> = {
       "Added animated docked header with rounded corners on scroll",
     ],
     items: [
+      {
+        title: "Build 1.550 Released — Time Zones, Real Disk Storage & Floating Dock",
+        date: "October 11, 2026",
+        type: "Announcement",
+        description: "Fixes the Start menu triple fault, adds 74 time zones with daylight saving, persistent ATA storage, Explorer details view, a floating dock, and a corrected text renderer.",
+        commitUrl: "/news/build-1550",
+      },
       {
         title: "Build 1.520 Released — 00m2 Build, Safety & Stability Update",
         date: "October 10, 2026",

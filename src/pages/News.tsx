@@ -52,6 +52,16 @@ interface NewsItem {
 
 const newsItems: NewsItem[] = [
   {
+    id: "build-1550-release",
+    title: "Build 1.550 Released — Time Zones, Real Disk Storage & Floating Dock",
+    date: "October 11, 2026",
+    type: "Announcement",
+    description: "Alpha Build 1.550 (00m2) fixes the Start menu triple fault, adds 74 time zones with daylight saving, persists files to a real ATA disk, rebuilds the taskbar as a floating dock, and fixes text rendering across the shell.",
+    icon: Rocket,
+    internalLink: "/news/build-1550",
+    featured: true,
+  },
+  {
     id: "build-1520-release",
     title: "Build 1.520 Released — 00m2 Build, Safety & Stability Update",
     date: "October 10, 2026",
@@ -59,7 +69,6 @@ const newsItems: NewsItem[] = [
     description: "Alpha Build 1.520 (00m2) is out with build-system recovery, memory-safety fixes, boot and driver hardening, correctness fixes, and major Settings/Explorer/Notepad UI improvements.",
     icon: Rocket,
     internalLink: "/news/build-1520",
-    featured: true,
   },
   {
     id: "website-ui-refresh",

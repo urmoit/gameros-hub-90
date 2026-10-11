@@ -82,7 +82,7 @@ const visionPoints = [
 const teamStats = [
   { value: "1", label: "Core Developer", color: "cyan" },
   { value: "27,000+", label: "Lines of Code", color: "purple" },
-  { value: "1.520", label: "Build", color: "pink" },
+  { value: "1.550", label: "Build", color: "pink" },
   { value: "Jan 2026", label: "Started", color: "cyan" },
 ];
 
@@ -172,13 +172,13 @@ const About = () => {
                     <h3 className="text-xl font-bold">Development Notice</h3>
                   </div>
                   <p className="text-muted-foreground mb-4">
-                    GamerOS has made significant progress! Build 1.520 is now released — the 00m2 update that fixes major build blockers,
+                    GamerOS has made significant progress! Build 1.550 is now released — the 00m2 update that fixes major build blockers,
                     memory safety issues, and driver/boot reliability problems while improving Settings, Notepad, Explorer, and release tooling.
-                    The latest alpha release is <span className="text-warning font-medium">00m2</span> (Build 1.520), released October 10, 2026.
+                    The latest alpha release is <span className="text-warning font-medium">00m2</span> (Build 1.550), released October 11, 2026.
                   </p>
                   <Button variant="outline" size="sm" asChild className="mt-2 border-border hover:bg-warning/10 hover:text-warning">
-                    <Link to="/news/build-1520">
-                      Read Build 1.520 Release Notes
+                    <Link to="/news/build-1550">
+                      Read Build 1.550 Release Notes
                     </Link>
                   </Button>
                 </div>
@@ -366,7 +366,7 @@ const About = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <Button size="lg" className="btn-solid border-0" asChild>
-                    <a href="https://github.com/urmoit/GamerOS/releases/download/00m2-alpha-Build-1.520/GamerOS_Alpha_Build_1.520.iso" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/urmoit/GamerOS/releases/download/00m2-alpha-Build-1.550/GamerOS_Alpha_1.550.iso" target="_blank" rel="noopener noreferrer">
                       <span className="relative z-10">Download ISO</span>
                     </a>
                   </Button>
