@@ -1,0 +1,343 @@
+# GamerOS Changelog (2026-10-11)
+
+Build 1.550 takes the shell rendered by 1.520 and repairs how text is drawn, then
+rebuilds the four always-visible surfaces — taskbar, Start menu, desktop watermark
+and boot screen — on top of that fix.
+
+## Release
+- Version: `00m2`
+- Build: `1.550`
+- Date: `2026-10-11`
+- Status: **Released.**
+
+## Critical — Triple Fault Opening the Start Menu
+
+- **Fixed a triple fault that killed the guest the moment the Start button was
+  clicked.** `boot.asm` enabled `CR4.PAE` but never set `CR4.OSFXSR` (bit 9) or
+  `CR4.OSXMMEXCPT` (bit 10) before entering long mode. In IA-32e, executing an
+  SSE instruction with `OSFXSR` clear raises `#UD`. Because the IDT is not
+  populated for these faults, that `#UD` became `#GP` -> `#DF` -> **triple
+  fault**, and the CPU shut down. This is what VMware was reporting as
+  "a fault has occurred causing a virtual CPU to enter the shutdown state".
+- **This was a latent landmine, not a Start-menu bug.** Any GCC-generated SSE
+  opcode anywhere in the kernel would have killed it. `-O2` emits `pxor` +
+  `movaps` for any initialisation wider than a 64-bit store, so the moment a
+  struct crossed 16 bytes the kernel would die. Growing
+  `start_menu_metrics_t` from 5 to 10 fields pushed it to 40 bytes and tipped GCC
+  into emitting `pxor %xmm0,%xmm0` at the top of `draw_start_menu()` — which is
+  why the crash appeared to belong to the Start menu.
+- **Diagnosed from QEMU's exception trace**, not guessed: `-d int,cpu_reset` gave
+  the sequence `#UD -> #GP(0x32) -> #DF -> Triple fault` at `RIP=0x109e00`, which
+  `addr2line` resolved to `draw_start_menu()` at `main.c:2663`, and `info
+  registers` showed `CR4=0x20` (PAE only, `OSFXSR` clear) against a `pxor`
+  instruction that cannot fault for any other reason.
+- **Verified fixed under QEMU 11.0.1:** opening the Start menu now raises **zero
+  exceptions and zero triple faults**, and the VM stays `running`.
+- The time zone dropdown and its mouse-wheel scrolling were confirmed working
+  under VMware. Wheel input could not be exercised through QEMU's monitor at
+  all — `mouse_button` only exposes left, middle and right, with no wheel
+  command — so that path was verified on real hardware input instead.
+
+## Time Zones
+
+- **Added a Time section to Settings, replacing the read-only "Date & time"
+  rows.** The Time & Language tab now shows the local time for the selected zone,
+  the zone name, its UTC offset, and whether daylight saving is currently in
+  effect.
+- **Added a scrollable time zone dropdown with 74 zones.** It is a combo box: a
+  single row showing the current zone, a `(74 zones)` count and a drop arrow,
+  which expands to a windowed list of eight rows. The list is longer than the
+  pane, so the mouse wheel scrolls it; up/down buttons are shown as well and
+  only when there is somewhere to scroll. Clicking an entry applies it and
+  closes the list, and clicking anywhere else in the pane dismisses it, the way
+  a combo box behaves. Row geometry is published by the renderer and read back
+  by the click and wheel handlers, the same way the other Settings controls stay
+  aligned.
+- **The selection changes the clock.** The taskbar clock and the Settings time
+  now read from the selected zone instead of taking raw RTC time. The RTC is
+  treated as UTC; local time is UTC plus the zone offset, with daylight saving
+  applied where the zone observes it. Verified end to end: forcing Kiritimati
+  (+14:00) at 15:14 UTC produced 05:14 local the following day.
+- **Daylight saving is implemented, not just offsets.** Four transition rules
+  are modelled: US/Canada (2nd Sunday March to 1st Sunday November at 02:00
+  local), European (last Sunday March to last Sunday October at 01:00 UTC),
+  Australian (1st Sunday October to 1st Sunday April), and New Zealand (last
+  Sunday September to 1st Sunday April). Zones that do not observe it — Hawaii,
+  Arizona, Moscow, India, Japan, China — hold a constant offset all year.
+- **Fixed southern-hemisphere daylight saving covering the wrong months.** The
+  daylight window spans New Year, and testing against Sydney exposed that
+  testing "at or after this year's start OR before next year's end" marked the
+  whole April-September gap as daylight time. The window is now anchored to the
+  previous year whenever the instant falls in the January-April tail.
+- **Verified with 17 timezone assertions** covering both hemispheres in summer
+  and winter, non-observing zones holding steady year round, and the US
+  transitions to the minute: one minute before spring-forward is still EST, and
+  the transition instant is already EDT.
+- **The selection persists** to `C:/GamerOS/Registry/TIMEZONE.INI` and is reloaded
+  at boot, so the clock keeps the chosen zone across a restart.
+
+## Correctness
+
+- **Fixed `sprintf` having no field-width or zero-padding support.** The parser
+  jumped straight from `%` to the conversion character, so any specifier with a
+  width such as `%02u` fell into the default branch and emitted the format text
+  literally instead of the number. The Time settings rendered
+  `\x02u:\x02u:\x02u` where the time should have been. `sprintf` now parses a
+  zero-pad flag and a width, and applies them to `%d`, `%i`, `%u`, `%x`, `%X`,
+  and `%s`, with the sign counted toward the width for signed conversions.
+  Anything else in the OS that used `%02u` was silently broken in the same way.
+- **Fixed the keyboard and mouse starving each other on the PS/2 controller.** The
+  keyboard and the auxiliary mouse share one output buffer, and status bit 5 says
+  which device a pending byte belongs to. Both poll loops drained on bit 0 alone,
+  so `mouse_poll()`, running first each frame, discarded nearly every keystroke
+  before `keyboard_poll()` saw it: tracing raw scancodes showed one keypress
+  surviving a 60-key burst. Each loop now stops at the device boundary. Typing
+  did not work at all before this.
+- **Fixed Notepad's line-number gutter clipping.** 22px held two digits, so every
+  number from line 100 up lost its leading digit; it is now 30px for 160 rows.
+
+## Application modularisation
+
+- **Split Notepad out of `main.c` into its own module.** ~340 lines of editing,
+  rendering, storage and input now live in `src/ui/apps/notepad/` behind a small
+  public interface. `src/ui/shell/shell_api.h` defines what an app may ask of the
+  shell: bring the volume up, test readiness, open or create a `GOS:/` file, raise
+  an error. Those implementations are thin, so an app never needs to know whether
+  storage is on ATA or in RAM. The shell keeps window chrome, focus and the input
+  pump; an app supplies its title, icon, renderer and event handlers and never
+  touches a `window_t`. This is a source-layout change, not a new on-disk format.
+  File Explorer and Settings are still embedded in `main.c` and are next.
+
+## Build Verification
+- Bumped the build number from `1.520` to `1.550`, keeping version `00m2`.
+  Updated in the `GAMEROS.INI` written at boot, the Settings About page, the
+  desktop watermark, and `README.md`.
+- Compile-verified: zero warnings, zero errors, zero undefined symbols.
+- Booted under QEMU and confirmed the desktop shell renders, including the
+  desktop icons, taskbar, and watermark.
+- **Storage verified against a real 12 GiB disk** attached on the IDE channel,
+  across three consecutive boots:
+  `Storage: ATA medium, capacity 12 GB, LBA48=no, model=QEMU HARDDISK`, then
+  `files=29 dirs=27 used=21 KB` — identical on every run, proving the volume
+  reloads from the medium rather than being rebuilt in RAM.
+- File Explorer was driven through the QEMU monitor to confirm the drive block
+  and the details columns render, and each captured frame was checked for
+  exceptions: `triple faults: 0` throughout.
+- Notepad was verified end to end after being split into its own module: launched
+  from the desktop icon, typed into, caret moved with the arrow/Home/End keys, the
+  modified indicator flipping between `Modified` and `Saved`, saved with the
+  toolbar button, and re-read after a full reboot with the text intact. Storage
+  stayed at `files=30 dirs=27` across both boots and `triple faults: 0`.
+
+## Storage
+
+- **The filesystem is now backed by a real disk instead of RAM.** `ata_pio_init()`
+  had been short-circuited with `g_ata_available = 0; return 0;`, leaving the
+  real probe as unreachable code, so every boot started from a wiped 2 MiB RAM
+  disk. The driver is enabled and storage now persists across reboots.
+- **Rewrote the ATA PIO driver.** It probes all four channel/device pairs rather
+  than assuming the primary master exists, runs IDENTIFY DEVICE, and reads real
+  capacity from words 60/61, falling back to the LBA48 words 100-103 when the
+  28-bit field signals a larger disk. The model and serial strings are decoded
+  from IDENTIFY words 27-46 and 10-19, correcting for the byte-swapped encoding.
+- **Implemented LBA48.** Disks above the 28-bit ceiling of 128 GiB need the
+  extended command set, so reads and writes use `0x24`/`0x34` with the high LBA
+  byte programmed through the drive/head register when the request exceeds
+  `0x0FFFFFFF`.
+- **Fixed the probe handshake that made detection fail.** The driver bailed out
+  if the drive never asserted DRQ during the post-reset signature phase, which
+  is legal and which the emulated controller does not do. That single `continue`
+  was the entire reason detection returned "no device". It now logs the failure
+  and falls through to IDENTIFY regardless.
+- **The filesystem now starts at LBA 64**, so the MBR, partition table, and any
+  backup GPT in the first sectors are never written. The superblock used to live
+  at LBA 0, which would have destroyed the partition table on the first write.
+- **Capacity is no longer hardcoded.** The old build always reserved
+  `MAX_DISK_SECTORS 4096` (2 MiB) regardless of the medium and reported a fake
+  `102400 MB`. The volume now spans whatever the drive reports.
+- **Fixed files being recreated on every boot.** `MAX_FILENAME_LEN` was 40, and
+  seeding writes paths such as `C:/GamerOS/Apps/Manifests/Notepad.gosapp`, which
+  is *exactly* 40 characters. `strncpy(..., MAX_FILENAME_LEN - 1)` stored a
+  truncated name, so the next boot's full path no longer matched it and
+  `fs_create_file` appended a duplicate. Six over-length paths meant the volume
+  gained six junk entries on every single boot, forever. The limit is now 64 and
+  `fs_create_file` rejects over-long names outright rather than truncating them.
+  Verified stable at `files=29 dirs=27` across three consecutive boots.
+- **Stopped reserving 24 KiB of RAM per file.** `file_t` embedded a full
+  `MAX_FILE_SIZE` buffer, so 32 slots cost 786 KB of BSS to hold data that
+  belongs on the medium. File contents are read from the medium on demand;
+  `files[]` is now 18 KB.
+- **Files are allocated by real size, not a fixed 24 KiB reservation**, so the
+  usage figure reflects actual occupancy. Added `fs_delete_file()` and
+  `fs_delete_directory()`, and `fs_get_space_info()` for free/used accounting.
+- **Raised the volume limits** to 256 files and 128 directories, with the on-disk
+  tables resized to match and the format version bumped to `GFS3PIO` so any
+  image from the older layout is cleanly reformatted rather than misread.
+- **The volume now mounts during boot** instead of being deferred until the first
+  app launch, so a boot log actually reports whether the medium was detected.
+
+## UI
+
+- **Turned the taskbar into a floating dock.** A full-width bar glued to the bottom
+  edge is now a rounded panel inset from the sides and bottom, sized to its
+  contents and centred, with the wallpaper showing through on all sides. Start,
+  the task buttons and the clock live inside it, plus a soft drop shadow. The
+  wallpaper now covers the full screen height, so no seam is left where the dock
+  used to be, and window placement clamps against the dock's real footprint so the
+  taller dock never overlaps window bottoms.
+- Dock geometry comes from one `dock_compute_layout` call read by both the
+  renderer and the hit tester, so the dock re-centring when windows open or close
+  cannot leave click targets out of step with the pixels. The Start menu hangs off
+  the dock's left edge instead of the screen corner.
+- `vga_fill_rounded_rect` and `vga_draw_rounded_rect` were stubs that ignored
+  `radius` and drew plain rectangles. They now round the corners for real,
+  clipping to the screen and writing both the indexed and truecolour buffers.
+
+- **Added a Windows-style drive block to Explorer "This PC".** Each volume now
+  shows its model, a usage bar, and a capacity line reading
+  `11.9 GB free of 12 GB`, in place of a bare `C:` row. The bar is sized from
+  measured bytes, and volumes under 1 GiB report in MB so a RAM-backed fallback
+  does not render as `0 GB free`.
+- **Added the Windows-style details view to File Explorer.** The entry list now
+  carries `Name | Date modified | Type | Size` with header separators, matching
+  the Explorer details layout. Name absorbs the leftover width, and the columns
+  collapse to `Name | Type | Size` when the window is too narrow to show a
+  readable date.
+- **Files now carry a modification time.** Added a closed-form Gregorian
+  date conversion to the RTC driver (`get_unix_time` / `unix_to_calendar`), so
+  no 64-bit division or `libgcc` helper is needed. `fs_write_file` stamps each
+  write, and the timestamp is persisted in what used to be padding in the file
+  record — the record stays 88 bytes, so images written before this field
+  existed still load (with `mtime` of 0).
+- **Type is derived from the extension** the way Explorer labels it:
+  `.EXE` is Application, `.GOSAPP` an Application manifest, `.DLL` an
+  Application extension, `.INI` Configuration Settings, `.REG` a Registry File,
+  `.LST` a System File, and folders report as File folder with a blank size.
+- **Sizes are humanised** to `0 bytes`, `1.2 KB`, `3.4 MB`, computed with
+  shifts rather than division for the same libgcc reason.
+
+- **Fixed the UI text renderer, which was shearing every letter.** `draw_compact_string()`
+  sampled only the **left 6 of the 8 columns** of each glyph
+  (`row_data & (0x80 >> col)` for `col` 0-5) while advancing the pen by only 6px.
+  The right side of every glyph was discarded and the following glyph then
+  overdrew 2px of it, so compact text rendered as vertical smears across the
+  whole shell — most visibly on the desktop watermark. It now samples all 8
+  columns and advances 8px, the font's natural width.
+- **Converted all 43 hardcoded 6px text-width computations** to `FONT_CW`. Any
+  site left at 6 would have overflowed its panel by a third once the renderer
+  started advancing 8. The one non-text use of `/ 6` — the wallpaper gradient
+  band height — was deliberately left alone.
+- **Rebuilt the taskbar.** The Start button was 52px wide, but its label needs
+  40px plus the flag gutter, so the text spilled past the button border. It is
+  now wide enough, with the label centred in the space left by the flag. The task
+  strip moved off a hardcoded `x = 56` to a centred run between the Start button
+  and the clock, which removes the large dead gap on wide displays. Task labels
+  are now clamped to the button width instead of a fixed 8 characters, and the
+  Start button shows a pressed state while the menu is open.
+- **Rebuilt the Start menu.** The profile rail was 42px wide, but "Admin" needs
+  40px at the corrected advance, so the label bled into the content column. The
+  rail is now 56px, the panel is wider, and the avatar plus both labels are
+  centred on the rail's own centre line. "Launchpad" is placed after the brand
+  word using a measured gap rather than a magic `x + 74`.
+- **Centralised the Start menu layout.** `rail_w`, `panel_x`, `panel_w`,
+  `items_top` and the item count were duplicated between the renderer and the
+  click handler — the same duplication that previously let click targets drift
+  away from the pixels they were drawn at. They now come from a single
+  `get_start_menu_metrics()`. The taskbar strip got the same treatment via
+  `taskbar_strip_start()`.
+- **Rebuilt the desktop watermark.** The build badge is right-aligned on the
+  lower row, and the card is sized from measured text instead of hand-padded
+  spaces that no longer lined up once the advance changed.
+- **Rebuilt the loading screen.** The title was centred on the *screen* while
+  being drawn inside a much narrower panel, so it sat outside the panel on any
+  wide display; it is now anchored to the panel's content column. The "Loading"
+  label was drawn across the spinner ring at the same `y` and overwrote the dots;
+  it now sits centred beneath the ring. The panel was also enlarged and centred
+  rather than positioned from the title's `y`.
+
+## Build and Tooling
+
+- **Raised the changelog viewer's line budget from 256 to 320** in `main.c`, and
+  moved the matching cap in `tools/embed_changelog.py` to the same value. The
+  two were separate hardcoded literals, so raising only one would have left the
+  generator warning about a truncation the viewer no longer had.
+
+## Documentation
+
+- **Split the changelog per release.** Build `1.520` (2026-10-10) stays in
+  `changelog_2026-10-10.md`; this file records build `1.550` (2026-10-11).
+  `tools/embed_changelog.py` was repointed at this file so the in-OS viewer keeps
+  showing the newest release.
+
+## Notes
+
+- The 1.520 notes recorded that the ISO had never been booted. It has now: the
+  desktop shell, taskbar, and watermark were confirmed rendering under QEMU.
+- The font fix is global. Every compact string in the OS is 33% wider than it
+  was, which is why the four surfaces above were rebuilt rather than patched.
+- Start-menu and taskbar hit boxes are now derived from the same metrics the
+  renderer uses, so a future layout change cannot silently break clicking.
+- **Known storage limitation: freed sectors are never reused.** Allocation is
+  append-only, so deleting a file zeroes its sectors and frees the name, but the
+  space is not returned to the pool. The volume therefore fills over many write
+  cycles until it is reformatted. A free-run list or bitmap is needed to close
+  that gap.
+- **Only legacy ATA at port 0x1F0 is supported.** AHCI (SATA) and NVMe are not
+  implemented, so a machine whose disk is on a modern controller will find no
+  device and fall back to the RAM disk. Under QEMU the default IDE channel works;
+  VMware VMs commonly default to NVMe or SATA and will need those drivers.
+
+## Planned
+
+### Kernel
+
+- **Populate a real IDT with exception handlers.** `IDT` still reads back as
+  `0000000000000000 00000000`, so hardware interrupts work only because the
+  firmware descriptor happens to be in place, and any fault triple-faults
+  instead of reaching a handler. This is why the `CR4.OSFXSR` bug presented as
+  an instant shutdown with no diagnostic at all.
+- Add a panic path that prints the fault vector, error code and the registers
+  QEMU captured, so a crash is diagnosable from the serial log.
+- Replace the polled input loop with PIT/HPET timer-driven frame pacing.
+- Add keyboard shortcuts: Alt+Tab window cycling, a Windows key, and Ctrl+Alt+Del.
+
+### Storage
+
+- Implement an AHCI (SATA) driver so VMware VMs without a legacy IDE controller
+  can mount a real volume.
+- Implement an NVMe driver over PCI for the same reason.
+- Add a free-sector map so deleted space is reclaimed instead of leaked, and
+  address the fragmentation the append-only allocator produces over time.
+- Add a journal so an interrupted metadata write cannot corrupt the volume.
+- Stop rewriting the whole file table on every write. `fs_save_metadata()`
+  serialises all 256 records on each `fs_write_file()`, so saving a file costs
+  the same whether the volume holds three files or three hundred.
+- Add rename and move, and make `fs_delete_directory()` refuse non-empty
+  directories instead of deleting the entry and orphaning its children.
+- Raise the 24 KiB per-file cap in `MAX_FILE_SIZE`, and handle paths that
+  exceed the 64-character `MAX_FILENAME_LEN` rather than rejecting them.
+- Add a BIOS-style POST screen so storage detection and capacity are visible
+  before the desktop loads, instead of only on the serial log.
+
+### Shell
+
+- Add Explorer sorting by column. The details view draws Name, Date modified,
+  Type and Size, but only the zone dropdown is interactive so far; the reference
+  layout shows a sort indicator on the header that does nothing yet.
+- Expose create, rename and delete in the Explorer UI. The filesystem already
+  has `fs_create_file`, `fs_delete_file` and `fs_delete_directory`; nothing
+  calls them.
+- Give Notepad open/save dialogs instead of the single fixed file path.
+- Taskbar: window previews on hover, overflow grouping, and show-desktop.
+- Visually confirm the loading screen; the desktop, taskbar, watermark, Start
+  menu and Explorer have all been captured as rendered frames.
+
+### Settings and time
+
+- Persist Settings state so toggles survive a reboot instead of resetting.
+- Allow the clock to be set. The RTC is read-only today, so the time zone can
+  only shift the displayed time; nothing corrects a clock that has drifted.
+- Cover the remaining daylight-saving rules. Iran, Chile, and Lord Howe Island
+  are approximated by one of the four implemented rules rather than their real
+  transitions.
+- Remember each Settings tab's scroll position between visits.
