@@ -108,11 +108,11 @@ const Download = () => {
                 <h2 className="text-4xl font-bold mb-4 text-foreground">Latest Alpha Release</h2>
                 
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-4 leading-relaxed">
-                  GamerOS <span className="text-primary font-medium">00m2</span> (Build 1.520) is the new compile-verified release
+                  GamerOS <span className="text-primary font-medium">00m2</span> (Build 1.550) is the new compile-verified release
                   with major build-system fixes, memory-safety hardening, and broad UI/driver stability upgrades across the OS.
                 </p>
                 <p className="text-sm text-success mb-10 font-medium">
-                  ✅ Build 1.520 released October 10, 2026
+                  ✅ Build 1.550 released October 11, 2026
                 </p>
                 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
@@ -121,9 +121,9 @@ const Download = () => {
                     asChild
                     className="min-w-[220px] btn-solid border-0"
                   >
-                     <a href="https://github.com/urmoit/GamerOS/releases/download/00m2-alpha-Build-1.520/GamerOS_Alpha_Build_1.520.iso" target="_blank" rel="noopener noreferrer">
+                     <a href="https://github.com/urmoit/GamerOS/releases/download/00m2-alpha-Build-1.550/GamerOS_Alpha_1.550.iso" target="_blank" rel="noopener noreferrer">
                     <DownloadIcon className="w-5 h-5 mr-2" />
-                    Download Build 1.520 ISO
+                    Download Build 1.550 ISO
                     </a>
                   </Button>
                   <Button 
@@ -131,9 +131,9 @@ const Download = () => {
                     className="min-w-[220px] btn-solid gap-2 group/btn" 
                     asChild
                   >
-                    <Link to="/news/build-1520">
+                    <Link to="/news/build-1550">
                       <Rocket className="w-5 h-5 group-hover/btn:" />
-                      Build 1.520 Release Notes
+                      Build 1.550 Release Notes
                       <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
                   </Button>
@@ -326,7 +326,7 @@ const Download = () => {
                 </p>
                 
                 <code className="block p-4 rounded-lg bg-background border border-border text-xs overflow-x-auto text-primary font-mono">
-                  GamerOS_Alpha_Build_1.520.iso
+                  GamerOS_Alpha_1.550.iso
                   <span className="">_</span>
                 </code>
               </div>
@@ -371,7 +371,7 @@ const Download = () => {
                 </p>
                 
                 <code className="block p-4 rounded-lg bg-background border border-border text-xs overflow-x-auto text-primary font-mono">
-                  Release Build 1.520
+                  Release Build 1.550
                 </code>
               </div>
             </div>
