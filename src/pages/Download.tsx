@@ -90,7 +90,7 @@ const Download = () => {
         {/* Alpha Release Section */}
         <section className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="glass-card p-5 sm:p-6 text-center relative overflow-hidden group">
+            <div className="py-6 text-left border-y border-border relative overflow-hidden group">
               {/* Animated Background Glows */}
               <div className="absolute top-0 right-0 w-96 h-96 bg-muted rounded-full hidden group-hover:bg-muted transition-all duration-700" />
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-muted rounded-full hidden group-hover:bg-muted transition-all duration-700" />
@@ -381,7 +381,7 @@ const Download = () => {
         {/* Newsletter/Notify Section */}
         <section className="py-12">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="glass-card p-5 sm:p-6 text-center relative overflow-hidden">
+            <div className="py-6 text-center border-y border-border relative overflow-hidden">
               <div className="absolute inset-0 bg-muted   " />
               
               <div className="relative z-10">

@@ -213,7 +213,7 @@ const About = () => {
                   <motion.div 
                     key={i} 
                     className="glass-card p-6 text-center glass-card-hover"
-                    whileHover={{ y: -8 }}
+                    whileHover={{ opacity: 0.95 }}
                     transition={{ duration: 0.3 }}
                   >
                     <div className={`w-14 h-14 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center mx-auto mb-4`}>
@@ -301,7 +301,7 @@ const About = () => {
                   <motion.div 
                     key={i} 
                     className="glass-card p-6 text-center glass-card-hover"
-                    whileHover={{ y: -5 }}
+                    whileHover={{ opacity: 0.95 }}
                     transition={{ duration: 0.3 }}
                   >
                     <div className={`w-14 h-14 rounded-lg ${colors.bg} border ${colors.border} flex items-center justify-center mx-auto mb-4`}>

@@ -721,12 +721,12 @@ const MonthlyNews = () => {
                       className="pl-12 pr-10 py-6 bg-muted border-border focus:border-border focus:ring-2 focus:ring-ring rounded-lg text-foreground placeholder:text-muted-foreground transition-all"
                     />
                     {searchQuery && (
-                      <button
+                      <Button variant="ghost"
                         onClick={() => setSearchQuery("")}
                         className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
                       >
                         <X className="w-5 h-5" />
-                      </button>
+                      </Button>
                     )}
                   </div>
 
@@ -744,7 +744,7 @@ const MonthlyNews = () => {
                         };
                         
                         return (
-                          <button
+                          <Button variant="ghost"
                             key={filter}
                             onClick={() => setActiveFilter(filter)}
                             className={`relative px-5 py-2.5 text-sm font-bold rounded-lg transition-all duration-300 ${
@@ -761,7 +761,7 @@ const MonthlyNews = () => {
                               />
                             )}
                             <span className="relative z-10">{filter}</span>
-                          </button>
+                          </Button>
                         );
                       })}
                     </div>
@@ -776,7 +776,7 @@ const MonthlyNews = () => {
                   <span className="font-bold text-foreground">{data.items.length}</span> updates
                 </p>
                 {(searchQuery || activeFilter !== "All") && (
-                  <button
+                  <Button variant="ghost"
                     onClick={() => {
                       setSearchQuery("");
                       setActiveFilter("All");
@@ -784,7 +784,7 @@ const MonthlyNews = () => {
                     className="text-sm text-primary hover:text-primary flex items-center gap-1.5 font-medium transition-colors"
                   >
                     Clear filters <X className="w-4 h-4" />
-                  </button>
+                  </Button>
                 )}
               </div>
 

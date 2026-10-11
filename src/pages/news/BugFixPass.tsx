@@ -108,12 +108,12 @@ const FixCard = ({ fix }: { fix: FixSection }) => {
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
             <h4 className="font-semibold text-foreground">{fix.title}</h4>
-            <button
+            <Button variant="ghost"
               onClick={() => setExpanded(!expanded)}
               className="p-2 rounded-lg bg-muted text-muted-foreground hover:text-primary transition-colors shrink-0"
             >
               {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-            </button>
+            </Button>
           </div>
           <div className="flex flex-wrap items-center gap-2 mt-2">
             {fix.files.map((f, i) => (

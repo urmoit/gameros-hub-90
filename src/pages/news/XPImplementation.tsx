@@ -111,9 +111,6 @@ const XPImplementation = () => {
               <Link
                 to="/news"
                 className="inline-flex items-center gap-2 mb-8 transition-all group text-primary"
-                
-                onMouseEnter={(e) => e.currentTarget.style.color = "hsl(180 100% 50%)"}
-                onMouseLeave={(e) => e.currentTarget.style.color = "hsl(180 100% 50% / 0.7)"}
               >
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                 Back to News
@@ -199,7 +196,7 @@ const XPImplementation = () => {
                     {/* Animated Progress Bar */}
                     <div className="relative h-3 bg-muted rounded-full overflow-hidden mb-6">
                       <motion.div 
-                        className="absolute inset-y-0 left-0 rounded-full bg-muted"
+                        className="absolute inset-y-0 left-0 rounded-full bg-primary"
                         initial={{ width: 0 }}
                         animate={{ width: `${overallProgress}%` }}
                         transition={{ duration: 1.5, ease: "easeOut" }}
@@ -310,7 +307,7 @@ const XPImplementation = () => {
                     className="group"
                   >
                     <div 
-                      className="h-24 rounded-lg mb-3 transition-all duration-300 group-hover:shadow-lg relative overflow-hidden bg-muted"
+                      className={`h-24 rounded-lg mb-3 border border-border relative overflow-hidden luna-swatch-${i}`}
                       
                     >
                       <div 

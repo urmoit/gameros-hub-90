@@ -482,7 +482,7 @@ const News = () => {
 
         <main className="flex-1">
           {/* Hero Section */}
-          <section className="relative pt-32 pb-20 overflow-hidden">
+          <section className="relative pt-28 pb-10 overflow-hidden">
             {/* Background Effects */}
             <div className="absolute inset-0">
               <div className="absolute inset-0 hidden  via-transparent to-transparent" />
@@ -513,7 +513,7 @@ const News = () => {
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
-                className="text-center max-w-4xl mx-auto"
+                className="max-w-6xl mx-auto"
               >
                 {/* Badge */}
                 <motion.div variants={itemVariants} className="mb-6">
@@ -534,7 +534,7 @@ const News = () => {
                 {/* Description */}
                 <motion.p
                   variants={itemVariants}
-                  className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
+                  className="text-base text-muted-foreground max-w-2xl"
                 >
                   Stay up to date with the latest GamerOS development news, commits, and community announcements.
                 </motion.p>
@@ -542,7 +542,7 @@ const News = () => {
                 {/* Stats */}
                 <motion.div
                   variants={itemVariants}
-                  className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12"
+                  className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6"
                 >
                   {[
                     { label: "Total Updates", value: stats.total, icon: Tag, color: "cyan" },
@@ -553,15 +553,15 @@ const News = () => {
                     <motion.div
                       key={stat.label}
                       variants={itemVariants}
-                      whileHover={{ scale: 1.05, y: -5 }}
-                      className="glass-card p-4 border border-border group cursor-default"
+                      whileHover={{ opacity: 0.95 }}
+                      className="py-3 border-t border-border group cursor-default"
                     >
-                      <div className="flex flex-col items-center gap-2">
-                        <div className={`w-12 h-12 rounded-lg bg-muted flex items-center justify-center shadow-none transition-shadow duration-300`}>
-                          <stat.icon className={`w-6 h-6 text-primary`} />
+                      <div className="flex flex-wrap items-center gap-2">
+                        <div className={`w-8 h-8 shrink-0 rounded-lg bg-muted flex items-center justify-center shadow-none transition-shadow duration-300`}>
+                          <stat.icon className={`w-4 h-4 text-primary`} />
                         </div>
-                        <div className="text-3xl font-bold text-foreground">{stat.value}</div>
-                        <div className="text-xs text-muted-foreground uppercase tracking-normal">{stat.label}</div>
+                        <div className="text-xl font-semibold text-foreground">{stat.value}</div>
+                        <div className="text-[10px] text-muted-foreground tracking-normal w-full sm:w-auto">{stat.label}</div>
                       </div>
                     </motion.div>
                   ))}
@@ -586,7 +586,7 @@ const News = () => {
                   <h2 className="text-2xl font-bold text-gaming-alt">Featured</h2>
                 </motion.div>
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-2 gap-4">
                   {featuredItems.map((item, i) => (
                     <motion.div
                       key={item.id}
@@ -594,7 +594,7 @@ const News = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: i * 0.1 }}
-                      whileHover={{ y: -5 }}
+                      whileHover={{ opacity: 0.95 }}
                       className={`glass-card glass-card-hover p-6 group ${typeConfig[item.type].glowColor} transition-all duration-300`}
                     >
                       <div className="flex items-start gap-4">
@@ -663,7 +663,7 @@ const News = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="glass-card p-6 mb-8 border border-border"
+                className="py-4 mb-6 border-y border-border"
               >
                 <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
                   {/* Search */}
@@ -676,12 +676,12 @@ const News = () => {
                       className="pl-11 bg-muted border-border text-foreground placeholder:text-muted-foreground focus:border-border focus:ring-ring"
                     />
                     {searchQuery && (
-                      <button
+                      <Button variant="ghost"
                         onClick={() => setSearchQuery("")}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                        aria-label="Clear search" className="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 p-0 text-muted-foreground"
                       >
                         <X className="w-4 h-4" />
-                      </button>
+                      </Button>
                     )}
                   </div>
 
@@ -697,7 +697,7 @@ const News = () => {
                           Community: " ",
                         };
                         return (
-                          <button
+                          <Button variant="ghost"
                             key={filter}
                             onClick={() => setActiveFilter(filter)}
                             className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
@@ -714,7 +714,7 @@ const News = () => {
                               />
                             )}
                             <span className="relative z-10">{filter}</span>
-                          </button>
+                          </Button>
                         );
                       })}
                     </div>
@@ -777,7 +777,7 @@ const News = () => {
                   <span className="font-medium text-foreground">{newsItems.length}</span> updates
                 </p>
                 {(searchQuery || activeFilter !== "All") && (
-                  <button
+                  <Button variant="ghost"
                     onClick={() => {
                       setSearchQuery("");
                       setActiveFilter("All");
@@ -785,7 +785,7 @@ const News = () => {
                     className="text-sm text-primary hover:text-primary transition-colors flex items-center gap-1"
                   >
                     Clear filters <X className="w-3 h-3" />
-                  </button>
+                  </Button>
                 )}
               </div>
 
@@ -808,7 +808,7 @@ const News = () => {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -20 }}
                           transition={{ duration: 0.3, delay: i * 0.05 }}
-                          whileHover={{ x: 5 }}
+                          whileHover={{ opacity: 0.95 }}
                           className={`glass-card glass-card-hover p-5 group ${typeConfig[item.type].glowColor} transition-all duration-300 border border-border`}
                         >
                           <div className="flex flex-col md:flex-row md:items-center gap-4">
