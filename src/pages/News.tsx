@@ -556,12 +556,12 @@ const News = () => {
                       whileHover={{ opacity: 0.95 }}
                       className="py-3 border-t border-border group cursor-default"
                     >
-                      <div className="flex items-center gap-3">
-                        <div className={`w-12 h-12 rounded-lg bg-muted flex items-center justify-center shadow-none transition-shadow duration-300`}>
-                          <stat.icon className={`w-6 h-6 text-primary`} />
+                      <div className="flex flex-wrap items-center gap-2">
+                        <div className={`w-8 h-8 shrink-0 rounded-lg bg-muted flex items-center justify-center shadow-none transition-shadow duration-300`}>
+                          <stat.icon className={`w-4 h-4 text-primary`} />
                         </div>
                         <div className="text-xl font-semibold text-foreground">{stat.value}</div>
-                        <div className="text-xs text-muted-foreground uppercase tracking-normal">{stat.label}</div>
+                        <div className="text-[10px] text-muted-foreground tracking-normal w-full sm:w-auto">{stat.label}</div>
                       </div>
                     </motion.div>
                   ))}
@@ -663,7 +663,7 @@ const News = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="glass-card p-6 mb-8 border border-border"
+                className="py-4 mb-6 border-y border-border"
               >
                 <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
                   {/* Search */}

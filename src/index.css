@@ -27,6 +27,12 @@
     --input: 220 10% 82%;
     --ring: 214 58% 40%;
     --radius: 0.375rem;
+    --luna-taskbar: 224 83% 23%;
+    --luna-start: 120 40% 39%;
+    --luna-window: 218 100% 45%;
+    --luna-sky: 211 48% 44%;
+    --luna-content: 51 34% 89%;
+    --luna-text: 0 0% 0%;
     --shadow-sm: 0 1px 3px hsl(220 10% 12% / 0.05);
     --shadow-md: 0 4px 12px hsl(220 10% 12% / 0.06);
     --sidebar-background: var(--muted);
@@ -105,3 +111,11 @@
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
+
+/* Historical product palette examples, not website theme accents. */
+.luna-swatch-0 { background: hsl(var(--luna-taskbar)); }
+.luna-swatch-1 { background: hsl(var(--luna-start)); }
+.luna-swatch-2 { background: hsl(var(--luna-window)); }
+.luna-swatch-3 { background: hsl(var(--luna-sky)); }
+.luna-swatch-4 { background: hsl(var(--luna-content)); }
+.luna-swatch-5 { background: hsl(var(--luna-text)); }
