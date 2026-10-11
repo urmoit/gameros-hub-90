@@ -135,7 +135,7 @@ const FAQItem = ({ question, answer, color }: { question: string; answer: string
       viewport={{ once: true }}
       transition={{ duration: 0.3 }}
     >
-      <button
+      <Button variant="ghost"
         onClick={() => setIsOpen(!isOpen)}
         className="w-full p-6 flex items-center justify-between text-left relative overflow-hidden"
       >
@@ -157,7 +157,7 @@ const FAQItem = ({ question, answer, color }: { question: string; answer: string
         >
           <ChevronDown className="w-5 h-5" />
         </motion.div>
-      </button>
+      </Button>
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -311,9 +311,9 @@ const FAQ = () => {
                       
                       animate={{
                         boxShadow: [
-                          "0 0 40px hsl(180 100% 50% / 40%)",
-                          "0 0 60px hsl(280 100% 60% / 40%)",
-                          "0 0 40px hsl(180 100% 50% / 40%)",
+                          "none",
+                          "none",
+                          "none",
                         ],
                       }}
                       transition={{

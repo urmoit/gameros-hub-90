@@ -111,9 +111,6 @@ const XPImplementation = () => {
               <Link
                 to="/news"
                 className="inline-flex items-center gap-2 mb-8 transition-all group text-primary"
-                
-                onMouseEnter={(e) => e.currentTarget.style.color = "hsl(180 100% 50%)"}
-                onMouseLeave={(e) => e.currentTarget.style.color = "hsl(180 100% 50% / 0.7)"}
               >
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                 Back to News
