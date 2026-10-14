@@ -23,14 +23,14 @@ import {
 } from "lucide-react";
 
 const currentFeatures = [
-  "VESA 32-bit True Color graphics (1024x768)",
-  "Windows XP Luna Theme desktop environment",
-  "Notepad app with keyboard text input",
-  "Double buffering for flicker-free rendering",
-  "VMware/VirtualBox mouse integration",
-  "USB 1.0-3.0 stack support",
-  "PS/2 keyboard and mouse drivers",
-  "GRUB2 bootloader with Multiboot2",
+  { label: "VESA 32-bit True Color graphics (1024x768)", done: false },
+  { label: "Classic Windows XP theme desktop environment", done: true },
+  { label: "Notepad app with keyboard text input", done: false },
+  { label: "Double buffering for flicker-free rendering", done: false },
+  { label: "VMware/VirtualBox mouse integration", done: true },
+  { label: "USB keyboard and mouse support", done: true },
+  { label: "PS/2 keyboard and mouse drivers", done: false },
+  { label: "GRUB2 bootloader with Multiboot2", done: true },
 ];
 
 const plannedFeatures = [
@@ -246,13 +246,14 @@ const About = () => {
                     <div className="w-12 h-12 rounded-lg bg-warning/10 border border-border flex items-center justify-center">
                       <Clock className="w-6 h-6 text-warning" />
                     </div>
-                    <h3 className="text-xl font-bold">In Development</h3>
+                    <h3 className="text-xl font-bold">Development Status</h3>
                   </div>
                   <ul className="space-y-3">
                     {currentFeatures.map((feature, i) => (
                       <li key={i} className="flex items-center gap-3 p-3 rounded-lg bg-muted border border-border">
-                        <div className="w-2 h-2 rounded-full bg-warning shadow-none" />
-                        <span className="text-sm">{feature}</span>
+                        <div className={`w-2 h-2 rounded-full shrink-0 ${feature.done ? "bg-success" : "bg-warning"}`} />
+                        <span className="text-sm flex-1">{feature.label}</span>
+                        <span className={`text-xs font-mono ${feature.done ? "text-success" : "text-warning"}`}>{feature.done ? "Done" : "In progress"}</span>
                       </li>
                     ))}
                   </ul>
