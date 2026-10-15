@@ -280,6 +280,25 @@ const About = () => {
                       </li>
                     ))}
                   </ul>
+
+                  <div className="mt-6 pt-5 border-t border-border">
+                    <h4 className="text-sm font-semibold mb-1">Before &rarr; Now</h4>
+                    <p className="text-xs text-muted-foreground mb-3">Recent fixes, implemented in the next update.</p>
+                    <div className="space-y-2">
+                      {beforeNow.map((row, i) => (
+                        <div key={i} className="p-3 rounded-lg bg-muted border border-border">
+                          <div className="flex items-center justify-between gap-2 mb-1.5">
+                            <span className="text-sm font-medium">{row.feature}</span>
+                            <span className="text-xs font-mono text-success shrink-0">Implemented</span>
+                          </div>
+                          <div className="text-xs text-muted-foreground space-y-0.5">
+                            <p><span className="text-warning font-medium">Before:</span> {row.before}</p>
+                            <p><span className="text-success font-medium">Now:</span> {row.now} <span className="text-success">(next update)</span></p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </ScrollReveal>
 
