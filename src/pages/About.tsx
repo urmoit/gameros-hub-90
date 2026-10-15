@@ -33,6 +33,29 @@ const currentFeatures = [
   { label: "GRUB2 bootloader with Multiboot2", done: true },
 ];
 
+const beforeNow = [
+  {
+    feature: "GRUB2 with Multiboot2",
+    before: "No — Multiboot 1 only",
+    now: "Both headers, kernel normalises either",
+  },
+  {
+    feature: "USB keyboard/mouse support",
+    before: "No — stubs that never ran",
+    now: "Working UHCI + boot-protocol HID",
+  },
+  {
+    feature: "VMware mouse integration",
+    before: "Present but not compiled, wrong constants, false-positive detection",
+    now: "Fixed and wired in",
+  },
+  {
+    feature: "VirtualBox mouse integration",
+    before: "No",
+    now: "Implemented (VMM device)",
+  },
+];
+
 const plannedFeatures = [
   "Full DirectX support",
   "Vulkan graphics API",
@@ -81,7 +104,7 @@ const visionPoints = [
 
 const teamStats = [
   { value: "1", label: "Core Developer", color: "cyan" },
-  { value: "27,000+", label: "Lines of Code", color: "purple" },
+  { value: "30,500+", label: "Lines of Code", color: "purple" },
   { value: "1.550", label: "Build", color: "pink" },
   { value: "Jan 2026", label: "Started", color: "cyan" },
 ];
@@ -257,6 +280,25 @@ const About = () => {
                       </li>
                     ))}
                   </ul>
+
+                  <div className="mt-6 pt-5 border-t border-border">
+                    <h4 className="text-sm font-semibold mb-1">Before &rarr; Now</h4>
+                    <p className="text-xs text-muted-foreground mb-3">Recent fixes, implemented in the next update.</p>
+                    <div className="space-y-2">
+                      {beforeNow.map((row, i) => (
+                        <div key={i} className="p-3 rounded-lg bg-muted border border-border">
+                          <div className="flex items-center justify-between gap-2 mb-1.5">
+                            <span className="text-sm font-medium">{row.feature}</span>
+                            <span className="text-xs font-mono text-success shrink-0">Implemented</span>
+                          </div>
+                          <div className="text-xs text-muted-foreground space-y-0.5">
+                            <p><span className="text-warning font-medium">Before:</span> {row.before}</p>
+                            <p><span className="text-success font-medium">Now:</span> {row.now} <span className="text-success">(next update)</span></p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </ScrollReveal>
 
