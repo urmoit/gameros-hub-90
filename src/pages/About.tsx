@@ -33,6 +33,29 @@ const currentFeatures = [
   { label: "GRUB2 bootloader with Multiboot2", done: true },
 ];
 
+const beforeNow = [
+  {
+    feature: "GRUB2 with Multiboot2",
+    before: "No — Multiboot 1 only",
+    now: "Both headers, kernel normalises either",
+  },
+  {
+    feature: "USB keyboard/mouse support",
+    before: "No — stubs that never ran",
+    now: "Working UHCI + boot-protocol HID",
+  },
+  {
+    feature: "VMware mouse integration",
+    before: "Present but not compiled, wrong constants, false-positive detection",
+    now: "Fixed and wired in",
+  },
+  {
+    feature: "VirtualBox mouse integration",
+    before: "No",
+    now: "Implemented (VMM device)",
+  },
+];
+
 const plannedFeatures = [
   "Full DirectX support",
   "Vulkan graphics API",
@@ -81,7 +104,7 @@ const visionPoints = [
 
 const teamStats = [
   { value: "1", label: "Core Developer", color: "cyan" },
-  { value: "27,000+", label: "Lines of Code", color: "purple" },
+  { value: "30,500+", label: "Lines of Code", color: "purple" },
   { value: "1.550", label: "Build", color: "pink" },
   { value: "Jan 2026", label: "Started", color: "cyan" },
 ];
