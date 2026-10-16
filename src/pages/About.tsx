@@ -30,15 +30,10 @@ const currentFeatures = [
   { label: "VMware/VirtualBox mouse integration", done: true },
   { label: "USB keyboard and mouse support", done: true },
   { label: "PS/2 keyboard and mouse drivers", done: false },
-  { label: "GRUB2 bootloader with Multiboot2", done: true },
+  { label: "GRUB2 bootloader", done: true },
 ];
 
 const beforeNow = [
-  {
-    feature: "GRUB2 with Multiboot2",
-    before: "No — Multiboot 1 only",
-    now: "Both headers, kernel normalises either",
-  },
   {
     feature: "USB keyboard/mouse support",
     before: "No — stubs that never ran",
